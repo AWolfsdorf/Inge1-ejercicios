@@ -33,6 +33,11 @@ AlanTuring class
 dateOfBirth
 	^June/23/1912! !
 
+!AlanTuring class methodsFor: 'as yet unclassified' stamp: 'AW 3/27/2021 17:41:45'!
+doesNotUnderstand: aMessage
+	
+	^'No entiendo lo que me decis con ' 	, aMessage printString! !
+
 
 !classDefinition: #AlonsoChurch category: 'Ejercicios-IS1'!
 DenotativeObject subclass: #AlonsoChurch
@@ -46,6 +51,11 @@ DenotativeObject subclass: #AlonsoChurch
 !classDefinition: 'AlonsoChurch class' category: 'Ejercicios-IS1'!
 AlonsoChurch class
 	instanceVariableNames: ''!
+
+!AlonsoChurch class methodsFor: 'as yet unclassified' stamp: 'AW 3/27/2021 18:32:44'!
+ageDifferenceWith: aPerson
+	^ self dateOfBirth year distanceTo: aPerson dateOfBirth year
+	"lo anterior no considera el momento del año en el que nacieron"! !
 
 !AlonsoChurch class methodsFor: 'as yet unclassified' stamp: 'nz 3/27/2021 13:46:29'!
 ageDifferenceWithAlanKay
