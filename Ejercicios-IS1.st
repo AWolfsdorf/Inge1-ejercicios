@@ -9,11 +9,17 @@ DenotativeObject subclass: #AlanKay
 
 !classDefinition: 'AlanKay class' category: 'Ejercicios-IS1'!
 AlanKay class
-	instanceVariableNames: ''!
+	instanceVariableNames: 'currentCompany'!
 
 !AlanKay class methodsFor: 'as yet unclassified' stamp: 'nz 3/27/2021 13:14:03'!
 dateOfBirth
 	^ May / 17 / 1940! !
+
+!AlanKay class methodsFor: 'as yet unclassified' stamp: 'nz 4/1/2021 15:35:59'!
+initializeCollaboratorsFromFile
+	"Auto generated method for loading purposes - Do not modify it"
+
+	currentCompany := 'VPRI'.! !
 
 
 !classDefinition: #AlanTuring category: 'Ejercicios-IS1'!
@@ -76,6 +82,18 @@ ageDifferenceWithDanIngalls
 dateOfBirth
 	^June/14/1903! !
 
+!AlonsoChurch class methodsFor: 'as yet unclassified' stamp: 'nz 4/1/2021 15:25:10'!
+isOlderThan: aPerson
+
+    ^(self ageDifferenceWith: aPerson) positive! !
+
+!AlonsoChurch class methodsFor: 'as yet unclassified' stamp: 'nz 4/1/2021 15:25:37'!
+m1: collaborator1
+
+   | temp1 |
+
+   ^thisContext! !
+
 
 !classDefinition: #Auto1 category: 'Ejercicios-IS1'!
 DenotativeObject subclass: #Auto1
@@ -131,3 +149,5 @@ DanIngalls class
 !DanIngalls class methodsFor: 'as yet unclassified' stamp: 'nz 3/27/2021 13:17:40'!
 dateOfBirth
 	^ April / 10 / 1944! !
+
+AlanKay initializeAfterFileIn!
