@@ -375,16 +375,10 @@ Numero subclass: #Entero
 	
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'AW 4/19/2021 21:06:08'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'AW 4/19/2021 21:59:45'!
 + anAdder 
 	
-	(anAdder isKindOf: Entero) ifTrue: [
-		^self class with: value + anAdder integerValue	
-	] ifFalse: [
-		^anAdder + (self class with: value)
-	].
-	
-! !
+	^anAdder addEntero: self.! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'AW 4/19/2021 21:27:41'!
 - aSubtrahend 
@@ -475,6 +469,14 @@ isOne
 isZero
 	
 	^value = 0! !
+
+
+!Entero methodsFor: 'private' stamp: 'AW 4/19/2021 21:57:06'!
+addEntero: anEnteroAdder
+
+	^self class with: value + anEnteroAdder integerValue
+	
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -613,6 +615,12 @@ printOn: aStream
 		print: numerator;
 		nextPut: $/;
 		print: denominator ! !
+
+
+!Fraccion methodsFor: 'private' stamp: 'AW 4/19/2021 21:58:52'!
+addEntero: anEnteroAdder
+
+	^anEnteroAdder * denominator + numerator / denominator .! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
