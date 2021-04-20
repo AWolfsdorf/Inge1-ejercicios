@@ -380,14 +380,9 @@ Numero subclass: #Entero
 	^aSubtrahend substractFromEntero: self.
 ! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'AW 4/19/2021 21:17:54'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'nz 4/20/2021 20:27:57'!
 / aDivisor 
-	(aDivisor isKindOf: Entero) ifTrue: [
-		^Fraccion with: self over: aDivisor		
-	] ifFalse: [
-		^Fraccion with: self * (aDivisor denominator) over: aDivisor numerator 
-	]
-	! !
+	^aDivisor divideAnEntero: self! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 21:55'!
 // aDivisor 
@@ -474,6 +469,16 @@ addFraccion: aFraccionAdder
 
 	^aFraccionAdder numerator + (self * aFraccionAdder denominator) / aFraccionAdder denominator ! !
 
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 20:22:55'!
+divideAFraccion: aFraccionDividend
+
+	^aFraccionDividend numerator / (aFraccionDividend denominator * self)! !
+
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 20:27:42'!
+divideAnEntero: anEnteroDividend
+
+	^Fraccion with: anEnteroDividend over: self		! !
+
 !Entero methodsFor: 'private' stamp: 'AW 4/20/2021 19:34:33'!
 multiplyByEntero: anEnteroMultiplier
 
@@ -538,15 +543,10 @@ Numero subclass: #Fraccion
 	^aSubtrahend substractFromFraccion: self
 	! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'AW 4/19/2021 21:19:54'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'nz 4/20/2021 20:24:07'!
 / aDivisor 
-	
-	(aDivisor isKindOf: Fraccion) ifTrue: [
-		^(numerator * aDivisor denominator) / (denominator * aDivisor numerator)	
-	] ifFalse: [
-		^numerator / (denominator * aDivisor)
-	]
-! !
+
+	^ aDivisor divideAFraccion: self! !
 
 
 !Fraccion methodsFor: 'comparing' stamp: 'HernanWilkinson 5/7/2016 20:42'!
@@ -620,6 +620,16 @@ addFraccion: aFraccionAdder
 	newNumerator := (numerator * aFraccionAdder denominator) + (denominator * aFraccionAdder numerator).
 	newDenominator := denominator * aFraccionAdder denominator.
 	^newNumerator / newDenominator! !
+
+!Fraccion methodsFor: 'private' stamp: 'nz 4/20/2021 20:20:08'!
+divideAFraccion: aFraccionDividend
+
+	^aFraccionDividend * (denominator / numerator)! !
+
+!Fraccion methodsFor: 'private' stamp: 'nz 4/20/2021 20:26:59'!
+divideAnEntero: anEnteroDividend
+
+	^Fraccion with: anEnteroDividend * denominator over: numerator ! !
 
 !Fraccion methodsFor: 'private' stamp: 'AW 4/20/2021 19:38:33'!
 multiplyByEntero: anEnteroMultiplier
