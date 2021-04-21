@@ -380,8 +380,9 @@ Numero subclass: #Entero
 	^aSubtrahend substractFromEntero: self.
 ! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'nz 4/20/2021 20:27:57'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'nz 4/20/2021 21:58:08'!
 / aDivisor 
+
 	^aDivisor divideAnEntero: self! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'nz 4/20/2021 20:43:18'!
@@ -459,13 +460,12 @@ addEntero: anEnteroAdder
 	
 	! !
 
-!Entero methodsFor: 'private' stamp: 'AW 4/20/2021 19:31:03'!
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 22:00:55'!
 addFraccion: aFraccionAdder
 
+	^aFraccionAdder addEntero: self.! !
 
-	^aFraccionAdder numerator + (self * aFraccionAdder denominator) / aFraccionAdder denominator ! !
-
-!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 20:22:55'!
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 22:03:25'!
 divideAFraccion: aFraccionDividend
 
 	^aFraccionDividend numerator / (aFraccionDividend denominator * self)! !
@@ -480,20 +480,20 @@ multiplyByEntero: anEnteroMultiplier
 
 	^self class with: (anEnteroMultiplier integerValue * value).! !
 
-!Entero methodsFor: 'private' stamp: 'AW 4/20/2021 19:39:50'!
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 22:08:58'!
 multiplyByFraccion: aFraccionMultiplier
 
-	^(aFraccionMultiplier numerator * self) / aFraccionMultiplier denominator.! !
+	^aFraccionMultiplier multiplyByEntero: self! !
 
 !Entero methodsFor: 'private' stamp: 'AW 4/20/2021 19:49:39'!
 substractFromEntero: anEnteroMinuend
 
 	^ self class with: (anEnteroMinuend integerValue - value).	! !
 
-!Entero methodsFor: 'private' stamp: 'AW 4/20/2021 19:54:37'!
+!Entero methodsFor: 'private' stamp: 'nz 4/20/2021 22:17:57'!
 substractFromFraccion: aFraccionMinuend
-
-	^(aFraccionMinuend numerator - (self * aFraccionMinuend denominator)) / aFraccionMinuend denominator.! !
+	
+	^aFraccionMinuend + self negated! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -524,10 +524,10 @@ Entero subclass: #Cero
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Cero methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:09:08'!
+!Cero methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:55:57'!
 fibonacci
 
-	^Entero with: 1! !
+	^self class with: 1! !
 
 
 !classDefinition: #EnteroNegativo category: 'Numero-Exercise'!
@@ -537,7 +537,7 @@ Entero subclass: #EnteroNegativo
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!EnteroNegativo methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:04:07'!
+!EnteroNegativo methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:56:48'!
 fibonacci
 
 	self error: Entero negativeFibonacciErrorDescription.! !
@@ -550,10 +550,10 @@ Entero subclass: #Uno
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Uno methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:10:04'!
+!Uno methodsFor: 'as yet unclassified' stamp: 'nz 4/20/2021 21:56:10'!
 fibonacci
 
-	^Entero with: 1! !
+	^self class with: 1! !
 
 
 !classDefinition: #Fraccion category: 'Numero-Exercise'!
@@ -664,10 +664,10 @@ divideAFraccion: aFraccionDividend
 
 	^aFraccionDividend * (denominator / numerator)! !
 
-!Fraccion methodsFor: 'private' stamp: 'nz 4/20/2021 20:26:59'!
+!Fraccion methodsFor: 'private' stamp: 'nz 4/20/2021 22:02:09'!
 divideAnEntero: anEnteroDividend
 
-	^Fraccion with: anEnteroDividend * denominator over: numerator ! !
+	^anEnteroDividend * denominator / numerator ! !
 
 !Fraccion methodsFor: 'private' stamp: 'AW 4/20/2021 19:38:33'!
 multiplyByEntero: anEnteroMultiplier
@@ -684,15 +684,11 @@ substractFromEntero: anEnteroMinuend
 
 	^ (anEnteroMinuend * denominator - numerator) / denominator! !
 
-!Fraccion methodsFor: 'private' stamp: 'AW 4/20/2021 19:57:13'!
+!Fraccion methodsFor: 'private' stamp: 'nz 4/20/2021 22:21:40'!
 substractFromFraccion: aFraccionMinuend
 
-	| newNumerator newDenominator |
-	
-	newNumerator := (aFraccionMinuend numerator * denominator) - (numerator * aFraccionMinuend  denominator).
-	newDenominator := denominator * aFraccionMinuend denominator.
-	
-	^newNumerator / newDenominator! !
+	^aFraccionMinuend + self negated
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
