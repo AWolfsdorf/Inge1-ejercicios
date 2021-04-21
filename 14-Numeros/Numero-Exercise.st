@@ -512,21 +512,28 @@ substractFromFraccion: aFraccionMinuend
 Entero class
 	instanceVariableNames: ''!
 
+!Entero class methodsFor: 'instance creation' stamp: 'nz 4/21/2021 01:17:15'!
+findEnteroSubclassForInteger: anIntegerValue
+	
+	"
+	No tenemos forma de aplicar polimorfismo sobre anIntegerValue de forma _linda_.
+	"
+	anIntegerValue negative ifTrue: [ ^EnteroNegativo ].
+	anIntegerValue isZero ifTrue: [ ^Cero ].
+	(anIntegerValue = 1) ifTrue: [ ^Uno ].
+	anIntegerValue isInteger ifTrue: [ ^Entero. ].
+	
+	self error: self class invalidNumberTypeErrorDescription ! !
+
 !Entero class methodsFor: 'instance creation' stamp: 'NR 4/15/2021 16:42:24'!
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'AW 4/21/2021 00:39:16'!
+!Entero class methodsFor: 'instance creation' stamp: 'nz 4/21/2021 01:16:26'!
 with: anIntegerValue 
 	
-	"Esta verificacion esta puesta por si se equivocan y quieren crear un Entero pasando otra cosa que un Integer - Hernan"
-	anIntegerValue isInteger ifFalse: [  self error: 'aValue debe ser anInteger' ].
-	
-	anIntegerValue negative ifTrue: [ ^EnteroNegativo new initializeWith: anIntegerValue ].
-	anIntegerValue isZero ifTrue: [ ^Cero new initializeWith: anIntegerValue ].
-	(anIntegerValue = 1) ifTrue: [ ^Uno new initializeWith: anIntegerValue ].
-	
-	^Entero new initializeWith: anIntegerValue! !
+	^(self findEnteroSubclassForInteger: anIntegerValue) new initializeWith: anIntegerValue.
+	! !
 
 
 !classDefinition: #Cero category: 'Numero-Exercise'!
