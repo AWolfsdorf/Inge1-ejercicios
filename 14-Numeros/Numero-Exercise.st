@@ -512,11 +512,19 @@ substractFromFraccion: aFraccionMinuend
 Entero class
 	instanceVariableNames: ''!
 
-!Entero class methodsFor: 'instance creation' stamp: 'nz 4/21/2021 01:17:15'!
+!Entero class methodsFor: 'instance creation' stamp: 'nz 4/21/2021 01:16:26'!
+with: anIntegerValue 
+	
+	^(self findEnteroSubclassForInteger: anIntegerValue) new initializeWith: anIntegerValue.
+	! !
+
+
+!Entero class methodsFor: 'private' stamp: 'nz 4/21/2021 01:23:56'!
 findEnteroSubclassForInteger: anIntegerValue
 	
 	"
-	No tenemos forma de aplicar polimorfismo sobre anIntegerValue de forma _linda_.
+	No tenemos forma de aplicar polimorfismo sobre
+	anIntegerValue sin modificar una clase externa.
 	"
 	anIntegerValue negative ifTrue: [ ^EnteroNegativo ].
 	anIntegerValue isZero ifTrue: [ ^Cero ].
@@ -525,15 +533,10 @@ findEnteroSubclassForInteger: anIntegerValue
 	
 	self error: self class invalidNumberTypeErrorDescription ! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'NR 4/15/2021 16:42:24'!
+
+!Entero class methodsFor: 'error descriptions' stamp: 'NR 4/15/2021 16:42:24'!
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
-
-!Entero class methodsFor: 'instance creation' stamp: 'nz 4/21/2021 01:16:26'!
-with: anIntegerValue 
-	
-	^(self findEnteroSubclassForInteger: anIntegerValue) new initializeWith: anIntegerValue.
-	! !
 
 
 !classDefinition: #Cero category: 'Numero-Exercise'!
