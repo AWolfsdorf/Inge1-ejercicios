@@ -287,6 +287,28 @@ test06FindEmptyPrefixShouldRaiseError
 	
 	! !
 
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:50:59'!
+test07FindPrefixWithSpacesShouldRaiseError
+
+	"
+	Pendientes:
+	- Falla si lo que se le pase a find no es un prefijo aceptado.
+	   (no puede ser vacío, ni contener espacios vacíos)
+	"
+
+	| stack finder |
+	stack := OOStack new.
+	finder := SentenceFinderByPrefix for: stack.
+	
+	self
+		should: [ finder find: 'winter is'. ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = SentenceFinderByPrefix invalidPrefixErrorDescription ].
+	
+	
+	! !
+
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
@@ -451,12 +473,13 @@ initializeFor: aStack
 	stack := aStack.! !
 
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:48:02'!
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:58:45'!
 find: aPrefixString 
 
 	| auxiliarStack matchingSentences | 
 	
 	(aPrefixString isEmpty) ifTrue: [self error: self class invalidPrefixErrorDescription].
+	(aPrefixString includes: Character space) ifTrue: [self error: self class invalidPrefixErrorDescription].
 	
 	matchingSentences := OrderedCollection new. 
 	auxiliarStack := OOStack new.
