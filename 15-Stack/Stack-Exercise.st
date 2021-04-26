@@ -144,6 +144,149 @@ TestCase subclass: #SentenceFinderByPrefixTest
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 17:49:49'!
+test01FindInEmptyStackReturnsEmptyCollection
+
+	| stack finder result |
+	stack := OOStack new.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	result := finder find: 'winter'.
+	
+	self assert: result isEmpty
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:06:26'!
+test02FindMatchingSentenceInAStack
+
+	"
+	Pendientes:
+	- Testear que al buscar algo, preserva el orden
+	- Buscar algo que no existe en un stack no vacio
+	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	
+	- Ver que si el stack tiene algo que no es una string que falle
+	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
+	"
+
+	| stack finder result winterIsNotComingToday |
+	winterIsNotComingToday := 'winter is not coming today'.
+	stack := OOStack new.
+	stack push: winterIsNotComingToday.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	result := finder find: 'winter'.
+	
+	self assert: result includes: winterIsNotComingToday.
+	self assert: result size equals: 1.
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:23:33'!
+test03SearchingTheStackDoesNotModifyIt
+
+	"
+	Pendientes:
+	- Buscar algo que no existe en un stack no vacio
+	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	
+	- Ver que si el stack tiene algo que no es una string que falle
+	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
+	"
+
+	| stack finder winterIsNotComingToday todayIsComingForWinter |
+	winterIsNotComingToday := 'winter is not coming today'.
+	todayIsComingForWinter := 'today is coming for winter'.
+	stack := OOStack new.
+	stack push: winterIsNotComingToday.
+	stack push: todayIsComingForWinter.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	finder find: 'winter'.
+	
+	self assert: stack pop equals: todayIsComingForWinter.
+	self assert: stack pop equals: winterIsNotComingToday.
+	self assert: stack isEmpty.
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:27:16'!
+test04SearchingUnmatchingPrefixShouldReturnEmptyCollection
+
+	"
+	Pendientes:
+	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	
+	- Ver que si el stack tiene algo que no es una string que falle
+	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
+	"
+
+	| stack finder result winterIsNotComingToday todayIsComingForWinter |
+	winterIsNotComingToday := 'winter is not coming today'.
+	todayIsComingForWinter := 'today is coming for winter'.
+	stack := OOStack new.
+	stack push: winterIsNotComingToday.
+	stack push: todayIsComingForWinter.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	result := finder find: 'monday'.
+	
+	self assert: result isEmpty.
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:40:21'!
+test05FindOnlyReturnMatchingSentences
+
+	"
+	Pendientes:
+	- Falla si lo que se le pase a find no es un prefijo aceptado.
+	   (no puede ser vacío, ni contener espacios vacíos)
+	"
+
+	| stack finder result winterIsNotComingToday todayIsComingForWinter |
+	winterIsNotComingToday := 'winter is not coming today'.
+	todayIsComingForWinter := 'today is coming for winter'.
+	stack := OOStack new.
+	stack push: winterIsNotComingToday.
+	stack push: todayIsComingForWinter.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	result := finder find: 'today'.
+	
+	self assert: result includes: todayIsComingForWinter.
+	self assert: result size equals: 1
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:46:47'!
+test06FindEmptyPrefixShouldRaiseError
+
+	"
+	Pendientes:
+	- Falla si lo que se le pase a find no es un prefijo aceptado.
+	   (no puede ser vacío, ni contener espacios vacíos)
+	"
+
+	| stack finder |
+	stack := OOStack new.
+	finder := SentenceFinderByPrefix for: stack.
+	
+	self
+		should: [ finder find: ''. ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = SentenceFinderByPrefix invalidPrefixErrorDescription ].
+	
+	
+	! !
+
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
@@ -298,7 +441,47 @@ isRoot
 
 !classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
 Object subclass: #SentenceFinderByPrefix
-	instanceVariableNames: ''
+	instanceVariableNames: 'stack'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'nz 4/26/2021 17:51:06'!
+initializeFor: aStack 
+	stack := aStack.! !
+
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:48:02'!
+find: aPrefixString 
+
+	| auxiliarStack matchingSentences | 
+	
+	(aPrefixString isEmpty) ifTrue: [self error: self class invalidPrefixErrorDescription].
+	
+	matchingSentences := OrderedCollection new. 
+	auxiliarStack := OOStack new.
+	
+	[stack isEmpty] whileFalse: [
+		(stack top beginsWith: aPrefixString) ifTrue: [ matchingSentences add: stack top ].
+		auxiliarStack push: stack pop.
+	].	
+	[auxiliarStack isEmpty] whileFalse: [
+		stack push: auxiliarStack pop.
+	].
+
+	^matchingSentences .! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SentenceFinderByPrefix class' category: 'Stack-Exercise'!
+SentenceFinderByPrefix class
+	instanceVariableNames: ''!
+
+!SentenceFinderByPrefix class methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 17:46:59'!
+for: aStack
+
+	^SentenceFinderByPrefix new initializeFor: aStack.! !
+
+!SentenceFinderByPrefix class methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:48:24'!
+invalidPrefixErrorDescription
+	^'AAAAA'.! !
