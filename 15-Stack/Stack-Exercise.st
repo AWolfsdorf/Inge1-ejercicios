@@ -473,13 +473,12 @@ initializeFor: aStack
 	stack := aStack.! !
 
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:58:45'!
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:03:05'!
 find: aPrefixString 
 
 	| auxiliarStack matchingSentences | 
 	
-	(aPrefixString isEmpty) ifTrue: [self error: self class invalidPrefixErrorDescription].
-	(aPrefixString includes: Character space) ifTrue: [self error: self class invalidPrefixErrorDescription].
+	self validatePrefix: aPrefixString.
 	
 	matchingSentences := OrderedCollection new. 
 	auxiliarStack := OOStack new.
@@ -493,6 +492,17 @@ find: aPrefixString
 	].
 
 	^matchingSentences .! !
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:02:19'!
+isValidPrefix: aPrefixString 
+
+	^(aPrefixString isEmpty) or: [aPrefixString includes: Character space].
+	! !
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:02:59'!
+validatePrefix: aPrefixString 
+
+	(self isValidPrefix: aPrefixString) ifTrue: [self error: self class invalidPrefixErrorDescription].! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
