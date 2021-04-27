@@ -139,16 +139,23 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'capitalizedTomorrowIsWinter todayIsComingForWinter winterIsNotComingToday stack'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 17:49:49'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
+setUp
+
+	winterIsNotComingToday := 'winter is not coming today'.
+	capitalizedTomorrowIsWinter := 'Tomorrow is winter'.
+	todayIsComingForWinter := 'today is coming for winter'.
+	stack := OOStack new.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test01FindInEmptyStackReturnsEmptyCollection
 
-	| stack finder result |
-	stack := OOStack new.
+	| finder result |
 	
 	finder := SentenceFinderByPrefix for: stack.
 	result := finder find: 'winter'.
@@ -158,22 +165,11 @@ test01FindInEmptyStackReturnsEmptyCollection
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:06:26'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test02FindMatchingSentenceInAStack
 
-	"
-	Pendientes:
-	- Testear que al buscar algo, preserva el orden
-	- Buscar algo que no existe en un stack no vacio
-	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	| finder result |
 	
-	- Ver que si el stack tiene algo que no es una string que falle
-	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
-	"
-
-	| stack finder result winterIsNotComingToday |
-	winterIsNotComingToday := 'winter is not coming today'.
-	stack := OOStack new.
 	stack push: winterIsNotComingToday.
 	
 	finder := SentenceFinderByPrefix for: stack.
@@ -185,22 +181,11 @@ test02FindMatchingSentenceInAStack
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:23:33'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test03SearchingTheStackDoesNotModifyIt
 
-	"
-	Pendientes:
-	- Buscar algo que no existe en un stack no vacio
-	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	| finder |
 	
-	- Ver que si el stack tiene algo que no es una string que falle
-	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
-	"
-
-	| stack finder winterIsNotComingToday todayIsComingForWinter |
-	winterIsNotComingToday := 'winter is not coming today'.
-	todayIsComingForWinter := 'today is coming for winter'.
-	stack := OOStack new.
 	stack push: winterIsNotComingToday.
 	stack push: todayIsComingForWinter.
 	
@@ -214,21 +199,11 @@ test03SearchingTheStackDoesNotModifyIt
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:27:16'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test04SearchingUnmatchingPrefixShouldReturnEmptyCollection
 
-	"
-	Pendientes:
-	- Buscar un prefijo en un stack donde hay cosas que matchean y cosas que no
+	| finder result |
 	
-	- Ver que si el stack tiene algo que no es una string que falle
-	- Falla correctamente si lo que se le pase a find no es una string sin espacios.
-	"
-
-	| stack finder result winterIsNotComingToday todayIsComingForWinter |
-	winterIsNotComingToday := 'winter is not coming today'.
-	todayIsComingForWinter := 'today is coming for winter'.
-	stack := OOStack new.
 	stack push: winterIsNotComingToday.
 	stack push: todayIsComingForWinter.
 	
@@ -240,19 +215,11 @@ test04SearchingUnmatchingPrefixShouldReturnEmptyCollection
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:40:21'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test05FindOnlyReturnMatchingSentences
 
-	"
-	Pendientes:
-	- Falla si lo que se le pase a find no es un prefijo aceptado.
-	   (no puede ser vacío, ni contener espacios vacíos)
-	"
-
-	| stack finder result winterIsNotComingToday todayIsComingForWinter |
-	winterIsNotComingToday := 'winter is not coming today'.
-	todayIsComingForWinter := 'today is coming for winter'.
-	stack := OOStack new.
+	| finder result |
+	
 	stack push: winterIsNotComingToday.
 	stack push: todayIsComingForWinter.
 	
@@ -265,17 +232,11 @@ test05FindOnlyReturnMatchingSentences
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:46:47'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test06FindEmptyPrefixShouldRaiseError
 
-	"
-	Pendientes:
-	- Falla si lo que se le pase a find no es un prefijo aceptado.
-	   (no puede ser vacío, ni contener espacios vacíos)
-	"
-
-	| stack finder |
-	stack := OOStack new.
+	| finder |
+	
 	finder := SentenceFinderByPrefix for: stack.
 	
 	self
@@ -287,17 +248,11 @@ test06FindEmptyPrefixShouldRaiseError
 	
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:50:59'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
 test07FindPrefixWithSpacesShouldRaiseError
 
-	"
-	Pendientes:
-	- Falla si lo que se le pase a find no es un prefijo aceptado.
-	   (no puede ser vacío, ni contener espacios vacíos)
-	"
-
-	| stack finder |
-	stack := OOStack new.
+	| finder |
+	
 	finder := SentenceFinderByPrefix for: stack.
 	
 	self
@@ -305,6 +260,23 @@ test07FindPrefixWithSpacesShouldRaiseError
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix invalidPrefixErrorDescription ].
+	
+	
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:52:32'!
+test08SentenceFinderIsCaseSensitive
+
+	| finder result |
+	
+	stack push: capitalizedTomorrowIsWinter.
+	stack push: todayIsComingForWinter.
+	
+	finder := SentenceFinderByPrefix for: stack.
+	result := finder find: 'To'.
+	
+	self assert: result includes: capitalizedTomorrowIsWinter.
+	self assert: result size equals: 1
 	
 	
 	! !
@@ -473,36 +445,64 @@ initializeFor: aStack
 	stack := aStack.! !
 
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:03:05'!
-find: aPrefixString 
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'nz 4/26/2021 21:06:35'!
+dump: aSourceStack in: aSinkStack
 
-	| auxiliarStack matchingSentences | 
-	
-	self validatePrefix: aPrefixString.
-	
-	matchingSentences := OrderedCollection new. 
+	self dump: aSourceStack in: aSinkStack forEachDo: [:sentence|].! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'nz 4/26/2021 21:05:01'!
+dump: aSourceStack in: aSinkStack forEachDo: aBlockToRename 
+
+	[aSourceStack isEmpty] whileFalse: [
+		aBlockToRename value: aSourceStack top.
+		aSinkStack push: aSourceStack pop.
+	].
+! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'nz 4/26/2021 21:16:09'!
+iterate: aStack forEachDo: aBlockClosure
+
+	| auxiliarStack | 
+
 	auxiliarStack := OOStack new.
 	
-	[stack isEmpty] whileFalse: [
-		(stack top beginsWith: aPrefixString) ifTrue: [ matchingSentences add: stack top ].
-		auxiliarStack push: stack pop.
-	].	
-	[auxiliarStack isEmpty] whileFalse: [
-		stack push: auxiliarStack pop.
+	self dump: aStack in: auxiliarStack forEachDo: aBlockClosure.
+	self dump: auxiliarStack in: aStack.
+! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'nz 4/26/2021 21:26:53'!
+selectSentencesThat: aBlockToMatch
+
+	| matchingSentences | 
+	
+	matchingSentences := OrderedCollection new. 
+	
+	self iterate: stack forEachDo: [:sentence| 
+		(aBlockToMatch value: sentence) ifTrue: [ matchingSentences add: sentence ].
 	].
 
 	^matchingSentences .! !
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:02:19'!
-isValidPrefix: aPrefixString 
+
+!SentenceFinderByPrefix methodsFor: 'validation' stamp: 'nz 4/26/2021 20:51:39'!
+isInvalidPrefix: aPrefixString 
 
 	^(aPrefixString isEmpty) or: [aPrefixString includes: Character space].
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 19:02:59'!
+!SentenceFinderByPrefix methodsFor: 'validation' stamp: 'nz 4/26/2021 20:51:51'!
 validatePrefix: aPrefixString 
 
-	(self isValidPrefix: aPrefixString) ifTrue: [self error: self class invalidPrefixErrorDescription].! !
+	(self isInvalidPrefix: aPrefixString) ifTrue: [self error: self class invalidPrefixErrorDescription].! !
+
+
+!SentenceFinderByPrefix methodsFor: 'usage' stamp: 'nz 4/26/2021 21:27:26'!
+find: aPrefixString 
+
+	self validatePrefix: aPrefixString.
+	
+	^self selectSentencesThat: [:sentence | sentence beginsWith: aPrefixString].
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -515,6 +515,6 @@ for: aStack
 
 	^SentenceFinderByPrefix new initializeFor: aStack.! !
 
-!SentenceFinderByPrefix class methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 18:48:24'!
+!SentenceFinderByPrefix class methodsFor: 'as yet unclassified' stamp: 'nz 4/26/2021 21:11:55'!
 invalidPrefixErrorDescription
-	^'AAAAA'.! !
+	^'Invalid Prefix!!'.! !
