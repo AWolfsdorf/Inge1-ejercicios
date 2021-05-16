@@ -2383,3 +2383,4191 @@ PASSED!
 PASSED!
 
 ----QUIT----(16 May 2021 16:11:31) Mars-Rover.image priorSource: 118!
+
+----STARTUP---- (16 May 2021 16:15:02) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/16-MarsRover/Mars-Rover.image!
+
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:17:25'!
+                    turnLeft
+
+	^ self directionToTheLeftOf: currentDirection! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:17:25' prior: 50333669!
+       receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+	].
+	(aPackage = 'l') ifTrue: [
+		currentDirection := self turnLeft.
+	].
+	(aPackage = 'll') ifTrue: [
+		currentDirection := self directionToTheLeftOf: currentDirection.
+		currentDirection := self directionToTheLeftOf: currentDirection.
+	].
+	(aPackage = 'r') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:17:31' prior: 50333772!
+    receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+	].
+	(aPackage = 'l') ifTrue: [
+		self turnLeft.
+	].
+	(aPackage = 'll') ifTrue: [
+		currentDirection := self directionToTheLeftOf: currentDirection.
+		currentDirection := self directionToTheLeftOf: currentDirection.
+	].
+	(aPackage = 'r') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:17:46' prior: 50333767!
+                        turnLeft
+
+	^ currentDirection _ self directionToTheLeftOf: currentDirection! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:18:02' prior: 50333791!
+                    receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+	].
+	(aPackage = 'l') ifTrue: [
+		self turnLeft.
+	].
+	(aPackage = 'll') ifTrue: [
+		self turnLeft.
+		self turnLeft.
+	].
+	(aPackage = 'r') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:18:06'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:18:52' prior: 50333816!
+                            receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+	].
+	(aPackage = 'r') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:18:53'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:19:27'!
+    test16
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ 0 @ 0.
+	expectedDirection _ #S.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'rr'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:19:34'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:20:07' prior: 50333869!
+                      receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+	].
+	(aPackage = 'r') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].
+
+	(aPackage = 'rr') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:20:11'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:20:35' prior: 50333937!
+    receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+	].
+	(aPackage = 'r') ifTrue: [
+		self turnRight.
+	].
+
+	(aPackage = 'rr') ifTrue: [
+		currentDirection := self directionToTheRightOf: currentDirection.
+		currentDirection := self directionToTheRightOf: currentDirection.
+	].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:20:57'!
+                turnRight
+
+	currentDirection _ self directionToTheRightOf: currentDirection.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:21:03' prior: 50333810!
+                   turnLeft
+
+	currentDirection _ self directionToTheLeftOf: currentDirection! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:07'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:21:24' prior: 50333995!
+            receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+	].
+	(aPackage = 'r') ifTrue: [
+		self turnRight.
+	].
+
+	(aPackage = 'rr') ifTrue: [
+		self turnRight.
+		self turnRight.
+	].! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:26'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:21:44' prior: 50334063!
+                          receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+		(instruction = $r) ifTrue: [
+			self turnRight.
+		].
+	].! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:21:46'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:22:42'!
+       test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ 1 @ 0.
+	expectedDirection _ #E.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'rf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:22:44'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:25:36' prior: 50333109!
+                      goForward
+	(currentDirection = #N) ifTrue: [
+		currentPosition := currentPosition + (0@	1).		
+	].
+	(currentDirection = #E) ifTrue: [
+		currentPosition := currentPosition + (1@	0).		
+	].
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:25:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:31:16'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:31:25' prior: 50334168!
+                         test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ 1 @ 0.
+	expectedDirection _ #E.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'lf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:31:27'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:32:14' prior: 50334186!
+                      goForward
+	(currentDirection = #N) ifTrue: [
+		currentPosition := currentPosition + (0@	1).		
+	].
+	(currentDirection = #E) ifTrue: [
+		currentPosition := currentPosition + (1@	0).		
+	].
+	(currentDirection = #W) ifTrue: [
+		currentPosition := currentPosition + (-1@	0).		
+	].
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:32:17'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:32:30' prior: 50334279!
+                             test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #E.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'lf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:32:31'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:32:37' prior: 50334312!
+                 test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'lf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:32:38'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:33:15'!
+                        test18
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'lf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:33:18' prior: 50334330!
+                            test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ 1 @ 0.
+	expectedDirection _ #E.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'rf'.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:33:42' prior: 50334403!
+              test17
+	| marsRover initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ 1 @ 0.
+	expectedDirection _ #E.
+	
+	marsRover _ MarsRover in: initialPosition seeingTo: initialDirection.
+	
+	marsRover receivePackage: 'rf'.
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:33:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:33:59'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:38:08'!
+                  assertMarsRoverIn: aPosition seeingTo: aDirection receiving: aInstructionPackage endsUpAt: expectedPosition seeingTo: expectedDirection
+	| marsRover |
+
+	marsRover _ MarsRover in: aPosition seeingTo: aDirection .
+	
+	marsRover receivePackage: aInstructionPackage .
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:38:57' prior: 50334387!
+     test18
+	| initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	self assertMarsRoverIn: initialPosition seeingTo: initialDirection 
+		receiving: 'lf' endsUpAt: expectedPosition seeingTo: expectedDirection.
+	
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:39:01' prior: 50334533!
+               test18
+	| initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	self assertMarsRoverIn: initialPosition seeingTo: initialDirection 
+		receiving: 'lf' endsUpAt: expectedPosition seeingTo: expectedDirection.
+	! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:39:02' prior: 50334547!
+                test18
+	| initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	self assertMarsRoverIn: initialPosition seeingTo: initialDirection 
+		receiving: 'lf' endsUpAt: expectedPosition seeingTo: expectedDirection.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:39:03' prior: 50334561!
+                 test18
+	| initialPosition initialDirection expectedPosition expectedDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	self assertMarsRoverIn: initialPosition seeingTo: initialDirection 
+		receiving: 'lf' endsUpAt: expectedPosition seeingTo: expectedDirection.! !
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:39:05'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:39:30' prior: 50334575!
+                    test18
+	| expectedPosition expectedDirection |
+	
+	expectedPosition _ -1 @ 0.
+	expectedDirection _ #W.
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N 
+		receiving: 'lf' endsUpAt: expectedPosition seeingTo: expectedDirection.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:40:30' prior: 50334633!
+                             test18
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:40:32'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:40:48' prior: 50334644!
+                        test18
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 seeingTo: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:40:59' prior: 50334695!
+                      test18
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 seeingTo: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:41:22' prior: 50334416!
+                      test17
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 seeingTo: #E.! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:41:23'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:41:55' prior: 50333919!
+                         test16
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 seeingTo: #S.
+! !
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:41:57'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:42:23' prior: 50333651!
+                        test15
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'll' endsUpAt: 0 @ 0 seeingTo: #S.! !
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:42:24'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:42:27' prior: 50334811!
+                         test15
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'll' endsUpAt: 0 @ 0 seeingTo: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:42:48' prior: 50333583!
+                       test14
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 seeingTo: #N.
+! !
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:42:50'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:43:14' prior: 50333286!
+                        test13
+	
+	self assertMarsRoverIn: 0 @ 2 seeingTo: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 seeingTo: #N.
+! !
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:43:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:43:17'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:43:46' prior: 50332838!
+                          test12
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 seeingTo: #W.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:43:57' prior: 50335015!
+                      test12
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 seeingTo: #N.
+! !
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:43:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:43:59'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:44:02' prior: 50335022!
+                          test12
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 seeingTo: #W.
+! !
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:44:03'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:44:17' prior: 50335117!
+           test12
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 seeingTo: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:44:48' prior: 50332773!
+                      test11
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 seeingTo: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:45:19' prior: 50332566!
+                      test10
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #E
+		receiving: 'l' endsUpAt: 0 @ 0 seeingTo: #N.
+! !
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:45:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:45:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:45:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:45:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:45:21'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:45:44' prior: 50332301!
+                         test09
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #E
+		receiving: 'r' endsUpAt: 0 @ 0 seeingTo: #S.
+! !
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:45:45'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:46:05' prior: 50332155!
+                         test08
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'r' endsUpAt: 0 @ 0 seeingTo: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:46:34' prior: 50332102!
+                       test07
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #S
+		receiving: 'r' endsUpAt: 0 @ 0 seeingTo: #W.
+! !
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:46:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:46:36'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:46:54' prior: 50332054!
+                          test06
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'r' endsUpAt: 0 @ 0 seeingTo: #E.
+! !
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:46:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:46:56'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:46:57' prior: 50335300!
+                          test06
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'r' endsUpAt: 0 @ 0 seeingTo: #E.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:47:13' prior: 50332038!
+                        test05
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'l' endsUpAt: 0 @ 0 seeingTo: #W.
+! !
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:47:14'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:47:43' prior: 50331911!
+                         test04
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'b' endsUpAt: 0 @ -1 seeingTo: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:48:02' prior: 50331859!
+                       test03
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'f' endsUpAt: 0 @ 1 seeingTo: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:48:17' prior: 50331799!
+                        test02
+
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: '' endsUpAt: 0 @ 0 seeingTo: #N.
+! !
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:48:18'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:51:17'!
+           test19
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #S
+		receiving: 'lf' endsUpAt: 1 @ 0 seeingTo: #E.! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:51:18'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:51:58' prior: 50335473!
+               test19
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:51:59'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:52:22' prior: 50335526!
+              test19
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 seeingTo: #S.! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:52:23'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:52:57' prior: 50334297!
+               goForward
+	(currentDirection = #N) ifTrue: [
+		currentPosition := currentPosition + (0@	1).		
+	].
+	(currentDirection = #E) ifTrue: [
+		currentPosition := currentPosition + (1@	0).		
+	].
+	(currentDirection = #W) ifTrue: [
+		currentPosition := currentPosition + (-1@	0).		
+	].
+	(currentDirection = #S) ifTrue: [
+		currentPosition := currentPosition + (0@	-1).		
+	].
+! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:53:00'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:56:31'!
+                           xxx: aDirection
+	
+	
+	
+	(aDirection = #N) ifTrue: [
+		^ 0 @ 1.		
+	].
+	(aDirection = #E) ifTrue: [
+		^ 1 @ 0.		
+	].
+	(aDirection = #W) ifTrue: [
+		^ -1 @ 0.		
+	].
+	(aDirection = #S) ifTrue: [
+		^ 0 @	-1.		
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:56:37' prior: 50335649!
+               xxx: aDirection
+	
+	(aDirection = #N) ifTrue: [
+		^ 0 @ 1.		
+	].
+	(aDirection = #E) ifTrue: [
+		^ 1 @ 0.		
+	].
+	(aDirection = #W) ifTrue: [
+		^ -1 @ 0.		
+	].
+	(aDirection = #S) ifTrue: [
+		^ 0 @	-1.		
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:57:06' prior: 50335588!
+                   goForward
+	currentPosition := currentPosition + self xxx: currentPosition.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:57:11' prior: 50335669!
+                    goForward
+	currentPosition := currentPosition + self xxx: currentDirection .
+! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:57:14'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:57:46' prior: 50335675!
+         goForward
+	currentPosition := currentPosition + (self xxx: currentDirection).
+! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:57:47'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:58:57'!
+   getForwardVectorFor: aDirection
+	
+	(aDirection = #N) ifTrue: [
+		^ 0 @ 1.		
+	].
+	(aDirection = #E) ifTrue: [
+		^ 1 @ 0.		
+	].
+	(aDirection = #W) ifTrue: [
+		^ -1 @ 0.		
+	].
+	(aDirection = #S) ifTrue: [
+		^ 0 @	-1.		
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 16:58:57' prior: 50335683!
+   goForward
+	currentPosition := currentPosition + (self getForwardVectorFor: currentDirection).
+! !
+
+!methodRemoval: MarsRover #xxx: stamp: 'AW 5/16/2021 16:58:57'!
+xxx: aDirection
+	
+	(aDirection = #N) ifTrue: [
+		^ 0 @ 1.		
+	].
+	(aDirection = #E) ifTrue: [
+		^ 1 @ 0.		
+	].
+	(aDirection = #W) ifTrue: [
+		^ -1 @ 0.		
+	].
+	(aDirection = #S) ifTrue: [
+		^ 0 @	-1.		
+	].
+!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 16:59:06'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:00:46'!
+                      test20
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'lb' endsUpAt: 0 @ 1 seeingTo: #S.! !
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:00:52'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:01:32' prior: 50333425!
+                goBackward
+
+	^ currentPosition := currentPosition + (self getBackwardVectorFor: currentDirection )! !
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:01:35'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:01:40'!
+    getBackwardVectorFor: aSymbol 
+	self shouldBeImplemented.! !
+
+(1@1)!
+
+self negated !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:02:51' prior: 50335820!
+              getBackwardVectorFor: aDirection 
+	^ (self getForwardVectorFor: aDirection ) negated.! !
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:02:52'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:03:00' prior: 50335812!
+                        goBackward
+
+	^ currentPosition := currentPosition + (self getBackwardVectorFor: currentDirection )! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:11:40'!
+         test21
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'x' endsUpAt: 0 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:11:44'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:11:58' prior: 50335887!
+                            test21
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:11:59'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:20:32' prior: 50334117!
+                receivePackage: aPackage 
+	aPackage allSatisfy: [ :char | 'bflr' includes: char ].
+	aPackage do: [:instruction | 
+		(instruction = $f) ifTrue: [
+			self goForward.
+		].
+		(instruction = $b) ifTrue: [
+			self goBackward.
+		].
+		(instruction = $l) ifTrue: [
+			self turnLeft.		
+		].
+		(instruction = $r) ifTrue: [
+			self turnRight.
+		].
+	].! !
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:20:34'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:21:33' prior: 50335954!
+ receivePackage: aPackage 
+	(aPackage allSatisfy: [ :char | 'bflr' includes: char ]) ifTrue: [
+		aPackage do: [:instruction | 
+			(instruction = $f) ifTrue: [
+				self goForward.
+			].
+			(instruction = $b) ifTrue: [
+				self goBackward.
+			].
+			(instruction = $l) ifTrue: [
+				self turnLeft.		
+			].
+			(instruction = $r) ifTrue: [
+				self turnRight.
+			].
+		].	
+	].
+	! !
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:21:39'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:22:16'!
+processInstruction: instruction 
+	(instruction = $f) ifTrue: [
+		self goForward.
+	].
+	(instruction = $b) ifTrue: [
+		self goBackward.
+	].
+	(instruction = $l) ifTrue: [
+		self turnLeft.		
+	].
+	(instruction = $r) ifTrue: [
+		self turnRight.
+	].
+	! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:22:21' prior: 50336035!
+           processInstruction: aInstruction 
+	(aInstruction = $f) ifTrue: [
+		self goForward.
+	].
+	(aInstruction = $b) ifTrue: [
+		self goBackward.
+	].
+	(aInstruction = $l) ifTrue: [
+		self turnLeft.		
+	].
+	(aInstruction = $r) ifTrue: [
+		self turnRight.
+	].
+	! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:22:39' prior: 50335970!
+      receivePackage: aPackage 
+	(aPackage allSatisfy: [ :char | 'bflr' includes: char ]) ifTrue: [
+		aPackage do: [:instruction | 
+			self processInstruction: instruction.
+		].	
+	].
+	! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:22:40'!
+PASSED!
+
+ArrayedCollection!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:27:48' prior: 50335945!
+   test21
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'fxb' endsUpAt: 1 @ 0 seeingTo: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:27:53' prior: 50336115!
+                      test21
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 seeingTo: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:27:55' prior: 50336122!
+                      test21
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 seeingTo: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:28:02'!
+       test22
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'fxb' endsUpAt: 1 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:28:03'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:31:22' prior: 50336057!
+               receivePackage: aPackage 
+	| errorOcurred |
+	errorOcurred _ false.	
+	aPackage do: [:instruction | 
+		('bflr' includes: instruction) ifFalse: [ errorOcurred _ true. ].
+		errorOcurred ifFalse: [		self processInstruction: instruction. ]
+	].
+	! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:31:37'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:31:42'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:32:33' prior: 50336135!
+                      test22
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 seeingTo: #W.! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:32:34'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:35:02' prior: 50336144!
+                   receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		('bflr' includes: instruction) ifFalse: [ ^nil. ].
+		self processInstruction: instruction.
+	].
+	! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:35:34'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:43:59' prior: 50336220!
+                              receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		('bflr' includes: instruction) ifFalse: [ ^nil. ].
+		self processInstruction: instruction.
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:44:34'!
+                     isInstructionValid: instruction
+
+	^ 'bflr' includes: instruction! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:44:34' prior: 50336282!
+                               receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		(self isInstructionValid: instruction) ifFalse: [ ^nil. ].
+		self processInstruction: instruction.
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:50:05' prior: 50336046!
+                             processInstruction: aInstruction 
+	(aInstruction = $f) ifTrue: [
+		^self goForward.
+	].
+	(aInstruction = $b) ifTrue: [
+		^self goBackward.
+	].
+	(aInstruction = $l) ifTrue: [
+		^self turnLeft.		
+	].
+	(aInstruction = $r) ifTrue: [
+		^self turnRight.
+	].
+	! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:50:07'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:52:31' prior: 50336296!
+      receivePackage: aPackage 
+	aPackage do: [:instruction | 
+		self processInstruction: instruction
+			onInvalidInstruction: [ ^nil. ]
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:54:10'!
+        processInstruction: aInstruction onInvalidInstruction: anErrorBlock
+	self processInstruction: aInstruction.
+	
+	^anErrorBlock value.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:54:44' prior: 50336374!
+                            processInstruction: aInstruction onInvalidInstruction: anErrorBlock
+	(aInstruction = $f) ifTrue: [
+		^self goForward.
+	].
+	(aInstruction = $b) ifTrue: [
+		^self goBackward.
+	].
+	(aInstruction = $l) ifTrue: [
+		^self turnLeft.		
+	].
+	(aInstruction = $r) ifTrue: [
+		^self turnRight.
+	].
+	
+	^anErrorBlock value.! !
+
+!methodRemoval: MarsRover #processInstruction: stamp: 'AW 5/16/2021 17:55:08'!
+processInstruction: aInstruction 
+	(aInstruction = $f) ifTrue: [
+		^self goForward.
+	].
+	(aInstruction = $b) ifTrue: [
+		^self goBackward.
+	].
+	(aInstruction = $l) ifTrue: [
+		^self turnLeft.		
+	].
+	(aInstruction = $r) ifTrue: [
+		^self turnRight.
+	].
+	!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 17:55:11' prior: 50336160!
+                       test22
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 seeingTo: #W.
+		! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:55:11'!
+PASSED!
+
+!methodRemoval: MarsRover #isInstructionValid: stamp: 'AW 5/16/2021 17:55:52'!
+isInstructionValid: instruction
+
+	^ 'bflr' includes: instruction!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 17:55:55'!
+PASSED!
+
+!classDefinition: #MarsRoverDirection category: 'Mars-Rover' stamp: 'AW 5/16/2021 18:02:59'!
+Object subclass: #MarsRoverDirection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+!MarsRover methodsFor: 'initialization' stamp: 'AW 5/16/2021 18:02:42' prior: 50331776!
+                        initializeIn: aInitialPosition seeingTo: aDirectionSymbol 
+
+	currentPosition := aInitialPosition.
+	currentDirection := MarsRoverDirection for: aDirectionSymbol.! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:03:06'!
+ERROR!
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:03:13'!
+                       for: aSymbol 
+	self shouldBeImplemented.! !
+
+!classDefinition: #MarsRoverSouthDirection category: 'Mars-Rover' stamp: 'AW 5/16/2021 18:05:30'!
+MarsRoverDirection subclass: #MarsRoverSouthDirection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverEastDirection category: 'Mars-Rover' stamp: 'AW 5/16/2021 18:05:39'!
+MarsRoverDirection subclass: #MarsRoverEastDirection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverNorthDirection category: 'Mars-Rover' stamp: 'AW 5/16/2021 18:05:43'!
+MarsRoverDirection subclass: #MarsRoverNorthDirection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverWestDirection category: 'Mars-Rover' stamp: 'AW 5/16/2021 18:05:46'!
+MarsRoverDirection subclass: #MarsRoverWestDirection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:05:19' prior: 50336542!
+for: aDirection 
+	
+	(aDirection = #S) ifTrue: [		^MarsRoverSouthDirection.	].
+	(aDirection = #E) ifTrue: [		^MarsRoverEastDirection. ].
+	(aDirection = #N) ifTrue: [		^MarsRoverNorthDirection. ].
+	(aDirection = #W) ifTrue: [		^MarsRoverWestDirection.	].! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:05:50'!
+ERROR!
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:06:14' prior: 50336578!
+           for: aDirection 
+	
+	(aDirection = #S) ifTrue: [		^MarsRoverSouthDirection new.	].
+	(aDirection = #E) ifTrue: [		^MarsRoverEastDirection new. ].
+	(aDirection = #N) ifTrue: [		^MarsRoverNorthDirection new. ].
+	(aDirection = #W) ifTrue: [		^MarsRoverWestDirection new.	].! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:06:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:06:26'!
+ERROR!
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:08:40' prior: 50336592!
+        for: aDirection 
+	
+	(aDirection = #S) ifTrue: [		^MarsRoverSouthDirection new.	].
+	(aDirection = #E) ifTrue: [		^MarsRoverEastDirection new. ].
+	(aDirection = #N) ifTrue: [		^MarsRoverNorthDirection new. ].
+	(aDirection = #W) ifTrue: [		^MarsRoverWestDirection new.	].
+	
+	^self error: self invalidDirectionDescription.	! !
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:09:14'!
+ invalidDirectionDescription
+
+	^'Direccion invalida, intente de nuevo por favor'.! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:09:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:09:35'!
+ERROR!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:09:37'!
+ERROR!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:09:51'!
+ERROR!
+!MarsRoverDirection class methodsFor: 'nil' stamp: 'AW 5/16/2021 18:10:40'!
+                  getForwardDirection
+	
+	self subclassResponsibility.! !
+!MarsRoverDirection class methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:11:02'!
+             getBackwardDirection
+	
+	self subclassResponsibility.! !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:11:17'!
+                  getBackwardDirection
+	
+	self subclassResponsibility.! !
+
+!methodRemoval: MarsRoverDirection class #getBackwardDirection stamp: 'AW 5/16/2021 18:11:17'!
+getBackwardDirection
+	
+	self subclassResponsibility.!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:11:21'!
+                            getForwardDirection
+	
+	self subclassResponsibility.! !
+
+!methodRemoval: MarsRoverDirection class #getForwardDirection stamp: 'AW 5/16/2021 18:11:22'!
+getForwardDirection
+	
+	self subclassResponsibility.!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:11:57' prior: 50336739!
+               getBackwardDirection
+	
+	self getForwardDirection negated! !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:11:59' prior: 50336759!
+                              getBackwardDirection
+	
+	self getForwardDirection negated.! !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:12:19'!
+             getForwardVector
+	
+	self subclassResponsibility.! !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:12:19' prior: 50336765!
+      getBackwardDirection
+	
+	self getForwardVector negated.! !
+
+!methodRemoval: MarsRoverDirection #getForwardDirection stamp: 'AW 5/16/2021 18:12:19'!
+getForwardDirection
+	
+	self subclassResponsibility.!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:12:31'!
+  getBackwardVector
+	
+	self getForwardVector negated.! !
+
+!methodRemoval: MarsRoverDirection #getBackwardDirection stamp: 'AW 5/16/2021 18:12:31'!
+getBackwardDirection
+	
+	self getForwardVector negated.!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:12:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:12:40'!
+ERROR!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:12:41'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:13:29' prior: 50335742!
+                     goForward
+	currentPosition := currentPosition + currentDirection getForwardVectorFor.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:13:34' prior: 50336847!
+         goForward
+	currentPosition := currentPosition + currentDirection getForwardVector.
+! !
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:13:47'!
+ERROR!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:14:15' prior: 50336770!
+                          getForwardVector
+	
+	^0 @ 1! !
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:14:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:14:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:14:35'!
+FAILURE!
+!MarsRover methodsFor: 'testing' stamp: 'AW 5/16/2021 18:15:31' prior: 50331882!
+                isAt: aPosition seeingTo: aDirection 
+	^currentPosition = aPosition and: [ currentDirection = MarsRoverDirection for: aDirection ].! !
+!MarsRover methodsFor: 'testing' stamp: 'AW 5/16/2021 18:15:57' prior: 50336873!
+        isAt: aPosition seeingTo: aDirection 
+	^currentPosition = aPosition and: [ currentDirection = (MarsRoverDirection for: aDirection) ].! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:16:02'!
+FAILURE!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:17:41' overrides: 16881029!
+  = otherDirection
+
+	self class = otherDirection class.! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:17:44'!
+ERROR!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:22:47'!
+ERROR!
+
+(MarsRoverDirection for: aDirection)!
+
+self class!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:23:56' prior: 50336890 overrides: 16881029!
+       = otherDirection
+
+	^self class = otherDirection class.! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:23:57'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:23:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:23:57'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:23:59'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:24:31' prior: 50335881!
+                        goBackward
+
+	^ currentPosition := currentPosition + (currentDirection getBackwardVector)! !
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:24:33'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:24:48'!
+ERROR!
+
+self getForwardVector!
+
+self negated !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:25:23' prior: 50336784!
+    getBackwardVector
+	
+	^self getForwardVector negated.! !
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:25:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:25:25'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:25:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:25:26'!
+ERROR!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:25:33'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:25:33'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:25:33'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:25:33'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:25:33'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:25:33'!
+FAILURE!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:26:13' prior: 50336862!
+                getForwardVector
+	
+	self subclassResponsibility.! !
+!MarsRoverEastDirection methodsFor: 'nil' stamp: 'AW 5/16/2021 18:26:37' overrides: 50337043!
+              getForwardVector
+
+	^1 @ 0! !
+!MarsRoverNorthDirection methodsFor: 'nil' stamp: 'AW 5/16/2021 18:26:48' overrides: 50337043!
+    getForwardVector
+
+	^0 @ 1! !
+!MarsRoverSouthDirection methodsFor: 'nil' stamp: 'AW 5/16/2021 18:26:57' overrides: 50337043!
+    getForwardVector
+
+	^-1 @ 0! !
+!MarsRoverSouthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:27:07' prior: 50337056 overrides: 50337043!
+   getForwardVector
+
+	^0 @ -1! !
+!MarsRoverWestDirection methodsFor: 'nil' stamp: 'AW 5/16/2021 18:27:15' overrides: 50337043!
+    getForwardVector
+
+	^-1 @ 0! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:27:18'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:27:18'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:27:18'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:27:18'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:27:18'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:27:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:27:22'!
+ERROR!
+
+self directionToTheRightOf: currentDirection!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:29:54' prior: 50334012!
+   turnRight
+
+	currentDirection _ currentDirection directionToTheRight.! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:29:59'!
+ERROR!
+!MarsRoverNorthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:30:45'!
+                    directionToTheRight
+	self shouldBeImplemented.! !
+!MarsRoverNorthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:31:22' prior: 50337134!
+   directionToTheRight
+	^MarsRoverEastDirection new.! !
+!MarsRoverNorthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:32:04' prior: 50337139!
+directionToTheRight
+	^MarsRoverDirection for: #E.! !
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:32:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:32:09'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:32:24'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:33:00' prior: 50334018!
+                  turnLeft
+
+	currentDirection _ currentDirection directionToTheLeft.! !
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:33:04'!
+ERROR!
+!MarsRoverNorthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:33:11'!
+                      directionToTheLeft
+	self shouldBeImplemented.! !
+!MarsRoverNorthDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:33:40' prior: 50337164!
+    directionToTheLeft
+	
+	^MarsRoverDirection for: #W.! !
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:33:41'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:33:43'!
+ERROR!
+!MarsRoverWestDirection methodsFor: 'accessing' stamp: 'AW 5/16/2021 18:33:50'!
+       directionToTheLeft
+	self shouldBeImplemented.! !
+!MarsRoverWestDirection methodsFor: 'accessing' stamp: 'AW 5/16/2021 18:34:00' prior: 50337178!
+               directionToTheLeft
+	^MarsRoverDirection for: #S.! !
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:34:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:34:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:34:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:34:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:34:05'!
+ERROR!
+!MarsRoverSouthDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:34:11'!
+  directionToTheRight
+	self shouldBeImplemented.! !
+!MarsRoverSouthDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:34:27' prior: 50337199!
+     directionToTheRight
+	^MarsRoverDirection for: #W.! !
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:34:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:34:30'!
+ERROR!
+!MarsRoverWestDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:34:42'!
+directionToTheRight
+	self shouldBeImplemented.! !
+!MarsRoverWestDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:34:54' prior: 50337213!
+      directionToTheRight
+	^MarsRoverDirection for: #N.! !
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:34:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:34:58'!
+ERROR!
+!MarsRoverEastDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:35:32'!
+directionToTheRight
+	self shouldBeImplemented.! !
+!MarsRoverEastDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:35:37' prior: 50337227!
+      directionToTheRight
+	^MarsRoverDirection for: #S.! !
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:35:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:35:40'!
+ERROR!
+!MarsRoverEastDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:35:51'!
+directionToTheLeft
+	self shouldBeImplemented.! !
+!MarsRoverEastDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:35:57' prior: 50337241!
+       directionToTheLeft
+	^MarsRoverDirection for: #N.! !
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:35:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:35:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:35:59'!
+PASSED!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:36:37'!
+                        directionToTheRight
+	
+	self subclassResponsibility.! !
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'AW 5/16/2021 18:36:43'!
+                   directionToTheLeft
+	
+	self subclassResponsibility.! !
+!MarsRoverSouthDirection methodsFor: '*DenotativeObject' stamp: 'AW 5/16/2021 18:37:15' overrides: 50337263!
+                             directionToTheLeft
+	^MarsRoverDirection for: #E.! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'AW 5/16/2021 18:37:19'!
+PASSED!
+
+!methodRemoval: MarsRover #directionToTheLeftOf: stamp: 'AW 5/16/2021 18:37:35'!
+directionToTheLeftOf: aDirection 
+	
+	(aDirection = #S) ifTrue: [		^#E.	].
+	(aDirection = #E) ifTrue: [		^#N.].
+	(aDirection = #N) ifTrue: [		^#W.	].
+	(aDirection = #W) ifTrue: [		^#S.	].!
+
+!methodRemoval: MarsRover #directionToTheRightOf: stamp: 'AW 5/16/2021 18:37:37'!
+directionToTheRightOf: aDirection
+
+	(aDirection = #S) ifTrue: [		^#W.	].
+	(aDirection = #E) ifTrue: [		^#S.].
+	(aDirection = #N) ifTrue: [		^#E.	].
+	(aDirection = #W) ifTrue: [		^#N.	].!
+
+!methodRemoval: MarsRover #getBackwardVectorFor: stamp: 'AW 5/16/2021 18:37:39'!
+getBackwardVectorFor: aDirection 
+	^ (self getForwardVectorFor: aDirection ) negated.!
+
+!methodRemoval: MarsRover #getForwardVectorFor: stamp: 'AW 5/16/2021 18:37:41'!
+getForwardVectorFor: aDirection
+	
+	(aDirection = #N) ifTrue: [
+		^ 0 @ 1.		
+	].
+	(aDirection = #E) ifTrue: [
+		^ 1 @ 0.		
+	].
+	(aDirection = #W) ifTrue: [
+		^ -1 @ 0.		
+	].
+	(aDirection = #S) ifTrue: [
+		^ 0 @	-1.		
+	].
+!
+
+----QUIT----(16 May 2021 18:41:35) Mars-Rover.image priorSource: 67506!
