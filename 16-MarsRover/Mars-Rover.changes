@@ -6571,3 +6571,2158 @@ getForwardVectorFor: aDirection
 !
 
 ----QUIT----(16 May 2021 18:41:35) Mars-Rover.image priorSource: 67506!
+
+----STARTUP---- (16 May 2021 22:31:15) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/16-MarsRover/Mars-Rover.image!
+
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 22:35:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 22:35:12'!
+PASSED!
+
+!classDefinition: #MarsRoverInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 22:59:59'!
+Object subclass: #MarsRoverInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 22:59:44' prior: 50336367!
+           receivePackage: aPackage
+
+	aPackage do: [:instructionChar | 
+		self processInstruction: (MarsRoverInstruction for: instructionChar)
+			onError: [ ^nil. ].
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:00:22'!
+                processInstruction: aMarsRoverInstruction onError: anErrorBlock
+
+	aMarsRoverInstruction executeWith: self onError: anErrorBlock.
+	! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:00:42'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:00:42'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:00:42'!
+ERROR!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:00:48'!
+ERROR!
+!MarsRoverInstruction class methodsFor: 'instance creation' stamp: 'nz 5/16/2021 23:01:03'!
+             for: aCharacter 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aCharacter ! !
+!MarsRoverInstruction class methodsFor: 'instance creation' stamp: 'nz 5/16/2021 23:01:36' prior: 50337544!
+                          for: aCharacter 
+	! !
+
+!classDefinition: #MarsRoverGoForwardInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:30'!
+Object subclass: #MarsRoverGoForwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverGoBackwardInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:33'!
+Object subclass: #MarsRoverGoBackwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverTurnLeftInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:35'!
+Object subclass: #MarsRoverTurnLeftInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverTurnRightInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:39'!
+Object subclass: #MarsRoverTurnRightInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverInvalidInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:42'!
+Object subclass: #MarsRoverInvalidInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+!MarsRoverInstruction class methodsFor: 'instance creation' stamp: 'nz 5/16/2021 23:03:24' prior: 50337553!
+                           for: aCharacter 
+		
+	(aCharacter = $f) ifTrue: [ ^MarsRoverGoForwardInstruction new. ].
+	(aCharacter = $b) ifTrue: [ ^MarsRoverGoBackwardInstruction new. ].
+	(aCharacter = $l) ifTrue: [ ^MarsRoverTurnLeftInstruction new. ].
+	(aCharacter = $r) ifTrue: [ ^MarsRoverTurnRightInstruction new. ].
+	^MarsRoverInvalidInstruction new.! !
+
+MarsRoverInstruction subclass: #MarsRoverInvalidInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverInvalidInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:03:59'!
+MarsRoverInstruction subclass: #MarsRoverInvalidInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+MarsRoverInstruction subclass: #MarsRoverTurnLeftInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverTurnLeftInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:04:02'!
+MarsRoverInstruction subclass: #MarsRoverTurnLeftInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+MarsRoverInstruction subclass: #MarsRoverTurnRightInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverTurnRightInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:04:05'!
+MarsRoverInstruction subclass: #MarsRoverTurnRightInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+MarsRoverInstruction subclass: #MarsRoverGoForwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverGoForwardInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:04:08'!
+MarsRoverInstruction subclass: #MarsRoverGoForwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+MarsRoverInstruction subclass: #MarsRoverGoBackwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!classDefinition: #MarsRoverGoBackwardInstruction category: 'Mars-Rover' stamp: 'nz 5/16/2021 23:04:11'!
+MarsRoverInstruction subclass: #MarsRoverGoBackwardInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars-Rover'!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:04:41'!
+ERROR!
+!MarsRoverGoForwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:04:58'!
+executeWith: aMarsRover onError: aBlockClosure 
+	self shouldBeImplemented.! !
+!MarsRoverGoForwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:13' prior: 50337679!
+ executeWith: aMarsRover onError: aBlockClosure 
+	aMarsRover goForward! !
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:05:16'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:05:16'!
+ERROR!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:05:18'!
+ERROR!
+!MarsRoverGoBackwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:26'!
+                       executeWith: aMarsRover onError: aBlockClosure 
+	self shouldBeImplemented.! !
+!MarsRoverGoBackwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:33' prior: 50337746!
+executeWith: aMarsRover onError: aBlockClosure 
+	aMarsRover goBackward! !
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:05:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:05:37'!
+ERROR!
+!MarsRoverTurnLeftInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:43'!
+   executeWith: aMarsRover onError: aBlockClosure 
+	self shouldBeImplemented.! !
+!MarsRoverTurnLeftInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:49' prior: 50337762!
+  executeWith: aMarsRover onError: aBlockClosure 
+	aMarsRover turnLeft! !
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:05:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:05:52'!
+ERROR!
+!MarsRoverTurnRightInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:05:59'!
+    executeWith: aMarsRover onError: aBlockClosure 
+	self shouldBeImplemented.! !
+!MarsRoverTurnRightInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:06:06' prior: 50337778!
+ executeWith: aMarsRover onError: aBlockClosure 
+	aMarsRover turnRight! !
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:06:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:06:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:06:14'!
+ERROR!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:06:14'!
+ERROR!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:06:20'!
+ERROR!
+!MarsRoverInvalidInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:06:27'!
+ executeWith: aMarsRover onError: aBlockClosure 
+	self shouldBeImplemented.! !
+!MarsRoverInvalidInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:06:34' prior: 50337847!
+   executeWith: aMarsRover onError: aBlockClosure 
+	aBlockClosure value.! !
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:06:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:06:39'!
+PASSED!
+
+!methodRemoval: MarsRover #processInstruction:onInvalidInstruction: stamp: 'nz 5/16/2021 23:06:45'!
+processInstruction: aInstruction onInvalidInstruction: anErrorBlock
+	(aInstruction = $f) ifTrue: [
+		^self goForward.
+	].
+	(aInstruction = $b) ifTrue: [
+		^self goBackward.
+	].
+	(aInstruction = $l) ifTrue: [
+		^self turnLeft.		
+	].
+	(aInstruction = $r) ifTrue: [
+		^self turnRight.
+	].
+	
+	^anErrorBlock value.!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:06:48'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:11:37' prior: 50337476!
+        receivePackage: aPackage
+
+	aPackage do: [:instructionChar | 
+		self processInstruction: (MarsRoverInstruction for: instructionChar)
+			onError: [ 
+				currentPosition inspect.
+				^nil. ].
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:13:54' prior: 50337980!
+                              receivePackage: aPackage
+
+	| errorHandler |
+	errorHandler := [ 
+		currentPosition inspect.
+		^nil.
+	].
+
+	aPackage do: [:instructionChar | 
+		self processInstruction: (MarsRoverInstruction for: instructionChar)
+			onError: errorHandler .
+	].
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:13:59' prior: 50336406!
+          test22
+	
+	self assertMarsRoverIn: 0 @ 0 seeingTo: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 seeingTo: #W.
+		! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:14:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:14:32'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:22:15' prior: 50337990!
+      receivePackage: aPackage
+
+	aPackage do: [:instructionChar | 
+		self processInstruction: (MarsRoverInstruction for: instructionChar)
+			onError: [ ^nil. ] .
+	].
+! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:22:26'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:23:13' prior: 50338063!
+                         receivePackage: anInstructionPackage
+
+	anInstructionPackage do: [:instructionChar | 
+		self processInstruction: (MarsRoverInstruction for: instructionChar)
+			onError: [ ^nil. ] .
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:24:27' prior: 50336853!
+       goForward
+
+	currentPosition := currentPosition + currentDirection getForwardVector.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:24:35' prior: 50336963!
+           goBackward
+
+	currentPosition := currentPosition + (currentDirection getBackwardVector)! !
+!MarsRover class methodsFor: 'instance creation' stamp: 'nz 5/16/2021 23:26:23'!
+                     at: aInitialPosition facing: aDirectionSymbol 
+
+	^self new initializeIn: aInitialPosition seeingTo: aDirectionSymbol ! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:26:23' prior: 50334519!
+      assertMarsRoverIn: aPosition seeingTo: aDirection receiving: aInstructionPackage endsUpAt: expectedPosition seeingTo: expectedDirection
+	| marsRover |
+
+	marsRover _ MarsRover at: aPosition facing: aDirection .
+	
+	marsRover receivePackage: aInstructionPackage .
+	
+	self assert: (marsRover isAt: expectedPosition seeingTo: expectedDirection).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:26:23' prior: 50331682!
+       test01
+	| marsRover initialPosition initialDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	
+	marsRover _ MarsRover at: initialPosition facing: initialDirection.
+	
+	self assert: (marsRover isAt: initialPosition seeingTo: initialDirection).! !
+
+!methodRemoval: MarsRover class #in:seeingTo: stamp: 'nz 5/16/2021 23:26:23'!
+in: aInitialPosition seeingTo: aDirectionSymbol 
+
+	^self new initializeIn: aInitialPosition seeingTo: aDirectionSymbol !
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:26:51'!
+PASSED!
+!MarsRover methodsFor: 'testing' stamp: 'nz 5/16/2021 23:27:08'!
+              isAt: aPosition facing: aDirection 
+	^currentPosition = aPosition and: [ currentDirection = (MarsRoverDirection for: aDirection) ].! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:27:08' prior: 50338153!
+                        assertMarsRoverIn: aPosition seeingTo: aDirection receiving: aInstructionPackage endsUpAt: expectedPosition seeingTo: expectedDirection
+	| marsRover |
+
+	marsRover _ MarsRover at: aPosition facing: aDirection .
+	
+	marsRover receivePackage: aInstructionPackage .
+	
+	self assert: (marsRover isAt: expectedPosition facing: expectedDirection).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:27:08' prior: 50338167!
+         test01
+	| marsRover initialPosition initialDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	
+	marsRover _ MarsRover at: initialPosition facing: initialDirection.
+	
+	self assert: (marsRover isAt: initialPosition facing: initialDirection).! !
+
+!methodRemoval: MarsRover #isAt:seeingTo: stamp: 'nz 5/16/2021 23:27:08'!
+isAt: aPosition seeingTo: aDirection 
+	^currentPosition = aPosition and: [ currentDirection = (MarsRoverDirection for: aDirection) ].!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:27:11'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02'!
+                      assertMarsRoverAt: aPosition facing: aDirection receiving: aInstructionPackage endsUpAt: expectedPosition facing: expectedDirection
+	| marsRover |
+
+	marsRover _ MarsRover at: aPosition facing: aDirection .
+	
+	marsRover receivePackage: aInstructionPackage .
+	
+	self assert: (marsRover isAt: expectedPosition facing: expectedDirection).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334869!
+             test14
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335191!
+                          test09
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #S.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335133!
+                           test11
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334760!
+                          test16
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 facing: #S.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335351!
+                          test06
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #E.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50336129!
+                            test21
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 facing: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334702!
+                           test18
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335249!
+                          test07
+
+	self assertMarsRoverAt: 0 @ 0 facing: #S
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #W.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335140!
+                            test10
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50338001!
+                           test22
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 facing: #W.
+		! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335358!
+                      test05
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #W.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335242!
+                           test08
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335803!
+                           test20
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lb' endsUpAt: 0 @ 1 facing: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334920!
+                           test13
+	
+	self assertMarsRoverAt: 0 @ 2 facing: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334862!
+                          test15
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'll' endsUpAt: 0 @ 0 facing: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50334709!
+                           test17
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 facing: #E.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335409!
+                           test04
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'b' endsUpAt: 0 @ -1 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335423!
+                           test02
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: '' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335579!
+                             test19
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 facing: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335416!
+                          test03
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'f' endsUpAt: 0 @ 1 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:28:02' prior: 50335126!
+                            test12
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #assertMarsRoverIn:seeingTo:receiving:endsUpAt:seeingTo: stamp: 'nz 5/16/2021 23:28:02'!
+assertMarsRoverIn: aPosition seeingTo: aDirection receiving: aInstructionPackage endsUpAt: expectedPosition seeingTo: expectedDirection
+	| marsRover |
+
+	marsRover _ MarsRover at: aPosition facing: aDirection .
+	
+	marsRover receivePackage: aInstructionPackage .
+	
+	self assert: (marsRover isAt: expectedPosition facing: expectedDirection).!
+!MarsRoverInstruction methodsFor: 'nil' stamp: 'nz 5/16/2021 23:28:59'!
+       executeWith: aMarsRover onError: anErrorBlock 
+	self subclassResponsibility.! !
+!MarsRoverGoBackwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:29:10' prior: 50337752 overrides: 50338504!
+          executeWith: aMarsRover onError: anErrorBlock 
+	aMarsRover goBackward! !
+!MarsRoverGoForwardInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:29:15' prior: 50337685 overrides: 50338504!
+                  executeWith: aMarsRover onError: anErrorBlock 
+	aMarsRover goForward! !
+!MarsRoverInvalidInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:29:21' prior: 50337853 overrides: 50338504!
+                     executeWith: aMarsRover onError: anErrorBlock 
+	anErrorBlock value.! !
+!MarsRoverTurnLeftInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:29:24' prior: 50337768 overrides: 50338504!
+                     executeWith: aMarsRover onError: anErrorBlock 
+	aMarsRover turnLeft! !
+!MarsRoverTurnRightInstruction methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:29:27' prior: 50337784 overrides: 50338504!
+                    executeWith: aMarsRover onError: anErrorBlock 
+	aMarsRover turnRight! !
+!MarsRover methodsFor: 'initialization' stamp: 'nz 5/16/2021 23:34:54'!
+                initializeAt: aInitialPosition facing: aDirectionSymbol 
+
+	currentPosition := aInitialPosition.
+	currentDirection := MarsRoverDirection for: aDirectionSymbol.! !
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:34:54' prior: 50338146!
+                           at: aInitialPosition facing: aDirectionSymbol 
+
+	^self new initializeAt: aInitialPosition facing: aDirectionSymbol ! !
+
+!methodRemoval: MarsRover #initializeIn:seeingTo: stamp: 'nz 5/16/2021 23:34:54'!
+initializeIn: aInitialPosition seeingTo: aDirectionSymbol 
+
+	currentPosition := aInitialPosition.
+	currentDirection := MarsRoverDirection for: aDirectionSymbol.!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/16/2021 23:37:47'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:41:37'!
+                             test02ReceiveEmptyPackageDoNothing
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: '' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test02 stamp: 'nz 5/16/2021 23:41:37'!
+test02
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: '' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:42:50'!
+          test03ReceiveSingleForwardInstruction
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'f' endsUpAt: 0 @ 1 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test03 stamp: 'nz 5/16/2021 23:43:02'!
+test03
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'f' endsUpAt: 0 @ 1 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:44:37'!
+     test04ReceiveSingleBackwardInstruction
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'b' endsUpAt: 0 @ -1 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test04 stamp: 'nz 5/16/2021 23:44:41'!
+test04
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'b' endsUpAt: 0 @ -1 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:45:07'!
+  test05ReceiveSingleTurnLeftInstruction
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #W.
+! !
+
+!methodRemoval: MarsRoverTest #test05 stamp: 'nz 5/16/2021 23:45:08'!
+test05
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #W.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:45:34'!
+  test06ReceiveSingleTurnRightInstructionFacingNorth
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #E.
+! !
+
+!methodRemoval: MarsRoverTest #test06 stamp: 'nz 5/16/2021 23:45:38'!
+test06
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #E.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:46:07'!
+                        test07ReceiveSingleTurnRightInstructionFacingSouth
+
+	self assertMarsRoverAt: 0 @ 0 facing: #S
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #W.
+! !
+
+!methodRemoval: MarsRoverTest #test07 stamp: 'nz 5/16/2021 23:46:09'!
+test07
+
+	self assertMarsRoverAt: 0 @ 0 facing: #S
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #W.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:46:20'!
+                        test08SingleTurnRightInstructionFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test08 stamp: 'nz 5/16/2021 23:46:22'!
+test08
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:46:39'!
+                              test09ReceiveSingleTurnRightInstructionFacingEast
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #S.
+! !
+
+!methodRemoval: MarsRoverTest #test09 stamp: 'nz 5/16/2021 23:46:46'!
+test09
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #S.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:46:54'!
+                       test08ReceiveSingleTurnRightInstructionFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test08SingleTurnRightInstructionFacingWest stamp: 'nz 5/16/2021 23:46:56'!
+test08SingleTurnRightInstructionFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'r' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'spinning' stamp: 'nz 5/16/2021 23:48:46'!
+                          test05ReceiveSingleTurnLeftInstructionFacingNorth
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #W.
+! !
+
+!methodRemoval: MarsRoverTest #test05ReceiveSingleTurnLeftInstruction stamp: 'nz 5/16/2021 23:48:51'!
+test05ReceiveSingleTurnLeftInstruction
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #W.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:49:16'!
+                       test10ReceiveSingleTurnLeftInstructionFacingEast
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test10 stamp: 'nz 5/16/2021 23:49:17'!
+test10
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #E
+		receiving: 'l' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:51:05'!
+                        test11ReceiveTwoForwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test12 stamp: 'nz 5/16/2021 23:51:27'!
+test12
+
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'fff' endsUpAt: 0 @ 3 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:51:52'!
+   test12ReceiveTwoBackwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 2 facing: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 facing: #N.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:52:07'!
+            test12ReceiveMultipleBackwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 2 facing: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test12ReceiveTwoBackwardInstructions stamp: 'nz 5/16/2021 23:52:12'!
+test12ReceiveTwoBackwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 2 facing: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:52:18'!
+ test11ReceiveMultipleForwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test11ReceiveTwoForwardInstructions stamp: 'nz 5/16/2021 23:52:22'!
+test11ReceiveTwoForwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 facing: #N.
+!
+
+!methodRemoval: MarsRoverTest #test11 stamp: 'nz 5/16/2021 23:52:24'!
+test11
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'ff' endsUpAt: 0 @ 2 facing: #N.
+!
+
+!methodRemoval: MarsRoverTest #test13 stamp: 'nz 5/16/2021 23:52:37'!
+test13
+	
+	self assertMarsRoverAt: 0 @ 2 facing: #N
+		receiving: 'bb' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:53:20'!
+                test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test14 stamp: 'nz 5/16/2021 23:53:55'!
+test14
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:54:18'!
+         test14ReceiveMultipleTurnLeftInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'll' endsUpAt: 0 @ 0 facing: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:54:35'!
+        test16ReceiveMultipleTurnRightInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 facing: #S.
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:54:40'!
+      test15ReceiveMultipleTurnRightInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 facing: #S.
+! !
+
+!methodRemoval: MarsRoverTest #test16ReceiveMultipleTurnRightInstructions stamp: 'nz 5/16/2021 23:54:42'!
+test16ReceiveMultipleTurnRightInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 facing: #S.
+!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:56:13'!
+                    test16ReceiveInstructionsCombiningRightAndForwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 facing: #E.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:56:36'!
+                    test16ReceiveInstructionsCombiningRightAndForward
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 facing: #E.! !
+
+!methodRemoval: MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForwardInstructions stamp: 'nz 5/16/2021 23:56:38'!
+test16ReceiveInstructionsCombiningRightAndForwardInstructions
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 facing: #E.!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:56:56'!
+         test17ReceiveInstructionsCombiningLeftAndForward
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:57:17'!
+test17ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.! !
+
+!methodRemoval: MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForward stamp: 'nz 5/16/2021 23:57:19'!
+test17ReceiveInstructionsCombiningLeftAndForward
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:57:26'!
+                        test17ReceiveInstructionsCombiningLeftAndForwardFacingNorth
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.! !
+
+!methodRemoval: MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/16/2021 23:57:30'!
+test17ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:57:42'!
+   test19ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 facing: #S.! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/16/2021 23:57:47'!
+                      test18ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 facing: #S.! !
+
+!methodRemoval: MarsRoverTest #test19ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/16/2021 23:57:49'!
+test19ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 facing: #S.!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ReceiveEmptyPackageDoNothing stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ReceiveSingleForwardInstruction stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ReceiveSingleBackwardInstruction stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05ReceiveSingleTurnLeftInstructionFacingNorth stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07ReceiveSingleTurnRightInstructionFacingSouth stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08ReceiveSingleTurnRightInstructionFacingWest stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10ReceiveSingleTurnLeftInstructionFacingEast stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11ReceiveMultipleForwardInstructions stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ReceiveMultipleBackwardInstructions stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14ReceiveMultipleTurnLeftInstructions stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ReceiveMultipleTurnRightInstructions stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForward stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForwardFacingNorth stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/17/2021 00:01:05'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/17/2021 00:01:14' prior: 50338935!
+                             test18ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'rb' endsUpAt: 0 @ -1 facing: #S.! !
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:01:15'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/17/2021 00:02:08' prior: 50339038!
+       test18ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'rb' endsUpAt: 0 @ -1 facing: #N.! !
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ReceiveEmptyPackageDoNothing stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ReceiveSingleForwardInstruction stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ReceiveSingleBackwardInstruction stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05ReceiveSingleTurnLeftInstructionFacingNorth stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07ReceiveSingleTurnRightInstructionFacingSouth stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08ReceiveSingleTurnRightInstructionFacingWest stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10ReceiveSingleTurnLeftInstructionFacingEast stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11ReceiveMultipleForwardInstructions stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ReceiveMultipleBackwardInstructions stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14ReceiveMultipleTurnLeftInstructions stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ReceiveMultipleTurnRightInstructions stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForward stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForwardFacingNorth stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/17/2021 00:02:10'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/17/2021 00:02:22'!
+                               test18ReceiveInstructionsCombiningRightAndBack
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'rb' endsUpAt: 0 @ -1 facing: #N.! !
+
+!methodRemoval: MarsRoverTest #test18ReceiveInstructionsCombiningLeftAndForwardFacingWest stamp: 'nz 5/17/2021 00:02:24'!
+test18ReceiveInstructionsCombiningLeftAndForwardFacingWest
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'rb' endsUpAt: 0 @ -1 facing: #N.!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/17/2021 00:02:28'!
+                test17ReceiveInstructionsCombiningLeftAndForward
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.! !
+
+!methodRemoval: MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForwardFacingNorth stamp: 'nz 5/17/2021 00:02:32'!
+test17ReceiveInstructionsCombiningLeftAndForwardFacingNorth
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'nz 5/17/2021 00:03:04'!
+            test19ReceiveInstructionCombiningLeftAndBack
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lb' endsUpAt: 0 @ 1 facing: #S.! !
+
+!methodRemoval: MarsRoverTest #test15 stamp: 'nz 5/17/2021 00:03:11'!
+test15
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'll' endsUpAt: 0 @ 0 facing: #S.!
+
+!methodRemoval: MarsRoverTest #test16 stamp: 'nz 5/17/2021 00:03:14'!
+test16
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rr' endsUpAt: 0 @ 0 facing: #S.
+!
+
+!methodRemoval: MarsRoverTest #test17 stamp: 'nz 5/17/2021 00:03:16'!
+test17
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'rf' endsUpAt: 1 @ 0 facing: #E.!
+
+!methodRemoval: MarsRoverTest #test18 stamp: 'nz 5/17/2021 00:03:18'!
+test18
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'lf' endsUpAt: -1 @ 0 facing: #W.!
+
+!methodRemoval: MarsRoverTest #test19 stamp: 'nz 5/17/2021 00:03:21'!
+test19
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lf' endsUpAt: 0 @ -1 facing: #S.!
+
+!methodRemoval: MarsRoverTest #test20 stamp: 'nz 5/17/2021 00:03:24'!
+test20
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'lb' endsUpAt: 0 @ 1 facing: #S.!
+!MarsRoverTest methodsFor: 'invalid instructions' stamp: 'nz 5/17/2021 00:05:37'!
+           test20AfterInvalidInstructionStopsProcessing
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 facing: #W.! !
+
+!methodRemoval: MarsRoverTest #test21 stamp: 'nz 5/17/2021 00:05:40'!
+test21
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'xb' endsUpAt: 0 @ 0 facing: #W.!
+!MarsRoverTest methodsFor: 'invalid instructions' stamp: 'nz 5/17/2021 00:05:48' prior: 50338407!
+           test22
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fx' endsUpAt: -1 @ 0 facing: #W.
+		! !
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ReceiveEmptyPackageDoNothing stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ReceiveSingleForwardInstruction stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ReceiveSingleBackwardInstruction stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05ReceiveSingleTurnLeftInstructionFacingNorth stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07ReceiveSingleTurnRightInstructionFacingSouth stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08ReceiveSingleTurnRightInstructionFacingWest stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10ReceiveSingleTurnLeftInstructionFacingEast stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11ReceiveMultipleForwardInstructions stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ReceiveMultipleBackwardInstructions stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14ReceiveMultipleTurnLeftInstructions stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ReceiveMultipleTurnRightInstructions stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForward stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForward stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningRightAndBack stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19ReceiveInstructionCombiningLeftAndBack stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20AfterInvalidInstructionStopsProcessing stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test22 stamp: 'nz 5/17/2021 00:05:48'!
+PASSED!
+!MarsRoverTest methodsFor: 'invalid instructions' stamp: 'nz 5/17/2021 00:05:52' prior: 50339228!
+                test22
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fx' endsUpAt: -1 @ 0 facing: #W.
+		! !
+!MarsRoverTest methodsFor: 'invalid instructions' stamp: 'nz 5/17/2021 00:05:54' prior: 50339309!
+                      test22
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 facing: #W.
+		! !
+!MarsRoverTest methodsFor: 'invalid instructions' stamp: 'nz 5/17/2021 00:06:29'!
+     test21InstructionBeforeTheFirstInvalidInstructionAreProcessed
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 facing: #W.
+		! !
+
+!methodRemoval: MarsRoverTest #test22 stamp: 'nz 5/17/2021 00:06:31'!
+test22
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #W
+		receiving: 'fxb' endsUpAt: -1 @ 0 facing: #W.
+		!
+!MarsRoverTest methodsFor: 'creation' stamp: 'nz 5/17/2021 00:11:51'!
+            test01MarsRoverIsCreatedSuccessfully
+	| marsRover initialPosition initialDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	
+	marsRover _ MarsRover at: initialPosition facing: initialDirection.
+	
+	self assert: (marsRover isAt: initialPosition facing: initialDirection).! !
+
+!methodRemoval: MarsRoverTest #test01 stamp: 'nz 5/17/2021 00:12:00'!
+test01
+	| marsRover initialPosition initialDirection |
+	
+	initialPosition _ 0 @ 0.
+	initialDirection _ #N.
+	
+	marsRover _ MarsRover at: initialPosition facing: initialDirection.
+	
+	self assert: (marsRover isAt: initialPosition facing: initialDirection).!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01MarsRoverIsCreatedSuccessfully stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ReceiveEmptyPackageDoNothing stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ReceiveSingleForwardInstruction stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ReceiveSingleBackwardInstruction stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05ReceiveSingleTurnLeftInstructionFacingNorth stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07ReceiveSingleTurnRightInstructionFacingSouth stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08ReceiveSingleTurnRightInstructionFacingWest stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10ReceiveSingleTurnLeftInstructionFacingEast stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11ReceiveMultipleForwardInstructions stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ReceiveMultipleBackwardInstructions stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14ReceiveMultipleTurnLeftInstructions stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ReceiveMultipleTurnRightInstructions stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForward stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForward stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningRightAndBack stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19ReceiveInstructionCombiningLeftAndBack stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20AfterInvalidInstructionStopsProcessing stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21InstructionBeforeTheFirstInvalidInstructionAreProcessed stamp: 'nz 5/17/2021 00:12:09'!
+PASSED!
+!MarsRoverTest methodsFor: 'multiple baby steps' stamp: 'nz 5/17/2021 00:12:29'!
+    test13ReceiveInstructionsToGoBackAndForthEndsInTheSamePlace
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace stamp: 'nz 5/17/2021 00:12:31'!
+test13ReceiveInstructionsToGoBackAndForthEndingInTheSamePlace
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverTest methodsFor: 'multiple baby steps' stamp: 'nz 5/17/2021 00:12:44'!
+                             test13ReceiveInstructionsToGoBackAndForthEndsUpInTheSamePlace
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+! !
+
+!methodRemoval: MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndsInTheSamePlace stamp: 'nz 5/17/2021 00:12:46'!
+test13ReceiveInstructionsToGoBackAndForthEndsInTheSamePlace
+	
+	self assertMarsRoverAt: 0 @ 0 facing: #N
+		receiving: 'bf' endsUpAt: 0 @ 0 facing: #N.
+!
+!MarsRoverNorthDirection methodsFor: 'accessing' stamp: 'nz 5/17/2021 00:14:37' prior: 50337144 overrides: 50337258!
+                           directionToTheRight
+
+	^MarsRoverDirection for: #E.! !
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01MarsRoverIsCreatedSuccessfully stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ReceiveEmptyPackageDoNothing stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ReceiveSingleForwardInstruction stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ReceiveSingleBackwardInstruction stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05ReceiveSingleTurnLeftInstructionFacingNorth stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06ReceiveSingleTurnRightInstructionFacingNorth stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07ReceiveSingleTurnRightInstructionFacingSouth stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08ReceiveSingleTurnRightInstructionFacingWest stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09ReceiveSingleTurnRightInstructionFacingEast stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10ReceiveSingleTurnLeftInstructionFacingEast stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11ReceiveMultipleForwardInstructions stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ReceiveMultipleBackwardInstructions stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13ReceiveInstructionsToGoBackAndForthEndsUpInTheSamePlace stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14ReceiveMultipleTurnLeftInstructions stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15ReceiveMultipleTurnRightInstructions stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16ReceiveInstructionsCombiningRightAndForward stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17ReceiveInstructionsCombiningLeftAndForward stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18ReceiveInstructionsCombiningRightAndBack stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19ReceiveInstructionCombiningLeftAndBack stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20AfterInvalidInstructionStopsProcessing stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21InstructionBeforeTheFirstInvalidInstructionAreProcessed stamp: 'nz 5/17/2021 00:14:47'!
+PASSED!
+
+----QUIT----(17 May 2021 00:15:29) Mars-Rover.image priorSource: 182563!
