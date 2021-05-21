@@ -98,7 +98,7 @@ test08
 	self assert: portfolio balance equals: 0.
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'AW 5/17/2021 21:06:46'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:41:40'!
 test09
 	
 	| portfolio anAccount |
@@ -109,12 +109,12 @@ test09
 	
 	Deposit register: 100 on: anAccount.
 	
-	portfolio registerAsset: anAccount.
+	portfolio registerAccount: anAccount.
 	
 	self assert: portfolio balance equals: 100.
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'AW 5/17/2021 21:06:46'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:41:40'!
 test10
 	
 	| portfolio anAccount anotherAccount |
@@ -127,13 +127,13 @@ test10
 	Deposit register: 100 on: anAccount.
 	Deposit register: 50 on: anAccount.
 	
-	portfolio registerAsset: anAccount.
-	portfolio registerAsset: anotherAccount .
+	portfolio registerAccount: anAccount.
+	portfolio registerAccount: anotherAccount .
 	
 	self assert: portfolio balance equals: 150.
 ! !
 
-!ReceptiveAccountTest methodsFor: 'tests' stamp: 'AW 5/17/2021 21:08:41'!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:41:40'!
 test11
 	
 	| portfolio anAccount aTransaction |
@@ -144,7 +144,7 @@ test11
 	
 	aTransaction _ Deposit register: 500 on: anAccount.
 	
-	portfolio registerAsset: anAccount.
+	portfolio registerAccount: anAccount.
 	
 	self assert: (portfolio hasRegistered: aTransaction).
 ! !
@@ -161,6 +161,150 @@ test12
 	aTransaction _ Deposit register: 500 on: anAccount.
 	
 	self deny: (portfolio hasRegistered: aTransaction).
+! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:41:40'!
+test13
+	
+	| portfolio anAccount anotherAccount anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio registerAccount: anAccount.
+	
+	self deny: (portfolio hasRegistered: anotherTransaction).
+
+" un portfolio con una cuenta que tiene dos tx
+  un portfolio con dos cuenta con una tx cada una
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:41:40'!
+test14
+	
+	| portfolio anAccount anotherAccount aTransaction anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio registerAccount: anAccount.
+	portfolio registerAccount: anotherAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+	self assert: (portfolio hasRegistered: anotherTransaction).
+
+"un portfolio con dos cuenta con una tx cada una
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:43:18'!
+test15
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	anotherPortfolio registerAccount: anAccount.
+	portfolio registerPortfolio: anotherPortfolio.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+
+"
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:48:55'!
+test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	"anotherPortfolio registerAccount: anAccount."
+	portfolio registerPortfolio: anotherPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 20:59:13'!
+test17
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio registerAccount: anAccount.
+	
+	mainPortfolio registerPortfolio: secondPortfolio.
+	mainPortfolio registerPortfolio: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 21:01:51'!
+test18
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anotherAccount anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	Deposit register: 500 on: anAccount.
+	secondPortfolio registerAccount: anAccount.
+	
+	anotherAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 300 on: anotherAccount.
+	thirdPortfolio registerAccount: anotherAccount.
+	
+	mainPortfolio registerPortfolio: secondPortfolio.
+	mainPortfolio registerPortfolio: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/20/2021 21:03:54'!
+test19
+	
+	| mainPortfolio secondPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	
+	secondPortfolio _ Portfolio new.
+	mainPortfolio registerPortfolio: secondPortfolio.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio registerAccount: anAccount.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
 ! !
 
 
@@ -187,13 +331,13 @@ value
 AccountTransaction class
 	instanceVariableNames: ''!
 
-!AccountTransaction class methodsFor: 'instance creation' stamp: 'AW 5/17/2021 21:07:20'!
+!AccountTransaction class methodsFor: 'instance creation' stamp: 'nz 5/20/2021 20:41:40'!
 register: aValue on: account
 
 	| transaction |
 	
 	transaction := self for: aValue.
-	account registerAsset: transaction.
+	account registerAccount: transaction.
 		
 	^ transaction! !
 
@@ -270,31 +414,37 @@ for: aValue
 
 !classDefinition: #Portfolio category: 'Portfolio-Ejercicio'!
 Object subclass: #Portfolio
-	instanceVariableNames: 'financialAssets'
+	instanceVariableNames: 'accounts portfolios'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'AW 5/17/2021 20:58:49'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/20/2021 20:42:04'!
 balance
 	
-	^ financialAssets sum: [ :financialAsset | financialAsset balance ] ifEmpty: [ 0 ].! !
+	^ accounts sum: [ :financialAsset | financialAsset balance ] ifEmpty: [ 0 ].! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'AW 5/17/2021 21:10:47'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/20/2021 21:04:49'!
 hasRegistered: aTransaction 
 	
-	
-	^financialAssets size = 1.! !
+	^(portfolios anySatisfy: [ :aPortfolio | aPortfolio hasRegistered: aTransaction ])
+	or: [ accounts anySatisfy: [ :anAccount | anAccount hasRegistered: aTransaction ] ].! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'AW 5/17/2021 20:52:13'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/20/2021 20:57:49'!
 initialize
 
-	financialAssets := OrderedCollection new.! !
+	accounts _ OrderedCollection new.
+	portfolios _ OrderedCollection new.! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'AW 5/17/2021 21:07:20'!
-registerAsset: afinancialAsset 
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/20/2021 20:42:04'!
+registerAccount: afinancialAsset 
 	
-	financialAssets add: afinancialAsset.! !
+	accounts add: afinancialAsset.! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/20/2021 20:58:03'!
+registerPortfolio: aPortfolio 
+
+	portfolios add: aPortfolio.! !
 
 
 !classDefinition: #ReceptiveAccount category: 'Portfolio-Ejercicio'!
@@ -310,8 +460,8 @@ initialize
 	transactions := OrderedCollection new.! !
 
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'AW 5/17/2021 21:07:20'!
-registerAsset: aTransaction
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'nz 5/20/2021 20:41:40'!
+registerAccount: aTransaction
 
 	transactions add: aTransaction 
 ! !
