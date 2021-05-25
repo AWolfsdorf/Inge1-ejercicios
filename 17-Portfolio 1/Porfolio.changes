@@ -6407,3 +6407,2076 @@ PASSED!
 PASSED!
 
 ----QUIT----(23 May 2021 22:30:57) Porfolio.image priorSource: 93512!
+
+----STARTUP---- (24 May 2021 20:19:38) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/17-Portfolio 1/Porfolio.image!
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:37:04'!
+    assetGeneratesDuplication: aFinancialAsset
+
+	^ aFinancialAsset leaves anySatisfy: [ :leave | self isOnAnyRootPortfolio: leave ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:37:04' prior: 50337499!
+validateAddAsset: aFinancialAsset
+	
+	(self assetGeneratesDuplication: aFinancialAsset)
+		ifTrue: [^self error: self class duplicatedAssetErrorDescription ].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:48:11'!
+                   isOnAnyTopmostPortfolio: aFinancialAsset
+
+	^ rootPortfolios anySatisfy: [ :aPortfolio | aPortfolio isSelfOrIsInPortfolio: aFinancialAsset ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:48:11' prior: 50338334!
+                    assetGeneratesDuplication: aFinancialAsset
+
+	^ aFinancialAsset leaves anySatisfy: [ :leave | self isOnAnyTopmostPortfolio: leave ]! !
+
+!methodRemoval: Portfolio #isOnAnyRootPortfolio: stamp: 'nz 5/24/2021 20:48:11'!
+isOnAnyRootPortfolio: aFinancialAsset
+
+	^ rootPortfolios anySatisfy: [ :aPortfolio | aPortfolio isSelfOrIsInPortfolio: aFinancialAsset ]!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:51:20'!
+                 isOnAnotherPortfolioThatIncludesMe: aFinancialAsset
+
+	^ rootPortfolios anySatisfy: [ :aPortfolio | aPortfolio isSelfOrIsInPortfolio: aFinancialAsset ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:51:20' prior: 50338357!
+         assetGeneratesDuplication: aFinancialAsset
+
+	^ aFinancialAsset leaves anySatisfy: [ :leave | self isOnAnotherPortfolioThatIncludesMe: leave ]! !
+
+!methodRemoval: Portfolio #isOnAnyTopmostPortfolio: stamp: 'nz 5/24/2021 20:51:20'!
+isOnAnyTopmostPortfolio: aFinancialAsset
+
+	^ rootPortfolios anySatisfy: [ :aPortfolio | aPortfolio isSelfOrIsInPortfolio: aFinancialAsset ]!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:54:38' prior: 50338379!
+                assetGeneratesDuplication: aFinancialAsset
+	"Usamos `leaves` porque reduce busquedas"
+	^ aFinancialAsset leaves anySatisfy: [ :asset | self isOnAnotherPortfolioThatIncludesMe: asset ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:54:43' prior: 50338394!
+        assetGeneratesDuplication: aFinancialAsset
+
+	"Usamos `leaves` porque reduce busquedas"
+	^ aFinancialAsset leaves anySatisfy: [ :asset | self isOnAnotherPortfolioThatIncludesMe: asset ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:55:11'!
+                       validateAssetInclusion: aFinancialAsset
+	
+	(self assetGeneratesDuplication: aFinancialAsset)
+		ifTrue: [^self error: self class duplicatedAssetErrorDescription ].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:55:11' prior: 50335990!
+                             registerAsset: aFinancialAsset 
+	
+	self validateAssetInclusion: aFinancialAsset.
+
+	aFinancialAsset addedToPortfolio: self.
+	financialAssets add: aFinancialAsset.! !
+
+!methodRemoval: Portfolio #validateAddAsset: stamp: 'nz 5/24/2021 20:55:11'!
+validateAddAsset: aFinancialAsset
+	
+	(self assetGeneratesDuplication: aFinancialAsset)
+		ifTrue: [^self error: self class duplicatedAssetErrorDescription ].!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:58:22'!
+  addAsset: aFinancialAsset
+
+	aFinancialAsset addedToPortfolio: self.
+	financialAssets add: aFinancialAsset! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:58:22' prior: 50338421!
+                      registerAsset: aFinancialAsset 
+	
+	self validateAssetInclusion: aFinancialAsset.
+
+	self addAsset: aFinancialAsset.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 20:58:34' prior: 50338436!
+             addAsset: aFinancialAsset
+
+	financialAssets add: aFinancialAsset.
+	aFinancialAsset addedToPortfolio: self.! !
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 20:58:35'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 20:58:38'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 20:58:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:59:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 20:59:58'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 21:00:17'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:06' prior: 50338443!
+                 registerAsset: aFinancialAsset 
+	
+	self validateAssetInclusion: aFinancialAsset.
+
+	financialAssets add: aFinancialAsset.
+	aFinancialAsset addedToPortfolio: self.! !
+
+!methodRemoval: Portfolio #addAsset: stamp: 'nz 5/24/2021 21:04:08'!
+addAsset: aFinancialAsset
+
+	financialAssets add: aFinancialAsset.
+	aFinancialAsset addedToPortfolio: self.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44'!
+                            addAsset: aFinancialAsset 
+	
+	self validateAssetInclusion: aFinancialAsset.
+
+	financialAssets add: aFinancialAsset.
+	aFinancialAsset addedToPortfolio: self.! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337489!
+                        test21
+	
+	| mainPortfolio |
+	
+	mainPortfolio _ Portfolio new.
+		
+	self should: [ 	mainPortfolio addAsset: mainPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334893!
+            test09
+	
+	| portfolio anAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: portfolio balance equals: 100.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334991!
+                      test17
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334919!
+           test13
+	
+	| portfolio anAccount anotherAccount anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self deny: (portfolio hasRegistered: anotherTransaction).
+
+" un portfolio con una cuenta que tiene dos tx
+  un portfolio con dos cuenta con una tx cada una
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334806!
+                           test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	"anotherPortfolio registerAccount: anAccount."
+	portfolio addAsset: anotherPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337385!
+             test22
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	innerPortfolio addAsset: anAccount.
+		
+	self should: [ 	mainPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334951!
+   test14
+	
+	| portfolio anAccount anotherAccount aTransaction anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+	self assert: (portfolio hasRegistered: anotherTransaction).
+
+"un portfolio con dos cuenta con una tx cada una
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337401!
+                 test26
+	
+	| rootPortfolio leftPortfolio rightPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	leftPortfolio _ Portfolio new.
+	rightPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+		
+	rootPortfolio addAsset: leftPortfolio.
+	leftPortfolio addAsset: anAccount.
+	rightPortfolio addAsset: anAccount.
+		
+	self should: [ rootPortfolio addAsset: rightPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337433!
+             test23
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	mainPortfolio addAsset: anAccount.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337934!
+  test28
+	
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	aPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 200 on: anAccount.
+	
+	self assert: aPortfolio transactions size equals: 1.
+	self assert: aPortfolio transactions first equals: aTransaction.! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334939!
+                 test11
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50335009!
+                test18
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anotherAccount anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	anotherAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 300 on: anotherAccount.
+	thirdPortfolio addAsset: anotherAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50335032!
+                             test19
+	
+	| mainPortfolio secondPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	
+	secondPortfolio _ Portfolio new.
+	mainPortfolio addAsset: secondPortfolio.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337420!
+    test20
+	
+	| mainPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	self should: [mainPortfolio addAsset: anAccount.]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334904!
+ test10
+	
+	| portfolio anAccount anotherAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	Deposit register: 50 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount .
+	
+	self assert: portfolio balance equals: 150.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50334974!
+                    test15
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	anotherPortfolio addAsset: anAccount.
+	portfolio addAsset: anotherPortfolio.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+
+"
+  un portfolio con un portfolio con una cuenta que tiene una tx
+"! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337449!
+          test24
+	
+	| parentPortfolio otherParentPortfolio innerPortfolio anAccount |
+	
+	parentPortfolio _ Portfolio new.
+	otherParentPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	parentPortfolio addAsset: innerPortfolio.
+	parentPortfolio addAsset: anAccount.
+	otherParentPortfolio addAsset: innerPortfolio.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'nz 5/24/2021 21:04:44' prior: 50337469!
+              test25
+	
+	| rootPortfolio childPortfolio grandChildPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	childPortfolio _ Portfolio new.
+	grandChildPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	rootPortfolio addAsset: childPortfolio .
+	rootPortfolio addAsset: anAccount.
+	childPortfolio addAsset: grandChildPortfolio.
+		
+	self should: [ 		grandChildPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: Portfolio #registerAsset: stamp: 'nz 5/24/2021 21:04:44'!
+registerAsset: aFinancialAsset 
+	
+	self validateAssetInclusion: aFinancialAsset.
+
+	financialAssets add: aFinancialAsset.
+	aFinancialAsset addedToPortfolio: self.!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 21:04:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 21:05:12'!
+PASSED!
+!FinancialAsset methodsFor: 'private' stamp: 'nz 5/24/2021 21:08:13'!
+                     leaves
+
+	self subclassResponsibility .! !
+!FinancialAsset methodsFor: 'transactions' stamp: 'nz 5/24/2021 21:24:27'!
+           transactions
+
+	self subclassResponsibility .! !
+!FinancialAsset methodsFor: 'private' stamp: 'nz 5/24/2021 21:29:16'!
+          addedToPortfolio: aPortfolio
+
+	self subclassResponsibility .! !
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 21:29:19'!
+PASSED!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:38:59' prior: 50338866!
+             test13
+	
+	| portfolio anAccount anotherAccount anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self deny: (portfolio hasRegistered: anotherTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:39:04' prior: 50338919!
+            test14
+	
+	| portfolio anAccount anotherAccount aTransaction anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+	self assert: (portfolio hasRegistered: anotherTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:39:11' prior: 50339066!
+                  test15
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	anotherPortfolio addAsset: anAccount.
+	portfolio addAsset: anotherPortfolio.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:39:19' prior: 50338887!
+                            test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: anotherPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:40:09' prior: 50339441!
+           test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones
+	
+	| portfolio emptyPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	emptyPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: emptyPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:40:55'!
+ test08EmptyPortfolioHasZeroBalance
+	
+	| portfolio |
+	
+	portfolio _ Portfolio new.
+	
+	self assert: portfolio balance equals: 0.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test08 stamp: 'nz 5/24/2021 21:42:32'!
+test08
+	
+	| portfolio |
+	
+	portfolio _ Portfolio new.
+	
+	self assert: portfolio balance equals: 0.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:43:55'!
+test09BalanceOfPortfolioWithOneAccountEqualsToAccountBalance
+	
+	| portfolio anAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: portfolio balance equals: 100.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test09 stamp: 'nz 5/24/2021 21:43:57'!
+test09
+	
+	| portfolio anAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: portfolio balance equals: 100.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:44:44'!
+                test10BalanceOfPortfolioWithManyAccountsEqualsToTheSumOfTheirBalances
+	
+	| portfolio anAccount anotherAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	Deposit register: 50 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount .
+	
+	self assert: portfolio balance equals: 150.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test10 stamp: 'nz 5/24/2021 21:44:46'!
+test10
+	
+	| portfolio anAccount anotherAccount |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	Deposit register: 50 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount .
+	
+	self assert: portfolio balance equals: 150.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:46:02'!
+   test11PortfolioWithOneAccountHasRegisteredTheTransactionsOfThatAccount
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test11 stamp: 'nz 5/24/2021 21:46:03'!
+test11
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:47:39'!
+                          test12PortfolioHasNotRegisteredATransactionOfAnExternalAccount
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test12 stamp: 'nz 5/24/2021 21:47:42'!
+test12
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+!
+
+!methodRemoval: ReceptiveAccountTest #test13 stamp: 'nz 5/24/2021 21:49:52'!
+test13
+	
+	| portfolio anAccount anotherAccount anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	
+	self deny: (portfolio hasRegistered: anotherTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:50:43'!
+    test13PortfolioWithMultipleAccountsHasRegisteredAllTheirTransactions
+	
+	| portfolio anAccount anotherAccount aTransaction anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+	self assert: (portfolio hasRegistered: anotherTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test14 stamp: 'nz 5/24/2021 21:50:47'!
+test14
+	
+	| portfolio anAccount anotherAccount aTransaction anotherTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	anotherTransaction _ Deposit register: 200 on: anotherAccount.
+	
+	portfolio addAsset: anAccount.
+	portfolio addAsset: anotherAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+	self assert: (portfolio hasRegistered: anotherTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:53:57'!
+    test14PortfolioWithNestedPortfolioHasRegisteredAccountTransactions
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anotherPortfolio _ Portfolio new.
+	portfolio addAsset: anotherPortfolio.
+	
+	anAccount _ ReceptiveAccount new.
+	anotherPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test15 stamp: 'nz 5/24/2021 21:54:07'!
+test15
+	
+	| portfolio anotherPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	anotherPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	anotherPortfolio addAsset: anAccount.
+	portfolio addAsset: anotherPortfolio.
+	
+	self assert: (portfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:57:48'!
+                          test15NotEmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount
+	
+	| portfolio emptyPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	emptyPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: emptyPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones stamp: 'nz 5/24/2021 21:57:50'!
+test16UnPortfolioAdentroDeOtroPortfolioVacioNoTieneTransacciones
+	
+	| portfolio emptyPortfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	emptyPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	portfolio addAsset: emptyPortfolio.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 21:57:59'!
+test12EmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test12PortfolioHasNotRegisteredATransactionOfAnExternalAccount stamp: 'nz 5/24/2021 21:58:01'!
+test12PortfolioHasNotRegisteredATransactionOfAnExternalAccount
+	
+	| portfolio anAccount aTransaction |
+	
+	portfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self deny: (portfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:00:45'!
+                     test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test17 stamp: 'nz 5/24/2021 22:00:47'!
+test17
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:02:41' prior: 50339001!
+                          test18
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anotherAccount anAccount aTransaction anotherTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	anotherAccount _ ReceptiveAccount new.
+	anotherTransaction _ Deposit register: 300 on: anotherAccount.
+	thirdPortfolio addAsset: anotherAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+	self assert: (mainPortfolio hasRegistered: anotherTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:03:31'!
+test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:03:38'!
+             test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anotherAccount anAccount aTransaction anotherTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	anotherAccount _ ReceptiveAccount new.
+	anotherTransaction _ Deposit register: 300 on: anotherAccount.
+	thirdPortfolio addAsset: anotherAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+	self assert: (mainPortfolio hasRegistered: anotherTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test18 stamp: 'nz 5/24/2021 22:03:39'!
+test18
+	
+	| mainPortfolio secondPortfolio thirdPortfolio anotherAccount anAccount aTransaction anotherTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	secondPortfolio _ Portfolio new.
+	thirdPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	aTransaction _ Deposit register: 500 on: anAccount.
+	secondPortfolio addAsset: anAccount.
+	
+	anotherAccount _ ReceptiveAccount new.
+	anotherTransaction _ Deposit register: 300 on: anotherAccount.
+	thirdPortfolio addAsset: anotherAccount.
+	
+	mainPortfolio addAsset: secondPortfolio.
+	mainPortfolio addAsset: thirdPortfolio.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+	self assert: (mainPortfolio hasRegistered: anotherTransaction).
+!
+
+!testRun: #ReceptiveAccountTest #test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08EmptyPortfolioHasZeroBalance stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09BalanceOfPortfolioWithOneAccountEqualsToAccountBalance stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10BalanceOfPortfolioWithManyAccountsEqualsToTheSumOfTheirBalances stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11PortfolioWithOneAccountHasRegisteredTheTransactionsOfThatAccount stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12EmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13PortfolioWithMultipleAccountsHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14PortfolioWithNestedPortfolioHasRegisteredAccountTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15NotEmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 22:03:53'!
+PASSED!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:05:01'!
+           test17PortfolioWithAnAccountAndAnEmptyPortfolioHasAccountTransactions
+	
+	| mainPortfolio secondPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	
+	secondPortfolio _ Portfolio new.
+	mainPortfolio addAsset: secondPortfolio.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+! !
+
+!methodRemoval: ReceptiveAccountTest #test19 stamp: 'nz 5/24/2021 22:05:07'!
+test19
+	
+	| mainPortfolio secondPortfolio anAccount aTransaction |
+	
+	mainPortfolio _ Portfolio new.
+	
+	secondPortfolio _ Portfolio new.
+	mainPortfolio addAsset: secondPortfolio.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 500 on: anAccount.
+	
+	self assert: (mainPortfolio hasRegistered: aTransaction).
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:05:51'!
+   test18CannotAddAnAccountTwiceToAPortfolio
+	
+	| mainPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	self should: [mainPortfolio addAsset: anAccount.]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test20 stamp: 'nz 5/24/2021 22:05:53'!
+test20
+	
+	| mainPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	
+	anAccount _ ReceptiveAccount new.
+	mainPortfolio addAsset: anAccount.
+	
+	self should: [mainPortfolio addAsset: anAccount.]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:06:14'!
+                         test19CantAddPortfolioToItself
+	
+	| mainPortfolio |
+	
+	mainPortfolio _ Portfolio new.
+		
+	self should: [ 	mainPortfolio addAsset: mainPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test21 stamp: 'nz 5/24/2021 22:06:16'!
+test21
+	
+	| mainPortfolio |
+	
+	mainPortfolio _ Portfolio new.
+		
+	self should: [ 	mainPortfolio addAsset: mainPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:07:13'!
+                          test20PortfolioWithNestedPortfolioCantAddADuplicatedAccount
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	innerPortfolio addAsset: anAccount.
+		
+	self should: [ 	mainPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test22 stamp: 'nz 5/24/2021 22:07:14'!
+test22
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	innerPortfolio addAsset: anAccount.
+		
+	self should: [ 	mainPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:10:03'!
+           test20CantAddAnAccountThatIsInANestedPortfolio
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	innerPortfolio addAsset: anAccount.
+		
+	self should: [ 	mainPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test20PortfolioWithNestedPortfolioCantAddADuplicatedAccount stamp: 'nz 5/24/2021 22:10:03'!
+test20PortfolioWithNestedPortfolioCantAddADuplicatedAccount
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	innerPortfolio addAsset: anAccount.
+		
+	self should: [ 	mainPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:10:40'!
+              test21CantAddAnAccountThatIsInAUpperPortfolio
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	mainPortfolio addAsset: anAccount.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test23 stamp: 'nz 5/24/2021 22:10:40'!
+test23
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	mainPortfolio addAsset: anAccount.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+
+!methodRemoval: ReceptiveAccountTest #test24 stamp: 'nz 5/24/2021 22:12:24'!
+test24
+	
+	| parentPortfolio otherParentPortfolio innerPortfolio anAccount |
+	
+	parentPortfolio _ Portfolio new.
+	otherParentPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	parentPortfolio addAsset: innerPortfolio.
+	parentPortfolio addAsset: anAccount.
+	otherParentPortfolio addAsset: innerPortfolio.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:19:38'!
+ test22CantAddAnAccountThatIsInAPortfolioManyLevelsAbove
+	
+	| rootPortfolio childPortfolio grandChildPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	childPortfolio _ Portfolio new.
+	grandChildPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	rootPortfolio addAsset: childPortfolio .
+	rootPortfolio addAsset: anAccount.
+	childPortfolio addAsset: grandChildPortfolio.
+		
+	self should: [ 		grandChildPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test25 stamp: 'nz 5/24/2021 22:19:38'!
+test25
+	
+	| rootPortfolio childPortfolio grandChildPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	childPortfolio _ Portfolio new.
+	grandChildPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	rootPortfolio addAsset: childPortfolio .
+	rootPortfolio addAsset: anAccount.
+	childPortfolio addAsset: grandChildPortfolio.
+		
+	self should: [ 		grandChildPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:21:07'!
+               test21CantAddAnAccountThatIsInAPortfolioALevelAbove
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	mainPortfolio addAsset: anAccount.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test21CantAddAnAccountThatIsInAUpperPortfolio stamp: 'nz 5/24/2021 22:21:07'!
+test21CantAddAnAccountThatIsInAUpperPortfolio
+	
+	| mainPortfolio innerPortfolio anAccount |
+	
+	mainPortfolio _ Portfolio new.
+	innerPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	
+	mainPortfolio addAsset: innerPortfolio.
+	mainPortfolio addAsset: anAccount.
+		
+	self should: [ 		innerPortfolio addAsset: anAccount. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:23:03'!
+   test23CantAddAPortfolioWithDuplicatedAccount
+	
+	| rootPortfolio leftPortfolio rightPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	leftPortfolio _ Portfolio new.
+	rightPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+		
+	rootPortfolio addAsset: leftPortfolio.
+	leftPortfolio addAsset: anAccount.
+	rightPortfolio addAsset: anAccount.
+		
+	self should: [ rootPortfolio addAsset: rightPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+! !
+
+!methodRemoval: ReceptiveAccountTest #test26 stamp: 'nz 5/24/2021 22:23:03'!
+test26
+	
+	| rootPortfolio leftPortfolio rightPortfolio anAccount |
+	
+	rootPortfolio _ Portfolio new.
+	leftPortfolio _ Portfolio new.
+	rightPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+		
+	rootPortfolio addAsset: leftPortfolio.
+	leftPortfolio addAsset: anAccount.
+	rightPortfolio addAsset: anAccount.
+		
+	self should: [ rootPortfolio addAsset: rightPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio duplicatedAssetErrorDescription.
+!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:23:45'!
+              test24EmptyPortfolioHasNoTransactions
+	
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: aPortfolio transactions isEmpty.! !
+
+!methodRemoval: ReceptiveAccountTest #test27 stamp: 'nz 5/24/2021 22:23:45'!
+test27
+	
+	| aPortfolio |
+	
+	aPortfolio _ Portfolio new.
+	
+	self assert: aPortfolio transactions isEmpty.!
+!ReceptiveAccountTest methodsFor: 'tests' stamp: 'nz 5/24/2021 22:24:14'!
+                   test25PortfolioWithOneAccountHasAllItsTransactions
+	
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	aPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 200 on: anAccount.
+	
+	self assert: aPortfolio transactions size equals: 1.
+	self assert: aPortfolio transactions first equals: aTransaction.! !
+
+!methodRemoval: ReceptiveAccountTest #test28 stamp: 'nz 5/24/2021 22:24:14'!
+test28
+	
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio _ Portfolio new.
+	anAccount _ ReceptiveAccount new.
+	aPortfolio addAsset: anAccount.
+	
+	aTransaction _ Deposit register: 200 on: anAccount.
+	
+	self assert: aPortfolio transactions size equals: 1.
+	self assert: aPortfolio transactions first equals: aTransaction.!
+
+!testRun: #ReceptiveAccountTest #test25PortfolioWithOneAccountHasAllItsTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08EmptyPortfolioHasZeroBalance stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09BalanceOfPortfolioWithOneAccountEqualsToAccountBalance stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10BalanceOfPortfolioWithManyAccountsEqualsToTheSumOfTheirBalances stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11PortfolioWithOneAccountHasRegisteredTheTransactionsOfThatAccount stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12EmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13PortfolioWithMultipleAccountsHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test14PortfolioWithNestedPortfolioHasRegisteredAccountTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test15NotEmptyPortfolioHasNotRegisteredATransactionOfAnExternalAccount stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test16PortfolioWithMultipleNestedPortfoliosHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test17PortfolioWithAnAccountAndAnEmptyPortfolioHasAccountTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test18CannotAddAnAccountTwiceToAPortfolio stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test19CantAddPortfolioToItself stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test20CantAddAnAccountThatIsInANestedPortfolio stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test21CantAddAnAccountThatIsInAPortfolioALevelAbove stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test22CantAddAnAccountThatIsInAPortfolioManyLevelsAbove stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test23CantAddAPortfolioWithDuplicatedAccount stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test24EmptyPortfolioHasNoTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test25PortfolioWithOneAccountHasAllItsTransactions stamp: 'nz 5/24/2021 22:24:54'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13PortfolioWithMultipleAccountsHasRegisteredAllTheirTransactions stamp: 'nz 5/24/2021 22:30:03'!
+PASSED!
+
+----QUIT----(24 May 2021 22:31:01) Porfolio.image priorSource: 213681!
