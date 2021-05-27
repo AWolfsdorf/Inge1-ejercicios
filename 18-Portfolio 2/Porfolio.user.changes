@@ -8253,3 +8253,59 @@ PASSED!
 PASSED!
 
 ----QUIT----(24 May 2021 22:31:01) Porfolio.image priorSource: 213681!
+
+----STARTUP---- (27 May 2021 20:38:58) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/18-Portfolio 2/Porfolio.image!
+
+
+!classRemoval: #ReceptiveAccount stamp: 'nz 5/27/2021 20:39:31'!
+FinancialAsset subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Portfolio stamp: 'nz 5/27/2021 20:39:31'!
+FinancialAsset subclass: #Portfolio
+	instanceVariableNames: 'financialAssets rootPortfolios'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #FinancialAsset stamp: 'nz 5/27/2021 20:39:32'!
+Object subclass: #FinancialAsset
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Withdraw stamp: 'nz 5/27/2021 20:39:32'!
+AccountTransaction subclass: #Withdraw
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #Deposit stamp: 'nz 5/27/2021 20:39:32'!
+AccountTransaction subclass: #Deposit
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #AccountTransaction stamp: 'nz 5/27/2021 20:39:33'!
+Object subclass: #AccountTransaction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classRemoval: #ReceptiveAccountTest stamp: 'nz 5/27/2021 20:39:33'!
+TestCase subclass: #ReceptiveAccountTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+----End fileIn of /home/nikita/r/f/ingsoft1/2021-1c/17-Portfolio 1/Portfolio-Solucion.st----!
+
+----QUIT----(27 May 2021 20:41:18) Porfolio.image priorSource: 279307!
