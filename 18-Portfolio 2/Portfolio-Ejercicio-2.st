@@ -305,6 +305,41 @@ test07AccountKnowsItsTransactions
 ! !
 
 
+!classDefinition: #TransferTest category: 'Portfolio-Ejercicio-2'!
+TestCase subclass: #TransferTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 20:53:02'!
+test01
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+		
+	self assert: -100 equals: senderAccount balance .
+	self assert: 100 equals: receiverAccount balance .
+! !
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 21:15:45'!
+test02
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: senderAccount transactions first receiver equals: receiverAccount.
+! !
+
+
 !classDefinition: #Account category: 'Portfolio-Ejercicio-2'!
 Object subclass: #Account
 	instanceVariableNames: ''
@@ -612,6 +647,50 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
+!classDefinition: #OutgoingTransfer category: 'Portfolio-Ejercicio-2'!
+AccountTransaction subclass: #OutgoingTransfer
+	instanceVariableNames: 'value senderAccount receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!OutgoingTransfer methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 21:33:54'!
+affectBalance: aBalance
+
+	^aBalance - value! !
+
+!OutgoingTransfer methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 21:32:58'!
+receiver
+
+	^receiverAccount! !
+
+!OutgoingTransfer methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 21:33:34'!
+value
+
+	^value! !
+
+
+!OutgoingTransfer methodsFor: 'initialization' stamp: 'nz 5/27/2021 21:32:13'!
+initializeAmount: anAmount from: aSenderAccount to: aReceiverAccount 
+	
+	value := anAmount.
+	senderAccount := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'OutgoingTransfer class' category: 'Portfolio-Ejercicio-2'!
+OutgoingTransfer class
+	instanceVariableNames: ''!
+
+!OutgoingTransfer class methodsFor: 'instance creation' stamp: 'nz 5/27/2021 21:35:41'!
+amount: anAmount from: aSenderAccount to: aReceiverAccount
+	| outgoingTransfer |
+	outgoingTransfer _ self new initializeAmount: anAmount from: aSenderAccount to: aReceiverAccount.
+	aSenderAccount register: outgoingTransfer.
+	^outgoingTransfer.! !
+
+
 !classDefinition: #Withdraw category: 'Portfolio-Ejercicio-2'!
 AccountTransaction subclass: #Withdraw
 	instanceVariableNames: 'value'
@@ -646,3 +725,22 @@ Withdraw class
 for: aValue
 
 	^ self new initializeFor: aValue ! !
+
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2'!
+Object subclass: #Transfer
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Transfer class' category: 'Portfolio-Ejercicio-2'!
+Transfer class
+	instanceVariableNames: ''!
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 21:23:54'!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	OutgoingTransfer amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.! !
