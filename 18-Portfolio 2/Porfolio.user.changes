@@ -8727,3 +8727,975 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(27 May 2021 21:36:17) Porfolio.image priorSource: 304017!
+
+----STARTUP---- (31 May 2021 21:41:02) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/18-Portfolio 2/Porfolio.image!
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:49:19' prior: 50341390!
+test02
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (senderAccount hasRegistered: transfer xxx).
+
+! !
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:49:23'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:49:33'!
+xxx
+	self shouldBeImplemented.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:50:02'!
+xxx
+	self shouldBeImplemented.! !
+
+!methodRemoval: Transfer class #xxx stamp: 'AW 5/31/2021 21:50:02'!
+xxx
+	self shouldBeImplemented.!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 5/31/2021 21:50:20'!
+Object subclass: #Transfer
+	instanceVariableNames: 'xxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:50:18' prior: 50341680!
+xxx
+	^xxx.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:50:31'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:50:31'!
+ERROR!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:50:31'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:52:36' prior: 50341459!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| outgoingTransfer |
+	
+	outgoingTransfer := OutgoingTransfer amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	^self new initializeWith: outgoingTransfer.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:53:29'!
+ERROR!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:53:29'!
+ERROR!
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:53:34'!
+ERROR!
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:53:55'!
+ERROR!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 5/31/2021 21:54:15'!
+Object subclass: #Transfer
+	instanceVariableNames: 'xxx outgoingTransfer_CHANGE_ME'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'initialization' stamp: 'AW 5/31/2021 21:54:15'!
+initializeWith: outgoingTransfer 
+	self shouldBeImplemented.
+	outgoingTransfer_CHANGE_ME := outgoingTransfer.! !
+!Transfer methodsFor: 'initialization' stamp: 'AW 5/31/2021 21:54:31' prior: 50341736!
+initializeWith: outgoingTransfer 
+
+	outgoingTransfer_CHANGE_ME := outgoingTransfer.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:54:45'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:54:47'!
+FAILURE!
+!Transfer methodsFor: 'initialization' stamp: 'AW 5/31/2021 21:55:18' prior: 50341743!
+initializeWith: outgoingTransfer 
+
+	xxx := outgoingTransfer.! !
+
+Object subclass: #Transfer
+	instanceVariableNames: 'xxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 5/31/2021 21:55:28'!
+Object subclass: #Transfer
+	instanceVariableNames: 'xxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:55:30'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:55:30'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:55:30'!
+PASSED!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:56:05'!
+outgoingTransaction
+	^xxx.! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:56:05' prior: 50341662!
+test02
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (senderAccount hasRegistered: transfer outgoingTransaction).
+
+! !
+
+!methodRemoval: Transfer #xxx stamp: 'AW 5/31/2021 21:56:05'!
+xxx
+	^xxx.!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 5/31/2021 21:56:20'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:56:20' prior: 50341754!
+initializeWith: outgoingTransfer 
+
+	outgoingTransaction := outgoingTransfer.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:56:20' prior: 50341777!
+outgoingTransaction
+	^outgoingTransaction.! !
+!Transfer methodsFor: 'initialization' stamp: 'AW 5/31/2021 21:56:47' prior: 50341804!
+initializeWith: aOutgoingTransaction 
+
+	outgoingTransaction := aOutgoingTransaction.! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:57:21' prior: 50341706!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| outgoingTransaction |
+	
+	outgoingTransaction := OutgoingTransfer amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	^self new initializeWith: outgoingTransaction.! !
+
+!classRenamed: #OutgoingTransfer as: #OutgoingTransaction stamp: 'AW 5/31/2021 21:57:32'!
+Smalltalk renameClassNamed: #OutgoingTransfer as: #OutgoingTransaction!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:57:32' prior: 50341821!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| outgoingTransaction |
+	
+	outgoingTransaction := OutgoingTransaction amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	^self new initializeWith: outgoingTransaction.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 5/31/2021 21:58:09'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 5/31/2021 21:58:09'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 22:00:09'!
+test03
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer receiver equals: receiverAccount.
+
+! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 5/31/2021 22:00:10'!
+ERROR!
+!OutgoingTransaction methodsFor: 'initialization' stamp: 'AW 5/31/2021 22:01:07'!
+initializeAmount: anAmount transfer: aTransfer 
+	
+	value := anAmount.
+	senderAccount := aTransfer .
+! !
+!OutgoingTransaction methodsFor: 'initialization' stamp: 'AW 5/31/2021 22:01:16' prior: 50341872!
+initializeAmount: anAmount transfer: aTransfer 
+	
+	value := anAmount.
+	senderAccount := aTransfer.
+! !
+
+!classDefinition: #OutgoingTransaction category: 'Portfolio-Ejercicio-2' stamp: 'AW 5/31/2021 22:01:23'!
+AccountTransaction subclass: #OutgoingTransaction
+	instanceVariableNames: 'value transfer receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 22:01:23' prior: 50341879!
+initializeAmount: anAmount transfer: aTransfer 
+	
+	value := anAmount.
+	transfer := aTransfer.
+! !
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 22:01:23' prior: 50341578!
+initializeAmount: anAmount from: aSenderAccount to: aReceiverAccount 
+	
+	value := anAmount.
+	transfer := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+
+!methodRemoval: OutgoingTransaction #initializeAmount:from:to: stamp: 'AW 5/31/2021 22:01:29'!
+initializeAmount: anAmount from: aSenderAccount to: aReceiverAccount 
+	
+	value := anAmount.
+	transfer := aSenderAccount.
+	receiverAccount := aReceiverAccount.!
+!OutgoingTransaction class methodsFor: 'instance creation' stamp: 'AW 5/31/2021 23:55:07'!
+for: aTransfer
+	| outgoingTransaction |
+	
+	outgoingTransaction _ self new initializeFor: aTransfer.
+	aTransfer sender register: outgoingTransaction.
+	^outgoingTransaction.! !
+
+!methodRemoval: OutgoingTransaction class #amount:from:to: stamp: 'AW 5/31/2021 23:55:15'!
+amount: anAmount from: aSenderAccount to: aReceiverAccount
+	| outgoingTransfer |
+	outgoingTransfer _ self new initializeAmount: anAmount from: aSenderAccount to: aReceiverAccount.
+	aSenderAccount register: outgoingTransfer.
+	^outgoingTransfer.!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:00:28' prior: 50341840!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction |
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	transfer setOutgoing: outgoingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:01:13'!
+ERROR!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:01:31'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction amountToTransfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:01:31'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction amountToTransfer senderAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:01:31'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction amountToTransfer senderAccount receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'initialization' stamp: 'AW 6/1/2021 00:01:31'!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	self shouldBeImplemented.
+	amountToTransfer := anAmountToTransfer.
+	senderAccount := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+!Transfer methodsFor: 'initialization' stamp: 'AW 6/1/2021 00:01:46' prior: 50341983!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+
+	amountToTransfer := anAmountToTransfer.
+	senderAccount := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:01:50'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction value senderAccount receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:01:50' prior: 50341993!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+
+	value := anAmountToTransfer.
+	senderAccount := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:01:56'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction value sender receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:01:56' prior: 50342011!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+
+	value := anAmountToTransfer.
+	sender := aSenderAccount.
+	receiverAccount := aReceiverAccount.! !
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:02:04'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction value sender receiver'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:02:04' prior: 50342029!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+
+	value := anAmountToTransfer.
+	sender := aSenderAccount.
+	receiver := aReceiverAccount.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:02:17'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:02:47' prior: 50341938!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction |
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	transfer setOutgoing: outgoingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:02:49'!
+ERROR!
+!OutgoingTransaction methodsFor: 'initialization' stamp: 'AW 6/1/2021 00:03:08'!
+initializeFor: aTransfer 
+	self shouldBeImplemented.
+	transfer := aTransfer.! !
+!OutgoingTransaction methodsFor: 'initialization' stamp: 'AW 6/1/2021 00:03:14' prior: 50342074!
+initializeFor: aTransfer 
+	
+	transfer := aTransfer.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:03:17'!
+ERROR!
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:03:27'!
+sender
+	self shouldBeImplemented.
+	^sender! !
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:03:32' prior: 50342086!
+sender
+	
+	^sender! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:03:34'!
+ERROR!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:03:59'!
+setOutgoing: anOutgoingTransaction 
+	self shouldBeImplemented.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:04:17' prior: 50342096!
+setOutgoing: anOutgoingTransaction 
+	
+! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:04:22'!
+ERROR!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:04:43'!
+receiver
+	self shouldBeImplemented.
+	^receiver! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:04:47' prior: 50342107!
+receiver
+	
+	^receiver! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:04:49'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:04:49'!
+ERROR!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:04:49'!
+FAILURE!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:04:49'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:04:51'!
+ERROR!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:05:02'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:05:02'!
+ERROR!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:05:02'!
+FAILURE!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:05:02'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:05:03'!
+ERROR!
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:05:51' prior: 50341627 overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance - transfer value.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:05:52'!
+ERROR!
+
+transfer value!
+
+transfer!
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:06:39' prior: 50342140 overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance - transfer amount.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:06:55'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:06:55'!
+ERROR!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:06:55'!
+FAILURE!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:06:55'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:06:57'!
+ERROR!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:07:05'!
+amount
+	self shouldBeImplemented.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:07:14' prior: 50342165!
+amount
+	^value.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:07:25'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:07:26'!
+FAILURE!
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:08:27'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction amount sender receiver'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:08:27' prior: 50342169!
+amount
+	^amount.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:08:27' prior: 50342046!
+initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+
+	amount := anAmountToTransfer.
+	sender := aSenderAccount.
+	receiver := aReceiverAccount.! !
+!Transfer methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:08:42' prior: 50342101!
+setOutgoing: anOutgoingTransaction 
+	
+	outgoingTransaction _ anOutgoingTransaction.! !
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:08:45'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:08:45'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:08:45'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:08:45'!
+PASSED!
+
+!methodRemoval: Transfer #initializeWith: stamp: 'AW 6/1/2021 00:09:11'!
+initializeWith: aOutgoingTransaction 
+
+	outgoingTransaction := aOutgoingTransaction.!
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:09:44'!
+amount
+
+	^value! !
+
+!methodRemoval: OutgoingTransaction #value stamp: 'AW 6/1/2021 00:09:44'!
+value
+
+	^value!
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:09:56' prior: 50342219!
+amount
+
+	^transfer amount.! !
+
+AccountTransaction subclass: #OutgoingTransaction
+	instanceVariableNames: 'transfer receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #OutgoingTransaction category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:10:05'!
+AccountTransaction subclass: #OutgoingTransaction
+	instanceVariableNames: 'transfer receiverAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+AccountTransaction subclass: #OutgoingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #OutgoingTransaction category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:10:20'!
+AccountTransaction subclass: #OutgoingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:10:27'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:10:27'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:10:27'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:10:27'!
+PASSED!
+
+!methodRemoval: OutgoingTransaction #initializeAmount:transfer: stamp: 'AW 6/1/2021 00:10:36'!
+initializeAmount: anAmount transfer: aTransfer 
+	
+	value := anAmount.
+	transfer := aTransfer.
+!
+
+!methodRemoval: OutgoingTransaction #receiver stamp: 'AW 6/1/2021 00:11:01'!
+receiver
+
+	^receiverAccount!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:11:04'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:11:04'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:11:04'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:11:04'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:12:49'!
+test04
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (receiverAccount hasRegistered: transfer incomingTransaction).
+
+! !
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:12:53'!
+ERROR!
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:13:02'!
+incomingTransaction
+	self shouldBeImplemented.! !
+
+!classDefinition: #Transfer category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:13:16'!
+Object subclass: #Transfer
+	instanceVariableNames: 'outgoingTransaction amount sender receiver incomingTransaction'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:13:15' prior: 50342300!
+incomingTransaction
+	
+	^incomingTransaction.! !
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:13:20'!
+FAILURE!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:14:08' prior: 50342057!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := Deposit register: anAmountToTransfer on: aReceiverAccount.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:14:11'!
+ERROR!
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:14:18'!
+setOutgoing: anOutgoingTransaction andIncoming: aDeposit 
+	self shouldBeImplemented.! !
+!Transfer methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:14:54' prior: 50342340!
+setOutgoing: anOutgoingTransaction andIncoming: aDeposit 
+	
+	outgoingTransaction _ anOutgoingTransaction.
+	incomingTransaction _ aDeposit.! !
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:14:56'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:14:56'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:14:56'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:14:56'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:14:56'!
+PASSED!
+
+!methodRemoval: Transfer #setOutgoing: stamp: 'AW 6/1/2021 00:15:15'!
+setOutgoing: anOutgoingTransaction 
+	
+	outgoingTransaction _ anOutgoingTransaction.!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:15:36'!
+test05
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer sender equals: senderAccount.
+
+! !
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:15:37'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:19:22' prior: 50342370!
+test05
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:19:33' prior: 50342396!
+test05
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:19:36'!
+ERROR!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:20:05'!
+test06
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:19:33' prior: 50342409!
+test05
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:19:22' prior: 50342435!
+test05
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:21:08' prior: 50342447!
+test05
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer sender equals: senderAccount.! !
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:21:09'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:21:09'!
+ERROR!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:21:09'!
+ERROR!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:21:27'!
+ERROR!
+
+AccountTransaction subclass: #IncomingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #IncomingTransaction category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:21:51'!
+AccountTransaction subclass: #IncomingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classRemoval: #IncomingTransaction stamp: 'AW 6/1/2021 00:21:59'!
+AccountTransaction subclass: #IncomingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+AccountTransaction subclass: #IncomingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #IncomingTransaction category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:22:08'!
+AccountTransaction subclass: #IncomingTransaction
+	instanceVariableNames: 'transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+IncomingTransaction class
+	instanceVariableNames: ''!
+
+!classDefinition: 'IncomingTransaction class' category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/1/2021 00:22:08'!
+IncomingTransaction class
+	instanceVariableNames: ''!
+!IncomingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:22:08' overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance - transfer amount.! !
+!IncomingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:22:08'!
+amount
+
+	^transfer amount.! !
+!IncomingTransaction methodsFor: 'initialization' stamp: 'AW 6/1/2021 00:22:08'!
+initializeFor: aTransfer 
+	
+	transfer := aTransfer.! !
+!IncomingTransaction class methodsFor: 'instance creation' stamp: 'AW 6/1/2021 00:22:08'!
+for: aTransfer
+	| outgoingTransaction |
+	
+	outgoingTransaction _ self new initializeFor: aTransfer.
+	aTransfer sender register: outgoingTransaction.
+	^outgoingTransaction.! !
+!IncomingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:22:16' prior: 50342534 overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance + transfer amount.! !
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:22:25'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:22:49' prior: 50342321!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:22:51'!
+FAILURE!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:22:51'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:22:51'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:22:51'!
+FAILURE!
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:22:51'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:22:51'!
+ERROR!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:22:57'!
+ERROR!
+!IncomingTransaction class methodsFor: 'instance creation' stamp: 'AW 6/1/2021 00:23:36' prior: 50342548!
+for: aTransfer
+	| outgoingTransaction |
+	
+	outgoingTransaction _ self new initializeFor: aTransfer.
+	aTransfer receiver register: outgoingTransaction.
+	^outgoingTransaction.! !
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:23:41'!
+ERROR!
+!IncomingTransaction class methodsFor: 'instance creation' stamp: 'AW 6/1/2021 00:24:10' prior: 50342599!
+for: aTransfer
+	| incomingTransaction |
+	
+	incomingTransaction _ self new initializeFor: aTransfer.
+	aTransfer receiver register: incomingTransaction.
+	^incomingTransaction.! !
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:24:17'!
+ERROR!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:24:24'!
+ERROR!
+!IncomingTransaction methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:24:30'!
+sender
+	self shouldBeImplemented.! !
+!IncomingTransaction methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:24:38' prior: 50342624!
+sender
+	^transfer sender .! !
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:24:39'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:24:40'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:24:41'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:25:23'!
+test07
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: senderAccount transactions first receiver equals: receiverAccount .
+
+! !
+
+!testRun: #TransferTest #test07 stamp: 'AW 6/1/2021 00:25:24'!
+ERROR!
+!OutgoingTransaction methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:25:30'!
+receiver
+	self shouldBeImplemented.! !
+!OutgoingTransaction methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:25:37' prior: 50342654!
+receiver
+	^transfer receiver.! !
+!OutgoingTransaction methodsFor: 'accessing' stamp: 'AW 6/1/2021 00:25:40' prior: 50342659!
+receiver
+	^transfer receiver.! !
+
+!testRun: #TransferTest #test07 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'AW 6/1/2021 00:25:40'!
+PASSED!
+
+----QUIT----(1 June 2021 00:30:30) Porfolio.image priorSource: 320113!
