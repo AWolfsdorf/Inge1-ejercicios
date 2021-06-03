@@ -9699,3 +9699,1349 @@ PASSED!
 PASSED!
 
 ----QUIT----(1 June 2021 00:30:30) Porfolio.image priorSource: 320113!
+
+----STARTUP---- (2 June 2021 21:56:49) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/18-Portfolio 2/Porfolio.image!
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:03:05'!
+test08
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: -100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 22:03:59'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:05:20'!
+transferAmountMustBePositiveErrorDescription
+	self shouldBeImplemented.! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:05:44' prior: 50342706!
+transferAmountMustBePositiveErrorDescription
+	^'Transfer amount must be positive'.! !
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 22:05:46'!
+FAILURE!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:08:28' prior: 50342566!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	(anAmountToTransfer < 0) ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 22:08:34'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:08:43'!
+test09
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: 0 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 22:08:43'!
+FAILURE!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:08:58' prior: 50342720!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	(anAmountToTransfer <= 0) ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 22:09:02'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:09:54'!
+test10
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 22:09:56'!
+FAILURE!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:10:40' prior: 50342818!
+test10
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
+
+! !
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:22:49'!
+ERROR!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:22:58'!
+transferReceiverAndSenderCannotBeTheSameErrorDescription
+	self shouldBeImplemented.! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:23:11' prior: 50342848!
+transferReceiverAndSenderCannotBeTheSameErrorDescription
+	^'Receiver and Sender cannot be the same'.! !
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:23:14'!
+FAILURE!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:24:15' prior: 50342775!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	(anAmountToTransfer <= 0) ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+	(aSenderAccount = aReceiverAccount) ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ].
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:24:16'!
+PASSED!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:25:09'!
+validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount
+
+	(anAmountToTransfer <= 0) ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+	(aSenderAccount = aReceiverAccount) ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:25:09' prior: 50342863!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	self validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount.
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:25:16'!
+PASSED!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:25:24' prior: 50342912!
+validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:25:26' prior: 50342969!
+validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+		
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:25:29'!
+PASSED!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:26:10' prior: 50342926!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	self validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount.
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:26:57'!
+validateTransferWithAmount: aReceiverAccount from: anAmountToTransfer to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+		
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:26:57' prior: 50343021!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	self validateTransferWithAmount: aReceiverAccount from: anAmountToTransfer to: aSenderAccount.
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+
+!methodRemoval: Transfer class #validateTransferWithAmount:anAmountToTransferfrom:to: stamp: 'nz 6/2/2021 23:26:57'!
+validateTransferWithAmount: aReceiverAccount anAmountToTransferfrom: anAmountToTransfer to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+		
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:27:06' prior: 50343055!
+amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
+	| transfer outgoingTransaction incomingTransaction |
+	
+	self validateTransferWithAmount: anAmountToTransfer from: aReceiverAccount to: aSenderAccount.
+	
+	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
+	
+	outgoingTransaction := OutgoingTransaction for: transfer.
+	incomingTransaction := IncomingTransaction for: transfer.
+	
+	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
+	^transfer.! !
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:27:16' prior: 50343041!
+validateTransferWithAmount: anAmountToTransfer from: aReceiverAccount to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+		
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
+
+!testRun: #TransferTest #test01 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test02 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test03 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test04 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test06 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test07 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test08 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test09 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+!testRun: #TransferTest #test10 stamp: 'nz 6/2/2021 23:27:25'!
+PASSED!
+
+TestCase subclass: #ReportsTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #ReportsTest category: 'Portfolio-Ejercicio-2' stamp: 'nz 6/2/2021 23:29:13'!
+TestCase subclass: #ReportsTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!ReportsTest methodsFor: 'no messages' stamp: 'nz 6/2/2021 23:29:32'!
+test01
+
+	! !
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:30:05'!
+test01TransferAffectsBothBalances
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+		
+	self assert: -100 equals: senderAccount balance .
+	self assert: 100 equals: receiverAccount balance .
+! !
+
+!methodRemoval: TransferTest #test01 stamp: 'nz 6/2/2021 23:30:16'!
+test01
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+		
+	self assert: -100 equals: senderAccount balance .
+	self assert: 100 equals: receiverAccount balance .
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:31:23'!
+test02TransferRegistersAnOutgoingTransactionInSenderAccount
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (senderAccount hasRegistered: transfer outgoingTransaction).
+
+! !
+
+!methodRemoval: TransferTest #test02 stamp: 'nz 6/2/2021 23:31:26'!
+test02
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (senderAccount hasRegistered: transfer outgoingTransaction).
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:32:23'!
+test03TransferCanRetrieveTheReceiver
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer receiver equals: receiverAccount.
+
+! !
+
+!methodRemoval: TransferTest #test03 stamp: 'nz 6/2/2021 23:32:29'!
+test03
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer receiver equals: receiverAccount.
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:32:57'!
+test04TransferRegistersAnIncomingTransactionInReceiverAccount
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (receiverAccount hasRegistered: transfer incomingTransaction).
+
+! !
+
+!methodRemoval: TransferTest #test04 stamp: 'nz 6/2/2021 23:32:57'!
+test04
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: (receiverAccount hasRegistered: transfer incomingTransaction).
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:33:15'!
+test05TransferCanRetrieveTheSender
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer sender equals: senderAccount.! !
+
+!methodRemoval: TransferTest #test05 stamp: 'nz 6/2/2021 23:33:15'!
+test05
+
+	| senderAccount receiverAccount transfer |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	transfer := Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: transfer sender equals: senderAccount.!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:35:57'!
+test06IncomingTransactionCanRetrieveTheSender
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+! !
+
+!methodRemoval: TransferTest #test06 stamp: 'nz 6/2/2021 23:35:57'!
+test06
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: receiverAccount transactions first sender equals: senderAccount.
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:37:17'!
+test07OutgoingTransactionCanRetrieveTheReceiver
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: senderAccount transactions first receiver equals: receiverAccount .
+
+! !
+
+!methodRemoval: TransferTest #test07 stamp: 'nz 6/2/2021 23:37:17'!
+test07
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	Transfer amount: 100 from: senderAccount to: receiverAccount.
+	
+	self assert: senderAccount transactions first receiver equals: receiverAccount .
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:37:45'!
+test08TransferWithNegativeAmountShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: -100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!methodRemoval: TransferTest #test08 stamp: 'nz 6/2/2021 23:37:45'!
+test08
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: -100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:38:18'!
+test09ZeroAmountTransferShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: 0 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!methodRemoval: TransferTest #test09 stamp: 'nz 6/2/2021 23:38:18'!
+test09
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: 0 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:38:49'!
+test10TransferReceiverAndSenderCannotBeTheSame
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
+
+! !
+
+!methodRemoval: TransferTest #test10 stamp: 'nz 6/2/2021 23:38:49'!
+test10
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
+
+!
+
+!testRun: #TransferTest #test10TransferReceiverAndSenderCannotBeTheSame stamp: 'nz 6/2/2021 23:38:52'!
+PASSED!
+
+!testRun: #TransferTest #test10TransferReceiverAndSenderCannotBeTheSame stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test01TransferAffectsBothBalances stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferRegistersAnOutgoingTransactionInSenderAccount stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferCanRetrieveTheReceiver stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferRegistersAnIncomingTransactionInReceiverAccount stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferCanRetrieveTheSender stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test06IncomingTransactionCanRetrieveTheSender stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test07OutgoingTransactionCanRetrieveTheReceiver stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test08TransferWithNegativeAmountShouldRaiseError stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test09ZeroAmountTransferShouldRaiseError stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+
+!testRun: #TransferTest #test10TransferReceiverAndSenderCannotBeTheSame stamp: 'nz 6/2/2021 23:38:54'!
+PASSED!
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:39:46'!
+test10SelfTransferShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
+
+! !
+
+!methodRemoval: TransferTest #test10TransferReceiverAndSenderCannotBeTheSame stamp: 'nz 6/2/2021 23:39:46'!
+test10TransferReceiverAndSenderCannotBeTheSame
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
+
+!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:47:48' prior: 50343158!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	"Deposit register: 100 on: account."
+	"Withdraw register: 50 on: account."
+		
+	report := nil value.
+		
+	self assert: 'Balance = 0.' equals: report first .
+	self assert: 1 equals: report size .
+! !
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2' stamp: 'nz 6/2/2021 23:52:44'!
+Object subclass: #AccountSummary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:52:35' prior: 50343475!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	"Deposit register: 100 on: account."
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/2/2021 23:53:04'!
+ERROR!
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:53:16'!
+for: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:55:12' prior: 50343509!
+for: aReceptiveAccount 
+	
+	self new intializeWith: aReceptiveAccount.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/2/2021 23:55:22'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:55:29'!
+intializeWith: aReceptiveAccount 
+	self shouldBeImplemented.! !
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2' stamp: 'nz 6/2/2021 23:55:50'!
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:55:48' prior: 50343521!
+intializeWith: aReceptiveAccount 
+	
+	account := aReceptiveAccount .! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/2/2021 23:55:56'!
+ERROR!
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:56:05'!
+createReport
+	self shouldBeImplemented.! !
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:56:23' prior: 50343542!
+createReport
+	
+	^OrderedCollection with: 'Balance = 0.'.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/2/2021 23:56:24'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/2/2021 23:56:24'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:57:37'!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:58:06' prior: 50343556!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/2/2021 23:58:21'!
+FAILURE!
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:00:08' prior: 50343547!
+createReport
+
+	^OrderedCollection with: 'Balance = 0.'.! !
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:01:56' prior: 50343514!
+for: aReceptiveAccount 
+	
+	^self new intializeWith: aReceptiveAccount.! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:02:08'!
+xtest02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+! !
+
+!methodRemoval: ReportsTest #test02 stamp: 'nz 6/3/2021 00:02:11'!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:02:35'!
+createReport
+
+	^OrderedCollection with: 'Balance = 0.'.! !
+
+!methodRemoval: AccountSummary class #createReport stamp: 'nz 6/3/2021 00:02:35'!
+createReport
+
+	^OrderedCollection with: 'Balance = 0.'.!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:02:42'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:02:59'!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+! !
+
+!methodRemoval: ReportsTest #xtest02 stamp: 'nz 6/3/2021 00:03:00'!
+xtest02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:03:06'!
+FAILURE!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:03:41'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:03:41'!
+FAILURE!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:03:41'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:05:24' prior: 50343624!
+createReport
+
+	(account transactions size = 0) ifTrue: [ 
+		^OrderedCollection with: 'Balance = 0.'.
+	].
+	^OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100.'.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:05:30'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:05:30'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:06:27'!
+test03
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:06:29'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:08:01' prior: 50343672!
+createReport
+
+	(account transactions size = 0) ifTrue: [ 
+		^OrderedCollection with: 'Balance = 0.'.
+	].
+	(account transactions first isKindOf: Withdraw) ifTrue: [
+		^OrderedCollection with: 'Extracción por 50.' with: 'Balance = -50.'.
+	].
+	^OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100.'.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:08:02'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:08:02'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:08:02'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:08:04'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:08:04'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:08:04'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:08:04'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:09:27' prior: 50343701!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions size = 0) ifTrue: [ 
+		^OrderedCollection with: 'Balance = 0.'.
+	].
+	(account transactions first isKindOf: Withdraw) ifTrue: [
+		^OrderedCollection with: 'Extracción por 50.' with: 'Balance = -50.'.
+	].
+	^OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100.'.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:10:56' prior: 50343730!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions first isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por 50.'.
+	] ifFalse: [
+		report add: 'Depósito por 100.'.
+	].
+	
+	report add: 'Balance = ', account balance, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:10:59'!
+ERROR!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:10:59'!
+ERROR!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:10:59'!
+ERROR!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:11:08'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:11:59' prior: 50343745!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		] ifFalse: [
+			report add: 'Depósito por 100.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:12:01'!
+ERROR!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:12:01'!
+ERROR!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:12:01'!
+ERROR!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:12:04'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:12:14' prior: 50343766!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		] ifFalse: [
+			report add: 'Depósito por 100.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:12:14'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:12:14'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:12:14'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:13:22'!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:13:54' prior: 50343808!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 30 from: anotherAccount to: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:14:24' prior: 50343823!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 30 from: anotherAccount to: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Entrada por transferencia de 30.' equals: report first .
+	self assert: 'Balance = 30.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:14:29'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:15:29' prior: 50343788!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		].
+		(account transactions first isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:15:43'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:15:43'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:15:43'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:15:43'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:15:43'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:17:49' prior: 50343839!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = 20.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:17:50'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:18:12' prior: 50343857!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		].
+		(account transactions first isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(account transactions first isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:18:16' prior: 50343906!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		].
+		(account transactions first isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(account transactions first isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:18:17'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:18:17'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:18:17'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:18:17'!
+FAILURE!
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:18:17'!
+FAILURE!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:18:26' prior: 50343888!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = -20.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:18:26'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'nz 6/3/2021 00:18:26'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'nz 6/3/2021 00:18:26'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'nz 6/3/2021 00:18:26'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'nz 6/3/2021 00:18:26'!
+PASSED!
+
+----QUIT----(3 June 2021 00:18:36) Porfolio.image priorSource: 353088!

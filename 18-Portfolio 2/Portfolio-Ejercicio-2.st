@@ -305,6 +305,77 @@ test07AccountKnowsItsTransactions
 ! !
 
 
+!classDefinition: #ReportsTest category: 'Portfolio-Ejercicio-2'!
+TestCase subclass: #ReportsTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:52:35'!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	"Deposit register: 100 on: account."
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:02:59'!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:06:27'!
+test03
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+! !
+
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:18:26'!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = -20.' equals: report second .
+! !
+
+
 !classDefinition: #TransferTest category: 'Portfolio-Ejercicio-2'!
 TestCase subclass: #TransferTest
 	instanceVariableNames: ''
@@ -312,8 +383,8 @@ TestCase subclass: #TransferTest
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio-2'!
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 5/27/2021 20:53:02'!
-test01
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:30:05'!
+test01TransferAffectsBothBalances
 
 	| senderAccount receiverAccount |
 	
@@ -326,8 +397,8 @@ test01
 	self assert: 100 equals: receiverAccount balance .
 ! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 21:56:05'!
-test02
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:31:23'!
+test02TransferRegistersAnOutgoingTransactionInSenderAccount
 
 	| senderAccount receiverAccount transfer |
 	
@@ -340,8 +411,8 @@ test02
 
 ! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 5/31/2021 22:00:09'!
-test03
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:32:23'!
+test03TransferCanRetrieveTheReceiver
 
 	| senderAccount receiverAccount transfer |
 	
@@ -354,8 +425,8 @@ test03
 
 ! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:12:49'!
-test04
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:32:57'!
+test04TransferRegistersAnIncomingTransactionInReceiverAccount
 
 	| senderAccount receiverAccount transfer |
 	
@@ -368,8 +439,8 @@ test04
 
 ! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:21:08'!
-test05
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:33:15'!
+test05TransferCanRetrieveTheSender
 
 	| senderAccount receiverAccount transfer |
 	
@@ -380,8 +451,8 @@ test05
 	
 	self assert: transfer sender equals: senderAccount.! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:20:05'!
-test06
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:35:57'!
+test06IncomingTransactionCanRetrieveTheSender
 
 	| senderAccount receiverAccount |
 	
@@ -394,8 +465,8 @@ test06
 
 ! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:25:23'!
-test07
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:37:17'!
+test07OutgoingTransactionCanRetrieveTheReceiver
 
 	| senderAccount receiverAccount |
 	
@@ -405,6 +476,57 @@ test07
 	Transfer amount: 100 from: senderAccount to: receiverAccount.
 	
 	self assert: senderAccount transactions first receiver equals: receiverAccount .
+
+! !
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:37:45'!
+test08TransferWithNegativeAmountShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: -100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:38:18'!
+test09ZeroAmountTransferShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := ReceptiveAccount  new.
+	
+	self
+		should: [Transfer amount: 0 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferAmountMustBePositiveErrorDescription.
+	
+
+
+! !
+
+!TransferTest methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:39:46'!
+test10SelfTransferShouldRaiseError
+
+	| senderAccount receiverAccount |
+	
+	senderAccount := ReceptiveAccount  new.
+	receiverAccount := senderAccount.
+	
+	self
+		should: [Transfer amount: 100 from: senderAccount to: receiverAccount.] 
+		raise: Error
+		description: Transfer transferReceiverAndSenderCannotBeTheSameErrorDescription.
+	
+
 
 ! !
 
@@ -643,6 +765,55 @@ isComposedBy: anAccount
 addedTo: aPortfolio 
 	
 	! !
+
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2'!
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:18:16'!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		(account transactions first isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		].
+		(account transactions first isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(account transactions first isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:55:48'!
+intializeWith: aReceptiveAccount 
+	
+	account := aReceptiveAccount .! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'AccountSummary class' category: 'Portfolio-Ejercicio-2'!
+AccountSummary class
+	instanceVariableNames: ''!
+
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 00:01:56'!
+for: aReceptiveAccount 
+	
+	^self new intializeWith: aReceptiveAccount.! !
 
 
 !classDefinition: #AccountTransaction category: 'Portfolio-Ejercicio-2'!
@@ -889,9 +1060,11 @@ setOutgoing: anOutgoingTransaction andIncoming: aDeposit
 Transfer class
 	instanceVariableNames: ''!
 
-!Transfer class methodsFor: 'as yet unclassified' stamp: 'AW 6/1/2021 00:22:49'!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:27:06'!
 amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount 
 	| transfer outgoingTransaction incomingTransaction |
+	
+	self validateTransferWithAmount: anAmountToTransfer from: aReceiverAccount to: aSenderAccount.
 	
 	transfer _ self new initializeAmount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount.
 	
@@ -900,3 +1073,20 @@ amount: anAmountToTransfer from: aSenderAccount to: aReceiverAccount
 	
 	transfer setOutgoing: outgoingTransaction andIncoming: incomingTransaction.
 	^transfer.! !
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 22:05:44'!
+transferAmountMustBePositiveErrorDescription
+	^'Transfer amount must be positive'.! !
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:23:11'!
+transferReceiverAndSenderCannotBeTheSameErrorDescription
+	^'Receiver and Sender cannot be the same'.! !
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'nz 6/2/2021 23:27:16'!
+validateTransferWithAmount: anAmountToTransfer from: aReceiverAccount to: aSenderAccount
+
+	(anAmountToTransfer <= 0)
+		ifTrue: [ self error: self class transferAmountMustBePositiveErrorDescription ].
+		
+	(aSenderAccount = aReceiverAccount)
+		ifTrue: [ self error: self class transferReceiverAndSenderCannotBeTheSameErrorDescription ]! !
