@@ -11045,3 +11045,4287 @@ PASSED!
 PASSED!
 
 ----QUIT----(3 June 2021 00:18:36) Porfolio.image priorSource: 353088!
+
+----STARTUP---- (3 June 2021 00:19:52) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/18-Portfolio 2/Porfolio.image!
+
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:21:38' prior: 50343929!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por 50.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:21:41'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:21:41'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:21:41'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:21:41'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:23:48' prior: 50343998!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:23:50'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:23:50'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:23:50'!
+ERROR!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:23:50'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:23:50'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:23:58' prior: 50344030!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por 100.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:23:59'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:23:59'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:23:59'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:23:59'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:24:13' prior: 50344065!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de 30.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:24:22' prior: 50344098!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de 20.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:24:37' prior: 50344123!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de ', transaction amount asString, '.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:24:38'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:24:38'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:24:38'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:24:38'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:25:55' prior: 50344149!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+		].
+		(transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de ', transaction amount asString, '.'.
+		].
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:27:26'!
+addTransaction: transaction toReport: report
+
+	^ (transaction isKindOf: OutgoingTransaction) ifTrue: [
+			report add: 'Salida por transferencia de ', transaction amount asString, '.'.
+		]! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:27:26' prior: 50344185!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		(transaction isKindOf: Withdraw) ifTrue: [
+			report add: 'Extracción por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: Deposit) ifTrue: [
+			report add: 'Depósito por ', transaction value asString, '.'.
+		].
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			report add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+		].
+		self addTransaction: transaction toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:27:42' prior: 50344221!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions isEmpty) ifFalse: [
+		|transaction|
+		transaction _ account transactions first.
+		self addTransaction: transaction toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:28:05' prior: 50344212!
+addTransaction: transaction toReport: report
+	(transaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', transaction value asString, '.'.
+	].
+	(transaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', transaction value asString, '.'.
+	].
+	(transaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+	].
+	(transaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', transaction amount asString, '.'.
+	]! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:28:08'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:28:08'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:28:08'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:28:08'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:29:27' prior: 50343494!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:29:33' prior: 50344288!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	"Deposit register: 100 on: account."
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:31:00'!
+test05
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = 50.' equals: report first .
+! !
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:31:02'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:32:33' prior: 50344245!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions size >= 1) ifTrue: [
+		self addTransaction: account transactions first toReport: report.
+	].
+	(account transactions size >= 2) ifTrue: [
+		self addTransaction: account transactions second toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:32:43'!
+FAILURE!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:33:39' prior: 50344313!
+test05
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:33:41'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:33:43'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:34:58' prior: 50344331!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions size >= 1) ifTrue: [
+		self addTransaction: account transactions first toReport: report.
+	].
+	(account transactions size >= 2) ifTrue: [
+		self addTransaction: account transactions second toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:35:52'!
+test06
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:36:30' prior: 50344405!
+test06
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:37:50' prior: 50344421!
+test06
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:37:59'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+
+!methodRemoval: ReportsTest #test06 stamp: 'AW 6/3/2021 00:37:59'!
+test06
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:38:05'!
+test06
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+
+!methodRemoval: ReportsTest #test05 stamp: 'AW 6/3/2021 00:38:05'!
+test05
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:38:11'!
+test05
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = -20.' equals: report second .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:38:43' prior: 50343964!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 30 from: anotherAccount to: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Entrada por transferencia de 30.' equals: report first .
+	self assert: 'Balance = 30.' equals: report second .
+! !
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test06 stamp: 'AW 6/3/2021 00:38:45'!
+PASSED!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:38:45'!
+FAILURE!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:38:45'!
+FAILURE!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:38:53'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:38:55'!
+PASSED!
+
+!testRun: #ReportsTest #test06 stamp: 'AW 6/3/2021 00:38:57'!
+PASSED!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:39:34' prior: 50344462!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:39:47' prior: 50344592!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report first .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:40:03' prior: 50344616!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report third .
+	self assert: 'Salida por transferencia de 20.' equals: report fourth .
+	self assert: 'Balance = 50.' equals: report fifth .
+! !
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:40:07'!
+FAILURE!
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:40:14' prior: 50344642!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 5 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report third .
+	self assert: 'Salida por transferencia de 20.' equals: report fourth .
+	self assert: 'Balance = 50.' equals: report fifth .
+! !
+!ReportsTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:40:23' prior: 50344670!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 5 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report third .
+	self assert: 'Salida por transferencia de 20.' equals: report fourth .
+	self assert: 'Balance = 60.' equals: report fifth .
+! !
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:40:24'!
+FAILURE!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:40:40'!
+FAILURE!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:41:26' prior: 50344391!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	(account transactions size >= 1) ifTrue: [
+		self addTransaction: account transactions first toReport: report.
+	].
+	(account transactions size >= 2) ifTrue: [
+		self addTransaction: account transactions second toReport: report.
+	].
+	(account transactions size >= 3) ifTrue: [
+		self addTransaction: account transactions third toReport: report.
+	].
+	(account transactions size >= 4) ifTrue: [
+		self addTransaction: account transactions fourth toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test06 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:41:27'!
+PASSED!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test06 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:41:29'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:42:22' prior: 50344727!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: report.
+	].
+	
+	(account transactions size >= 2) ifTrue: [
+		self addTransaction: account transactions second toReport: report.
+	].
+	(account transactions size >= 3) ifTrue: [
+		self addTransaction: account transactions third toReport: report.
+	].
+	(account transactions size >= 4) ifTrue: [
+		self addTransaction: account transactions fourth toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:42:27' prior: 50344783!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+
+!testRun: #ReportsTest #test01 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test02 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test03 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test04 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test05 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test06 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!testRun: #ReportsTest #test07 stamp: 'AW 6/3/2021 00:42:28'!
+PASSED!
+
+!classRenamed: #ReportsTest as: #AccountSummaryTest stamp: 'AW 6/3/2021 00:56:02'!
+Smalltalk renameClassNamed: #ReportsTest as: #AccountSummaryTest!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 00:59:10' prior: 50344301!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:01:04'!
+test01SummaryWithNoTransactionsOnlyHastBalanceLine
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+! !
+
+!methodRemoval: AccountSummaryTest #test01 stamp: 'AW 6/3/2021 01:01:09'!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 1 equals: report size .
+	self assert: 'Balance = 0.' equals: report first .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:02:01'!
+test02SummaryWithADepositShouldHaveALineForDeposit
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+! !
+
+!methodRemoval: AccountSummaryTest #test02 stamp: 'AW 6/3/2021 01:02:07'!
+test02
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	"Withdraw register: 50 on: account."
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Balance = 100.' equals: report second .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:02:59'!
+test03SummaryWithWithdrawShouldHaveALineForWithdraw
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+! !
+
+!methodRemoval: AccountSummaryTest #test03 stamp: 'AW 6/3/2021 01:03:02'!
+test03
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Extracción por 50.' equals: report first .
+	self assert: 'Balance = -50.' equals: report second .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:03:30'!
+test04SummaryWithAnIncomingTransactionShouldHaveALineForIt
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 30 from: anotherAccount to: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Entrada por transferencia de 30.' equals: report first .
+	self assert: 'Balance = 30.' equals: report second .
+! !
+
+!methodRemoval: AccountSummaryTest #test04 stamp: 'AW 6/3/2021 01:03:30'!
+test04
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 30 from: anotherAccount to: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Entrada por transferencia de 30.' equals: report first .
+	self assert: 'Balance = 30.' equals: report second .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:03:55'!
+test05SummaryWithOutgoingTransactionShouldHaveALineForIt
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = -20.' equals: report second .
+! !
+
+!methodRemoval: AccountSummaryTest #test05 stamp: 'AW 6/3/2021 01:03:55'!
+test05
+
+	| account report anotherAccount |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 2 equals: report size .
+	self assert: 'Salida por transferencia de 20.' equals: report first .
+	self assert: 'Balance = -20.' equals: report second .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:04:37'!
+test06SummaryWithTwoTransactionShouldHaveBoth
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+! !
+
+!methodRemoval: AccountSummaryTest #test06 stamp: 'AW 6/3/2021 01:04:37'!
+test06
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 3 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Balance = 50.' equals: report third .
+!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:05:05'!
+test07SummaryWithMultipleTransactionsShouldHaveAllOfThem
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 5 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report third .
+	self assert: 'Salida por transferencia de 20.' equals: report fourth .
+	self assert: 'Balance = 60.' equals: report fifth .
+! !
+
+!methodRemoval: AccountSummaryTest #test07 stamp: 'AW 6/3/2021 01:05:05'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: account.
+	Withdraw register: 50 on: account.
+	Transfer amount: 30 from: anotherAccount to: account.
+	Transfer amount: 20 from: account to: anotherAccount.
+		
+	report := (AccountSummary for: account) createReport.
+		
+	self assert: 5 equals: report size .
+	self assert: 'Depósito por 100.' equals: report first .
+	self assert: 'Extracción por 50.' equals: report second .
+	self assert: 'Entrada por transferencia de 30.' equals: report third .
+	self assert: 'Salida por transferencia de 20.' equals: report fourth .
+	self assert: 'Balance = 60.' equals: report fifth .
+!
+
+TestCase subclass: #TransferNet
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #TransferNet category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:05:46'!
+TestCase subclass: #TransferNet
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+TestCase subclass: #TransferNetTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #TransferNetTest category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:05:50'!
+TestCase subclass: #TransferNetTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classRemoval: #TransferNet stamp: 'AW 6/3/2021 01:05:58'!
+TestCase subclass: #TransferNet
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!TransferNetTest methodsFor: 'nil' stamp: 'AW 6/3/2021 01:06:16'!
+test01
+! !
+
+!classDefinition: #TransferNet category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:08:36'!
+Object subclass: #TransferNet
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:08:30' prior: 50345099!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (TransferNet for: account) createReport.
+		
+
+	self assert: 0 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:08:48'!
+ERROR!
+!TransferNet class methodsFor: 'instance creation' stamp: 'AW 6/3/2021 01:08:54'!
+for: aReceptiveAccount 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aReceptiveAccount ! !
+!TransferNet class methodsFor: 'instance creation' stamp: 'AW 6/3/2021 01:09:05' prior: 50345120!
+for: aReceptiveAccount 
+
+	^self new initializeFor: aReceptiveAccount ! !
+!TransferNet class methodsFor: 'instance creation' stamp: 'AW 6/3/2021 01:09:09' prior: 50345129!
+for: anAccount 
+
+	^self new initializeFor: anAccount ! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:09:18'!
+ERROR!
+
+!classDefinition: #TransferNet category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:09:38'!
+Object subclass: #TransferNet
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!TransferNet methodsFor: 'initialization' stamp: 'AW 6/3/2021 01:09:38'!
+initializeFor: anAccount 
+	self shouldBeImplemented.
+	account := anAccount.! !
+!TransferNet methodsFor: 'initialization' stamp: 'AW 6/3/2021 01:09:43' prior: 50345149!
+initializeFor: anAccount 
+	
+	account := anAccount.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:09:47'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:09:59'!
+createReport
+	self shouldBeImplemented.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:10:06' prior: 50345162!
+createReport
+	^0.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:10:08'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:10:08'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:10:38'!
+test02
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+		
+	report := (TransferNet for: account) createReport.
+		
+
+	self assert: 0 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:11:20' prior: 50345175!
+test02
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: account to: anotherAccount.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: -42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:11:24'!
+FAILURE!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:12:12' prior: 50345167!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	^-42.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:12:13'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:12:13'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:12:38'!
+test03
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:12:39'!
+FAILURE!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:14:05' prior: 50345199!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+		^42.			
+	].
+	(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+		^42.			
+	]	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:14:07' prior: 50345223!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+		^42.			
+	].
+	(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+		^-42.			
+	]	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:14:08'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:14:08'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:14:08'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:14:14' prior: 50345234!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+		^42.			
+	].
+	(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+		^-42.			
+	].
+! !
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:14:16'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:14:16'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:14:16'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:14:16'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:16:24' prior: 50345209!
+test03
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:16:40' prior: 50345272!
+test03
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:17:18' prior: 50345286!
+test03
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:17:27'!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:17:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:17:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:17:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:17:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:17:29'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:17:46' prior: 50345312!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:17:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:17:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:17:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:17:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:17:47'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:17:54' prior: 50345337!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:17:55'!
+FAILURE!
+
+account transactions!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:19:48' prior: 50345252!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:19:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:19:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:19:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:19:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:19:51'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:19:51'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:19:51'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:19:51'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:19:51'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:20:39' prior: 50345380!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:20:50' prior: 50345414!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:24:15' prior: 50345427!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:24:16'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:24:16'!
+FAILURE!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:24:16'!
+FAILURE!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:24:16'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:24:25' prior: 50345440!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:24:27' prior: 50345463!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^-42.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:24:27'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:24:27'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:24:27'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:24:27'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:24:44' prior: 50345363!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 10 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:24:49' prior: 50345499!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:26:03' prior: 50345476!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^42.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^account transactions first amount negated.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:26:13' prior: 50345527!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		(account transactions first isKindOf: IncomingTransaction) ifTrue: [
+			^account transactions first amount.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^account transactions first amount negated.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:26:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:26:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:26:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:26:15'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:26:27' prior: 50345541!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		| transaction |
+	transaction _ account transactions first.
+	(transaction isKindOf: IncomingTransaction) ifTrue: [
+			^account transactions first amount.			
+		].
+		(account transactions first isKindOf: OutgoingTransaction ) ifTrue: [
+			^account transactions first amount negated.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:26:58' prior: 50345566!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		| transaction |
+		transaction _ account transactions first.
+		(transaction isKindOf: IncomingTransaction) ifTrue: [
+			^transaction amount.			
+		].
+		(transaction isKindOf: OutgoingTransaction ) ifTrue: [
+			^transaction amount negated.			
+		].	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:26:59'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:26:59'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:26:59'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:26:59'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:31:44' prior: 50345583!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		| transaction |
+		transaction _ account transactions first.
+		^self getTransferNetFor: transaction.	
+	] ifFalse: [
+		^0.
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:31:46'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:31:46'!
+ERROR!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:31:46'!
+ERROR!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:31:46'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:31:49'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:31:56'!
+getTransferNetFor: anOutgoingTransaction 
+	self shouldBeImplemented.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:32:20' prior: 50345630!
+getTransferNetFor: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:32:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:32:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:32:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:32:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:32:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:32:25'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:32:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:32:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:32:29'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:32:29'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:33:40'!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:33:42'!
+FAILURE!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:35:06' prior: 50345608!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		| transaction |
+		transaction _ account transactions first.
+		^self getTransferNetFor: transaction.	
+	] ifFalse: [
+		^(self getTransferNetFor: account transactions first) + (self getTransferNetFor: account transactions second).	
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:35:07'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:35:07'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:35:07'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:35:07'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:35:07'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:35:10'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:35:40' prior: 50345513!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:37:31'!
+test06
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 131 from: anotherAccount to: account.
+	Transfer amount: 222 from: anotherAccount to: account.
+	Transfer amount: 313 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 666 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:37:34'!
+FAILURE!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:38:31' prior: 50345685!
+createReport
+	(account transactions isEmpty) ifTrue: [ ^0. ].
+	
+	(account transactions size = 1) ifTrue: [
+		| transaction |
+		transaction _ account transactions first.
+		^self getTransferNetFor: transaction.	
+	].
+	(account transactions size = 2) ifTrue: [
+		^(self getTransferNetFor: account transactions first) + (self getTransferNetFor: account transactions second).	
+	].
+	(account transactions size = 3) ifTrue: [
+		^(self getTransferNetFor: account transactions first) + (self getTransferNetFor: account transactions second) + (self getTransferNetFor: account transactions third ).	
+	].
+	
+! !
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:38:33'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:40:09' prior: 50345759!
+createReport
+	| net |
+	net := 0.	
+	(account transactions isEmpty) ifTrue: [ ^net. ].
+	
+
+	(account transactions size >= 1) ifTrue: [
+		net := net + self getTransferNetFor: account transactions first.	
+	].
+	(account transactions size >= 2) ifTrue: [
+		net := net + self getTransferNetFor: account transactions second.
+	].
+	(account transactions size = 3) ifTrue: [
+		net := net + self getTransferNetFor: account transactions third.	
+	].
+	
+	^net.
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:40:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:40:10'!
+ERROR!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:40:10'!
+ERROR!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:40:10'!
+ERROR!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:40:10'!
+ERROR!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:40:10'!
+ERROR!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:40:13'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:40:46' prior: 50345798!
+createReport
+	| net |
+	net := 0.	
+	(account transactions isEmpty) ifTrue: [ ^net. ].
+	
+
+	(account transactions size >= 1) ifTrue: [
+		net := net + (self getTransferNetFor: account transactions first).	
+	].
+	(account transactions size >= 2) ifTrue: [
+		net := net + (self getTransferNetFor: account transactions second).
+	].
+	(account transactions size = 3) ifTrue: [
+		net := net + (self getTransferNetFor: account transactions third).	
+	].
+	
+	^net.
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:40:47'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:42:09' prior: 50345832!
+createReport
+	^account transactions sum: [ :transaction | self getTransferNetFor: transaction ]
+		ifEmpty: [ 0 ].	! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:42:10'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:42:20' prior: 50345864!
+createReport
+	^account transactions 
+		sum: [ :transaction | self getTransferNetFor: transaction ]
+		ifEmpty: [ 0 ].	! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:42:23'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:43:35' prior: 50345669!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:44:15' prior: 50345906!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:44:23' prior: 50345920!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:44:26'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:45:04' prior: 50345636!
+getTransferNetFor: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].
+	^0.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:45:06'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:45:15'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:45:37'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:46:01'!
+test07x
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test07 stamp: 'AW 6/3/2021 01:46:01'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:46:07'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test05 stamp: 'AW 6/3/2021 01:46:07'!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:46:14'!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test07x stamp: 'AW 6/3/2021 01:46:14'!
+test07x
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 01:46:24'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:47:49' prior: 50345885!
+createReport
+	^account transactions 
+		sum: [ :transaction | self getTransferNetFor: transaction ].	! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:47:50'!
+ERROR!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 01:47:50'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 01:47:50'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:47:55' prior: 50346098!
+createReport
+	^account transactions 
+		sum: [ :transaction | self getTransferNetFor: transaction ]
+		ifEmpty: [ 0 ].	! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:48:49'!
+getTransferNetOf: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].
+	^0.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:48:49' prior: 50346123!
+createReport
+	^account transactions 
+		sum: [ :transaction | self getTransferNetOf: transaction ]
+		ifEmpty: [ 0 ].	! !
+
+!methodRemoval: TransferNet #getTransferNetFor: stamp: 'AW 6/3/2021 01:48:49'!
+getTransferNetFor: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].
+	^0.!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:55:15' prior: 50344805!
+createReport
+
+	| report |
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:55:19' prior: 50346157!
+createReport
+
+	| reportx |
+
+	reportx := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: reportx.
+	].
+	
+	reportx add: 'Balance = ', account balance asString, '.'.
+	^reportx.! !
+
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account report'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account reportx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account reportxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:56:05'!
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account reportxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:56:24' prior: 50344258!
+addTransaction: transaction toReport: aReport
+	(transaction isKindOf: Withdraw) ifTrue: [
+		aReport add: 'Extracción por ', transaction value asString, '.'.
+	].
+	(transaction isKindOf: Deposit) ifTrue: [
+		aReport add: 'Depósito por ', transaction value asString, '.'.
+	].
+	(transaction isKindOf: IncomingTransaction) ifTrue: [
+		aReport add: 'Entrada por transferencia de ', transaction amount asString, '.'.
+	].
+	(transaction isKindOf: OutgoingTransaction) ifTrue: [
+		aReport add: 'Salida por transferencia de ', transaction amount asString, '.'.
+	]! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:56:30' prior: 50346202!
+addTransaction: aTransaction toReport: aReport
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		aReport add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		aReport add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		aReport add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		aReport add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:56:48' prior: 50346168!
+createReport
+
+	reportxx := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: reportxx.
+	].
+	
+	reportxx add: 'Balance = ', account balance asString, '.'.
+	^reportxx.! !
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 01:56:53'!
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account report'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:56:53' prior: 50346244!
+createReport
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction toReport: report.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:57:17' prior: 50346263!
+createReport
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		self addTransaction: transaction.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:58:19' prior: 50346223!
+addTransaction: aTransaction toReport: aReport
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 01:58:34'!
+addTransaction: aTransaction 
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]! !
+
+!methodRemoval: AccountSummary #addTransaction:toReport: stamp: 'AW 6/3/2021 01:58:34'!
+addTransaction: aTransaction toReport: aReport
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]!
+
+!classDefinition: #TransferNet category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:01:22'!
+Object subclass: #TransferNet
+	instanceVariableNames: 'account net'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:01:21' prior: 50346140!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		net := net + self getTransferNetOf: transaction.
+	].
+		
+	^net! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:01:40' prior: 50346352!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		self addTransferNetOf: transaction.
+	].
+		
+	^net! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:01:47' prior: 50346360!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		self getTransferNetOf: transaction.
+	].
+		
+	^net! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:01:55'!
+addTransferNetOf: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].
+	^0.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:01:55' prior: 50346367!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		self addTransferNetOf: transaction.
+	].
+		
+	^net! !
+
+!methodRemoval: TransferNet #getTransferNetOf: stamp: 'AW 6/3/2021 02:01:56'!
+getTransferNetOf: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		^aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		^aTransaction amount negated.			
+	].
+	^0.!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:02:18' prior: 50346374!
+addTransferNetOf: aTransaction 
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		net := net + aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		net := net + aTransaction amount negated.			
+	].! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:02:21'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:05:00' prior: 50346304!
+addTransaction: aTransaction 
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]! !
+!AccountTransaction methodsFor: 'balance' stamp: 'AW 6/3/2021 02:07:43'!
+visit: aVisitor
+	self subclassResponsibility.! !
+!IncomingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:08:26' overrides: 50346448!
+visit: aVisitor
+	
+	aVisitor visitIncomingTransaction: self.! !
+!OutgoingTransaction methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:08:49' overrides: 50346448!
+visit: aVisitor
+	
+	aVisitor visitOutgoingTransaction: self.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:09:20' prior: 50346401!
+addTransferNetOf: aTransaction 
+	aTransaction visit: self.
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		net := net + aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		net := net + aTransaction amount negated.			
+	].! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:09:44' prior: 50346464!
+addTransferNetOf: aTransaction 
+	aTransaction visit: self.
+"
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		net := net + aTransaction amount.			
+	].
+	(aTransaction isKindOf: OutgoingTransaction ) ifTrue: [
+		net := net + aTransaction amount negated.			
+	].
+"! !
+!Deposit methodsFor: 'value' stamp: 'AW 6/3/2021 02:10:19' overrides: 50346448!
+visit: aVisitor
+
+	aVisitor visitDeposit: self.! !
+!Withdraw methodsFor: 'value' stamp: 'AW 6/3/2021 02:10:33' overrides: 50346448!
+visit: aVisitor! !
+!Deposit methodsFor: 'value' stamp: 'AW 6/3/2021 02:10:40' prior: 50346488 overrides: 50346448!
+visit: aVisitor! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:11:44'!
+visitIncomingTransaction: aIncomingTransaction
+
+	net := net + aIncomingTransaction amount.			! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:12:19'!
+visitOutgoingTransaction: aOutgoingTransaction
+
+	net := net -	aOutgoingTransaction amount.			! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:12:20' prior: 50346507!
+visitOutgoingTransaction: aOutgoingTransaction
+
+	net := net - 	aOutgoingTransaction amount.			! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:13:23'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:13:44' prior: 50346476!
+addTransferNetOf: aTransaction 
+	aTransaction visit: self.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:13:49'!
+PASSED!
+!Withdraw methodsFor: 'value' stamp: 'AW 6/3/2021 02:15:06' prior: 50346493 overrides: 50346448!
+visit: aVisitor
+
+	aVisitor visitWithdraw: self.! !
+!Deposit methodsFor: 'value' stamp: 'AW 6/3/2021 02:15:18' prior: 50346497 overrides: 50346448!
+visit: aVisitor
+
+	aVisitor visitDeposit: self.! !
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:15:56'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:15:56'!
+ERROR!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:15:56'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:16:05'!
+visitDeposit: aDeposit 
+	self shouldBeImplemented.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:16:14' prior: 50346696!
+visitDeposit: aDeposit ! !
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:16:16'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:16:19' prior: 50346428!
+addTransaction: aTransaction 
+	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]! !
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:16:19'!
+PASSED!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:17:02'!
+test08
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Withdraw register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:17:03'!
+ERROR!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:17:10'!
+visitWithdraw: aWithdraw 
+	self shouldBeImplemented.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:17:13' prior: 50346770!
+visitWithdraw: aWithdraw 
+	! !
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:17:15'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:18:03' prior: 50346708!
+addTransaction: aTransaction 
+
+	aTransaction visit: self.
+"	(aTransaction isKindOf: Withdraw) ifTrue: [
+		report add: 'Extracción por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: Deposit) ifTrue: [
+		report add: 'Depósito por ', aTransaction value asString, '.'.
+	].
+	(aTransaction isKindOf: IncomingTransaction) ifTrue: [
+		report add: 'Entrada por transferencia de ', aTransaction amount asString, '.'.
+	].
+	(aTransaction isKindOf: OutgoingTransaction) ifTrue: [
+		report add: 'Salida por transferencia de ', aTransaction amount asString, '.'.
+	]"! !
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:18:04'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:18:04'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:18:06'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:18:28'!
+visitDeposit: aDeposit 
+	self shouldBeImplemented.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:18:37' prior: 50346853!
+visitDeposit: aDeposit 
+	report add: 'Depósito por ', aDeposit value asString, '.'.! !
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:18:38'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:18:40'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:18:55'!
+visitWithdraw: aWithdraw 
+	self shouldBeImplemented.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:19:05' prior: 50346871!
+visitWithdraw: aWithdraw 
+	report add: 'Extracción por ', aWithdraw value asString, '.'.! !
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:19:07'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:19:08'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:19:25'!
+visitIncomingTransaction: anIncomingTransaction 
+	self shouldBeImplemented.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:19:32' prior: 50346890!
+visitIncomingTransaction: anIncomingTransaction 
+	report add: 'Entrada por transferencia de ', anIncomingTransaction amount asString, '.'.! !
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:19:34'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:19:36'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:19:52'!
+visitOutgoingTransaction: anOutgoingTransaction 
+	self shouldBeImplemented.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:19:59' prior: 50346911!
+visitOutgoingTransaction: anOutgoingTransaction 
+	report add: 'Salida por transferencia de ', anOutgoingTransaction amount asString, '.'.! !
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:20:01'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:20:02'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:20:02'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:20:10' prior: 50346801!
+addTransaction: aTransaction 
+
+	aTransaction visit: self.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:26:24' prior: 50346273!
+createReport
+
+	report := OrderedCollection new.
+	
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:26:24' prior: 50346384!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		transaction visit: self.
+	].
+		
+	^net! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:26:26'!
+PASSED!
+!TransferNet methodsFor: 'initialization' stamp: 'AW 6/3/2021 02:27:38' prior: 50345155!
+initializeFor: anAccount 
+	
+	account := anAccount.
+	net := 0.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:27:50' prior: 50346942!
+createReport
+
+
+	
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:27:57' prior: 50343534!
+intializeWith: aReceptiveAccount 
+	
+	account := aReceptiveAccount .
+	report := OrderedCollection new.! !
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:28:00'!
+PASSED!
+!TransferNet methodsFor: 'initialization' stamp: 'AW 6/3/2021 02:28:02' prior: 50346978!
+initializeFor: anAccount 
+	
+	account := anAccount.
+! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:28:02'!
+PASSED!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:29:47'!
+postReportCreation
+
+	^ report add: 'Balance = ', account balance asString, '.'! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:29:47' prior: 50346984!
+createReport
+
+
+	
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	self postReportCreation.
+	^report.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:29:57' prior: 50347056!
+createReport
+
+
+	
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	^self postReportCreation.
+	! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:30:07' prior: 50347050!
+postReportCreation
+
+	report add: 'Balance = ', account balance asString, '.'.
+	^report.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:30:19'!
+postReportCreation
+
+	^net.! !
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:30:33' prior: 50346952!
+createReport
+	
+	net := 0.
+	
+	account transactions do: [ :transaction | 
+		transaction visit: self.
+	].
+		
+	^self postReportCreation.! !
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:30:34'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:30:36'!
+PASSED!
+!TransferNet methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:30:51' prior: 50347081!
+createReport
+	
+	account transactions do: [ :transaction | 
+		transaction visit: self.
+	].
+		
+	^self postReportCreation.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:30:56' prior: 50347064!
+createReport
+
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	^self postReportCreation.
+	! !
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:30:57'!
+PASSED!
+
+Object subclass: #Report
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #Report category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:31:37'!
+Object subclass: #Report
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:31:56'!
+intializeFor: aReceptiveAccount 
+	
+	account := aReceptiveAccount .
+	report := OrderedCollection new.! !
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:31:56' prior: 50343592!
+for: aReceptiveAccount 
+	
+	^self new intializeFor: aReceptiveAccount.! !
+
+!methodRemoval: AccountSummary #intializeWith: stamp: 'AW 6/3/2021 02:31:56'!
+intializeWith: aReceptiveAccount 
+	
+	account := aReceptiveAccount .
+	report := OrderedCollection new.!
+
+Report subclass: #TransferNet
+	instanceVariableNames: 'net'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #TransferNet category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:32:20'!
+Report subclass: #TransferNet
+	instanceVariableNames: 'net'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+Report subclass: #AccountSummary
+	instanceVariableNames: 'report'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+
+!classDefinition: #AccountSummary category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:32:34'!
+Report subclass: #AccountSummary
+	instanceVariableNames: 'report'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Report methodsFor: 'nil' stamp: 'AW 6/3/2021 02:32:57'!
+intializeFor: aReceptiveAccount 
+	
+	account := aReceptiveAccount.! !
+
+!methodRemoval: Report #intializeFor: stamp: 'AW 6/3/2021 02:34:01'!
+intializeFor: aReceptiveAccount 
+	
+	account := aReceptiveAccount.!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:34:05' prior: 50347188!
+intializeFor: aReceptiveAccount 
+	
+	account := aReceptiveAccount .
+	report := OrderedCollection new.! !
+!Report methodsFor: 'nil' stamp: 'AW 6/3/2021 02:34:18'!
+intializeFor: aReceptiveAccount 
+	
+	self subclassResponsibility.! !
+!Report methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:34:33'!
+postReportCreation
+	
+	self subclassResponsibility.! !
+
+!methodRemoval: Report #intializeFor: stamp: 'AW 6/3/2021 02:34:37'!
+intializeFor: aReceptiveAccount 
+	
+	self subclassResponsibility.!
+!Report methodsFor: 'nil' stamp: 'AW 6/3/2021 02:34:49'!
+createReport
+
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	^self postReportCreation.
+	! !
+
+!methodRemoval: AccountSummary #createReport stamp: 'AW 6/3/2021 02:35:00'!
+createReport
+
+	account transactions do: [ :transaction |
+		transaction visit: self.
+	].
+	
+	^self postReportCreation.
+	!
+
+!methodRemoval: TransferNet #createReport stamp: 'AW 6/3/2021 02:35:06'!
+createReport
+	
+	account transactions do: [ :transaction | 
+		transaction visit: self.
+	].
+		
+	^self postReportCreation.!
+!Report methodsFor: 'nil' stamp: 'AW 6/3/2021 02:35:34'!
+visitDeposit: aDeposit 
+
+	self subclassResponsibility.! !
+!Report methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:35:46'!
+visitIncomingTransaction: anIncomingTransaction 
+	self subclassResponsibility.! !
+!Report methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:35:56'!
+visitOutgoingTransaction: anOutgoingTransaction 
+	self subclassResponsibility.! !
+!Report methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:36:04'!
+visitWithdraw: aWithdraw 
+	self subclassResponsibility.! !
+
+!methodRemoval: AccountSummary #addTransaction: stamp: 'AW 6/3/2021 02:36:10'!
+addTransaction: aTransaction 
+
+	aTransaction visit: self.!
+
+!methodRemoval: TransferNet #addTransferNetOf: stamp: 'AW 6/3/2021 02:36:18'!
+addTransferNetOf: aTransaction 
+	aTransaction visit: self.!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:36:42'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:36:52'!
+FAILURE!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:36:52'!
+ERROR!
+
+!testRun: #TransferTest #test01TransferAffectsBothBalances stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferRegistersAnOutgoingTransactionInSenderAccount stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferCanRetrieveTheReceiver stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferRegistersAnIncomingTransactionInReceiverAccount stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferCanRetrieveTheSender stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test06IncomingTransactionCanRetrieveTheSender stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test07OutgoingTransactionCanRetrieveTheReceiver stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test08TransferWithNegativeAmountShouldRaiseError stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test09ZeroAmountTransferShouldRaiseError stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferTest #test10SelfTransferShouldRaiseError stamp: 'AW 6/3/2021 02:36:52'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:36:59'!
+ERROR!
+!TransferNet methodsFor: 'initialization' stamp: 'AW 6/3/2021 02:37:40' prior: 50347027!
+initializeFor: anAccount 
+	
+	account := anAccount.
+	net := 0.
+! !
+
+!testRun: #AccountSummaryTest #test01SummaryWithNoTransactionsOnlyHastBalanceLine stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02SummaryWithADepositShouldHaveALineForDeposit stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03SummaryWithWithdrawShouldHaveALineForWithdraw stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04SummaryWithAnIncomingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05SummaryWithOutgoingTransactionShouldHaveALineForIt stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test06SummaryWithTwoTransactionShouldHaveBoth stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test07SummaryWithMultipleTransactionsShouldHaveAllOfThem stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test01 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test02 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test03 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test04 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test05 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test06 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test07 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferNetTest #test08 stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test01TransferAffectsBothBalances stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferRegistersAnOutgoingTransactionInSenderAccount stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferCanRetrieveTheReceiver stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferRegistersAnIncomingTransactionInReceiverAccount stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferCanRetrieveTheSender stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test06IncomingTransactionCanRetrieveTheSender stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test07OutgoingTransactionCanRetrieveTheReceiver stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test08TransferWithNegativeAmountShouldRaiseError stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test09ZeroAmountTransferShouldRaiseError stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!testRun: #TransferTest #test10SelfTransferShouldRaiseError stamp: 'AW 6/3/2021 02:37:44'!
+PASSED!
+
+!classRenamed: #Report as: #ReportGenerator stamp: 'AW 6/3/2021 02:38:01'!
+Smalltalk renameClassNamed: #Report as: #ReportGenerator!
+!Withdraw methodsFor: 'value' stamp: 'AW 6/3/2021 02:39:56'!
+amount
+
+	^ value! !
+!AccountTransaction methodsFor: 'value' stamp: 'AW 6/3/2021 02:39:56'!
+amount 
+
+	self subclassResponsibility ! !
+!Deposit methodsFor: 'value' stamp: 'AW 6/3/2021 02:39:56' overrides: 50347648!
+amount
+
+	^ value! !
+!ReceptiveAccountTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:39:56' prior: 50340753!
+test04WithdrawValueMustBePositive 
+
+	| account withdrawValue |
+	
+	account := ReceptiveAccount new.
+	withdrawValue := 50.
+	
+	self assert: withdrawValue equals: (Withdraw register: withdrawValue on: account) amount
+! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:39:56' prior: 50346876 overrides: 50347292!
+visitWithdraw: aWithdraw 
+	report add: 'Extracción por ', aWithdraw amount asString, '.'.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:39:56' prior: 50346858 overrides: 50347277!
+visitDeposit: aDeposit 
+	report add: 'Depósito por ', aDeposit amount asString, '.'.! !
+
+!methodRemoval: Withdraw #value stamp: 'AW 6/3/2021 02:39:56'!
+value
+
+	^ value!
+
+!methodRemoval: AccountTransaction #value stamp: 'AW 6/3/2021 02:39:56'!
+value 
+
+	self subclassResponsibility !
+
+!methodRemoval: Deposit #value stamp: 'AW 6/3/2021 02:39:56'!
+value
+
+	^ value!
+
+!classDefinition: #Deposit category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:40:47'!
+AccountTransaction subclass: #Deposit
+	instanceVariableNames: 'amount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:47' prior: 50347652 overrides: 50347648!
+amount
+
+	^ amount! !
+!Deposit methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:47' prior: 50341085!
+initializeFor: aValue
+
+	amount := aValue ! !
+!Deposit methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:47' prior: 50341094 overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance + amount ! !
+
+!classDefinition: #Withdraw category: 'Portfolio-Ejercicio-2' stamp: 'AW 6/3/2021 02:40:52'!
+AccountTransaction subclass: #Withdraw
+	instanceVariableNames: 'amount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio-2'!
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:52' prior: 50347645 overrides: 50347648!
+amount
+
+	^ amount! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:52' prior: 50341123!
+initializeFor: aValue
+
+	amount := aValue ! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:40:52' prior: 50341132 overrides: 50341052!
+affectBalance: aBalance
+
+	^aBalance - amount! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:41:56'!
+test01TransferNetForEmptyAccountIsZero
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (TransferNet for: account) createReport.
+		
+
+	self assert: 0 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:42:26'!
+test02TransferNetForAccountWithOneOutgoingTransactionIsTheAmountOfIt
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: account to: anotherAccount.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: -42 equals: report .
+
+! !
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:43:01'!
+test03TransferNetForAccountWithOneIncomingTransactionIsTheAmountOfIt
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test03 stamp: 'AW 6/3/2021 02:43:05'!
+test03
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+
+!methodRemoval: TransferNetTest #test02 stamp: 'AW 6/3/2021 02:43:08'!
+test02
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: account to: anotherAccount.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: -42 equals: report .
+
+!
+
+!methodRemoval: TransferNetTest #test01 stamp: 'AW 6/3/2021 02:43:12'!
+test01
+
+	| account report |
+	
+	account := ReceptiveAccount new.
+		
+	report := (TransferNet for: account) createReport.
+		
+
+	self assert: 0 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:44:24'!
+test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionZero
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test04 stamp: 'AW 6/3/2021 02:44:24'!
+test04
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:44:36'!
+test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionsZero
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionZero stamp: 'AW 6/3/2021 02:44:36'!
+test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionZero
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:45:06'!
+test04TransferNetForAPortfolioWithOnlyInternalTransactionsIsZero
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionsZero stamp: 'AW 6/3/2021 02:45:06'!
+test04TransferNetForAPortfolioWithBothOutgoingAndIncomingTransactionsZero
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account with: anotherAccount.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 0 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:46:12'!
+test05TransferNetSumsTheAmountOfTheTransactions
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test05 stamp: 'AW 6/3/2021 02:46:12'!
+test05
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:46:56'!
+test05TransferNetWithTwoTransactionsIsTheSumOfTheAmounts
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test05TransferNetSumsTheAmountOfTheTransactions stamp: 'AW 6/3/2021 02:46:56'!
+test05TransferNetSumsTheAmountOfTheTransactions
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:47:19'!
+test06TransferNetWithMultipleTransactionsIsTheSumOfTheAmounts
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 131 from: anotherAccount to: account.
+	Transfer amount: 222 from: anotherAccount to: account.
+	Transfer amount: 313 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 666 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test06 stamp: 'AW 6/3/2021 02:47:19'!
+test06
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 131 from: anotherAccount to: account.
+	Transfer amount: 222 from: anotherAccount to: account.
+	Transfer amount: 313 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 666 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:48:04'!
+test07TransferNetIsNotAffectedByDeposits
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test07 stamp: 'AW 6/3/2021 02:48:04'!
+test07
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:48:20'!
+test08TransferNetIsNotAffectedByWithdraws
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Withdraw register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test08 stamp: 'AW 6/3/2021 02:48:20'!
+test08
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Withdraw register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+
+!methodRemoval: TransferNetTest #test05TransferNetWithTwoTransactionsIsTheSumOfTheAmounts stamp: 'AW 6/3/2021 02:49:19'!
+test05TransferNetWithTwoTransactionsIsTheSumOfTheAmounts
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Transfer amount: 20 from: anotherAccount to: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 62 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:49:24'!
+test05TransferNetWithMultipleTransactionsIsTheSumOfTheAmounts
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 131 from: anotherAccount to: account.
+	Transfer amount: 222 from: anotherAccount to: account.
+	Transfer amount: 313 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 666 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test06TransferNetWithMultipleTransactionsIsTheSumOfTheAmounts stamp: 'AW 6/3/2021 02:49:24'!
+test06TransferNetWithMultipleTransactionsIsTheSumOfTheAmounts
+
+	| portfolio account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	portfolio := Portfolio with: account.
+	
+	Transfer amount: 131 from: anotherAccount to: account.
+	Transfer amount: 222 from: anotherAccount to: account.
+	Transfer amount: 313 from: anotherAccount to: account.
+		
+	report := (TransferNet for: portfolio) createReport.		
+
+	self assert: 666 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:49:28'!
+test06TransferNetIsNotAffectedByDeposits
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test07TransferNetIsNotAffectedByDeposits stamp: 'AW 6/3/2021 02:49:28'!
+test07TransferNetIsNotAffectedByDeposits
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Deposit register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+!TransferNetTest methodsFor: 'as yet unclassified' stamp: 'AW 6/3/2021 02:49:35'!
+test07TransferNetIsNotAffectedByWithdraws
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Withdraw register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+! !
+
+!methodRemoval: TransferNetTest #test08TransferNetIsNotAffectedByWithdraws stamp: 'AW 6/3/2021 02:49:35'!
+test08TransferNetIsNotAffectedByWithdraws
+
+	| account anotherAccount report |
+	
+	account := ReceptiveAccount new.
+	anotherAccount := ReceptiveAccount new.
+	
+	Transfer amount: 42 from: anotherAccount to: account.
+	Withdraw register: 20 on: account.
+		
+	report := (TransferNet for: account) createReport.		
+
+	self assert: 42 equals: report .
+
+!
+
+----QUIT----(3 June 2021 03:08:38) Porfolio.image priorSource: 394872!
