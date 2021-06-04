@@ -1,3 +1,166 @@
+!classDefinition: #MarsRoverLogTest category: 'MarsRover-WithHeading'!
+TestCase subclass: #MarsRoverLogTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:38:45'!
+test01
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@3' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:35:42'!
+test02
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:39:12'!
+test03
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face East' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:47:56'!
+test04
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #East equals: window heading. ! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:59:38'!
+test05
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@1' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:00:40'!
+test06
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1@1 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:02:40'!
+test07
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face West' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:03:01'!
+test08
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #West equals: window heading. ! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:05:36'!
+test09
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 2@2' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:14:53'!
+test10
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face West' equals: log first.! !
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:19:11'!
+test11
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 2 equals: log size. 
+	self assert: 'Moved to 1@2' equals: log first.
+	self assert: 'Moved to 1@3' equals: log second.! !
+
+
 !classDefinition: #MarsRoverTest category: 'MarsRover-WithHeading'!
 TestCase subclass: #MarsRoverTest
 	instanceVariableNames: ''
@@ -185,7 +348,7 @@ test16
 
 !classDefinition: #MarsRover category: 'MarsRover-WithHeading'!
 Object subclass: #MarsRover
-	instanceVariableNames: 'position head'
+	instanceVariableNames: 'position head log window'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'MarsRover-WithHeading'!
@@ -228,15 +391,21 @@ headWest
 	
 	head := MarsRoverHeadingWest new! !
 
-!MarsRover methodsFor: 'heading' stamp: 'HAW 8/22/2019 12:07:11'!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 21:28:28'!
 rotateLeft
 	
-	head rotateLeft: self! !
+	head rotateLeft: self.
+	log ifNotNil: [ log add: 'Rotated to face West'. ].! !
 
-!MarsRover methodsFor: 'heading' stamp: 'HAW 8/22/2019 12:14:00'!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 21:27:37'!
 rotateRight
 	
-	head rotateRight: self! !
+	head rotateRight: self.
+	log ifNotNil: [ 
+		(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+	].! !
 
 
 !MarsRover methodsFor: 'testing' stamp: 'HAW 8/22/2019 12:00:30'!
@@ -265,20 +434,22 @@ isRotateRightCommand: aCommand
 	^aCommand = $r! !
 
 
-!MarsRover methodsFor: 'moving' stamp: 'HAW 8/22/2019 12:05:20'!
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/3/2021 21:25:45'!
 moveBackward
 	
-	head moveBackward: self! !
+	head moveBackward: self.
+	log ifNotNil: [ log add: 'Moved to ', position asString. ]! !
 
 !MarsRover methodsFor: 'moving' stamp: 'HAW 8/22/2019 12:15:01'!
 moveEast
 	
 	position := position + (1@0)! !
 
-!MarsRover methodsFor: 'moving' stamp: 'HAW 8/22/2019 12:05:55'!
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/3/2021 21:25:08'!
 moveForward
 	
-	head moveForward: self! !
+	head moveForward: self.
+	log ifNotNil: [ log add: 'Moved to ', position asString. ].	! !
 
 !MarsRover methodsFor: 'moving' stamp: 'HAW 8/22/2019 12:13:12'!
 moveNorth
@@ -296,21 +467,48 @@ moveWest
 	position := position + (-1@0)! !
 
 
-!MarsRover methodsFor: 'command processing' stamp: 'HAW 6/30/2018 19:48:26'!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:28:17'!
 process: aSequenceOfCommands
 
-	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+
+	
+	].
 ! !
 
-!MarsRover methodsFor: 'command processing' stamp: 'HAW 8/22/2019 12:08:50'!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:24:57'!
 processCommand: aCommand
 
-	(self isForwardCommand: aCommand) ifTrue: [ ^ self moveForward ].
+	(self isForwardCommand: aCommand) ifTrue: [ ^self moveForward. ].
 	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
 	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
 	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
 
 	self signalInvalidCommand.! !
+
+
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:42:58'!
+addLog: aLog 
+	log := aLog! !
+
+
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:49:09'!
+addWindow: aMarsRoverWindow 
+	window := aMarsRoverWindow .! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -548,3 +746,33 @@ MarsRoverHeadingWest class
 cardinalPoint
 
 	^#West! !
+
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: 'position heading'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:54:53'!
+changeHeading: aDirection
+	heading := aDirection.! !
+
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:57:39'!
+changePosition: aPosition 
+	position:= aPosition! !
+
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:56:43'!
+heading
+	^heading! !
+
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:56:35'!
+initialize
+
+	position := 1@2.
+	heading := #North.! !
+
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:53:17'!
+position
+	^ position! !

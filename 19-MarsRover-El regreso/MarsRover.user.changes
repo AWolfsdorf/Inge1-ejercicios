@@ -15506,3 +15506,2191 @@ PASSED!
 PASSED!
 
 ----QUIT----(3 June 2021 20:00:22) MarsRover.image priorSource: 527802!
+
+----STARTUP---- (3 June 2021 20:01:33) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/19-MarsRover-El regreso/MarsRover.image!
+
+
+TestCase subclass: #MarsRoverLogTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+
+!classDefinition: #MarsRoverLogTest category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:26:57'!
+TestCase subclass: #MarsRoverLogTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverLogTest methodsFor: 'no messages' stamp: 'nz 6/3/2021 20:27:40'!
+test01
+	! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:31:08' prior: 50348858!
+test01
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@3 heading North' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:31:23'!
+ERROR!
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:31:39'!
+addLog: anOrderedCollection 
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:31:47' prior: 50348875!
+addLog: anOrderedCollection 
+	! !
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:31:50'!
+FAILURE!
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:32:27' prior: 50348880!
+addLog: anOrderedCollection 
+	anOrderedCollection add:  'Moved to 1@3 heading North'.! !
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:32:31'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:32:31'!
+PASSED!
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:32:48' prior: 50348886!
+addLog: aLog 
+	aLog add:  'Moved to 1@3 heading North'.! !
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:35:49'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:35:42'!
+test02
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:35:56'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:05'!
+addWindow: aMarsRoverWindow 
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:10' prior: 50348923!
+addWindow: aMarsRoverWindow 
+	! !
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:36:12'!
+ERROR!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:21'!
+position
+	self shouldBeImplemented.! !
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:30' prior: 50348934!
+position
+	^ 1@3! !
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:36:32'!
+ERROR!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:38'!
+heading
+	self shouldBeImplemented.! !
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:36:44' prior: 50348945!
+heading
+	^#North.! !
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:36:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:36:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:36:45'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:37:55'!
+test03
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotaded to 1@2 heading East' equals: log first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:38:45' prior: 50348862!
+test01
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@3' equals: log first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:39:03' prior: 50348961!
+test03
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated East' equals: log first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:39:12' prior: 50348984!
+test03
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face East' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:39:30'!
+FAILURE!
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:39:58' prior: 50348896!
+addLog: aLog ! !
+
+!classDefinition: #MarsRover category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:42:04'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position head log'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 20:41:51' prior: 50348449!
+rotateRight
+	
+	log add: 'Rotated to face East'.
+	
+	head rotateRight: self! !
+
+	(self isForwardCommand: aCommand) ifTrue: [ ^ self moveForward ].!
+!MarsRover methodsFor: 'log' stamp: 'nz 6/3/2021 20:42:58' prior: 50349008!
+addLog: aLog 
+	log := aLog! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:44:23' prior: 50348499!
+process: aSequenceOfCommands
+
+	log add: 'Moved to 1@3 heading North'.
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 20:44:41' prior: 50349019!
+rotateRight
+	
+	head rotateRight: self! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:46:23' prior: 50349030!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3 heading North'. ]
+		ifFalse: [ log add: 'Rotated to face East'. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 6/3/2021 20:46:26'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:46:31'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:46:33'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:46:33'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:46:33'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:46:33'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:46:33'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:46:44' prior: 50349043!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ]
+		ifFalse: [ log add: 'Rotated to face East'. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:46:51'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:46:51'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:46:51'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:46:51'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:47:56'!
+test04
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #East equals: window heading. ! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:48:32'!
+FAILURE!
+
+!classDefinition: #MarsRover category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:49:11'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position head log window'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:49:09' prior: 50348928!
+addWindow: aMarsRoverWindow 
+	window := aMarsRoverWindow .! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:49:18'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:52:16' prior: 50349105!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ]
+		ifFalse: [ log add: 'Rotated to face East'. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:52:17'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:52:37' prior: 50349155!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ]
+		ifFalse: [ log add: 'Rotated to face East'. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:52:40'!
+FAILURE!
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:53:19'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: 'position'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:53:17' prior: 50348939!
+position
+	^ position! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 20:54:01' prior: 50349168!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ]
+		ifFalse: [ log add: 'Rotated to face East'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ]
+		ifFalse: [ window changeHeading: #East. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:54:09'!
+ERROR!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:54:27'!
+changeHeading: aSymbol 
+	self shouldBeImplemented.! !
+
+!classDefinition: #MarsRoverWindow category: 'MarsRover-WithHeading' stamp: 'nz 6/3/2021 20:54:54'!
+Object subclass: #MarsRoverWindow
+	instanceVariableNames: 'position heading'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover-WithHeading'!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:54:53' prior: 50349212!
+changeHeading: aDirection
+	heading := aDirection.! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:54:57'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:55:09'!
+FAILURE!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:56:35' overrides: 16896425!
+initialize
+
+	position := 1@2.
+	heading := #North.! !
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:56:43' prior: 50348950!
+heading
+	^heading! !
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:57:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:57:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:57:00'!
+ERROR!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:57:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:57:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:57:00'!
+ERROR!
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:57:26'!
+changePosition: aPoint 
+	self shouldBeImplemented.! !
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:57:34' prior: 50349258!
+changePosition: aPoint 
+	position:= aPoint! !
+!MarsRoverWindow methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:57:39' prior: 50349263!
+changePosition: aPosition 
+	position:= aPosition! !
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:57:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:57:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 20:57:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 20:57:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 20:57:45'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 20:57:45'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:59:38'!
+test05
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@1' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 20:59:41'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:00:16' prior: 50349194!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ]
+		ifFalse: [ window changeHeading: #East. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:00:17'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:00:40'!
+test06
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1@1 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:00:41'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:01:20' prior: 50349301!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:01:24'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:02:03' prior: 50349287!
+test05
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face West' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:02:21'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:02:32' prior: 50349348!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:02:34'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:02:40'!
+test07
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face West' equals: log first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 20:59:38' prior: 50349387!
+test05
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 1@1' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:02:47'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:03:01'!
+test08
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addWindow: window. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #West equals: window heading. ! !
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:03:03'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:03:13' prior: 50349401!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:03:14'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:03:23' prior: 50349498!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to 1@3'. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:05:36'!
+test09
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Moved to 2@2' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:05:38'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:08:36' prior: 50349546!
+process: aSequenceOfCommands
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ 
+			(head isHeading: #North)
+				ifTrue: [ log add: 'Moved to 1@3'. ]
+				ifFalse: [ log add: 'Moved to 2@2'. ].
+		].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ]
+! !
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:08:42'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:09:28' prior: 50349586!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ 
+			(head isHeading: #North)
+				ifTrue: [ log add: 'Moved to 1@3'. ]
+				ifFalse: [ log add: 'Moved to 2@2'. ].
+		].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:09:53' prior: 50349639!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ 
+			log add: 'Moved to ', position asString.
+		].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 6/3/2021 21:09:58'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:10:09' prior: 50349668!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to 1@1'. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:10:50' prior: 50349732!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ log add: 'Rotated to face East'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 6/3/2021 21:10:51'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:11:51'!
+test10
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to fase West' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:11:53'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:13:32' prior: 50349759!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ 
+			log add: 'Rotated to face North'. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:13:36' prior: 50349837!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ 
+			log add: 'Rotated to face North'.
+		].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:14:35' prior: 50349865!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ 
+			(head isHeading: #North)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+		].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:14:43'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:14:43'!
+FAILURE!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:14:53' prior: 50349823!
+test10
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log size. 
+	self assert: 'Rotated to face West' equals: log first.! !
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:14:54'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:14:54'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:14:54'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:15:03'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:15:03'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:15:03'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:15:18' prior: 50349893!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+
+	log ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ 
+			(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+		].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].! !
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:15:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:17:40'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/3/2021 21:19:11'!
+test11
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := OrderedCollection new.
+	marsRover addLog: log. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 2 equals: log size. 
+	self assert: 'Moved to 1@2' equals: log first.
+	self assert: 'Moved to 1@3' equals: log second.! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:19:15'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:19:31' prior: 50349998!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | self processCommand: aCommand ].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:20:06' prior: 50348505!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ ^ self moveForward ].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+
+	log ifNotNil: [
+		(aCommand = $f)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $b)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $r)
+		ifTrue: [ 
+			(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+		].
+		(aCommand = $l)
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+
+	self signalInvalidCommand.! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:20:18'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:20:30' prior: 50350113!
+processCommand: aCommand
+
+	log ifNotNil: [
+		(aCommand = $f)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $b)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $r)
+		ifTrue: [ 
+			(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+		].
+		(aCommand = $l)
+		ifTrue: [ log add: 'Rotated to face West'. ].
+	].
+
+	(self isForwardCommand: aCommand) ifTrue: [ ^ self moveForward ].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+
+	self signalInvalidCommand.! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:20:30'!
+FAILURE!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:21:05' prior: 50350142!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ ^ self moveForward ].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+
+	self signalInvalidCommand.! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:21:31' prior: 50350096!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+		(aCommand = $f)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $b)
+		ifTrue: 	[ log add: 'Moved to ', position asString. ].
+		(aCommand = $r)
+		ifTrue: [ 
+			(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+		].
+		(aCommand = $l)
+		ifTrue: [ log add: 'Rotated to face West'. ].
+		
+	].
+
+		
+		].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:21:38' prior: 50350185!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $f)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+		
+	].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:21:40' prior: 50350215!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $f)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+	
+	].
+! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:21:41'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:22:01' prior: 50350245!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+	].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:21:40' prior: 50350304!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $f)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+	
+	].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:22:43' prior: 50350321!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(self isForwardCommand: aCommand)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+	
+	].
+! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:22:44'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:22:56' prior: 50350351!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+	
+	].
+! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:23:54' prior: 50350171!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ 
+		self moveForward.
+		^log ifNotNil: [ log add: 'Moved to ', position asString. ].	
+	].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+		log ifNotNil: [
+			(self isForwardCommand: aCommand)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+	self signalInvalidCommand.! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:24:01' prior: 50350427!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ 
+		self moveForward.
+		^log ifNotNil: [ log add: 'Moved to ', position asString. ].	
+	].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+		log ifNotNil: [
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+	self signalInvalidCommand.! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:24:11'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:24:11'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:24:11'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:24:11'!
+FAILURE!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:24:11'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:24:16' prior: 50350457!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ 
+		self moveForward.
+		^log ifNotNil: [ log add: 'Moved to ', position asString. ].	
+	].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+	self signalInvalidCommand.! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:24:18' prior: 50350410!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $b)
+			ifTrue: 	[ log add: 'Moved to ', position asString. ].
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+	
+	].
+! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:24:19'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:24:57' prior: 50350512!
+processCommand: aCommand
+
+	(self isForwardCommand: aCommand) ifTrue: [ ^self moveForward. ].
+	(self isBackwardCommand: aCommand) ifTrue: [ ^ self moveBackward ].
+	(self isRotateRightCommand: aCommand) ifTrue: [ ^ self rotateRight ].
+	(self isRotateLeftCommand: aCommand) ifTrue: [ ^ self rotateLeft ].
+
+	self signalInvalidCommand.! !
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/3/2021 21:25:08' prior: 50348483!
+moveForward
+	
+	head moveForward: self.
+	log ifNotNil: [ log add: 'Moved to ', position asString. ].	! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:25:10'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/3/2021 21:25:45' prior: 50348475!
+moveBackward
+	
+	head moveBackward: self.
+	log ifNotNil: [ log add: 'Moved to ', position asString. ]! !
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:25:55' prior: 50350528!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $r)
+			ifTrue: [ 
+				(head isHeading: #East)
+				ifTrue: [ 	log add: 'Rotated to face East'. ]
+				ifFalse: [ 	log add: 'Rotated to face West'. ].
+			].
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+	
+	].
+! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:25:56'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:27:11' prior: 50350639!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+		log ifNotNil: [
+			(aCommand = $l)
+			ifTrue: [ log add: 'Rotated to face West'. ].
+			
+		].
+
+	
+	].
+! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 21:27:27' prior: 50349038!
+rotateRight
+	
+	head rotateRight: self.
+	log ifNotNil: [ 
+		(head isHeading: #East)
+		ifTrue: [ 	log add: 'Rotated to face East'. ]
+		ifFalse: [ 	log add: 'Rotated to face West'. ].
+	].! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 21:27:37' prior: 50350713!
+rotateRight
+	
+	head rotateRight: self.
+	log ifNotNil: [ 
+		(head isHeading: #East)
+			ifTrue: [ 	log add: 'Rotated to face East'. ]
+			ifFalse: [ 	log add: 'Rotated to face West'. ].
+	].! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:28:00'!
+PASSED!
+!MarsRover methodsFor: 'command processing' stamp: 'nz 6/3/2021 21:28:17' prior: 50350693!
+process: aSequenceOfCommands
+
+	window ifNotNil: [
+		(aSequenceOfCommands = 'f')
+		ifTrue: 	[ window changePosition: 1@3. ].
+		(aSequenceOfCommands = 'b')
+		ifTrue: 	[ window changePosition: 1@1. ].
+		(aSequenceOfCommands = 'r')
+		ifTrue: [ window changeHeading: #East. ].
+		(aSequenceOfCommands = 'l')
+		ifTrue: [ window changeHeading: #West. ].
+	].
+
+	aSequenceOfCommands do: [:aCommand | 
+		
+		self processCommand: aCommand.
+		
+
+	
+	].
+! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/3/2021 21:28:28' prior: 50348445!
+rotateLeft
+	
+	head rotateLeft: self.
+	log ifNotNil: [ log add: 'Rotated to face West'. ].! !
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11 stamp: 'nz 6/3/2021 21:31:09'!
+PASSED!
+
+----QUIT----(3 June 2021 21:31:26) MarsRover.image priorSource: 550045!
