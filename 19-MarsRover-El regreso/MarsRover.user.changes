@@ -21593,3 +21593,930 @@ PASSED!
 PASSED!
 
 ----QUIT----(6 June 2021 22:10:21) MarsRover.image priorSource: 613132!
+
+----STARTUP---- (6 June 2021 22:11:20) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/19-MarsRover-El regreso/MarsRover.image!
+
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:13:15'!
+test01LogPositionChangeOnMoveForward
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'f'.
+		
+	self assert: 1 equals: log lines size. 
+	self assert: 'Moved to 1@3' equals: log lines first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:13:35'!
+test02ChangeWindowPositionOnMoveForward
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: window position. 
+	self assert: #North equals: window heading. ! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:14:11'!
+test03LogChangeHeadingOnRotateRight
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Rotated to face East' equals: log lines first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:14:22'!
+test04ChangeWindowHeadingOnRotateRight
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #East equals: window heading. ! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:14:39'!
+test05LogPositionChangeOnMoveBackward
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Moved to 1@1' equals: log lines first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:15:01'!
+test06ChangeWindowPositionOnMoveBackward
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1@1 equals: window position. 
+	self assert: #North equals: window heading. ! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:15:15'!
+test07LogChangeHeadingOnRotateLeft
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Rotated to face West' equals: log lines first.! !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:15:28'!
+test08ChangeWindowHeadingOnRotateLeft
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #West equals: window heading. ! !
+
+!methodRemoval: MarsRoverLogTest #test01 stamp: 'nz 6/6/2021 22:15:47'!
+test01
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'f'.
+		
+	self assert: 1 equals: log lines size. 
+	self assert: 'Moved to 1@3' equals: log lines first.!
+
+!methodRemoval: MarsRoverLogTest #test02 stamp: 'nz 6/6/2021 22:15:49'!
+test02
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1@3 equals: window position. 
+	self assert: #North equals: window heading. !
+
+!methodRemoval: MarsRoverLogTest #test03 stamp: 'nz 6/6/2021 22:15:50'!
+test03
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Rotated to face East' equals: log lines first.!
+
+!methodRemoval: MarsRoverLogTest #test04 stamp: 'nz 6/6/2021 22:15:51'!
+test04
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #East equals: window heading. !
+
+!methodRemoval: MarsRoverLogTest #test05 stamp: 'nz 6/6/2021 22:15:53'!
+test05
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Moved to 1@1' equals: log lines first.!
+
+!methodRemoval: MarsRoverLogTest #test06 stamp: 'nz 6/6/2021 22:15:54'!
+test06
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'b'.
+	
+	self assert: 1@1 equals: window position. 
+	self assert: #North equals: window heading. !
+
+!methodRemoval: MarsRoverLogTest #test07 stamp: 'nz 6/6/2021 22:15:55'!
+test07
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Rotated to face West' equals: log lines first.!
+
+!methodRemoval: MarsRoverLogTest #test08 stamp: 'nz 6/6/2021 22:15:56'!
+test08
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'l'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #West equals: window heading. !
+
+!methodRemoval: MarsRoverLogTest #test09 stamp: 'nz 6/6/2021 22:16:01'!
+test09
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'f'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Moved to 2@2' equals: log lines first.!
+
+!methodRemoval: MarsRoverLogTest #test10 stamp: 'nz 6/6/2021 22:16:05'!
+test10
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 2@3 heading: #South.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'r'.
+	
+	self assert: 1 equals: log lines size. 
+	self assert: 'Rotated to face West' equals: log lines first.!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:16:24'!
+test09LogMultiplePositionChanges
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 2 equals: log lines size. 
+	self assert: 'Moved to 1@2' equals: log lines first.
+	self assert: 'Moved to 1@3' equals: log lines second.! !
+
+!methodRemoval: MarsRoverLogTest #test11 stamp: 'nz 6/6/2021 22:16:26'!
+test11
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 2 equals: log lines size. 
+	self assert: 'Moved to 1@2' equals: log lines first.
+	self assert: 'Moved to 1@3' equals: log lines second.!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:16:53'!
+test10ChangeWindowPositionOnMultipleMoves
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 1@4 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!methodRemoval: MarsRoverLogTest #test12 stamp: 'nz 6/6/2021 22:16:54'!
+test12
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'ff'.
+	
+	self assert: 1@4 equals: window position. 
+	self assert: #North equals: window heading. !
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:17:06'!
+test11LogMultipleRotations
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'rr'.
+	
+	self assert: 2 equals: log lines size. 
+	self assert: 'Rotated to face East' equals: log lines first.
+	self assert: 'Rotated to face South' equals: log lines second.! !
+
+!methodRemoval: MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:17:08'!
+test13
+	
+	| marsRover log |
+	
+	marsRover := MarsRover at: 1@1 heading: #North.
+	log := MarsRoverLog new.
+	marsRover addObserver: log. 
+	
+	marsRover process: 'rr'.
+	
+	self assert: 2 equals: log lines size. 
+	self assert: 'Rotated to face East' equals: log lines first.
+	self assert: 'Rotated to face South' equals: log lines second.!
+!MarsRoverLogTest methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:17:40'!
+test12ChangeWindowHeadingOnMultipleRotations
+	
+	| marsRover window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	marsRover addObserver: window. 
+	
+	marsRover process: 'rl'.
+	
+	self assert: 1@2 equals: window position. 
+	self assert: #North equals: window heading. ! !
+
+!testRun: #MarsRoverLogTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:17:44'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'window' stamp: 'nz 6/6/2021 22:21:05'!
+test13
+	
+	| marsRover log window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	log := MarsRoverLog new.
+	marsRover addObserver: window. 
+	marsRover addObserver: log. 
+	
+	marsRover process: 'flbr'.
+	
+	self assert: 2@2 equals: window position. 
+	self assert: #North equals: window heading. ! !
+!MarsRoverLogTest methodsFor: 'window' stamp: 'nz 6/6/2021 22:22:58' prior: 50354789!
+test13
+	
+	| marsRover log window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	log := MarsRoverLog new.
+	marsRover addObserver: window. 
+	marsRover addObserver: log. 
+	
+	marsRover process: 'flbr'.
+	
+	self assert: 2@3 equals: window position. 
+	self assert: #North equals: window heading. 
+	
+	self assert: 4 equals: log lines size. 
+	self assert: 'Moved to 1@3' equals: log lines first.
+	self assert: 'Rotated to face West' equals: log lines second.
+	self assert: 'Moved to 2@3' equals: log lines third.
+	self assert: 'Rotated to face North' equals: log lines fourth.! !
+
+!testRun: #MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:23:01'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+
+!testRun: #MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:23:06'!
+PASSED!
+!MarsRoverLogTest methodsFor: 'window' stamp: 'nz 6/6/2021 22:23:27'!
+test13MultipleObservers
+	
+	| marsRover log window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	log := MarsRoverLog new.
+	marsRover addObserver: window. 
+	marsRover addObserver: log. 
+	
+	marsRover process: 'flbr'.
+	
+	self assert: 2@3 equals: window position. 
+	self assert: #North equals: window heading. 
+	
+	self assert: 4 equals: log lines size. 
+	self assert: 'Moved to 1@3' equals: log lines first.
+	self assert: 'Rotated to face West' equals: log lines second.
+	self assert: 'Moved to 2@3' equals: log lines third.
+	self assert: 'Rotated to face North' equals: log lines fourth.! !
+
+!methodRemoval: MarsRoverLogTest #test13 stamp: 'nz 6/6/2021 22:23:29'!
+test13
+	
+	| marsRover log window |
+	
+	marsRover := MarsRover at: 1@2 heading: #North.
+	window := MarsRoverWindow new.
+	log := MarsRoverLog new.
+	marsRover addObserver: window. 
+	marsRover addObserver: log. 
+	
+	marsRover process: 'flbr'.
+	
+	self assert: 2@3 equals: window position. 
+	self assert: #North equals: window heading. 
+	
+	self assert: 4 equals: log lines size. 
+	self assert: 'Moved to 1@3' equals: log lines first.
+	self assert: 'Rotated to face West' equals: log lines second.
+	self assert: 'Moved to 2@3' equals: log lines third.
+	self assert: 'Rotated to face North' equals: log lines fourth.!
+
+!classRenamed: #MarsRoverLogTest as: #MarsRoverObserverTest stamp: 'nz 6/6/2021 22:26:01'!
+Smalltalk renameClassNamed: #MarsRoverLogTest as: #MarsRoverObserverTest!
+
+!methodRemoval: MarsRoverLog class #new stamp: 'nz 6/6/2021 22:26:48'!
+new
+
+
+	^self basicNew initialize.
+	
+	!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:27:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16 stamp: 'nz 6/6/2021 22:27:10'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/6/2021 22:29:54' prior: 50354127!
+moveBackward
+	
+	head moveBackward: self.
+	self informPositionChangedToObservers: position.
+	observers do: [ :observer | observer changePosition: position ].! !
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/6/2021 22:30:01' prior: 50355054!
+moveBackward
+	
+	head moveBackward: self.
+	self informPositionChangedToObservers: position.! !
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:30:08'!
+ERROR!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:30:08'!
+ERROR!
+
+!testRun: #MarsRoverObserverTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:30:08'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:30:08'!
+ERROR!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:30:10'!
+ERROR!
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:30:26'!
+informPositionChangedToObservers: aPoint 
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:30:40' prior: 50355119!
+informPositionChangedToObservers: aPosition 
+	
+	observers do: [ :observer | observer changePosition: aPosition ].! !
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:30:50' prior: 50355124!
+informPositionChangedToObservers: aPosition 
+	
+	observers do: [ :observer | observer changePosition: aPosition ].! !
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:30:58'!
+informPositionChangeToObservers: aPosition 
+	
+	observers do: [ :observer | observer changePosition: aPosition ].! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'nz 6/6/2021 22:30:58' prior: 50355062!
+moveBackward
+	
+	head moveBackward: self.
+	self informPositionChangeToObservers: position.! !
+
+!methodRemoval: MarsRover #informPositionChangedToObservers: stamp: 'nz 6/6/2021 22:30:58'!
+informPositionChangedToObservers: aPosition 
+	
+	observers do: [ :observer | observer changePosition: aPosition ].!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:31:03'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:31:04'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:31:04'!
+PASSED!
+!MarsRover methodsFor: 'moving' stamp: 'nz 6/6/2021 22:31:15' prior: 50354133!
+moveForward
+	
+	head moveForward: self.
+	self informPositionChangeToObservers: position.! !
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:31:16'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:31:53' prior: 50354107!
+headNorth
+	
+	head := MarsRoverHeadingNorth new.
+	self informHeadingChangeToObservers: #North.! !
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:31:56'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:31:56'!
+ERROR!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:31:56'!
+ERROR!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:31:58'!
+ERROR!
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:32:07'!
+informHeadingChangeToObservers: aSymbol 
+	self shouldBeImplemented.! !
+!MarsRover methodsFor: 'observers' stamp: 'nz 6/6/2021 22:32:18' prior: 50355279!
+informHeadingChangeToObservers: aHeadingSymbol 
+	
+	observers do: [ :observer | observer changeHeading: aHeadingSymbol ].! !
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:32:20'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:32:21'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:32:33' prior: 50354114!
+headSouth
+	
+	head := MarsRoverHeadingSouth new.
+	self informHeadingChangeToObservers:  #South .! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:32:37' prior: 50354121!
+headWest
+	
+	head := MarsRoverHeadingWest new.
+	self informHeadingChangeToObservers:  #West .! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:32:43' prior: 50354101!
+headEast
+	
+	head := MarsRoverHeadingEast new.
+	self informHeadingChangeToObservers:  #East.! !
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test01LogPositionChangeOnMoveForward stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test02ChangeWindowPositionOnMoveForward stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test03LogChangeHeadingOnRotateRight stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test04ChangeWindowHeadingOnRotateRight stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test05LogPositionChangeOnMoveBackward stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test06ChangeWindowPositionOnMoveBackward stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test07LogChangeHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test08ChangeWindowHeadingOnRotateLeft stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test09LogMultiplePositionChanges stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test10ChangeWindowPositionOnMultipleMoves stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test11LogMultipleRotations stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test12ChangeWindowHeadingOnMultipleRotations stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+
+!testRun: #MarsRoverObserverTest #test13MultipleObservers stamp: 'nz 6/6/2021 22:32:45'!
+PASSED!
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:35:13' prior: 50355298!
+headSouth
+	
+	head := MarsRoverHeadingSouth new.
+	self informHeadingChangeToObservers: #South .! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:35:16' prior: 50355304!
+headWest
+	
+	head := MarsRoverHeadingWest new.
+	self informHeadingChangeToObservers: #West .! !
+!MarsRover methodsFor: 'heading' stamp: 'nz 6/6/2021 22:35:20' prior: 50355310!
+headEast
+	
+	head := MarsRoverHeadingEast new.
+	self informHeadingChangeToObservers: #East.! !
+
+----SNAPSHOT----(6 June 2021 22:35:45) MarsRover.image priorSource: 729448!
+
+----QUIT----(6 June 2021 22:36:01) MarsRover.image priorSource: 759389!
