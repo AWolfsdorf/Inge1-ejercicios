@@ -1,0 +1,527 @@
+
+
+----STARTUP---- (8 June 2021 23:49:33) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:05:51'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCart category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:09:11'!
+Object subclass: #ShoppingCart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'no messages' stamp: 'AW 6/9/2021 00:09:01'!
+              test01
+
+	| shoppingCart |
+	shoppingCart := ShoppingCart new.
+	
+	self assert: shoppingCart listItems size equals: 0. ! !
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:09:31'!
+ERROR!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:09:39'!
+              listItems
+	self shouldBeImplemented.! !
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:09:58' prior: 50331682!
+                         listItems
+	^OrderedCollection new.! !
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:10:01' prior: 50331687!
+                           listItems
+	^OrderedCollection new.! !
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:10:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:10:05'!
+PASSED!
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:22:07'!
+Object subclass: #Book
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:22:11'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:21:58'!
+                            test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first item equals: quantity.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:22:33' prior: 50331715!
+test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first item equals: quantity.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:22:57' overrides: 16927572!
+                              setUp
+	
+	isbnBook1 := 'ISBN1'! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:23:03' prior: 50331744 overrides: 16927572!
+        setUp
+	
+	isbnBook1 := 'ISBN1'.! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:23:07'!
+ERROR!
+!Book class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:23:16'!
+        for: aString 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aString ! !
+!Book class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:23:45' prior: 50331755!
+                 for: anIsbnString
+	
+	^self new initializeFor: anIsbnString ! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:23:47'!
+ERROR!
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:24:11'!
+Object subclass: #Book
+	instanceVariableNames: 'isbnString'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Book methodsFor: 'casing' stamp: 'AW 6/9/2021 00:24:11'!
+          initializeFor: anIsbnString 
+	self shouldBeImplemented.
+	isbnString := anIsbnString.! !
+!Book methodsFor: 'casing' stamp: 'AW 6/9/2021 00:24:28' prior: 50331776!
+                              initializeFor: anIsbnString 
+
+	isbnString := anIsbnString.! !
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:24:32'!
+Object subclass: #Book
+	instanceVariableNames: 'isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Book methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:24:32' prior: 50331782!
+                               initializeFor: anIsbnString 
+
+	isbn := anIsbnString.! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:24:36'!
+ERROR!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:24:47'!
+              add: aSmallInteger of: aBook 
+	self shouldBeImplemented.! !
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:25:22' prior: 50331801!
+     add: aQuantity of: anItem 
+
+	! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:25:24'!
+FAILURE!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:26:05' prior: 50331729!
+               test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first quantity equals: quantity.! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:26:58'!
+FAILURE!
+
+!classDefinition: #ShoppingCart category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:28:57'!
+Object subclass: #ShoppingCart
+	instanceVariableNames: 'item'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartItem category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:30:01'!
+Object subclass: #ShoppingCartItem
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:28:34' prior: 50331806!
+                         add: aQuantity of: anItem 
+
+	item := OrderedCollection with: (ShoppingCartItem for: anItem quantity: aQuantity)! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:30:08'!
+ERROR!
+
+!classDefinition: #ShoppingCart category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:30:16'!
+Object subclass: #ShoppingCart
+	instanceVariableNames: 'items'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:30:16' prior: 50331844!
+      add: aQuantity of: anItem 
+
+	items := OrderedCollection with: (ShoppingCartItem for: anItem quantity: aQuantity)! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:30:28'!
+ERROR!
+!ShoppingCartItem class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:30:34'!
+          for: aBook quantity: aSmallInteger 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aBook quantity: aSmallInteger ! !
+!ShoppingCartItem class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:31:03' prior: 50331869!
+                         for: anItem quantity: aQuantity 
+
+	^self new initializeFor: anItem quantity: aQuantity ! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:31:06'!
+ERROR!
+
+!classDefinition: #ShoppingCartItem category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:31:19'!
+Object subclass: #ShoppingCartItem
+	instanceVariableNames: 'item'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartItem category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:31:19'!
+Object subclass: #ShoppingCartItem
+	instanceVariableNames: 'item quantity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartItem methodsFor: 'initialization' stamp: 'AW 6/9/2021 00:31:19'!
+                           initializeFor: anItem quantity: aQuantity 
+	self shouldBeImplemented.
+	item := anItem.
+	quantity := aQuantity.! !
+!ShoppingCartItem methodsFor: 'initialization' stamp: 'AW 6/9/2021 00:31:25' prior: 50331902!
+                initializeFor: anItem quantity: aQuantity 
+	
+	item := anItem.
+	quantity := aQuantity.! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:31:28'!
+FAILURE!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:31:47' prior: 50331692!
+                           listItems
+	^items.! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:31:49'!
+ERROR!
+!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:31:59'!
+                      item
+	self shouldBeImplemented.
+	^item! !
+!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:01' prior: 50331924!
+                             item
+	
+	^item! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:32:03'!
+ERROR!
+!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:09'!
+                           quantity
+	self shouldBeImplemented.
+	^quantity! !
+!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:11' prior: 50331935!
+                     quantity
+	
+	^quantity! !
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:32:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:32:13'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:32:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:32:13'!
+ERROR!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:33:10' overrides: 16896425!
+                      initialize
+
+	items := OrderedCollection new.! !
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:33:17'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:33:17'!
+PASSED!
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'AW 6/9/2021 00:35:48'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1 isbnBook2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:35:46'!
+                test03
+	| shoppingCart book1 book2 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	book2 := Book for: isbnBook2.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart listItems first item equals: book1.
+	self assert: shoppingCart listItems first quantity equals: 1.
+	self assert: shoppingCart listItems first item equals: book2.
+	self assert: shoppingCart listItems first quantity equals: 2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:35:58' prior: 50331749 overrides: 16927572!
+          setUp
+	
+	isbnBook1 := 'ISBN1'.
+	isbnBook2 := 'ISBN1'.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:36:01' prior: 50331991 overrides: 16927572!
+                setUp
+	
+	isbnBook1 := 'ISBN1'.
+	isbnBook2 := 'ISBN2'.! !
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:36:04'!
+FAILURE!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:36:47' prior: 50331860!
+                           add: aQuantity of: anItem 
+
+	items add: (ShoppingCartItem for: anItem quantity: aQuantity).! !
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:36:49'!
+FAILURE!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:37:13' prior: 50331971!
+                 test03
+	| shoppingCart book1 book2 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	book2 := Book for: isbnBook2.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart listItems first item equals: book1.
+	self assert: shoppingCart listItems first quantity equals: 1.
+	self assert: shoppingCart listItems second item equals: book2.
+	self assert: shoppingCart listItems second quantity equals: 2.! !
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:37:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:37:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:37:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:37:19'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:39:48'!
+                            assert: book of: shoppingCart in: quantity
+
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first quantity equals: quantity! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:39:48' prior: 50331813!
+           test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: book of: shoppingCart in: quantity.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:40:40'!
+assert: book has: shoppingCart of: quantity
+
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first quantity equals: quantity! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:40:40' prior: 50332052!
+          test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: book has: shoppingCart of: quantity.! !
+
+!methodRemoval: ShoppingCartTest #assert:of:in: stamp: 'AW 6/9/2021 00:40:40'!
+assert: book of: shoppingCart in: quantity
+
+	self assert: shoppingCart listItems first item equals: book.
+	self assert: shoppingCart listItems first quantity equals: quantity!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:40:59' prior: 50332072!
+               test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	book := Book for: isbnBook1.
+	
+	shoppingCart add: quantity of: book.
+	
+	self assert: shoppingCart listItems size equals: 1.
+	self assert: shoppingCart has: quantity of: book.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:41:29' prior: 50332063!
+               assert: shoppingCart has: quantity of: item
+
+	self assert: shoppingCart listItems first item equals: item.
+	self assert: shoppingCart listItems first quantity equals: quantity! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:43:34' prior: 50332014!
+          test03
+	| shoppingCart book1 book2 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	book2 := Book for: isbnBook2.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart listItems first quantity equals: 1.
+	self assert: shoppingCart listItems second item equals: book2.
+	self assert: shoppingCart listItems second quantity equals: 2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:43:48' prior: 50332113!
+              test03
+	| shoppingCart book1 book2 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	book2 := Book for: isbnBook2.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:49:48' prior: 50332104!
+assert: shoppingCart has: quantity of: item
+
+	self assert: (shoppingCart listItems anySatisfy: [ :anItem | 
+		(anItem item = item) and: [ anItem quantity = quantity ]. 
+	] ).! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:50:54' prior: 50332146!
+           assert: shoppingCart has: quantity of: item
+
+	self assert: (shoppingCart listItems anySatisfy: [ :anShoppingCartItem | 
+		(anShoppingCartItem item = item) and: [ anShoppingCartItem quantity = quantity ]. 
+	] ).! !
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:51:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:51:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:51:05'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:53:12' prior: 50332155!
+   assert: shoppingCart has: quantity of: item
+
+	self assert: (shoppingCart listItems anySatisfy: [ :anShoppingCartItem | 
+		anShoppingCartItem is: quantity of: item.
+	] ).! !
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:53:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:53:14'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:53:14'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:53:17'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:53:17'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:53:17'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:53:20'!
+ERROR!
+!ShoppingCartItem methodsFor: 'testing' stamp: 'AW 6/9/2021 00:53:37'!
+                             is: aSmallInteger of: aBook 
+	self shouldBeImplemented.! !
+!ShoppingCartItem methodsFor: 'testing' stamp: 'AW 6/9/2021 00:54:31' prior: 50332197!
+              is: aQuantity of: anItem 
+	^(item = anItem) and: [ quantity = aQuantity ].! !
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:54:34'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'AW 6/9/2021 00:54:34'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:54:34'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:54:34'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:54:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:54:36'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'AW 6/9/2021 00:54:39'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'AW 6/9/2021 00:54:39'!
+PASSED!
+
+----QUIT----(9 June 2021 00:55:43) TusLibros.image priorSource: 2549!
