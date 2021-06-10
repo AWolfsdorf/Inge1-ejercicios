@@ -61,10 +61,10 @@ TestCase subclass: #ShoppingCartTest
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:53:12'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
 assert: shoppingCart has: quantity of: item
 
-	self assert: (shoppingCart listItems anySatisfy: [ :anShoppingCartItem | 
+	self assert: (shoppingCart items anySatisfy: [ :anShoppingCartItem | 
 		anShoppingCartItem is: quantity of: item.
 	] ).! !
 
@@ -74,15 +74,15 @@ setUp
 	isbnBook1 := 'ISBN1'.
 	isbnBook2 := 'ISBN2'.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:09:01'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
 test01
 
 	| shoppingCart |
 	shoppingCart := ShoppingCart new.
 	
-	self assert: shoppingCart listItems size equals: 0. ! !
+	self assert: shoppingCart items size equals: 0. ! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:40:59'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
 test02
 	| shoppingCart book quantity |
 
@@ -92,10 +92,10 @@ test02
 	
 	shoppingCart add: quantity of: book.
 	
-	self assert: shoppingCart listItems size equals: 1.
+	self assert: shoppingCart items size equals: 1.
 	self assert: shoppingCart has: quantity of: book.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:43:48'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
 test03
 	| shoppingCart book1 book2 |
 
@@ -106,11 +106,11 @@ test03
 	shoppingCart add: 1 of: book1.
 	shoppingCart add: 2 of: book2.
 	
-	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart items size equals: 2.
 	self assert: shoppingCart has: 1 of: book1.
 	self assert: shoppingCart has: 2 of: book2.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:48:13'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 19:58:51'!
 test04
 	| shoppingCart book1 |
 
@@ -118,11 +118,11 @@ test04
 	book1 := Book for: isbnBook1.
 	
 	self  should: [ shoppingCart add: -2 of: book1. ]
-		raise: Error
+		raise: Error - MessageNotUnderstood 
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
 	! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:49:43'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 19:58:45'!
 test05
 	| shoppingCart book1 |
 
@@ -130,9 +130,45 @@ test05
 	book1 := Book for: isbnBook1.
 	
 	self  should: [ shoppingCart add: 0 of: book1. ]
-		raise: Error
+		raise: Error - MessageNotUnderstood 
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
 	! !
+
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:06:15'!
+test06
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	! !
+
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:16:04'!
+test07
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart := ShoppingCart new.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
+
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:19:05'!
+test08
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+	
+	shoppingCart := ShoppingCart new.
+		
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart add: 4 of: (Book for: isbnBook1).
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
 
 
 !classDefinition: #Book category: 'Tus-Libros'!
@@ -172,10 +208,10 @@ initializeWith: aPriceList
 	priceList := aPriceList.! !
 
 
-!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:34:07'!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
 checkOut: aShoppingCart payingWith: aCreditCard 
 
-	aShoppingCart listItems ifEmpty: [
+	aShoppingCart items ifEmpty: [
 		^self error: self class cantCheckoutEmptyCartErrorDescription .
 	].
 
@@ -239,26 +275,47 @@ set: aBook price: aPrice
 
 !classDefinition: #ShoppingCart category: 'Tus-Libros'!
 Object subclass: #ShoppingCart
-	instanceVariableNames: 'items'
+	instanceVariableNames: 'items lastUpdate'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:56'!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:21:01'!
 add: aQuantity of: anItem 
 
-	(aQuantity <= 0) ifTrue: [ self error: self class itemQuantityMustBeGreaterThanZeroErrorDescription ].
+	self assertQuantityIsValid: aQuantity.
+	
+	items add: (ShoppingCartItem for: anItem quantity: aQuantity).
+	self updateTimestamp.! !
 
-	items add: (ShoppingCartItem for: anItem quantity: aQuantity).! !
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:09:49'!
+assertQuantityIsValid: aQuantity
 
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:33:10'!
+	aQuantity strictlyPositive
+		ifFalse: [ self error: self class itemQuantityMustBeGreaterThanZeroErrorDescription ].
+	
+	aQuantity isInteger
+		ifFalse: [ self error: self class itemQuantyMustBeAnIntegerErrorDescription ]! !
+
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:20:43'!
 initialize
 
-	items := OrderedCollection new.! !
+	items := OrderedCollection new.
+	self updateTimestamp.! !
 
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:31:47'!
-listItems
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
+items
 	^items.! !
+
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:17:01'!
+lastUpdateTimeStamp
+	
+	^lastUpdate! !
+
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:20:43'!
+updateTimestamp
+
+	^ lastUpdate := DateAndTime now! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -269,6 +326,11 @@ ShoppingCart class
 !ShoppingCart class methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:56'!
 itemQuantityMustBeGreaterThanZeroErrorDescription
 	^'Cannot add item with negative quantity!!'.! !
+
+
+!ShoppingCart class methodsFor: 'errors' stamp: 'AW 6/10/2021 20:05:50'!
+itemQuantyMustBeAnIntegerErrorDescription
+	^'Quanty must be an integer!!'! !
 
 
 !classDefinition: #ShoppingCartItem category: 'Tus-Libros'!
