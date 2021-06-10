@@ -525,3 +525,1007 @@ PASSED!
 PASSED!
 
 ----QUIT----(9 June 2021 00:55:43) TusLibros.image priorSource: 2549!
+
+----STARTUP---- (9 June 2021 23:06:35) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:07:10'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:07:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:07:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:07:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:07:14'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:37:13'!
+test04
+	| shoppingCart book1 book2 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	book2 := Book for: isbnBook2.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book1.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book1.
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:37:21' prior: 50332244!
+test04
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book1.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book1.
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:37:23'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:37:23'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:37:23'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:37:23'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:37:23'!
+PASSED!
+
+!methodRemoval: ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:37:32'!
+test04
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book1.
+	
+	self assert: shoppingCart listItems size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book1.
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:42:06'!
+test04
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error
+		description: ShoppingCart cannotAddItemWithNegativeQuantityErrorDescription.
+	
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:42:13'!
+ERROR!
+!ShoppingCart class methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:42:35'!
+cannotAddItemWithNegativeQuantityErrorDescription
+	self shouldBeImplemented.! !
+!ShoppingCart class methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:43:16' prior: 50332321!
+cannotAddItemWithNegativeQuantityErrorDescription
+	^'Cannot add item with negative quantity!!'.! !
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:43:23'!
+FAILURE!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:43:38'!
+FAILURE!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:45:11' prior: 50332005!
+add: aQuantity of: anItem 
+
+	(aQuantity < 0) ifTrue: [ self error: self class cannotAddItemWithNegativeQuantityErrorDescription ].
+
+	items add: (ShoppingCartItem for: anItem quantity: aQuantity).! !
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:45:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:45:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:45:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:45:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:45:13'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:46:03'!
+test05
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error
+		description: ShoppingCart cannotAddItemWithNegativeQuantityErrorDescription.
+	
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:46:04'!
+FAILURE!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:46:19'!
+FAILURE!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:46:33' prior: 50332338!
+add: aQuantity of: anItem 
+
+	(aQuantity <= 0) ifTrue: [ self error: self class cannotAddItemWithNegativeQuantityErrorDescription ].
+
+	items add: (ShoppingCartItem for: anItem quantity: aQuantity).! !
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:46:35'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:29' prior: 50332359!
+test05
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:29' prior: 50332305!
+test04
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	
+	
+	"
+	- Expiracion del carrito
+	- Checkout del carrito
+	- Transacción
+	- Merchant Processor
+	
+	"! !
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:47:32'!
+ERROR!
+!ShoppingCart class methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:56'!
+itemQuantityMustBeGreaterThanZeroErrorDescription
+	^'Cannot add item with negative quantity!!'.! !
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:47:56' prior: 50332378!
+add: aQuantity of: anItem 
+
+	(aQuantity <= 0) ifTrue: [ self error: self class itemQuantityMustBeGreaterThanZeroErrorDescription ].
+
+	items add: (ShoppingCartItem for: anItem quantity: aQuantity).! !
+
+!methodRemoval: ShoppingCart class #cannotAddItemWithNegativeQuantityErrorDescription stamp: 'nz 6/9/2021 23:47:56'!
+cannotAddItemWithNegativeQuantityErrorDescription
+	^'Cannot add item with negative quantity!!'.!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:48:04'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:48:13' prior: 50332416!
+test04
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/9/2021 23:48:19'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/9/2021 23:49:43' prior: 50332402!
+test05
+	| shoppingCart book1 |
+
+	shoppingCart := ShoppingCart new.
+	book1 := Book for: isbnBook1.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/9/2021 23:50:38'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'no messages' stamp: 'nz 6/9/2021 23:50:45'!
+test01
+
+	! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/9/2021 23:50:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/9/2021 23:50:47'!
+PASSED!
+
+1996/May!
+
+May/1996!
+
+!classDefinition: #PriceList category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:14:43'!
+Object subclass: #PriceList
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #Cashier category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:14:51'!
+Object subclass: #Cashier
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:15:06'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:14:23'!
+xtest0001alpha
+
+	| aCashier book bookPrices cart creditCard creditCardNumber1 expirationDate isbn1 pepeSanchez transaction |
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	pepeSanchez _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: pepeSanchez
+		expiration: expirationDate.
+	
+	transaction _ aCashier checkOut: cart payingWith: creditCard.
+	
+	self assert: 124 equals: transaction total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:15:21' prior: 50332545!
+xtest0001alpha
+
+	| aCashier book bookPrices cart creditCard creditCardNumber1 expirationDate isbn1 pepeSanchez transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	pepeSanchez _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: pepeSanchez
+		expiration: expirationDate.
+	
+	transaction _ aCashier checkOut: cart payingWith: creditCard.
+	
+	self assert: 124 equals: transaction total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:15:50' prior: 50332570!
+xtest0001alpha
+
+	| aCashier book bookPrices cart creditCard creditCardNumber1 expirationDate isbn1 sanchezPepe transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	sanchezPepe _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: sanchezPepe
+		expiration: expirationDate.
+	
+	transaction _ aCashier checkOut: cart payingWith: creditCard.
+	
+	self assert: 124 equals: transaction total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:15:56' prior: 50332595!
+xtest0001alpha
+
+	| aCashier book bookPrices cart creditCard creditCardNumber1 expirationDate isbn1 cardOwner transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	transaction _ aCashier checkOut: cart payingWith: creditCard.
+	
+	self assert: 124 equals: transaction total.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:16:18'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:16:18'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:16:22'!
+PASSED!
+
+!methodRemoval: CheckOutTest #test01 stamp: 'nz 6/10/2021 00:16:32'!
+test01
+
+	!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:17:52'!
+xtest0000alpha
+
+	| aCashier bookPrices cart creditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: creditCard. ] raise: Error description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:18:11'!
+test01
+
+	| aCashier bookPrices cart creditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: creditCard. ] raise: Error description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+
+!methodRemoval: CheckOutTest #xtest0000alpha stamp: 'nz 6/10/2021 00:18:11'!
+xtest0000alpha
+
+	| aCashier bookPrices cart creditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: creditCard. ] raise: Error description: Cashier cantCheckoutEmptyCartErrorDescription.!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:18:21'!
+ERROR!
+!Cashier class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:18:37'!
+with: aPriceList 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWith: aPriceList ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:18:44' prior: 50332721!
+with: aPriceList 
+	
+	^self new initializeWith: aPriceList ! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:18:46'!
+ERROR!
+
+!classDefinition: #Cashier category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:19:02'!
+Object subclass: #Cashier
+	instanceVariableNames: 'priceList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Cashier methodsFor: 'initialization' stamp: 'nz 6/10/2021 00:19:02'!
+initializeWith: aPriceList 
+	self shouldBeImplemented.
+	priceList := aPriceList.! !
+!Cashier methodsFor: 'initialization' stamp: 'nz 6/10/2021 00:19:07' prior: 50332743!
+initializeWith: aPriceList 
+	
+	priceList := aPriceList.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:19:09'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:19:21'!
+number: aString owner: aString2 expiration: aGregorianMonthOfYear 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeNumber: aString owner: aString2 expiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:19:28' prior: 50332756!
+number: aString owner: aString2 expiration: aGregorianMonthOfYear 
+
+	^self new initializeNumber: aString owner: aString2 expiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:19:35' prior: 50332767!
+number: aCreditCardNumber owner: aString2 expiration: aGregorianMonthOfYear 
+
+	^self new initializeNumber: aCreditCardNumber owner: aString2 expiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:19:41' prior: 50332776!
+number: aCreditCardNumber owner: anOwner expiration: aGregorianMonthOfYear 
+
+	^self new initializeNumber: aCreditCardNumber owner: anOwner expiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:19:56' prior: 50332785!
+number: aCreditCardNumber owner: anOwnerName expiration: aGregorianMonthOfYear 
+
+	^self new initializeNumber: aCreditCardNumber owner: anOwnerName expiration: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'nz 6/10/2021 00:20:07' prior: 50332794!
+number: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+
+	^self new initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear ! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:20:12'!
+ERROR!
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:20:29'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:20:29'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber ownerName'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:20:29'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber ownerName expirationMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CreditCard methodsFor: 'initialization' stamp: 'nz 6/10/2021 00:20:29'!
+initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+	self shouldBeImplemented.
+	creditCardNumber := aCreditCardNumber.
+	ownerName := anOwnerName.
+	expirationMonthOfYear := anExpirationMonthOfYear.! !
+!CreditCard methodsFor: 'initialization' stamp: 'nz 6/10/2021 00:20:38' prior: 50332837!
+initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+
+	creditCardNumber := aCreditCardNumber.
+	ownerName := anOwnerName.
+	expirationMonthOfYear := anExpirationMonthOfYear.! !
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:20:48'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number ownerName expirationMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:20:48' prior: 50332848!
+initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+
+	number := aCreditCardNumber.
+	ownerName := anOwnerName.
+	expirationMonthOfYear := anExpirationMonthOfYear.! !
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:20:56'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number owner expirationMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:20:56' prior: 50332866!
+initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+
+	number := aCreditCardNumber.
+	owner := anOwnerName.
+	expirationMonthOfYear := anExpirationMonthOfYear.! !
+
+!classDefinition: #CreditCard category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:21:00'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number owner expiration'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:21:00' prior: 50332884!
+initializeNumber: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear 
+
+	number := aCreditCardNumber.
+	owner := anOwnerName.
+	expiration := anExpirationMonthOfYear.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:21:05'!
+ERROR!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:21:20'!
+cantCheckoutEmptyCartErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:21:44' prior: 50332912!
+cantCheckoutEmptyCartErrorDescription
+	^'Cannot checkout an empty shopping cart!!'.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:21:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:21:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:21:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:21:56'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:22:34' prior: 50332676!
+test01
+
+	| aCashier bookPrices cart creditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: creditCard. ] raise: Error - MessageNotUnderstood description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:22:35'!
+ERROR!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:23:04' prior: 50332933!
+test01
+
+	| aCashier bookPrices cart creditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	creditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: creditCard. ]
+		raise: Error - MessageNotUnderstood
+		description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:23:05'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:23:25'!
+checkOut: aShoppingCart payingWith: aCreditCard 
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:23:40' prior: 50332982!
+checkOut: aShoppingCart payingWith: aCreditCard 
+	
+	^self error: self class cantCheckoutEmptyCartErrorDescription .! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:23:42'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:23:42'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:24:28' prior: 50332958!
+test01
+
+	| aCashier bookPrices cart validCreditCard creditCardNumber1 expirationDate cardOwner |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner _ 'PEPE SANCHEZ'.
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner
+		expiration: expirationDate.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:26:03'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber11'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:26:04'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber11 expirationDate1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:26:05'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber11 expirationDate1 cardOwner1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:26:06'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber11 expirationDate1 cardOwner1 validCreditCard1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:26:14' overrides: 16927572!
+setUp
+
+	creditCardNumber11 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber11
+		owner: cardOwner1
+		expiration: expirationDate1.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:26:31' prior: 50333000!
+test01
+
+	| aCashier bookPrices cart  |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:27:36' prior: 50332620!
+xtest0001alpha
+
+	| aCashier book bookPrices cart isbn1 transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: transaction total.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:28:05'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:28:05' prior: 50333056 overrides: 16927572!
+setUp
+
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:29:08'!
+test02
+
+	| aCashier book bookPrices cart isbn1 transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: transaction total.! !
+
+!methodRemoval: CheckOutTest #xtest0001alpha stamp: 'nz 6/10/2021 00:29:08'!
+xtest0001alpha
+
+	| aCashier book bookPrices cart isbn1 transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: transaction total.!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:30:57'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:32:04'!
+ERROR!
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:32:11'!
+set: aBook price: aSmallInteger 
+	self shouldBeImplemented.! !
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:32:13' prior: 50333151!
+set: aBook price: aSmallInteger 
+	! !
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:32:24' prior: 50333156!
+set: aBook price: aPrice 
+	! !
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:32:26'!
+ERROR!
+
+!classDefinition: #Transaction category: 'Tus-Libros' stamp: 'nz 6/10/2021 00:34:13'!
+Object subclass: #Transaction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:34:07' prior: 50332988!
+checkOut: aShoppingCart payingWith: aCreditCard 
+
+	aShoppingCart listItems ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	^Transaction new.
+	! !
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:34:16'!
+ERROR!
+!Transaction methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:34:21'!
+total
+	self shouldBeImplemented.! !
+!Transaction methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:34:26' prior: 50333185!
+total
+	^124.! !
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:34:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:34:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:34:27'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:35:19' prior: 50333117!
+test02
+
+	| aCashier book bookPrices cart isbn1 transaction |
+	
+	isbn1 _ '12938102398'.
+	book _ Book for: isbn1.
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: transaction total.! !
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:35:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 00:35:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 00:35:20'!
+PASSED!
+
+----QUIT----(10 June 2021 00:35:45) TusLibros.image priorSource: 18413!
