@@ -1992,3 +1992,617 @@ PASSED!
 	self updateTimestamp.! !
 
 ----QUIT----(10 June 2021 20:22:16) TusLibros.image priorSource: 50304!
+
+----STARTUP---- (10 June 2021 20:24:08) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:26:40'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1 isbnBook2 book1a'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:26:42'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1 isbnBook2 book1a book2a'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:26:39' prior: 50331997 overrides: 16927572!
+        setUp
+	
+	isbnBook1 := 'ISBN1'.
+	book1a := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2a := Book for: isbnBook2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:26:50' prior: 50333543!
+ test02
+	| shoppingCart book quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	
+	shoppingCart add: quantity of: book1a.
+	
+	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart has: quantity of: book.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:26:54' prior: 50333779!
+              test02
+	| shoppingCart quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	
+	shoppingCart add: quantity of: book1a.
+	
+	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart has: quantity of: book1a.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:04' prior: 50333562!
+                 test03
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1a.
+	shoppingCart add: 2 of: book2a.
+	
+	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart has: 1 of: book1a.
+	self assert: shoppingCart has: 2 of: book2a.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:14' prior: 50333254!
+         test04
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: -2 of: book1a. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:21' prior: 50333242!
+              test05
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 0 of: book1a. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:28' prior: 50333362!
+               test06
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1a. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:38' prior: 50333682!
+            test08
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+	
+	shoppingCart := ShoppingCart new.
+		
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart add: 4 of: book1a.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:27:46'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1 isbnBook2 book1 book2a'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333801!
+    test03
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2a.
+	
+	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2a.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333824!
+           test05
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333772 overrides: 16927572!
+                            setUp
+	
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2a := Book for: isbnBook2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333813!
+  test04
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333835!
+               test06
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333790!
+             test02
+	| shoppingCart quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	
+	shoppingCart add: quantity of: book1.
+	
+	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart has: quantity of: book1.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:46' prior: 50333846!
+                   test08
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+	
+	shoppingCart := ShoppingCart new.
+		
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart add: 4 of: book1.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:27:49'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'isbnBook1 isbnBook2 book1 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:49' prior: 50333892 overrides: 16927572!
+                  setUp
+	
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:49' prior: 50333868!
+   test03
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2.! !
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test07 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test08 stamp: 'nz 6/10/2021 20:27:52'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:29:54'!
+        test01EmptyCartHasNoItems
+
+	| shoppingCart |
+	shoppingCart := ShoppingCart new.
+	
+	self assert: shoppingCart items size equals: 0. ! !
+
+!methodRemoval: ShoppingCartTest #test01 stamp: 'nz 6/10/2021 20:29:57'!
+test01
+
+	| shoppingCart |
+	shoppingCart := ShoppingCart new.
+	
+	self assert: shoppingCart items size equals: 0. !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:08'!
+         test02AddingAnItemToACart
+	| shoppingCart quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	
+	shoppingCart add: quantity of: book1.
+	
+	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart has: quantity of: book1.! !
+
+!methodRemoval: ShoppingCartTest #test02 stamp: 'nz 6/10/2021 20:31:11'!
+test02
+	| shoppingCart quantity |
+
+	shoppingCart := ShoppingCart new.
+	quantity := 1.
+	
+	shoppingCart add: quantity of: book1.
+	
+	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart has: quantity of: book1.!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:31'!
+                               test03AddingMultipleItemsToACart
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2.! !
+
+!methodRemoval: ShoppingCartTest #test03 stamp: 'nz 6/10/2021 20:31:34'!
+test03
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2.!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:02'!
+            test04AddingANegativeQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+
+!methodRemoval: ShoppingCartTest #test04 stamp: 'nz 6/10/2021 20:32:04'!
+test04
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:22'!
+        test05AddingZeroQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+
+!methodRemoval: ShoppingCartTest #test05 stamp: 'nz 6/10/2021 20:32:24'!
+test05
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:34'!
+               test06AddingNonIntegerQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	! !
+
+!methodRemoval: ShoppingCartTest #test06 stamp: 'nz 6/10/2021 20:32:36'!
+test06
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:33:48'!
+   test07CreatingACartUpdatesItsLastUpdateTimestamp
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart := ShoppingCart new.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
+
+!methodRemoval: ShoppingCartTest #test07 stamp: 'nz 6/10/2021 20:33:51'!
+test07
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart := ShoppingCart new.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:34:13'!
+                          test08AddingAnItemUpdatesItsLastUpdateTimestamp
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+	
+	shoppingCart := ShoppingCart new.
+		
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart add: 4 of: book1.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
+
+!methodRemoval: ShoppingCartTest #test08 stamp: 'nz 6/10/2021 20:34:15'!
+test08
+	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
+	
+	shoppingCart := ShoppingCart new.
+		
+	beforeUpdateTimestamp := DateAndTime now.
+	shoppingCart add: 4 of: book1.
+	afterUpdateTimestamp := DateAndTime now.
+	
+	self assert: (shoppingCart lastUpdateTimeStamp 
+		between: beforeUpdateTimestamp and: afterUpdateTimestamp).!
+
+!testRun: #ShoppingCartTest #test08AddingAnItemUpdatesItsLastUpdateTimestamp stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test07CreatingACartUpdatesItsLastUpdateTimestamp stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test08AddingAnItemUpdatesItsLastUpdateTimestamp stamp: 'nz 6/10/2021 20:34:19'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:35:06'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:35:07'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:35:08'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/10/2021 20:35:09'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:35:05' prior: 50333106 overrides: 16927572!
+            setUp
+
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:35:21' prior: 50333201!
+  test02
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: transaction total.! !
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 20:35:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 20:35:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 20:35:25'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:07:19'!
+           test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book1.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: transaction total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:07:23' prior: 50334273!
+                            test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: transaction total.! !
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/10/2021 21:07:24'!
+FAILURE!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/10/2021 21:29:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/10/2021 21:29:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/10/2021 21:29:20'!
+FAILURE!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/10/2021 21:29:20'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:29:43' prior: 50334289!
+            test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 'Deberia dar 150 si implementamos este test' equals: transaction total.! !
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/10/2021 21:29:44'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:30:00' prior: 50334316!
+         test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 'Deberia dar 150 si implementamos la funcionalidad' equals: transaction total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:30:06' prior: 50334335!
+            test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: transaction total.! !
+
+----QUIT----(10 June 2021 21:30:20) TusLibros.image priorSource: 67135!

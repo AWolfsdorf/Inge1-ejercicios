@@ -1,11 +1,11 @@
 !classDefinition: #CheckOutTest category: 'Tus-Libros'!
 TestCase subclass: #CheckOutTest
-	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1'
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:28:05'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:35:05'!
 setUp
 
 	creditCardNumber1 _ '4182418241824182'.
@@ -16,7 +16,12 @@ setUp
 		number: creditCardNumber1
 		owner: cardOwner1
 		expiration: expirationDate1.
-	! !
+	
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
 
 !CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:26:31'!
 test01
@@ -33,30 +38,46 @@ test01
 		raise: Error - MessageNotUnderstood
 		description: Cashier cantCheckoutEmptyCartErrorDescription.! !
 
-!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:35:19'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:35:21'!
 test02
 
-	| aCashier book bookPrices cart isbn1 transaction |
-	
-	isbn1 _ '12938102398'.
-	book _ Book for: isbn1.
+	| aCashier bookPrices cart transaction |
 	
 	bookPrices _ PriceList new.
-	bookPrices set: book price: 124.
+	bookPrices set: book1 price: 124.
 	
 	aCashier _ Cashier with: bookPrices.
 	
 	cart _ ShoppingCart new.
-	cart add: 1 of: book.
+	cart add: 1 of: book1.
 	
 	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
 	
 	self assert: 124 equals: transaction total.! !
 
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:30:06'!
+test03
+
+	| aCashier bookPrices cart transaction |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: transaction total.! !
+
 
 !classDefinition: #ShoppingCartTest category: 'Tus-Libros'!
 TestCase subclass: #ShoppingCartTest
-	instanceVariableNames: 'isbnBook1 isbnBook2'
+	instanceVariableNames: 'isbnBook1 isbnBook2 book1 book2'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
@@ -68,40 +89,40 @@ assert: shoppingCart has: quantity of: item
 		anShoppingCartItem is: quantity of: item.
 	] ).! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/9/2021 00:36:01'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:27:49'!
 setUp
 	
 	isbnBook1 := 'ISBN1'.
-	isbnBook2 := 'ISBN2'.! !
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
-test01
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:29:54'!
+test01EmptyCartHasNoItems
 
 	| shoppingCart |
 	shoppingCart := ShoppingCart new.
 	
 	self assert: shoppingCart items size equals: 0. ! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
-test02
-	| shoppingCart book quantity |
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:08'!
+test02AddingAnItemToACart
+	| shoppingCart quantity |
 
 	shoppingCart := ShoppingCart new.
 	quantity := 1.
-	book := Book for: isbnBook1.
 	
-	shoppingCart add: quantity of: book.
+	shoppingCart add: quantity of: book1.
 	
 	self assert: shoppingCart items size equals: 1.
-	self assert: shoppingCart has: quantity of: book.! !
+	self assert: shoppingCart has: quantity of: book1.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
-test03
-	| shoppingCart book1 book2 |
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:31'!
+test03AddingMultipleItemsToACart
+	| shoppingCart |
 
 	shoppingCart := ShoppingCart new.
-	book1 := Book for: isbnBook1.
-	book2 := Book for: isbnBook2.
 	
 	shoppingCart add: 1 of: book1.
 	shoppingCart add: 2 of: book2.
@@ -110,44 +131,41 @@ test03
 	self assert: shoppingCart has: 1 of: book1.
 	self assert: shoppingCart has: 2 of: book2.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 19:58:51'!
-test04
-	| shoppingCart book1 |
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:02'!
+test04AddingANegativeQuantityRaisesError
+	| shoppingCart |
 
 	shoppingCart := ShoppingCart new.
-	book1 := Book for: isbnBook1.
 	
 	self  should: [ shoppingCart add: -2 of: book1. ]
 		raise: Error - MessageNotUnderstood 
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
 	! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 19:58:45'!
-test05
-	| shoppingCart book1 |
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:22'!
+test05AddingZeroQuantityRaisesError
+	| shoppingCart |
 
 	shoppingCart := ShoppingCart new.
-	book1 := Book for: isbnBook1.
 	
 	self  should: [ shoppingCart add: 0 of: book1. ]
 		raise: Error - MessageNotUnderstood 
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
 	! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:06:15'!
-test06
-	| shoppingCart book1 |
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:32:34'!
+test06AddingNonIntegerQuantityRaisesError
+	| shoppingCart |
 
 	shoppingCart := ShoppingCart new.
-	book1 := Book for: isbnBook1.
 	
 	self  should: [ shoppingCart add: 1.5 of: book1. ]
 		raise: Error - MessageNotUnderstood 
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
 	! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:16:04'!
-test07
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:33:48'!
+test07CreatingACartUpdatesItsLastUpdateTimestamp
 	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
 
 	beforeUpdateTimestamp := DateAndTime now.
@@ -157,14 +175,14 @@ test07
 	self assert: (shoppingCart lastUpdateTimeStamp 
 		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:19:05'!
-test08
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:34:13'!
+test08AddingAnItemUpdatesItsLastUpdateTimestamp
 	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
 	
 	shoppingCart := ShoppingCart new.
 		
 	beforeUpdateTimestamp := DateAndTime now.
-	shoppingCart add: 4 of: (Book for: isbnBook1).
+	shoppingCart add: 4 of: book1.
 	afterUpdateTimestamp := DateAndTime now.
 	
 	self assert: (shoppingCart lastUpdateTimeStamp 
