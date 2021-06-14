@@ -23,25 +23,29 @@ setUp
 	isbnBook2 := 'ISBN2'.
 	book2 := Book for: isbnBook2.! !
 
-!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:26:31'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 20:05:33'!
 test01
 
-	| aCashier bookPrices cart  |
+	| aCashier bookPrices cart  receiptBook |
 	
 	bookPrices _ PriceList new.
 	
-	aCashier _ Cashier with: bookPrices.
+	receiptBook _ ReceiptBook new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
 	
 	cart _ ShoppingCart new.
 	
 	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
 		raise: Error - MessageNotUnderstood
-		description: Cashier cantCheckoutEmptyCartErrorDescription.! !
+		description: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
 
-!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:35:21'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:07:14'!
 test02
 
-	| aCashier bookPrices cart transaction |
+	| aCashier bookPrices cart receipt |
 	
 	bookPrices _ PriceList new.
 	bookPrices set: book1 price: 124.
@@ -51,14 +55,14 @@ test02
 	cart _ ShoppingCart new.
 	cart add: 1 of: book1.
 	
-	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
 	
-	self assert: 124 equals: transaction total.! !
+	self assert: 124 equals: receipt total.! !
 
-!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 21:30:06'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:07:22'!
 test03
 
-	| aCashier bookPrices cart transaction |
+	| aCashier bookPrices cart receipt |
 	
 	bookPrices _ PriceList new.
 	bookPrices set: book1 price: 100.
@@ -70,9 +74,27 @@ test03
 	cart add: 1 of: book1.
 	cart add: 2 of: book2.
 	
-	transaction _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
 	
-	self assert: 150 equals: transaction total.! !
+	self assert: 150 equals: receipt total.! !
+
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:18:39'!
+test04
+
+	| aCashier bookPrices cart |
+	
+	bookPrices _ PriceList new.
+	
+	aCashier _ Cashier with: bookPrices.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	"TODO: Agregar sales book y testear que no se haya agregado la venta"! !
 
 
 !classDefinition: #ShoppingCartTest category: 'Tus-Libros'!
@@ -82,10 +104,10 @@ TestCase subclass: #ShoppingCartTest
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:02:37'!
 assert: shoppingCart has: quantity of: item
 
-	self assert: (shoppingCart items anySatisfy: [ :anShoppingCartItem | 
+	self assert: (shoppingCart entries anySatisfy: [ :anShoppingCartItem | 
 		anShoppingCartItem is: quantity of: item.
 	] ).! !
 
@@ -98,15 +120,15 @@ setUp
 	isbnBook2 := 'ISBN2'.
 	book2 := Book for: isbnBook2.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:29:54'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:02:37'!
 test01EmptyCartHasNoItems
 
 	| shoppingCart |
 	shoppingCart := ShoppingCart new.
 	
-	self assert: shoppingCart items size equals: 0. ! !
+	self assert: shoppingCart entries size equals: 0. ! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:08'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:02:37'!
 test02AddingAnItemToACart
 	| shoppingCart quantity |
 
@@ -115,10 +137,10 @@ test02AddingAnItemToACart
 	
 	shoppingCart add: quantity of: book1.
 	
-	self assert: shoppingCart items size equals: 1.
+	self assert: shoppingCart entries size equals: 1.
 	self assert: shoppingCart has: quantity of: book1.! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:31:31'!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:02:37'!
 test03AddingMultipleItemsToACart
 	| shoppingCart |
 
@@ -127,7 +149,7 @@ test03AddingMultipleItemsToACart
 	shoppingCart add: 1 of: book1.
 	shoppingCart add: 2 of: book2.
 	
-	self assert: shoppingCart items size equals: 2.
+	self assert: shoppingCart entries size equals: 2.
 	self assert: shoppingCart has: 1 of: book1.
 	self assert: shoppingCart has: 2 of: book2.! !
 
@@ -164,30 +186,6 @@ test06AddingNonIntegerQuantityRaisesError
 		description: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
 	! !
 
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:33:48'!
-test07CreatingACartUpdatesItsLastUpdateTimestamp
-	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
-
-	beforeUpdateTimestamp := DateAndTime now.
-	shoppingCart := ShoppingCart new.
-	afterUpdateTimestamp := DateAndTime now.
-	
-	self assert: (shoppingCart lastUpdateTimeStamp 
-		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
-
-!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 20:34:13'!
-test08AddingAnItemUpdatesItsLastUpdateTimestamp
-	| shoppingCart afterUpdateTimestamp beforeUpdateTimestamp |
-	
-	shoppingCart := ShoppingCart new.
-		
-	beforeUpdateTimestamp := DateAndTime now.
-	shoppingCart add: 4 of: book1.
-	afterUpdateTimestamp := DateAndTime now.
-	
-	self assert: (shoppingCart lastUpdateTimeStamp 
-		between: beforeUpdateTimestamp and: afterUpdateTimestamp).! !
-
 
 !classDefinition: #Book category: 'Tus-Libros'!
 Object subclass: #Book
@@ -215,7 +213,7 @@ for: anIsbnString
 
 !classDefinition: #Cashier category: 'Tus-Libros'!
 Object subclass: #Cashier
-	instanceVariableNames: 'priceList'
+	instanceVariableNames: 'priceList receiptBook'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
@@ -225,16 +223,46 @@ initializeWith: aPriceList
 	
 	priceList := aPriceList.! !
 
+!Cashier methodsFor: 'initialization' stamp: 'nz 6/14/2021 20:06:28'!
+initializeWith: aPriceList and: aReceiptBook 
+	
+	priceList := aPriceList.
+	receiptBook := aReceiptBook.! !
 
-!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:30:27'!
+areAllItemsInPriceList: aCollectionOfShoppingCartEntries
+
+	^ aCollectionOfShoppingCartEntries allSatisfy: [ :entry | priceList hasPriceFor: entry item ]! !
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:30:27'!
+assertAllItemsInPriceList: aCollectionOfShoppingCartEntries
+
+	(self areAllItemsInPriceList: aCollectionOfShoppingCartEntries)
+		ifFalse: [ self error: self class cantCheckoutItemWithNoPriceForItErrorDescription ]
+	
+	! !
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:53:49'!
 checkOut: aShoppingCart payingWith: aCreditCard 
 
-	aShoppingCart items ifEmpty: [
+	| total |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
 		^self error: self class cantCheckoutEmptyCartErrorDescription .
 	].
 
-	^Transaction new.
+	^Receipt withTotal: total.
 	! !
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 18:55:26'!
+priceFor: aShoppingCartEntry
+	
+	^(priceList priceFor: aShoppingCartEntry item) * (aShoppingCartEntry quantity).! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -247,10 +275,18 @@ with: aPriceList
 	
 	^self new initializeWith: aPriceList ! !
 
+!Cashier class methodsFor: 'instance creation' stamp: 'nz 6/14/2021 20:06:15'!
+with: aPriceList and: aReceiptBook 
+	^self new initializeWith: aPriceList and: aReceiptBook ! !
+
 
 !Cashier class methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:21:44'!
 cantCheckoutEmptyCartErrorDescription
 	^'Cannot checkout an empty shopping cart!!'.! !
+
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:17:37'!
+cantCheckoutItemWithNoPriceForItErrorDescription
+	^'Cant checkout item with no price for it!!'.! !
 
 
 !classDefinition: #CreditCard category: 'Tus-Libros'!
@@ -281,30 +317,85 @@ number: aCreditCardNumber owner: anOwnerName expiration: anExpirationMonthOfYear
 
 !classDefinition: #PriceList category: 'Tus-Libros'!
 Object subclass: #PriceList
+	instanceVariableNames: 'prices'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:29:04'!
+hasPriceFor: aBook 
+	
+	^prices includesKey: aBook.! !
+
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 18:59:05'!
+initialize
+
+	prices _ Dictionary new.! !
+
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:00:48'!
+priceFor: aBook 
+	
+	^prices at: aBook.! !
+
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 18:59:21'!
+set: aBook price: aPrice 
+	prices at: aBook put: aPrice.! !
+
+
+!classDefinition: #Receipt category: 'Tus-Libros'!
+Object subclass: #Receipt
+	instanceVariableNames: 'total'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!Receipt methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 18:49:08'!
+total
+	^total.! !
+
+
+!Receipt methodsFor: 'initialization' stamp: 'nz 6/14/2021 18:48:47'!
+initializeWithTotal: aTransactionTotal 
+	
+	total := aTransactionTotal.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Receipt class' category: 'Tus-Libros'!
+Receipt class
+	instanceVariableNames: ''!
+
+!Receipt class methodsFor: 'instance creation' stamp: 'nz 6/14/2021 18:48:27'!
+withTotal: aTransactionTotal 
+
+	^self new initializeWithTotal: aTransactionTotal ! !
+
+
+!classDefinition: #ReceiptBook category: 'Tus-Libros'!
+Object subclass: #ReceiptBook
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:32:24'!
-set: aBook price: aPrice 
-	! !
+!ReceiptBook methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 20:07:59'!
+isEmpty
+	^true.! !
 
 
 !classDefinition: #ShoppingCart category: 'Tus-Libros'!
 Object subclass: #ShoppingCart
-	instanceVariableNames: 'items lastUpdate'
+	instanceVariableNames: 'entries lastUpdate'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:21:01'!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:42:41'!
 add: aQuantity of: anItem 
 
 	self assertQuantityIsValid: aQuantity.
 	
-	items add: (ShoppingCartItem for: anItem quantity: aQuantity).
-	self updateTimestamp.! !
+	entries add: (ShoppingCartEntry for: anItem quantity: aQuantity).! !
 
 !ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:09:49'!
 assertQuantityIsValid: aQuantity
@@ -315,25 +406,14 @@ assertQuantityIsValid: aQuantity
 	aQuantity isInteger
 		ifFalse: [ self error: self class itemQuantyMustBeAnIntegerErrorDescription ]! !
 
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:20:43'!
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:02:37'!
+entries
+	^entries.! !
+
+!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'nz 6/14/2021 19:42:36'!
 initialize
 
-	items := OrderedCollection new.
-	self updateTimestamp.! !
-
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:10:12'!
-items
-	^items.! !
-
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:17:01'!
-lastUpdateTimeStamp
-	
-	^lastUpdate! !
-
-!ShoppingCart methodsFor: 'as yet unclassified' stamp: 'AW 6/10/2021 20:20:43'!
-updateTimestamp
-
-	^ lastUpdate := DateAndTime now! !
+	entries := OrderedCollection new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -351,54 +431,42 @@ itemQuantyMustBeAnIntegerErrorDescription
 	^'Quanty must be an integer!!'! !
 
 
-!classDefinition: #ShoppingCartItem category: 'Tus-Libros'!
-Object subclass: #ShoppingCartItem
+!classDefinition: #ShoppingCartEntry category: 'Tus-Libros'!
+Object subclass: #ShoppingCartEntry
 	instanceVariableNames: 'item quantity'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!ShoppingCartItem methodsFor: 'initialization' stamp: 'AW 6/9/2021 00:31:25'!
+!ShoppingCartEntry methodsFor: 'initialization' stamp: 'AW 6/9/2021 00:31:25'!
 initializeFor: anItem quantity: aQuantity 
 	
 	item := anItem.
 	quantity := aQuantity.! !
 
 
-!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:01'!
+!ShoppingCartEntry methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:01'!
 item
 	
 	^item! !
 
-!ShoppingCartItem methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:11'!
+!ShoppingCartEntry methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:11'!
 quantity
 	
 	^quantity! !
 
 
-!ShoppingCartItem methodsFor: 'testing' stamp: 'AW 6/9/2021 00:54:31'!
+!ShoppingCartEntry methodsFor: 'testing' stamp: 'AW 6/9/2021 00:54:31'!
 is: aQuantity of: anItem 
 	^(item = anItem) and: [ quantity = aQuantity ].! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'ShoppingCartItem class' category: 'Tus-Libros'!
-ShoppingCartItem class
+!classDefinition: 'ShoppingCartEntry class' category: 'Tus-Libros'!
+ShoppingCartEntry class
 	instanceVariableNames: ''!
 
-!ShoppingCartItem class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:31:03'!
+!ShoppingCartEntry class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:31:03'!
 for: anItem quantity: aQuantity 
 
 	^self new initializeFor: anItem quantity: aQuantity ! !
-
-
-!classDefinition: #Transaction category: 'Tus-Libros'!
-Object subclass: #Transaction
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Tus-Libros'!
-
-!Transaction methodsFor: 'as yet unclassified' stamp: 'nz 6/10/2021 00:34:26'!
-total
-	^124.! !
