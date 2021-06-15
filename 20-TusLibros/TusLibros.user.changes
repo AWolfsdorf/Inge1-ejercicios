@@ -3546,3 +3546,2069 @@ PASSED!
 PASSED!
 
 ----QUIT----(14 June 2021 20:08:13) TusLibros.image priorSource: 86915!
+
+----STARTUP---- (14 June 2021 21:44:14) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+
+!methodRemoval: Cashier class #with: stamp: 'AW 6/14/2021 21:47:06'!
+with: aPriceList 
+	
+	^self new initializeWith: aPriceList !
+
+!methodRemoval: Cashier #initializeWith: stamp: 'AW 6/14/2021 21:47:27'!
+initializeWith: aPriceList 
+	
+	priceList := aPriceList.!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 21:47:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:47:37'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 21:47:37'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 21:47:37'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:47:40'!
+ERROR!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:48:13' prior: 50334874!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ ReceiptBook new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: receipt total.! !
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:48:16'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:51:43' prior: 50335313!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: receipt total.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:52:02' prior: 50335200!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		description: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!classRemoval: #ReceiptBook stamp: 'AW 6/14/2021 21:52:11'!
+Object subclass: #ReceiptBook
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:54:18' prior: 50335331!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: receipt.! !
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:54:20'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:55:25' prior: 50335171!
+checkOut: aShoppingCart payingWith: aCreditCard 
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:55:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 21:55:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 21:55:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 21:55:29'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 21:55:29'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 21:55:31'!
+ERROR!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:56:49' prior: 50334826!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: receipt total.
+	
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: receipt.
+	! !
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 21:56:54'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:58:02'!
+assert: receipt isTheOnlyReceiptIn: receiptBook
+
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: receipt! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:58:03' prior: 50335370!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyReceiptIn: receiptBook.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:58:35'!
+assert: receipt isTheOnlyIn: receiptBook
+
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: receipt! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:58:36' prior: 50335450!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.! !
+
+!methodRemoval: CheckOutTest #assert:isTheOnlyReceiptIn: stamp: 'AW 6/14/2021 21:58:36'!
+assert: receipt isTheOnlyReceiptIn: receiptBook
+
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: receipt!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:58:51' prior: 50335467!
+assert: item isTheOnlyIn: receiptBook
+
+	self assert: receiptBook size equals: 1.
+	self assert: receiptBook includes: item! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:59:05' prior: 50335499!
+assert: item isTheOnlyIn: collection
+
+	self assert: collection size equals: 1.
+	self assert: collection includes: item! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:59:10' prior: 50335506!
+assert: item isTheOnlyIn: aCollection
+
+	self assert: aCollection size equals: 1.
+	self assert: aCollection includes: item! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:59:15' prior: 50335513!
+assert: anItem isTheOnlyIn: aCollection
+
+	self assert: aCollection size equals: 1.
+	self assert: aCollection includes: anItem! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 21:59:55' prior: 50335420!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 .
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:01:03' prior: 50334987!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:01:07'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:01:07'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:01:07'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:01:07'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:01:07'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:04:36' prior: 50335547!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:04:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:04:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:04:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:04:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:04:37'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:04:42' prior: 50335576!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:04:48' prior: 50335604!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier scheckOut: cart payingWith: validCreditCard1. ]
+		raise: Error 
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:04:50'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:05:04' prior: 50335622!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:05:55' prior: 50335347!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:06:02'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:06:02'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:06:02'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:06:02'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:06:02'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:06:29' prior: 50334052!
+test04AddingANegativeQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: -2 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:06:35' prior: 50334073!
+test05AddingZeroQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 0 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription.
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:06:40' prior: 50334094!
+test06AddingNonIntegerQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: ShoppingCart itemQuantityMustBeGreaterThanZeroErrorDescription .
+	! !
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/14/2021 22:06:41'!
+FAILURE!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/14/2021 22:07:30'!
+FAILURE!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:08:20' prior: 50335711!
+test06AddingNonIntegerQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: ShoppingCart itemQuantyMustBeAnIntegerErrorDescription .
+	! !
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:08:22' prior: 50335730!
+test06AddingNonIntegerQuantityRaisesError
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	self  should: [ shoppingCart add: 1.5 of: book1. ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: ShoppingCart itemQuantyMustBeAnIntegerErrorDescription.
+	! !
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/14/2021 22:08:22'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:09:26'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:09:23' prior: 50335641!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:09:41' prior: 50335787!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:09:51'!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:10:18' prior: 50335822!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:10:26'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'AW 6/14/2021 22:10:45'!
+cantCheckWithExpiredCardErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'errors' stamp: 'AW 6/14/2021 22:11:12' prior: 50335859!
+cantCheckWithExpiredCardErrorDescription
+	^'The card is expired!!'! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:11:16'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:11:57' prior: 50335840!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:11:58'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:14:52'!
+checkOut: aShoppingCart payingWith: aCreditCard on: aDate
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aDate.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!methodRemoval: Cashier #checkOut:payingWith:on: stamp: 'AW 6/14/2021 22:15:14'!
+checkOut: aShoppingCart payingWith: aCreditCard on: aDate
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aDate.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	!
+
+DateAndTime now.!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50'!
+checkOut: aShoppingCart payingWith: aCreditCard on: aDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50' prior: 50335659!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1 on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50' prior: 50335872!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50' prior: 50335528!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 on: DateAndTime now .
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50' prior: 50335805!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard1 on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:16:50' prior: 50335475!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard1 on: DateAndTime now .
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.! !
+
+!methodRemoval: Cashier #checkOut:payingWith: stamp: 'AW 6/14/2021 22:16:50'!
+checkOut: aShoppingCart payingWith: aCreditCard 
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:18:55'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:18:59'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:20:28' prior: 50335925!
+checkOut: aShoppingCart payingWith: aCreditCard on: aDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aDate.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:20:30'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:20:30'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:20:30'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:20:30'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:20:30'!
+ERROR!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:20:34'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:20:43'!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:20:51' prior: 50336080!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	
+	^true.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:20:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:20:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:20:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:20:57'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:22:13' prior: 50336086!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	
+	^aCreditCard isNotNil.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:22:14'!
+ERROR!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:22:30'!
+ERROR!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:24:56'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard today'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:24:59'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard today expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:24:53' prior: 50334238 overrides: 16927572!
+setUp
+
+	today _ DateAndTime now.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ today - 1 * month. 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:25:04' prior: 50336133 overrides: 16927572!
+setUp
+
+	today _ DateAndTime now.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ today - (1 * month). 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+DateAndTime now - (1 * month )!
+
+1 * month!
+
+1 * month!
+
+DateAndTime now!
+
+GregorianDateTime now!
+
+self - (1*month)!
+
+self previous: (1*month)!
+
+self previous: (month)!
+
+self next!
+
+self next: GregorianMonth !
+
+timeOfDay timeFromMidnight!
+
+GregorianDateTime now - (GregorianDateTime now)!
+
+GregorianDateTime now - (GregorianDateTime now milliSeconds)!
+
+GregorianDateTime now next: (TimeUnits minute with: 1)!
+
+GregorianDateTime now next: (1 * minute )!
+
+GregorianDateTime now next: (1 * minute) !
+
+GregorianDateTime now next: (1 * month)!
+
+GregorianDateTime now next: (10 * day) !
+
+GregorianMonthOfYear current !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:38:01' prior: 50336155 overrides: 16927572!
+setUp
+
+	today _ GregorianMonthOfYear current.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ today - (1 * month). 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:38:23' prior: 50336196 overrides: 16927572!
+setUp
+
+	today _ GregorianMonthOfYear current.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ today - (1 * month). 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:38:29'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 expirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:38:29' prior: 50336218 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ GregorianMonthOfYear mayOf: (GregorianYear number: 2030).
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ currentMonth - (1 * month). 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+currentMonth!
+
+currentMonth _ GregorianMonthOfYear current.
+currentMonth!
+
+currentMonth _ GregorianMonthOfYear current.
+currentMonth next.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:05' prior: 50336252 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	creditCardNumber1 _ '4182418241824182'.
+	expirationDate1 _ currentMonth next.
+	cardOwner1 _ 'PEPE SANCHEZ'.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:19' prior: 50336279 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	expirationDate1 _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber1 _ '4182418241824182'.
+	cardOwner1 _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:40:38'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 validExpirationDate1 cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:38' prior: 50336301 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationDate1 _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber1 _ '4182418241824182'.
+	cardOwner1 _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: validExpirationDate1.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:40:49'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber1 validExpirationDate cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:49' prior: 50336334 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationDate _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber1 _ '4182418241824182'.
+	cardOwner1 _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: validExpirationDate.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber1
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:40:53'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationDate cardOwner1 validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:53' prior: 50336367 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationDate _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner1 _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner1
+		expiration: validExpirationDate.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner1
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:40:57'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationDate cardOwner validCreditCard1 isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:40:57' prior: 50336400 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationDate _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard1 _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationDate.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:41:04'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationDate cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:41:04' prior: 50336433 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationDate _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationDate.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:41:04' prior: 50336014!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: DateAndTime now .
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:41:04' prior: 50335996!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:41:04' prior: 50335940!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:41:04' prior: 50335976!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: DateAndTime now .
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:41:11'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:41:11'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:41:11'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:41:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:41:11'!
+ERROR!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:42:30'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonth cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:42:30' prior: 50336466 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonth _ currentMonth next.
+	expiredExpirationDate _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonth.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationDate.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:42:36'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonth cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:42:36' prior: 50336583 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonth _ currentMonth next.
+	expiredExpirationMonth _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonth.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:43:11'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonthOfYear cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:43:11' prior: 50336616 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonth _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:43:17'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonthOfYear cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:43:17' prior: 50336649 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:43:40' prior: 50336683 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:43:44' prior: 50336706 overrides: 16927572!
+setUp
+
+	currentMonth _ GregorianMonthOfYear current.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:44:09'!
+ERROR!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:44:09'!
+ERROR!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:44:19'!
+ERROR!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:44:26' prior: 50335957!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard on: DateAndTime now. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:44:26'!
+ERROR!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:44:33'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:45:28' prior: 50336100!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	
+	^aCreditCard isExpiredOn: aDateAndTime.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:46:39' prior: 50336781!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	
+	^aCreditCard isExpiredOn: aDateAndTime.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:47:43' prior: 50336787!
+assertCardIsValid: aCreditCard on: aDateAndTime 
+	
+	(aCreditCard isExpiredOn: aDateAndTime) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	]! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:47:48'!
+ERROR!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:47:58'!
+isExpiredOn: aDateAndTime 
+	self shouldBeImplemented.! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:50:25' prior: 50336804!
+isExpiredOn: aDateAndTime 
+	
+	expiration < aDateAndTime.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:50:27'!
+ERROR!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:51:25'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonthOfYear cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonthOfYear today'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:51:22' prior: 50336523!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:51:58' prior: 50336728 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:52:06'!
+FAILURE!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:52:06'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:52:06'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:52:06'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:52:06'!
+ERROR!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:52:18' prior: 50336487!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:52:28' prior: 50336540!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:52:31' prior: 50336898!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:52:38' prior: 50336505!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:52:47' prior: 50336757!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:52:48'!
+FAILURE!
+
+expiration < aDateAndTime.!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:54:45' prior: 50336809!
+isExpiredOn: aDateAndTime 
+	
+	^expiration < aDateAndTime.! !
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:54:46'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:54:46'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:54:46'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:54:46'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:54:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:54:47'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:55:32'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber validExpirationMonthOfYear cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonthOfYear today expiredThisMonthCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:55:31'!
+test06
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier with: bookPrices and: receiptBook.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredThisMonthCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:55:59' prior: 50336847 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth .
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:56:00' prior: 50337027 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	validExpirationMonthOfYear _ currentMonth next.
+	expiredExpirationMonthOfYear _ currentMonth previous. 
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: validExpirationMonthOfYear.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: expiredExpirationMonthOfYear.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:56:27' prior: 50337054 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:56:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:56:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:56:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:56:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:56:29'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:56:29'!
+FAILURE!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:56:29'!
+FAILURE!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:57:21'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth expiredExpirationMonthOfYear today expiredThisMonthCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'AW 6/14/2021 22:57:21'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:57:32'!
+FAILURE!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:57:32'!
+FAILURE!
+
+!testRun: #CheckOutTest #test01 stamp: 'AW 6/14/2021 22:58:03'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'AW 6/14/2021 22:58:03'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'AW 6/14/2021 22:58:03'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'AW 6/14/2021 22:58:03'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'AW 6/14/2021 22:58:03'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:58:03'!
+FAILURE!
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 22:58:03'!
+FAILURE!
+
+expiration < aDateAndTime!
+
+expiration <= aDateAndTime!
+
+expiration = aDateAndTime!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:59:25' prior: 50336976!
+isExpiredOn: aDateAndTime 
+	
+	^expiration < aDateAndTime or: [ expiration = aDateAndTime monthOfYear ].! !
+
+expiration = aDateAndTime monthOfYear!
+
+expiration < aDateAndTime!
+
+expiration < aDateAndTime or: [ expiration = aDateAndTime monthOfYear ].!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 22:59:45' prior: 50337166!
+isExpiredOn: aDateAndTime 
+	
+	^expiration < aDateAndTime or: [ expiration = aDateAndTime monthOfYear ].! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:00:17' prior: 50337177!
+isExpiredOn: aDateAndTime 
+	
+	^expiration < aDateAndTime or: [ expiration = aDateAndTime monthOfYear ].! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:00:40' prior: 50337184!
+isExpiredOn: aDateAndTime 
+	
+	^expiration <= aDateAndTime monthOfYear.! !
+
+expiration <= aDateAndTime monthOfYear.!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:01:26' prior: 50337191!
+isExpiredOn: aFixedGregorianDate 
+	
+	^expiration <= aFixedGregorianDate monthOfYear.! !
+
+!testRun: #CheckOutTest #test06 stamp: 'AW 6/14/2021 23:01:27'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:03:18' prior: 50336050!
+checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		^self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:03:42' prior: 50337198!
+isExpiredOn: aGregorianDate 
+	
+	^expiration <= aGregorianDate monthOfYear.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AW 6/14/2021 23:03:54' prior: 50336793!
+assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	]! !
+
+----QUIT----(14 June 2021 23:06:46) TusLibros.image priorSource: 116351!
