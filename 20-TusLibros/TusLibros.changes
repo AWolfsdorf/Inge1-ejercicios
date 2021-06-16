@@ -7304,3 +7304,3166 @@ PASSED!
 PASSED!
 
 ----QUIT----(15 June 2021 23:31:28) TusLibros.image priorSource: 178771!
+
+----STARTUP---- (15 June 2021 23:34:16) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:37:52' prior: 50338248!
+                     checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.
+	
+	total _ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		self error: self class cantCheckoutEmptyCartErrorDescription .
+	].
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:37:54'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:38:43'!
+                  getShoppingCartTotal: aShoppingCart
+
+	^ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		self error: self class cantCheckoutEmptyCartErrorDescription .
+	]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:38:43' prior: 50338973!
+          checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:38:47'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:39:49' prior: 50339021!
+         checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:40:21'!
+          assertIsValid: aGregorianDate m2: aCreditCard m3: aShoppingCart
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:40:21' prior: 50339057!
+                 checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertIsValid: aGregorianDate m2: aCreditCard m3: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:40:59'!
+                    m3: aShoppingCart m2: aCreditCard assertIsValid: aGregorianDate
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:40:59' prior: 50339081!
+                 checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self m3: aGregorianDate m2: aCreditCard assertIsValid: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!methodRemoval: Cashier #assertIsValid:m2:m3: stamp: 'nz 6/15/2021 23:40:59'!
+assertIsValid: aGregorianDate m2: aCreditCard m3: aShoppingCart
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:42:16'!
+                   assertCanCheckout: aShoppingCart payingWith: aCreditCard on: aGregorianDate
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:42:16' prior: 50339104!
+     checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertCanCheckout: aGregorianDate payingWith: aCreditCard on: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	Receipt withTotal: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+
+!methodRemoval: Cashier #m3:m2:assertIsValid: stamp: 'nz 6/15/2021 23:42:16'!
+m3: aShoppingCart m2: aCreditCard assertIsValid: aGregorianDate
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:42:28' prior: 50339126!
+                       assertCanCheckout: aShoppingCart payingWith: aCreditCard on: aGregorianDate
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:43:56'!
+                    createReceiptWith: total
+
+	^ Receipt withTotal: total! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:43:56' prior: 50339135!
+            checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertCanCheckout: aGregorianDate payingWith: aCreditCard on: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	self createReceiptWith: total.
+	
+	receiptBook add: receipt.
+	
+	^receipt.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:44:00' prior: 50339172!
+                   checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertCanCheckout: aGregorianDate payingWith: aCreditCard on: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	self createReceiptWith: total.
+	
+	
+	^receipt.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:44:36' prior: 50339167!
+              createReceiptWith: total
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: total.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:44:44' prior: 50339201!
+           createReceiptWith: aTotalAmount
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: aTotalAmount.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:45:10' prior: 50339208!
+                             createReceiptWith: aTotalAmount
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: aTotalAmount.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:45:17'!
+             createReceiptWithTotal: aTotalAmount
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: aTotalAmount.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:45:17' prior: 50339187!
+                        checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total receipt |
+
+	self assertCanCheckout: aGregorianDate payingWith: aCreditCard on: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	receipt _ 	self createReceiptWithTotal: total.
+	
+	
+	^receipt.
+	! !
+
+!methodRemoval: Cashier #createReceiptWith: stamp: 'nz 6/15/2021 23:45:17'!
+createReceiptWith: aTotalAmount
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: aTotalAmount.
+	receiptBook add: receipt.
+	
+	^receipt .!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:45:29' prior: 50339223!
+                      createReceiptWithTotal: anAmountOfMoney
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: anAmountOfMoney.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:45:51' prior: 50339231!
+                  checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total |
+
+	self assertCanCheckout: aGregorianDate payingWith: aCreditCard on: aShoppingCart.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	^ self createReceiptWithTotal: total.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:46:35' prior: 50339260!
+         checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total |
+
+	self assertCanCheckout: aShoppingCart payingWith: aCreditCard on: aGregorianDate.
+	
+	total _ self getShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	^ self createReceiptWithTotal: total.
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:47:15'!
+                         calculateShoppingCartTotal: aShoppingCart
+
+	^ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		self error: self class cantCheckoutEmptyCartErrorDescription .
+	]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:47:15' prior: 50339273!
+    checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate  
+
+	| total |
+
+	self assertCanCheckout: aShoppingCart payingWith: aCreditCard on: aGregorianDate.
+	
+	total _ self calculateShoppingCartTotal: aShoppingCart.
+
+	merchantProcessor debit: total from: aCreditCard. 
+
+	^ self createReceiptWithTotal: total.
+	! !
+
+!methodRemoval: Cashier #getShoppingCartTotal: stamp: 'nz 6/15/2021 23:47:15'!
+getShoppingCartTotal: aShoppingCart
+
+	^ aShoppingCart entries sum: [ :entry |
+		self priceFor: entry.
+	] ifEmpty: [
+		self error: self class cantCheckoutEmptyCartErrorDescription .
+	]!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:47:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:49:27'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/15/2021 23:51:09'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:51:07'!
+                 test10
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysWithoutCreditCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor insufficientFundsCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:51:28' prior: 50338840 overrides: 16927572!
+                          setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/15/2021 23:51:49'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:51:46' prior: 50339397 overrides: 16927572!
+  setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:52:00' prior: 50339451 overrides: 16927572!
+       setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:52:10'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:52:10'!
+FAILURE!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:52:10'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:54:36' prior: 50339374!
+               test10
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysWithoutCreditCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:54:47'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'nz 6/15/2021 23:54:58'!
+                invalidCreditCardNumberErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'errors' stamp: 'nz 6/15/2021 23:55:55' prior: 50339575!
+      invalidCreditCardNumberErrorDescription
+	^'The credit card number is invalid!!'.! !
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:56:19'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:57:37' prior: 50339552!
+  test10
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:57:38'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:57:59' prior: 50339489 overrides: 16927572!
+             setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:58:03'!
+FAILURE!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/15/2021 23:58:19' prior: 50339612 overrides: 16927572!
+             setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/15/2021 23:58:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:58:22'!
+FAILURE!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/15/2021 23:58:22'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:01:42' prior: 50337229!
+               assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	].
+	(aCreditCard number == '418241') ifTrue: [
+		self error: self class invalidCreditCardNumberErrorDescription .	
+	].! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:01:43' prior: 50339716!
+                            assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	].
+	(aCreditCard number == '418241') ifTrue: [
+		self error: self class invalidCreditCardNumberErrorDescription.	
+	].! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:01:46' prior: 50339729!
+                             assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	].
+	(aCreditCard number = '418241') ifTrue: [
+		self error: self class invalidCreditCardNumberErrorDescription.	
+	].! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:01:49'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:01:49'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:01:49'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:01:49'!
+ERROR!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:01:55'!
+ERROR!
+!CreditCard methodsFor: 'accessing' stamp: 'nz 6/16/2021 00:02:01'!
+                          number
+	self shouldBeImplemented.
+	^number! !
+!CreditCard methodsFor: 'accessing' stamp: 'nz 6/16/2021 00:02:03' prior: 50339779!
+                              number
+	^number! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:02:06'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:02:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:02:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:02:12'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:02:12'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:02:12'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:02:12'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:12:02' prior: 50339158!
+                   assertCanCheckout: aShoppingCart payingWith: aCreditCard on: aGregorianDate
+
+	self assertAllItemsInPriceList: aShoppingCart entries.
+	self assertCardIsValid: aCreditCard on: aGregorianDate.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:13:49' prior: 50339742!
+    assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	].
+	aCreditCard hasValidNumber ifFalse: [
+		self error: self class invalidCreditCardNumberErrorDescription.	
+	].! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:13:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:13:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:13:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:13:56'!
+ERROR!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:14:01'!
+ERROR!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:14:08'!
+                    hasValidNumber
+	self shouldBeImplemented.! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:15:02' prior: 50339850!
+                     hasValidNumber
+	^number ~= '418241'.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:15:22'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:15:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:15:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:15:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:15:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:15:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:15:25'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 00:16:45'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber invalidNumberCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:16:43'!
+      test11
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard2 on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:17:12' prior: 50339653 overrides: 16927572!
+                      setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:17:25'!
+FAILURE!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:17:53' prior: 50339855!
+                     hasValidNumber
+	^number size = 16.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:17:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:17:58'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 00:20:02'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber invalidNumberCreditCard2 emptyOwnerCreditCard'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:19:59'!
+   test12
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:20:33' prior: 50339915 overrides: 16927572!
+                       setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:20:45'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'nz 6/16/2021 00:20:55'!
+      invalidCreditCardOwnerNameErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'errors' stamp: 'nz 6/16/2021 00:21:09' prior: 50340104!
+   invalidCreditCardOwnerNameErrorDescription
+	^'Invalid credit card owner name!!'.! !
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:21:12'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:21:41' prior: 50339813!
+       assertCardIsValid: aCreditCard on: aGregorianDate 
+	
+	(aCreditCard isExpiredOn: aGregorianDate) ifTrue: [
+		self error: self class cantCheckWithExpiredCardErrorDescription.	
+	].
+	aCreditCard hasValidNumber ifFalse: [
+		self error: self class invalidCreditCardNumberErrorDescription.	
+	].
+	aCreditCard hasValidOwnerName ifFalse: [
+		self error: self class invalidCreditCardOwnerNameErrorDescription.	
+	].! !
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:21:44'!
+ERROR!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:21:54'!
+                   hasValidOwnerName
+	self shouldBeImplemented.! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:22:49' prior: 50340135!
+                  hasValidOwnerName
+	^owner isEmpty negated.! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:23:00' prior: 50340140!
+                    hasValidOwnerName
+	^owner isEmpty negated.! !
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:23:03'!
+ERROR!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:23:19' prior: 50340145!
+            hasValidOwnerName
+	^owner isEmpty not.! !
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:23:20'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 00:24:00'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard isbnBook1 book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber invalidNumberCreditCard2 emptyOwnerCreditCard emptyOwnerCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:23:57'!
+   test13
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard2 on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:24:17' prior: 50340057 overrides: 16927572!
+                      setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:24:26'!
+FAILURE!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:24:47' prior: 50340152!
+               hasValidOwnerName
+	owner
+	^owner isEmpty not.! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:32:49' prior: 50340279!
+                 hasValidOwnerName
+	^owner withBlanksTrimmed isEmpty not.! !
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:33:04'!
+PASSED!
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:34:14'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:34:27' prior: 50340227 overrides: 16927572!
+                    setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ '     P    '.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:34:28'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:34:31' prior: 50340354 overrides: 16927572!
+                setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	invalidCreditCardNumber _ '418241'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: invalidCreditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test02 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test03 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test04 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test05 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test06 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test07 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test08 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test09 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test10 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test11 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test12 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+
+!testRun: #CheckOutTest #test13 stamp: 'nz 6/16/2021 00:34:32'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:38:09' prior: 50340434 overrides: 16927572!
+              setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: '418241'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	isbnBook1 := 'ISBN1'.
+	book1 := Book for: isbnBook1.
+	
+	isbnBook2 := 'ISBN2'.
+	book2 := Book for: isbnBook2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:39:52'!
+                           test01CheckoutEmptyCartRaisesError
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test01 stamp: 'nz 6/16/2021 00:39:55'!
+test01
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:40:57'!
+          test02CheckoutACartWithOneItem
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.! !
+
+!methodRemoval: CheckOutTest #test02 stamp: 'nz 6/16/2021 00:40:59'!
+test02
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 124.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 124 equals: receipt total.
+	
+	self assert: receipt isTheOnlyIn: receiptBook.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:41:14'!
+                            test03CheckoutACartWithMultipleItems
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	! !
+
+!methodRemoval: CheckOutTest #test03 stamp: 'nz 6/16/2021 00:41:17'!
+test03
+
+	| aCashier bookPrices cart receipt receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 100.
+	bookPrices set: book2 price: 25.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 1 of: book1.
+	cart add: 2 of: book2.
+	
+	receipt _ aCashier checkOut: cart payingWith: validCreditCard on: today.
+	
+	self assert: 150 equals: receipt total.
+
+	self assert: receipt isTheOnlyIn: receiptBook.
+	!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:42:03'!
+test04CheckoutItemWithoutPricesShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test04 stamp: 'nz 6/16/2021 00:42:05'!
+test04
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutItemWithNoPriceForItErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:42:38'!
+                               test05CheckoutWithExpiredCardShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test05 stamp: 'nz 6/16/2021 00:42:41'!
+test05
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:45:20'!
+   test06CheckoutWithCardExpiredThisMonthShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredThisMonthCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test06 stamp: 'nz 6/16/2021 00:45:29'!
+test06
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysStolenCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: expiredThisMonthCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckWithExpiredCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:46:34'!
+  test07CheckoutWithStolenCardRaisesError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysStolenCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor stolenCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test07 stamp: 'nz 6/16/2021 00:46:36'!
+test07
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysStolenCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor stolenCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:46:43'!
+                           test07CheckoutWithStolenCardShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysStolenCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor stolenCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:46:51'!
+                  test01CheckoutEmptyCartShouldRaiseError
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test01CheckoutEmptyCartRaisesError stamp: 'nz 6/16/2021 00:46:54'!
+test01CheckoutEmptyCartRaisesError
+
+	| aCashier bookPrices cart  receiptBook |
+	
+	bookPrices _ PriceList new.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor .
+	
+	cart _ ShoppingCart new.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+
+!methodRemoval: CheckOutTest #test07CheckoutWithStolenCardRaisesError stamp: 'nz 6/16/2021 00:46:59'!
+test07CheckoutWithStolenCardRaisesError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysStolenCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor stolenCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:47:14'!
+               test08ChackoutWithFakeCardShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysFakeCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor fakeCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test08 stamp: 'nz 6/16/2021 00:47:16'!
+test08
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysFakeCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor fakeCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:47:36'!
+test09CheckoutWithInsufficientFundsShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysWithoutCreditCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor insufficientFundsCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test09 stamp: 'nz 6/16/2021 00:47:38'!
+test09
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysWithoutCreditCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor insufficientFundsCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:47:45'!
+           test08CheckoutWithFakeCardShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysFakeCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor fakeCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test08ChackoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 00:47:45'!
+test08ChackoutWithFakeCardShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysFakeCardMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: validCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: MerchantProcessor fakeCreditCardErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+
+!methodRemoval: CheckOutTest #test11 stamp: 'nz 6/16/2021 00:48:07'!
+test11
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard2 on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:48:37'!
+                              test10CheckoutWithInvalidCardNumberShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test10 stamp: 'nz 6/16/2021 00:48:38'!
+test10
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: invalidNumberCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:50:15'!
+                     test11CheckoutWithEmptyCardOwnerNameShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test12 stamp: 'nz 6/16/2021 00:50:21'!
+test12
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:50:50'!
+                    test12CheckoutWithBlankCardOwnerNameShouldRaiseError
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard2 on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.! !
+
+!methodRemoval: CheckOutTest #test13 stamp: 'nz 6/16/2021 00:50:52'!
+test13
+
+	| aCashier bookPrices cart receiptBook |
+	
+	bookPrices _ PriceList new.
+	bookPrices set: book1 price: 50.
+	
+	receiptBook _ OrderedCollection new.
+	
+	aCashier _ Cashier withPrices: bookPrices receiptBook: receiptBook merchantProcessor: mockAlwaysOkMerchantProcessor.
+	
+	cart _ ShoppingCart new.
+	cart add: 3 of: book1.
+	
+	self should: [ aCashier checkOut: cart payingWith: emptyOwnerCreditCard2 on: today. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardOwnerNameErrorDescription.
+		
+	self assert: receiptBook isEmpty.!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:51:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 00:51:53'!
+PASSED!
+!ShoppingCartTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:52:20' prior: 50333955 overrides: 16927572!
+    setUp
+	
+	book1 := 'ISBN1'.
+	book2 := 'ISBN2'.! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:52:39' prior: 50340514 overrides: 16927572!
+                           setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: '418241'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	book1 := 'ISBN1'.
+	
+	book2 := 'ISBN2'.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!classRemoval: #Book stamp: 'nz 6/16/2021 00:52:50'!
+Object subclass: #Book
+	instanceVariableNames: 'isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:52:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 00:52:56'!
+PASSED!
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 00:53:07' prior: 50341314 overrides: 16927572!
+                    setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: '418241'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	invalidNumberCreditCard2 _ CreditCard
+		number:  '41824182418241824444444444444444444'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	book1 := 'ISBN1'.
+	book2 := 'ISBN2'.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+!CheckOutTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/16/2021 01:00:41' prior: 50341470 overrides: 16927572!
+    setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ CreditCard
+		number: '418241'
+		owner: cardOwner
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	book1 := 'ISBN1'.
+	book2 := 'ISBN2'.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ MockAlwaysOkMerchantProcessor new.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:00:43'!
+PASSED!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:01:14'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard book1 isbnBook2 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber invalidNumberCreditCard2 emptyOwnerCreditCard emptyOwnerCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:01:14'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard book1 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidCreditCardNumber invalidNumberCreditCard2 emptyOwnerCreditCard emptyOwnerCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:01:14'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard book1 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard invalidNumberCreditCard2 emptyOwnerCreditCard emptyOwnerCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #CheckOutTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:01:15'!
+TestCase subclass: #CheckOutTest
+	instanceVariableNames: 'creditCardNumber cardOwner validCreditCard book1 book2 expiredCreditCard currentMonth today expiredThisMonthCreditCard mockAlwaysStolenCardMerchantProcessor mockAlwaysOkMerchantProcessor mockAlwaysFakeCardMerchantProcessor mockAlwaysWithoutCreditCardMerchantProcessor invalidNumberCreditCard emptyOwnerCreditCard emptyOwnerCreditCard2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!methodRemoval: CreditCard #number stamp: 'nz 6/16/2021 01:03:23'!
+number
+	^number!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 01:03:35'!
+PASSED!
+!MerchantProcessor class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:04:01' prior: 50338925!
+                insufficientFundsCreditCardErrorDescription
+	^'Cannot debit from a credit card with insufficient funds!!'.! !
+!MerchantProcessor class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:04:04' prior: 50338232!
+                    stolenCreditCardErrorDescription
+	^'Cannot debit from stolen credit card!!'.! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 01:10:57'!
+PASSED!
+
+TestCase subclass: #PriceListTest
+	instanceVariableNames: 'book1 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #PriceListTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:14:48'!
+TestCase subclass: #PriceListTest
+	instanceVariableNames: 'book1 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!PriceListTest methodsFor: 'no messages' stamp: 'nz 6/16/2021 01:15:07' overrides: 16927572!
+        setUp
+	
+	book1 := 'ISBN1'.
+	book2 := 'ISBN2'.! !
+!PriceListTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/16/2021 01:17:48'!
+   test01
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: -100.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList cannotAddItemWithNegativePriceErrorDescription.! !
+
+!testRun: #PriceListTest #test01 stamp: 'nz 6/16/2021 01:17:52'!
+ERROR!
+!PriceList class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:18:19'!
+                 cannotAddItemWithNegativePriceErrorDescription
+	self shouldBeImplemented.! !
+!PriceList class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:18:34' prior: 50341839!
+                             cannotAddItemWithNegativePriceErrorDescription
+	^'Cannot add item with negative price!!'.! !
+
+!testRun: #PriceListTest #test01 stamp: 'nz 6/16/2021 01:18:36'!
+FAILURE!
+!PriceList methodsFor: 'set prices' stamp: 'nz 6/16/2021 01:19:29' prior: 50334545!
+    set: aBook price: aPrice 
+	aPrice negative ifTrue: [ self error: self class cannotAddItemWithNegativePriceErrorDescription. ].
+	prices at: aBook put: aPrice.! !
+
+!testRun: #PriceListTest #test01 stamp: 'nz 6/16/2021 01:19:31'!
+PASSED!
+!PriceListTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/16/2021 01:20:06'!
+         test02
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: 0.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList cannotAddItemWithNegativePriceErrorDescription.! !
+!PriceList class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:20:26'!
+                             itemPriceShouldBePositiveErrorDescription
+	^'Cannot add item with negative price!!'.! !
+!PriceListTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:26' prior: 50341827!
+       test01
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: -100.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceShouldBePositiveErrorDescription.! !
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:26' prior: 50341853!
+        set: aBook price: aPrice 
+	aPrice negative ifTrue: [ self error: self class itemPriceShouldBePositiveErrorDescription. ].
+	prices at: aBook put: aPrice.! !
+!PriceListTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:26' prior: 50341863!
+   test02
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: 0.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceShouldBePositiveErrorDescription.! !
+
+!methodRemoval: PriceList class #cannotAddItemWithNegativePriceErrorDescription stamp: 'nz 6/16/2021 01:20:26'!
+cannotAddItemWithNegativePriceErrorDescription
+	^'Cannot add item with negative price!!'.!
+!PriceList class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:20:38'!
+                      itemPriceMustBePositiveErrorDescription
+	^'Cannot add item with negative price!!'.! !
+!PriceListTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:38' prior: 50341879!
+         test01
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: -100.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.! !
+!PriceListTest methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:38' prior: 50341897!
+      test02
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: 0.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.! !
+!PriceList methodsFor: 'as yet unclassified' stamp: 'nz 6/16/2021 01:20:38' prior: 50341889!
+             set: aBook price: aPrice 
+	aPrice negative ifTrue: [ self error: self class itemPriceMustBePositiveErrorDescription. ].
+	prices at: aBook put: aPrice.! !
+
+!methodRemoval: PriceList class #itemPriceShouldBePositiveErrorDescription stamp: 'nz 6/16/2021 01:20:38'!
+itemPriceShouldBePositiveErrorDescription
+	^'Cannot add item with negative price!!'.!
+!PriceList class methodsFor: 'errors' stamp: 'nz 6/16/2021 01:21:09' prior: 50341913!
+              itemPriceMustBePositiveErrorDescription
+	^'Item price must be positive!!'.! !
+
+!testRun: #PriceListTest #test02 stamp: 'nz 6/16/2021 01:21:17'!
+FAILURE!
+!PriceList methodsFor: 'set prices' stamp: 'nz 6/16/2021 01:21:58' prior: 50341939!
+                   set: aBook price: aPrice 
+	aPrice positive ifFalse: [ self error: self class itemPriceMustBePositiveErrorDescription. ].
+	prices at: aBook put: aPrice.! !
+
+!testRun: #PriceListTest #test01 stamp: 'nz 6/16/2021 01:21:59'!
+PASSED!
+
+!testRun: #PriceListTest #test02 stamp: 'nz 6/16/2021 01:21:59'!
+FAILURE!
+
+!testRun: #PriceListTest #test02 stamp: 'nz 6/16/2021 01:21:59'!
+FAILURE!
+!PriceList methodsFor: 'set prices' stamp: 'nz 6/16/2021 01:23:49' prior: 50341961!
+                 set: aBook price: aPrice 
+	(aPrice > 0) ifFalse: [ self error: self class itemPriceMustBePositiveErrorDescription. ].
+	prices at: aBook put: aPrice.! !
+
+!testRun: #PriceListTest #test01 stamp: 'nz 6/16/2021 01:23:49'!
+PASSED!
+
+!testRun: #PriceListTest #test02 stamp: 'nz 6/16/2021 01:23:49'!
+PASSED!
+!PriceList methodsFor: 'set prices' stamp: 'nz 6/16/2021 01:24:12'!
+                assertPriceIsValid: aPrice
+
+	^ (aPrice > 0) ifFalse: [ self error: self class itemPriceMustBePositiveErrorDescription. ]! !
+!PriceList methodsFor: 'set prices' stamp: 'nz 6/16/2021 01:24:12' prior: 50341976!
+                set: aBook price: aPrice 
+	self assertPriceIsValid: aPrice.
+	prices at: aBook put: aPrice.! !
+!PriceListTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/16/2021 01:25:23'!
+                      test01AddItemWithNegativePriceShouldRaiseError
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: -100.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.! !
+!PriceListTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/16/2021 01:25:37'!
+                   test02AddItemWithZeroPriceShouldRaiseError
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: 0.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.! !
+
+!methodRemoval: PriceListTest #test02 stamp: 'nz 6/16/2021 01:25:40'!
+test02
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: 0.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.!
+
+!methodRemoval: PriceListTest #test01 stamp: 'nz 6/16/2021 01:25:41'!
+test01
+
+	| priceList |
+	
+	priceList _ PriceList new.
+	
+	self should: [ priceList set: book1 price: -100.]
+		raise: Error - MessageNotUnderstood
+		withMessageText: PriceList itemPriceMustBePositiveErrorDescription.!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 01:25:45'!
+PASSED!
+
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'book1 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCartTest category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:26:27'!
+TestCase subclass: #ShoppingCartTest
+	instanceVariableNames: 'book1 book2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShoppingCart category: 'Tus-Libros' stamp: 'nz 6/16/2021 01:26:46'!
+Object subclass: #ShoppingCart
+	instanceVariableNames: 'entries'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/16/2021 01:27:26'!
+PASSED!
+
+----QUIT----(16 June 2021 01:27:44) TusLibros.image priorSource: 234095!
