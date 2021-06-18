@@ -10467,3 +10467,496 @@ PASSED!
 PASSED!
 
 ----QUIT----(16 June 2021 01:27:44) TusLibros.image priorSource: 234095!
+
+----STARTUP---- (17 June 2021 20:54:36) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+
+TestCase subclass: #ShopTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShopTest category: 'Tus-Libros' stamp: 'nz 6/17/2021 20:58:09'!
+TestCase subclass: #ShopTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'nz 6/17/2021 21:09:38'!
+Object subclass: #Shop
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShopTest methodsFor: 'no messages' stamp: 'nz 6/17/2021 21:09:28'!
+test01
+	
+	| shop |
+	shop := Shop new.
+	
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:09:45'!
+ERROR!
+!Shop class methodsFor: 'errors' stamp: 'nz 6/17/2021 21:09:56'!
+incorrectPasswordOrClientIdErrorDescription
+	self shouldBeImplemented.! !
+!Shop class methodsFor: 'errors' stamp: 'nz 6/17/2021 21:10:15' prior: 50342230!
+incorrectPasswordOrClientIdErrorDescription
+	^'Incorrect password or client id!!'.! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:10:21'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:10:36'!
+createCartClientId: aSmallInteger password: aString 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:11:52' prior: 50342243!
+createCartClientId: aClientId password: aPassword
+
+	self error: self class incorrectPasswordOrClientIdErrorDescription .
+	! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:12:20'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:12:20'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:12:30' prior: 50342219!
+test01
+	
+	| shop |
+	
+	shop := Shop new.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:15:11'!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop new.
+	
+	cartId := shop createCartClientId: 3 password: '123'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:15:23'!
+ERROR!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:15:29' prior: 50342271!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop new.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:15:30'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:17' prior: 50342249!
+createCartClientId: aClientId password: aPassword
+
+	(aPassword = '123') ifTrue: [
+	self error: self class incorrectPasswordOrClientIdErrorDescription .
+	].
+
+! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:23' prior: 50342293!
+createCartClientId: aClientId password: aPassword
+
+	(aPassword = '123') ifTrue: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	].
+! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:16:24'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:16:24'!
+ERROR!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:16:24'!
+ERROR!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:16:36'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:16:36'!
+ERROR!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:16:36'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:44'!
+listCart: aShop 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:55' prior: 50342322!
+listCart: aShop 
+	^OrderedCollection new.! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:16:57'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:17:03'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:17:03'!
+PASSED!
+
+!classDefinition: #MockUserAuthenticator category: 'Tus-Libros' stamp: 'nz 6/17/2021 21:23:31'!
+Object subclass: #MockUserAuthenticator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:23:10' prior: 50342261!
+test01
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysResponding: true).
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:23:52'!
+ERROR!
+!MockUserAuthenticator class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:24:12'!
+alwaysResponding: aTrue 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeAlwaysResponding: aTrue ! !
+!MockUserAuthenticator class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:25:11' prior: 50342360!
+alwaysResponding: anAuthenticationResponse
+	^self new initializeAlwaysReturning: anAuthenticationResponse ! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:25:18'!
+ERROR!
+
+!classDefinition: #MockUserAuthenticator category: 'Tus-Libros' stamp: 'nz 6/17/2021 21:25:27'!
+Object subclass: #MockUserAuthenticator
+	instanceVariableNames: 'authenticationResponse'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!MockUserAuthenticator methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:25:27'!
+initializeAlwaysReturning: anAuthenticationResponse 
+	self shouldBeImplemented.
+	authenticationResponse := anAuthenticationResponse.! !
+!MockUserAuthenticator methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:25:35' prior: 50342386!
+initializeAlwaysReturning: anAuthenticationResponse 
+	
+	authenticationResponse := anAuthenticationResponse.! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:25:38'!
+ERROR!
+!Shop class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:25:50'!
+withUserAuthenticator: aMockUserAuthenticator 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithUserAuthenticator: aMockUserAuthenticator ! !
+!Shop class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:26:05' prior: 50342402!
+withUserAuthenticator: anUserAuthenticator 
+
+	^self new initializeWithUserAuthenticator: anUserAuthenticator ! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:07'!
+ERROR!
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'nz 6/17/2021 21:26:14'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:26:14'!
+initializeWithUserAuthenticator: anUserAuthenticator 
+	self shouldBeImplemented.
+	userAuthenticator := anUserAuthenticator.! !
+!Shop methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:26:21' prior: 50342427!
+initializeWithUserAuthenticator: anUserAuthenticator 
+	
+	userAuthenticator := anUserAuthenticator.! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:23'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:23'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:26:23'!
+PASSED!
+!MockUserAuthenticator class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:26:42'!
+alwaysReturning: anAuthenticationResponse
+	^self new initializeAlwaysReturning: anAuthenticationResponse ! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:26:42' prior: 50342346!
+test01
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!methodRemoval: MockUserAuthenticator class #alwaysResponding: stamp: 'nz 6/17/2021 21:26:42'!
+alwaysResponding: anAuthenticationResponse
+	^self new initializeAlwaysReturning: anAuthenticationResponse !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:47'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:47'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:26:47'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:26:55' prior: 50342282!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:26:56'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:26:56'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:26:56'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:27:01'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:27:01'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:27:01'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:27:11' prior: 50342479!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false).
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:27:13'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:27:13'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:27:13'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:28:44' prior: 50342301!
+createCartClientId: aClientId password: aPassword
+
+	userAuthenticator authenticate: aClientId password: aPassword.
+! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:28:48'!
+ERROR!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:28:48'!
+ERROR!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:28:51'!
+ERROR!
+!MockUserAuthenticator methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:29:02'!
+authenticate: aSmallInteger password: aString 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:29:18' prior: 50342521!
+createCartClientId: aClientId password: aPassword
+
+	(userAuthenticator authenticate: aClientId password: aPassword) ifTrue: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:29:23' prior: 50342540!
+createCartClientId: aClientId password: aPassword
+
+	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	].! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:29:24'!
+FAILURE!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:29:24'!
+ERROR!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:29:26'!
+ERROR!
+!MockUserAuthenticator methodsFor: 'error handling' stamp: 'nz 6/17/2021 21:29:29' overrides: 16881409!
+error: aString 
+	self shouldBeImplemented.! !
+
+!methodRemoval: MockUserAuthenticator #error: stamp: 'nz 6/17/2021 21:30:05'!
+error: aString 
+	self shouldBeImplemented.!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:30:13'!
+ERROR!
+!MockUserAuthenticator methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:30:51' prior: 50342534!
+authenticate: aSmallInteger password: aString 
+	true! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:30:52'!
+ERROR!
+!MockUserAuthenticator methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:31:09' prior: 50342578!
+authenticate: aSmallInteger password: aString 
+	^true.! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:31:10'!
+FAILURE!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:31:10'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:31:10'!
+FAILURE!
+!MockUserAuthenticator methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:31:32' prior: 50342586!
+authenticate: aSmallInteger password: aString 
+	^authenticationResponse .! !
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:32:07'!
+ERROR!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:32:07'!
+ERROR!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:32:17' prior: 50342503!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:32:24' prior: 50342454!
+test01
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false).
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:32:24'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:32:24'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:32:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/17/2021 21:34:05'!
+PASSED!
+
+----QUIT----(17 June 2021 21:34:14) TusLibros.image priorSource: 337465!

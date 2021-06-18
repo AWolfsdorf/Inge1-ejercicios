@@ -352,6 +352,40 @@ setUp
 	book2 := 'ISBN2'.! !
 
 
+!classDefinition: #ShopTest category: 'Tus-Libros'!
+TestCase subclass: #ShopTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:32:24'!
+test01
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false).
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:32:17'!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+
+
 !classDefinition: #ShoppingCartTest category: 'Tus-Libros'!
 TestCase subclass: #ShoppingCartTest
 	instanceVariableNames: 'book1 book2'
@@ -682,6 +716,35 @@ debit: anAmountOfMoney from: aCreditCard
 	^self error: self class insufficientFundsCreditCardErrorDescription .! !
 
 
+!classDefinition: #MockUserAuthenticator category: 'Tus-Libros'!
+Object subclass: #MockUserAuthenticator
+	instanceVariableNames: 'authenticationResponse'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!MockUserAuthenticator methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:25:35'!
+initializeAlwaysReturning: anAuthenticationResponse 
+	
+	authenticationResponse := anAuthenticationResponse.! !
+
+
+!MockUserAuthenticator methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:31:32'!
+authenticate: aSmallInteger password: aString 
+	^authenticationResponse .! !
+
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'MockUserAuthenticator class' category: 'Tus-Libros'!
+MockUserAuthenticator class
+	instanceVariableNames: ''!
+
+!MockUserAuthenticator class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:26:42'!
+alwaysReturning: anAuthenticationResponse
+	^self new initializeAlwaysReturning: anAuthenticationResponse ! !
+
+
 !classDefinition: #PriceList category: 'Tus-Libros'!
 Object subclass: #PriceList
 	instanceVariableNames: 'prices'
@@ -755,6 +818,47 @@ Receipt class
 withTotal: aTransactionTotal 
 
 	^self new initializeWithTotal: aTransactionTotal ! !
+
+
+!classDefinition: #Shop category: 'Tus-Libros'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:29:23'!
+createCartClientId: aClientId password: aPassword
+
+	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	].! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:55'!
+listCart: aShop 
+	^OrderedCollection new.! !
+
+
+!Shop methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:26:21'!
+initializeWithUserAuthenticator: anUserAuthenticator 
+	
+	userAuthenticator := anUserAuthenticator.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Shop class' category: 'Tus-Libros'!
+Shop class
+	instanceVariableNames: ''!
+
+!Shop class methodsFor: 'errors' stamp: 'nz 6/17/2021 21:10:15'!
+incorrectPasswordOrClientIdErrorDescription
+	^'Incorrect password or client id!!'.! !
+
+
+!Shop class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:26:05'!
+withUserAuthenticator: anUserAuthenticator 
+
+	^self new initializeWithUserAuthenticator: anUserAuthenticator ! !
 
 
 !classDefinition: #ShoppingCart category: 'Tus-Libros'!
