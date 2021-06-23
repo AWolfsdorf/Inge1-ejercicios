@@ -354,7 +354,7 @@ setUp
 
 !classDefinition: #ShopTest category: 'Tus-Libros'!
 TestCase subclass: #ShopTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'creditCard1'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
@@ -384,6 +384,100 @@ test02
 	cartItems := shop listCart: cartId.
 	
 	self assert: cartItems isEmpty.! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 21:24:30'!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 21:33:06'!
+test04
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 21:40:40'!
+test05
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:16:15'!
+test06
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:50:13'!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 23:03:31'!
+test08
+	
+	| shop cartId clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true).
+	
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 10 of: 'book_isbn' to: cartId.
+	
+	shop checkOut: cartId payingWith: creditCard1.
+	
+	self assert: (shop listPurchasesOf: clientId with: password) size equals: 1.
+	! !
 
 
 !classDefinition: #ShoppingCartTest category: 'Tus-Libros'!
@@ -822,27 +916,72 @@ withTotal: aTransactionTotal
 
 !classDefinition: #Shop category: 'Tus-Libros'!
 Object subclass: #Shop
-	instanceVariableNames: 'userAuthenticator'
+	instanceVariableNames: 'userAuthenticator carts'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:29:23'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:51'!
+add: aQuantity of: anItem to: aShoppingCartId
+	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+	
+	(self getCart: aShoppingCartId) add: aQuantity of: anItem! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:13'!
+cartExists: aShoppingCartId
+
+	^ carts size < aShoppingCartId! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 23:01:58'!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart |
+	(self cartExists: aShoppingCartId ) ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+	
+	cart := self getCart: aShoppingCartId. 
+
+	(cart entries) ifEmpty: [ self error: Cashier cantCheckoutEmptyCartErrorDescription ].
+	! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 21:59:41'!
+createCart
+	carts add: ShoppingCart new.
+	^carts size! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 21:59:34'!
 createCartClientId: aClientId password: aPassword
 
 	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
 		self error: self class incorrectPasswordOrClientIdErrorDescription .
-	].! !
+	].
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/17/2021 21:16:55'!
-listCart: aShop 
-	^OrderedCollection new.! !
+	^self createCart.! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:00:14'!
+getCart: aShoppingCartId
+
+	^ carts at: aShoppingCartId! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:00:46'!
+getCartEntries: aShoppingCartId
+
+	^ (self getCart: aShoppingCartId) entries! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:19'!
+listCart: aShoppingCartId 
+	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ]. 
+ 	
+	^self getCartEntries: aShoppingCartId.! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 23:02:48'!
+listPurchasesOf: aClientId with: aClientPassword
+	^OrderedCollection with: 1.! !
 
 
-!Shop methodsFor: 'initialization' stamp: 'nz 6/17/2021 21:26:21'!
+!Shop methodsFor: 'initialization' stamp: 'AW 6/22/2021 21:55:51'!
 initializeWithUserAuthenticator: anUserAuthenticator 
 	
-	userAuthenticator := anUserAuthenticator.! !
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -853,6 +992,10 @@ Shop class
 !Shop class methodsFor: 'errors' stamp: 'nz 6/17/2021 21:10:15'!
 incorrectPasswordOrClientIdErrorDescription
 	^'Incorrect password or client id!!'.! !
+
+!Shop class methodsFor: 'errors' stamp: 'AW 6/22/2021 21:33:52'!
+invalidCartIdErrorDescription
+	^'The cart id is invalid!!'! !
 
 
 !Shop class methodsFor: 'instance creation' stamp: 'nz 6/17/2021 21:26:05'!
