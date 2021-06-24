@@ -14996,3 +14996,3788 @@ FAILURE!
 
 
 ----QUIT----(23 June 2021 01:49:15) TusLibros.image priorSource: 486905!
+
+----STARTUP---- (23 June 2021 22:47:07) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros/TusLibros.image!
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 22:47:47' prior: 50346591!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipt |
+	
+	receipt := lastReceiptForClient at: aClientId .
+
+	^ PurchasesSummary with: receipt items total: receipt total.! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 22:47:47'!
+FAILURE!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 22:47:47'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 22:47:47'!
+FAILURE!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 22:48:11'!
+FAILURE!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 22:49:34'!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 150 equals: purchases total.
+	self assert: 5 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 01:15:30' prior: 50346735!
+test09
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop add: 1 of: stubs book2 to: cartId.
+	
+	shop add: 1 of: stubs book3 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 150.
+	self assert: purchases items size equals: 4.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
+	! !
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 22:49:54'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 22:49:54'!
+FAILURE!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 22:49:54'!
+FAILURE!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 22:53:57'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:00:42' prior: 50346572!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	(self cartExists: aShoppingCartId ) ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+	
+	cart := self getCart: aShoppingCartId. 
+	
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+
+	(cart entries) ifEmpty: [ self error: Cashier cantCheckoutEmptyCartErrorDescription ].
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:00:49'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:00:58'!
+registerReceipt: aReceipt for: aSmallInteger 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:20' prior: 50347033!
+registerReceipt: aReceipt for: aClientId 
+	lastReceiptForClient at: aClientId put: aReceipt.! !
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'AW 6/23/2021 23:01:43'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts receiptsForClients cashier'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:43' prior: 50346880!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipt |
+	
+	receipt := receiptsForClients at: aClientId .
+
+	^ PurchasesSummary with: receipt items total: receipt total.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:43' prior: 50346557!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	receiptsForClients  := Dictionary new.  "clientId => cart size"
+	
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:43' prior: 50347039!
+registerReceipt: aReceipt for: aClientId 
+	receiptsForClients at: aClientId put: aReceipt.! !
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'AW 6/23/2021 23:01:52'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:52' prior: 50347053!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipt |
+	
+	receipt := clientReceipts at: aClientId .
+
+	^ PurchasesSummary with: receipt items total: receipt total.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:52' prior: 50347062!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new.  "clientId => cart size"
+	
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:01:52' prior: 50347077!
+registerReceipt: aReceipt for: aClientId 
+	clientReceipts at: aClientId put: aReceipt.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:04:08' prior: 50347115!
+registerReceipt: aReceipt for: aClientId 
+	| receipts |
+	receipts := clientReceipts at: aClientId ifAbsentPut: OrderedCollection new.
+	
+	receipts add: aReceipt.! !
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:04:19'!
+ERROR!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:04:45'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:05:44' prior: 50347091!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary with: receipts items total: receipts total.! !
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:06:11'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:07:20' prior: 50347134!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary with: receipts.! !
+!PurchasesSummary class methodsFor: 'instance creation' stamp: 'AW 6/23/2021 23:07:27' prior: 50344262!
+with: aBagOfItems total: aTotalAmount 
+
+	^self new initializeWith: aBagOfItems.! !
+!PurchasesSummary class methodsFor: 'instance creation' stamp: 'AW 6/23/2021 23:07:38'!
+with: aBagOfItems
+
+	^self new initializeWith: aBagOfItems.! !
+!PurchasesSummary class methodsFor: 'instance creation' stamp: 'AW 6/23/2021 23:07:48'!
+for: aBagOfItems
+
+	^self new initializeWith: aBagOfItems.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:07:48' prior: 50347145!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+
+!methodRemoval: PurchasesSummary class #with: stamp: 'AW 6/23/2021 23:07:48'!
+with: aBagOfItems
+
+	^self new initializeWith: aBagOfItems.!
+!PurchasesSummary class methodsFor: 'instance creation' stamp: 'AW 6/23/2021 23:07:59' prior: 50347164!
+for: aReceiptCollection
+
+	^self new initializeWith: aReceiptCollection.! !
+!PurchasesSummary class methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:08:11' prior: 50347182!
+for: aReceiptCollection
+
+	^self new initializeFor: aReceiptCollection.! !
+!PurchasesSummary class methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:08:11' prior: 50347153!
+with: aBagOfItems total: aTotalAmount 
+
+	^self new initializeFor: aBagOfItems.! !
+
+!methodRemoval: PurchasesSummary class #with:total: stamp: 'AW 6/23/2021 23:08:12'!
+with: aBagOfItems total: aTotalAmount 
+
+	^self new initializeFor: aBagOfItems.!
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:08:57'!
+initializeWith: aReceiptCollection
+
+	| aTotalAmount |
+	items := aReceiptCollection.
+	total := aTotalAmount.! !
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:09:09' prior: 50347205!
+initializeWith: aReceiptCollection
+	| aTotalAmount |
+	items := aReceiptCollection.
+	total := aTotalAmount.! !
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:09:23' prior: 50347212!
+initializeWith: aReceiptCollection
+	| totalAmount |
+	items := aReceiptCollection.
+	total := totalAmount.! !
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:09:40' prior: 50347219!
+initializeWith: aReceiptCollection
+	| totalAmount |
+
+	items := aReceiptCollection.
+	total := totalAmount.! !
+
+!methodRemoval: PurchasesSummary #initializeWith:total: stamp: 'AW 6/23/2021 23:09:43'!
+initializeWith: aBagOfItems total: aTotalAmount 
+
+	items := aBagOfItems.
+	total := aTotalAmount.!
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:11:16' prior: 50347226!
+initializeWith: aReceiptCollection
+
+	total := 0.
+	items := Bag new.
+	aReceiptCollection do: [ :aReceipt | 
+		items addAll: aReceipt items.
+		total := total + aReceipt total.	
+	]
+	! !
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:13:38' prior: 50347239!
+initializeWith: aReceiptCollection
+
+	total := 0.
+	items := Bag new.
+	aReceiptCollection do: [ :aReceipt | 
+		items addAll: aReceipt items.
+		total := total + aReceipt total.	
+	].
+	! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:13:48'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:13:52'!
+ERROR!
+!PurchasesSummary methodsFor: 'initialization' stamp: 'AW 6/23/2021 23:14:32'!
+initializeFor: aReceiptCollection
+
+	total := 0.
+	items := Bag new.
+	aReceiptCollection do: [ :aReceipt | 
+		items addAll: aReceipt items.
+		total := total + aReceipt total.	
+	].
+	! !
+
+!methodRemoval: PurchasesSummary #initializeWith: stamp: 'AW 6/23/2021 23:14:32'!
+initializeWith: aReceiptCollection
+
+	total := 0.
+	items := Bag new.
+	aReceiptCollection do: [ :aReceipt | 
+		items addAll: aReceipt items.
+		total := total + aReceipt total.	
+	].
+	!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:14:52' prior: 50346914!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 150 equals: purchases total.
+	self assert: 5 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:14:52'!
+FAILURE!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:16:32' prior: 50347278!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:16:40'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:21:04'!
+test12
+	
+	| shop clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	
+	self should: [ shop listPurchasesOf: clientId with: password ] 
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:23:21' prior: 50347381!
+test12
+	
+	| shop clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	self should: [ shop listPurchasesOf: clientId with: password ] 
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
+	! !
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:25:09'!
+FAILURE!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:27:03'!
+FAILURE!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:27:12'!
+FAILURE!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:27:37'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:29:13' prior: 50347169!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	userAuthenticator authenticate: aClientId password: aClientPassword.
+	
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:29:19' prior: 50347423!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	userAuthenticator authenticate: aClientId password: aClientPassword.
+
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:29:20' prior: 50347433!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	userAuthenticator authenticate: aClientId password: aClientPassword.
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:30:29' prior: 50347443!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	(userAuthenticator authenticate: aClientId password: aClientPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription.
+	].
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:30:33'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:34:11' prior: 50347013!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+
+	(cart entries) ifEmpty: [ self error: Cashier cantCheckoutEmptyCartErrorDescription ].
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:34:26' prior: 50343177!
+getCart: aShoppingCartId
+	(self cartExists: aShoppingCartId ) 
+		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+
+	^ carts at: aShoppingCartId! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:34:42' prior: 50343380!
+add: aQuantity of: anItem to: aShoppingCartId
+	
+	(self getCart: aShoppingCartId) add: aQuantity of: anItem! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:34:47'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:35:21' prior: 50347494!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:35:23'!
+ERROR!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:35:23'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:35:23'!
+ERROR!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:36:17' prior: 50345470!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:36:23'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:38:01' prior: 50347551!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:39:30'!
+authenticateClient: aPassword withPassword: aClientId
+
+	^ (userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	]! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:39:30' prior: 50343157!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aPassword withPassword: aClientId.
+
+	^self createCart.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:39:51' prior: 50347659!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aClientId withPassword: aPassword.
+
+	^self createCart.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:40:09' prior: 50347649!
+authenticateClient: aClientId withPassword: aPassword
+
+	^ (userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	]! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:40:21' prior: 50347673!
+authenticateClient: aClientId withPassword: aPassword
+	
+	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	]! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:40:54' prior: 50347453!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	self authenticateClient: aClientId withPassword: aClientPassword.
+	
+	receipts := clientReceipts at: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/23/2021 23:40:55'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:41:33'!
+receiptsFor: aClientId
+
+	^ clientReceipts at: aClientId! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:41:33' prior: 50347693!
+listPurchasesOf: aClientId with: aClientPassword
+
+	| receipts |
+	
+	self authenticateClient: aClientId withPassword: aClientPassword.
+	
+	receipts := self receiptsFor: aClientId .
+
+	^ PurchasesSummary for: receipts.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:42:03' prior: 50347733!
+listPurchasesOf: aClientId with: aClientPassword
+	
+	self authenticateClient: aClientId withPassword: aClientPassword.
+	
+	^ PurchasesSummary for: (self receiptsFor: aClientId).! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:58:47'!
+createCartAndGetId
+	carts add: ShoppingCart new.
+	^carts size! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:58:47' prior: 50347666!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aClientId withPassword: aPassword.
+
+	^self createCartAndGetId.! !
+
+!methodRemoval: Shop #createCart stamp: 'AW 6/23/2021 23:58:47'!
+createCart
+	carts add: ShoppingCart new.
+	^carts size!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:01:11' prior: 50347510!
+getCart: aShoppingCartId
+
+	
+	(self cartExists: aShoppingCartId ) 
+		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+
+	^ carts at: aShoppingCartId! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:01:40' prior: 50347767!
+getCart: aShoppingCartId
+
+	self assertCartExists: aShoppingCartId.
+	
+	^ carts at: aShoppingCartId! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:01:59'!
+assertCartExists: aShoppingCartId
+	
+	(self cartExists: aShoppingCartId ) 
+		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 00:02:01'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:05:05'!
+test13
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:05:09'!
+FAILURE!
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'AW 6/24/2021 00:08:20'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:08:15' prior: 50344224!
+getClientIdOf: aCartId 
+	
+	^cartsClients at: aCartId .! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:11:37'!
+createCartAndGetId: aClientId
+	carts add: ShoppingCart new.
+	^carts size! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:11:37' prior: 50347756!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aClientId withPassword: aPassword.
+
+	^self createCartAndGetId: aClientId.! !
+
+!methodRemoval: Shop #createCartAndGetId stamp: 'AW 6/24/2021 00:11:37'!
+createCartAndGetId
+	carts add: ShoppingCart new.
+	^carts size!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:11:58'!
+createCartAndGetIdFor: aClientId
+	carts add: ShoppingCart new.
+	^carts size! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:11:58' prior: 50347874!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aClientId withPassword: aPassword.
+
+	^self createCartAndGetIdFor: aClientId.! !
+
+!methodRemoval: Shop #createCartAndGetId: stamp: 'AW 6/24/2021 00:11:58'!
+createCartAndGetId: aClientId
+	carts add: ShoppingCart new.
+	^carts size!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:13:42' prior: 50347886!
+createCartAndGetIdFor: aClientId
+	| cartId |
+	carts add: ShoppingCart new.
+	
+	cartId := carts size.
+	
+	cartsClients at: cartId put: aClientId. 
+	
+	^ cartId.! !
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:14:09'!
+ERROR!
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:14:50' prior: 50347100!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+
+		! !
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:14:56'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:22:11'!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+
+!classDefinition: #MockTimeProvider category: 'Tus-Libros' stamp: 'AW 6/24/2021 00:23:13'!
+Object subclass: #MockTimeProvider
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:09'!
+timeProvider
+	^MockTimeProvider new.! !
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52'!
+mockAlwaysOkMerchantProcessor: aTimeProvider
+
+	^MockAlwaysOkMerchantProcessor new.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50346952!
+test09
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop add: 1 of: stubs book2 to: cartId.
+	
+	shop add: 1 of: stubs book3 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 150.
+	self assert: purchases items size equals: 4.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50347398!
+test12
+	
+	| shop clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	self should: [ shop listPurchasesOf: clientId with: password ] 
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345550!
+test06
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345564!
+test04
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!CheckOutTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345031 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	stubs := TestStubs new.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ stubs invalidNumberCreditCard.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	book1 := stubs book1.
+	book2 := stubs book2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50347318!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345532!
+test05
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345846!
+test08
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 100.
+	self assert: purchases items size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345597!
+test01
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:52' prior: 50345419!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:53' prior: 50347814!
+test13
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:53' prior: 50347960!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:53' prior: 50345511!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:53' prior: 50345769!
+test10
+	
+	| shop cartId clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 1 of: stubs book1 to: cartId.
+	
+	self
+		should: [ shop
+				checkOut: cartId
+				payingWith: stubs invalidNumberCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:23:53' prior: 50347592!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+
+!methodRemoval: TestStubs #mockAlwaysOkMerchantProcessor stamp: 'AW 6/24/2021 00:23:53'!
+mockAlwaysOkMerchantProcessor
+
+	^MockAlwaysOkMerchantProcessor new.!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:24:22' prior: 50348287!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:24:41' prior: 50348394!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:09' prior: 50348433!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:18'!
+mockAlwaysOkMerchantProcessor
+
+	^MockAlwaysOkMerchantProcessor new.! !
+
+!methodRemoval: TestStubs #mockAlwaysOkMerchantProcessor: stamp: 'AW 6/24/2021 00:25:22'!
+mockAlwaysOkMerchantProcessor: aTimeProvider
+
+	^MockAlwaysOkMerchantProcessor new.!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:31' prior: 50348247!
+test13
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:39' prior: 50348047!
+test12
+	
+	| shop clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	self should: [ shop listPurchasesOf: clientId with: password ] 
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:51' prior: 50348135!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:25:53' prior: 50347637!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:02' prior: 50348349!
+test10
+	
+	| shop cartId clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 1 of: stubs book1 to: cartId.
+	
+	self
+		should: [ shop
+				checkOut: cartId
+				payingWith: stubs invalidNumberCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:12' prior: 50348015!
+test09
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop add: 1 of: stubs book2 to: cartId.
+	
+	shop add: 1 of: stubs book3 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 150.
+	self assert: purchases items size equals: 4.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:17' prior: 50348192!
+test08
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 100.
+	self assert: purchases items size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:23' prior: 50348371!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:31' prior: 50348064!
+test06
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:38' prior: 50348173!
+test05
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:45' prior: 50348079!
+test04
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:26:51' prior: 50348327!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:27:02' prior: 50348233!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:27:10' prior: 50348217!
+test01
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:29:08' prior: 50348787!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:29:31' prior: 50348766!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:29:33'!
+PASSED!
+!Shop class methodsFor: 'instance creation' stamp: 'AW 6/24/2021 00:30:35'!
+withUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+
+	^self new initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor ! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348561!
+test12
+	
+	| shop clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	self should: [ shop listPurchasesOf: clientId with: password ] 
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348801!
+test01
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348721!
+test06
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348578!
+test11
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348816!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348753!
+test04
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348680!
+test08
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 100.
+	self assert: purchases items size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348522!
+test13
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348704!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348830!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348628!
+test10
+	
+	| shop cartId clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 1 of: stubs book1 to: cartId.
+	
+	self
+		should: [ shop
+				checkOut: cartId
+				payingWith: stubs invalidNumberCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348473!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35' prior: 50348649!
+test09
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop add: 1 of: stubs book2 to: cartId.
+	
+	shop add: 1 of: stubs book3 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 150.
+	self assert: purchases items size equals: 4.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:36' prior: 50348735!
+test05
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+
+!methodRemoval: Shop class #withUserAuthenticator:prices:merchantProcessor: stamp: 'AW 6/24/2021 00:30:36'!
+withUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+
+	^self new initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:41' prior: 50349094!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:48' prior: 50348982!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:51' prior: 50348912!
+test01
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:31:08' prior: 50349138!
+test14
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book3 to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:34:58' prior: 50349293!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 30 * minute.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:35:12' prior: 50349333!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 30 * minute.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:36:35' prior: 50349353!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 30 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:37:14' prior: 50349373!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:37:16'!
+ERROR!
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:37:30'!
+toTheFuture: aSimpleMeasure 
+	self shouldBeImplemented.! !
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:37:50' prior: 50349421!
+toTheFuture: anAmountOfFuture
+	! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:37:53'!
+ERROR!
+!Shop class methodsFor: 'errors' stamp: 'AW 6/24/2021 00:38:03'!
+expiredCartErrorDescription
+	self shouldBeImplemented.! !
+!Shop class methodsFor: 'errors' stamp: 'AW 6/24/2021 00:38:25' prior: 50349432!
+expiredCartErrorDescription
+	^'The cart is expired!!'.! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:38:30'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:43:32'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:43:40'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:44:47' prior: 50348615!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	self assertCartNotExpired: aShoppingCartId.
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:45:05'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:45:11'!
+assertCartNotExpired: aSmallInteger 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'AW 6/24/2021 00:49:07'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:49:03' prior: 50349465!
+assertCartNotExpired: aCartId 
+	(timeProvider now distanceTo: (self getCreationTime: aCartId) > 30 * minute) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:49:33' prior: 50347915!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+	
+		
+
+		! !
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:50:00'!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+	
+		
+
+		! !
+!Shop class methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:50:00' prior: 50348883!
+withUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+
+	^self new initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
+
+!methodRemoval: Shop #initializeWithUserAuthenticator:prices:merchantProcessor: stamp: 'AW 6/24/2021 00:50:00'!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor   
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+	
+		
+
+		!
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:50:09' prior: 50349503!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+	timeProvider := aTimeProvider.
+		
+	
+		
+
+		! !
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:50:13' prior: 50349548!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+	timeProvider := aTimeProvider.		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+
+		
+	
+		
+
+		! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 00:50:16'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:50:16'!
+ERROR!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:50:20'!
+ERROR!
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:50:32'!
+now
+	self shouldBeImplemented.! !
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:51:10' prior: 50349616!
+now
+	GregorianDateTime now.! !
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:51:14' prior: 50349621!
+now
+	^GregorianDateTime now.! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:51:17'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:51:26'!
+getCreationTime: aSmallInteger 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:51:43' prior: 50349632!
+getCreationTime: aCartId 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:52:04' prior: 50349637!
+getCreationTime: aCartId 
+	^GregorianDateTime now.! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:52:06'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:52:46' prior: 50349479!
+assertCartNotExpired: aCartId 
+	((timeProvider now distanceTo: (self getCreationTime: aCartId)) > 30 * minute) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:52:48'!
+FAILURE!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:53:04'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:54:00' prior: 50349649!
+assertCartNotExpired: aCartId 
+	((timeProvider now distanceTo: (self getCreationTime: aCartId)) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 00:54:09'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 00:54:11'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 00:54:11'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 00:54:11'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 00:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 00:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 00:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:54:13'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:54:51'!
+FAILURE!
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:57:22' prior: 50349426!
+toTheFuture: anAmountOfFuture
+	self now next: anAmountOfFuture.! !
+
+!classDefinition: #MockTimeProvider category: 'Tus-Libros' stamp: 'AW 6/24/2021 00:57:59'!
+Object subclass: #MockTimeProvider
+	instanceVariableNames: 'now'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:57:56' prior: 50349691!
+toTheFuture: anAmountOfFuture
+	now := now next: anAmountOfFuture.! !
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:59:25' overrides: 16896425!
+initialize
+
+	now := GregorianDateTime now.! !
+!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:59:41' prior: 50349626!
+now
+	^now.! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 00:59:46'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:00:19'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:01:26'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:02:05' prior: 50349662!
+assertCartNotExpired: aCartId 
+	self halt.
+	((timeProvider now distanceTo: (self getCreationTime: aCartId)) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+(self getCreationTime: aCartId)!
+
+timeProvider now!
+
+timeProvider now distanceTo: (self getCreationTime: aCartId)!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:04:02' prior: 50349725!
+assertCartNotExpired: aCartId 
+	self halt.
+	((timeProvider now distanceTo: (self getCreationTime: aCartId)) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:06:45'!
+FAILURE!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:06:53'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:08:38' prior: 50349738!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+	self halt.
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:08:51'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:10:23'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:10:27'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:10:32'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:10:34' prior: 50349752!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:10:36' prior: 50349796!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:10:38'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:11:00' prior: 50349807!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:11:05' prior: 50349849!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:11:39' prior: 50349860!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	((cartCreationTime distanceTo: now) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:12:18' prior: 50349871!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now cartAge |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	cartAge _ cartCreationTime distanceTo: now.
+	((cartAge) > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:12:47' prior: 50349882!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now cartAge |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	cartAge := cartCreationTime distanceTo: now.
+	(cartAge > (30 * minute)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:13:32'!
+maxCartAge
+
+	^ 30 * minute! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:13:32' prior: 50349894!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now cartAge |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	cartAge := cartCreationTime distanceTo: now.
+	(cartAge > (self maxCartAge)) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:13:37' prior: 50349910!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now cartAge |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	cartAge := cartCreationTime distanceTo: now.
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:13:39'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:14:50' prior: 50349922!
+assertCartNotExpired: aCartId 
+	| cartCreationTime now cartAge |
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	cartCreationTime distanceTo: now.
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:15:30'!
+getCartAgeFor: aCartId
+	| cartCreationTime now |
+	
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	^cartCreationTime distanceTo: now.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:15:39' prior: 50349977!
+getCartAgeFor: aCartId
+	| cartCreationTime now |
+	
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	
+	^cartCreationTime distanceTo: now.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:16:23' prior: 50349964!
+assertCartNotExpired: aCartId 
+
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:16:25' prior: 50349994!
+assertCartNotExpired: aCartId 
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:17:04'!
+assertCartIsNotExpired: aCartId 
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:17:04' prior: 50349449!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	self assertCartIsNotExpired: aShoppingCartId.
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!methodRemoval: Shop #assertCartNotExpired: stamp: 'AW 6/24/2021 01:17:04'!
+assertCartNotExpired: aCartId 
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:17:49' prior: 50349396!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:18:05' prior: 50350043!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:18:12'!
+test15
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:18:17'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:20:33' prior: 50350089!
+test15
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	cartId := shop createCartClientId: clientId password: password.
+		
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:20:36'!
+FAILURE!
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'AW 6/24/2021 01:21:56'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider cartCreationTimes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:21:52' prior: 50349642!
+getCreationTime: aCartId 
+	^cartCreationTimes at: aCartId.! !
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:21:59'!
+FAILURE!
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 01:22:19' prior: 50349566!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+	cartCreationTimes := Dictionary new. 
+	timeProvider := aTimeProvider.		
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+
+		
+	
+		
+
+		! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:22:56' prior: 50347905!
+createCartAndGetIdFor: aClientId
+	| cartId |
+	carts add: ShoppingCart new.
+	
+	cartId := carts size.
+	
+	cartsClients at: cartId put: aClientId. 
+	cartCreationTimes at: cartId put: timeProvider now.
+	
+	^ cartId.! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:23:32'!
+FAILURE!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:23:32'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:23:32'!
+FAILURE!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:23:59'!
+FAILURE!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:23:59'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:23:59'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:25:35' prior: 50350021!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	self assertCartIsNotExpired: aShoppingCartId.
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:25:43'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:25:46'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:27:00' prior: 50350067!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop add: 12 of: stubs book1 to: cartId ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:27:04'!
+FAILURE!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:27:12' prior: 50350148!
+test15
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop add: 12 of: stubs book1 to: cartId ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:27:17'!
+test16
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop add: 12 of: stubs book1 to: cartId ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:20:33' prior: 50350361!
+test15
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	cartId := shop createCartClientId: clientId password: password.
+		
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	
+	! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:18:05' prior: 50350336!
+test14
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test16 stamp: 'AW 6/24/2021 01:27:57'!
+FAILURE!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:40' prior: 50347775!
+getCart: aShoppingCartId
+
+	self assertCartExists: aShoppingCartId.
+	self assertCartIsNotExpired: aShoppingCartId.
+	
+	^ carts at: aShoppingCartId! !
+
+!testRun: #ShopTest #test16 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+
+!testRun: #ShopTest #test16 stamp: 'AW 6/24/2021 01:28:41'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:48' prior: 50350287!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:50' prior: 50350498!
+checkOut: aShoppingCartId payingWith: aCreditCard 
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+
+!testRun: #ShopTest #test01 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test02 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test03 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test04 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test05 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test06 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test07 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test08 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test09 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test10 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test11 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test12 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test13 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test14 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test15 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+
+!testRun: #ShopTest #test16 stamp: 'AW 6/24/2021 01:28:52'!
+PASSED!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:32:59'!
+test01InvalidClientShallNotPass
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	! !
+
+!methodRemoval: ShopTest #test01 stamp: 'AW 6/24/2021 01:33:04'!
+test01
+	
+	| shop |
+	
+	shop := Shop
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: false) 
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	self should: [ shop createCartClientId: 3 password: '123'. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.	
+	
+	!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:37:38'!
+test02NewCartsAreEmpty
+	
+	| shop cartId cartItems |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:38:17'!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:38:40'!
+test04ListInvalidCartShouldRaiseError
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+
+!methodRemoval: ShopTest #test04 stamp: 'AW 6/24/2021 01:38:42'!
+test04
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop listCart: 15 ]
+		raise: Error - MessageNotUnderstood 
+		withMessageText: Shop invalidCartIdErrorDescription.
+	!
+
+!methodRemoval: ShopTest #test03 stamp: 'AW 6/24/2021 01:38:45'!
+test03
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: cartItems first quantity equals: quantity.
+	self assert: cartItems first item equals: bookIsbn.!
+
+!methodRemoval: ShopTest #test02 stamp: 'AW 6/24/2021 01:38:47'!
+test02
+	
+	| shop cartId cartItems |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems isEmpty.!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:39:39'!
+test05AddItemToCartDoesntModifyOtherCarts
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+
+!methodRemoval: ShopTest #test05 stamp: 'AW 6/24/2021 01:39:41'!
+test05
+	
+	| shop bookIsbn cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:40:21'!
+test06CheckoutInvalidCartIdShouldRaiseError
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	! !
+
+!methodRemoval: ShopTest #test06 stamp: 'AW 6/24/2021 01:40:23'!
+test06
+	
+	| shop |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	self should: [ shop checkOut: 16 payingWith: creditCard1 ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop invalidCartIdErrorDescription.
+	!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:40:45'!
+test07CheckoutUsesTheCashier
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	! !
+
+!methodRemoval: ShopTest #test07 stamp: 'AW 6/24/2021 01:40:47'!
+test07
+	
+	| shop cartId |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 15 password: '1234'.
+	
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	!
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:43:21'!
+test08ListPurchasesOnOnlyOneBuyClient
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 100.
+	self assert: purchases items size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+
+!methodRemoval: ShopTest #test08 stamp: 'AW 6/24/2021 01:43:23'!
+test08
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 100.
+	self assert: purchases items size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	!
+
+----QUIT----(24 June 2021 01:43:58) TusLibros.image priorSource: 487097!
