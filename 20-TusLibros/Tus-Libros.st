@@ -829,6 +829,16 @@ createReceiptWithTotal: anAmountOfMoney cart: aShoppingCart
 	
 	^receipt .! !
 
+!Cashier methodsFor: 'private' stamp: 'nz 6/23/2021 01:37:45'!
+getEntriesAsBag: aShoppingCart 
+	
+	| aBag |
+	aBag := Bag new.
+	
+	aShoppingCart entries do: [ :entry | aBag add: entry item withOccurrences: entry quantity ].
+	
+	^aBag.! !
+
 !Cashier methodsFor: 'private' stamp: 'nz 6/14/2021 18:55:26'!
 priceFor: aShoppingCartEntry
 	
@@ -881,17 +891,6 @@ assertCardIsValid: aCreditCard on: aGregorianDate
 	aCreditCard hasValidOwnerName ifFalse: [
 		self error: self class invalidCreditCardOwnerNameErrorDescription.	
 	].! !
-
-
-!Cashier methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 01:37:45'!
-getEntriesAsBag: aShoppingCart 
-	
-	| aBag |
-	aBag := Bag new.
-	
-	aShoppingCart entries do: [ :entry | aBag add: entry item withOccurrences: entry quantity ].
-	
-	^aBag.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1053,18 +1052,20 @@ Object subclass: #MockTimeProvider
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:59:25'!
-initialize
+!MockTimeProvider methodsFor: 'time traveling' stamp: 'AW 6/24/2021 00:57:56'!
+toTheFuture: anAmountOfFuture
+	now := now next: anAmountOfFuture.! !
 
-	now := GregorianDateTime now.! !
 
-!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:59:41'!
+!MockTimeProvider methodsFor: 'accessing time' stamp: 'AW 6/24/2021 00:59:41'!
 now
 	^now.! !
 
-!MockTimeProvider methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:57:56'!
-toTheFuture: anAmountOfFuture
-	now := now next: anAmountOfFuture.! !
+
+!MockTimeProvider methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:59:25'!
+initialize
+
+	now := GregorianDateTime now.! !
 
 
 !classDefinition: #MockUserAuthenticator category: 'Tus-Libros'!
@@ -1149,11 +1150,11 @@ Object subclass: #PurchasesSummary
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!PurchasesSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 00:25:00'!
+!PurchasesSummary methodsFor: 'accessing' stamp: 'nz 6/23/2021 00:25:00'!
 items
 	^ items. ! !
 
-!PurchasesSummary methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 00:24:54'!
+!PurchasesSummary methodsFor: 'accessing' stamp: 'nz 6/23/2021 00:24:54'!
 total
 	^total.! !
 
@@ -1195,14 +1196,13 @@ initializeWithTotal: aTransactionTotal items: aBagOfItems
 	items := aBagOfItems.! !
 
 
+!Receipt methodsFor: 'accessing' stamp: 'nz 6/23/2021 01:40:20'!
+items
+	^items.! !
+
 !Receipt methodsFor: 'accessing' stamp: 'nz 6/14/2021 18:49:08'!
 total
 	^total.! !
-
-
-!Receipt methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 01:40:20'!
-items
-	^items.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1223,39 +1223,17 @@ Object subclass: #Shop
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:34:42'!
+!Shop methodsFor: 'facade' stamp: 'AW 6/23/2021 23:34:42'!
 add: aQuantity of: anItem to: aShoppingCartId
 	
 	(self getCart: aShoppingCartId) add: aQuantity of: anItem! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:01:59'!
-assertCartExists: aShoppingCartId
-	
-	(self cartExists: aShoppingCartId ) 
-		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
-! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:17:04'!
-assertCartIsNotExpired: aCartId 
-	| cartAge |
-	cartAge := self getCartAgeFor: aCartId. 
-	(cartAge > self maxCartAge) 
-		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:40:21'!
-authenticateClient: aClientId withPassword: aPassword
-	
-	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
-		self error: self class incorrectPasswordOrClientIdErrorDescription .
-	]! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:13'!
-cartExists: aShoppingCartId
-
-	^ carts size < aShoppingCartId! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:50'!
+!Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:38:48'!
 checkOut: aShoppingCartId payingWith: aCreditCard 
+	"
+	Acá quedo expuesta la clase de la tarjeta de credito.
+	"
+	
 	| cart clientId receipt |
 	
 	cart := self getCart: aShoppingCartId. 
@@ -1266,7 +1244,46 @@ checkOut: aShoppingCartId payingWith: aCreditCard
 	self registerReceipt: receipt for: clientId.
 ! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:22:56'!
+!Shop methodsFor: 'facade' stamp: 'AW 6/24/2021 00:11:58'!
+createCartClientId: aClientId password: aPassword
+
+	self authenticateClient: aClientId withPassword: aPassword.
+
+	^self createCartAndGetIdFor: aClientId.! !
+
+!Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:39:35'!
+listCart: aShoppingCartId 
+	"
+	Aca nos quedo expuesta la clase ShoppingCartEntry
+	Despues de definir PurchasesSummary pensamos en
+	refactorizar el carrito para que use una Bag pero
+	no llegamos con ese refactor.
+	"
+	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ]. 
+ 	
+	^self getCartEntries: aShoppingCartId.! !
+
+!Shop methodsFor: 'facade' stamp: 'AW 6/23/2021 23:42:03'!
+listPurchasesOf: aClientId with: aClientPassword
+	
+	self authenticateClient: aClientId withPassword: aClientPassword.
+	
+	^ PurchasesSummary for: (self receiptsFor: aClientId).! !
+
+
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 00:01:59'!
+assertCartExists: aShoppingCartId
+	
+	(self cartExists: aShoppingCartId ) 
+		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
+! !
+
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/22/2021 22:06:13'!
+cartExists: aShoppingCartId
+
+	^ carts size < aShoppingCartId! !
+
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 01:22:56'!
 createCartAndGetIdFor: aClientId
 	| cartId |
 	carts add: ShoppingCart new.
@@ -1278,14 +1295,7 @@ createCartAndGetIdFor: aClientId
 	
 	^ cartId.! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:11:58'!
-createCartClientId: aClientId password: aPassword
-
-	self authenticateClient: aClientId withPassword: aPassword.
-
-	^self createCartAndGetIdFor: aClientId.! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:40'!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 01:28:40'!
 getCart: aShoppingCartId
 
 	self assertCartExists: aShoppingCartId.
@@ -1293,7 +1303,25 @@ getCart: aShoppingCartId
 	
 	^ carts at: aShoppingCartId! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:15:39'!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/22/2021 22:00:46'!
+getCartEntries: aShoppingCartId
+
+	^ (self getCart: aShoppingCartId) entries! !
+
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 00:08:15'!
+getClientIdOf: aCartId 
+	
+	^cartsClients at: aCartId .! !
+
+
+!Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:17:04'!
+assertCartIsNotExpired: aCartId 
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
+		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
+
+!Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:15:39'!
 getCartAgeFor: aCartId
 	| cartCreationTime now |
 	
@@ -1302,51 +1330,31 @@ getCartAgeFor: aCartId
 	
 	^cartCreationTime distanceTo: now.! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:00:46'!
-getCartEntries: aShoppingCartId
-
-	^ (self getCart: aShoppingCartId) entries! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:08:15'!
-getClientIdOf: aCartId 
-	
-	^cartsClients at: aCartId .! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:21:52'!
+!Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:21:52'!
 getCreationTime: aCartId 
 	^cartCreationTimes at: aCartId.! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:19'!
-listCart: aShoppingCartId 
-	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ]. 
- 	
-	^self getCartEntries: aShoppingCartId.! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:42:03'!
-listPurchasesOf: aClientId with: aClientPassword
-	
-	self authenticateClient: aClientId withPassword: aClientPassword.
-	
-	^ PurchasesSummary for: (self receiptsFor: aClientId).! !
-
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:13:32'!
+!Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:13:32'!
 maxCartAge
 
 	^ 30 * minute! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:41:33'!
+
+
+!Shop methodsFor: 'client receipts' stamp: 'AW 6/23/2021 23:41:33'!
 receiptsFor: aClientId
 
 	^ clientReceipts at: aClientId! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:04:08'!
+!Shop methodsFor: 'client receipts' stamp: 'AW 6/23/2021 23:04:08'!
 registerReceipt: aReceipt for: aClientId 
 	| receipts |
 	receipts := clientReceipts at: aClientId ifAbsentPut: OrderedCollection new.
 	
 	receipts add: aReceipt.! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'nz 6/23/2021 01:11:36'!
+
+!Shop methodsFor: 'time provider' stamp: 'nz 6/23/2021 01:11:36'!
 today
 	^FixedGregorianDate today.! !
 
@@ -1371,6 +1379,14 @@ initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchant
 		
 
 		! !
+
+
+!Shop methodsFor: 'user authentication' stamp: 'AW 6/23/2021 23:40:21'!
+authenticateClient: aClientId withPassword: aPassword
+	
+	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
+		self error: self class incorrectPasswordOrClientIdErrorDescription .
+	]! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

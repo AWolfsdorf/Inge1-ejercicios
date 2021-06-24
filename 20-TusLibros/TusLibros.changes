@@ -19172,3 +19172,41 @@ test16
 		withMessageText: Shop expiredCartErrorDescription.
 	
 	!
+!Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:37:41' prior: 50343371!
+                 listCart: aShoppingCartId 
+	"
+	Aca nos quedo expuesta la clase ShoppingCartEntry
+	Pensamos refactorizar el carrito para que use una Bag pero
+	no llegamos con ese refactor.
+	"
+	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ]. 
+ 	
+	^self getCartEntries: aShoppingCartId.! !
+!Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:38:48' prior: 50350511!
+                 checkOut: aShoppingCartId payingWith: aCreditCard 
+	"
+	Acá quedo expuesta la clase de la tarjeta de credito.
+	"
+	
+	| cart clientId receipt |
+	
+	cart := self getCart: aShoppingCartId. 
+	clientId := self getClientIdOf: aShoppingCartId.
+	
+	receipt := cashier checkOut: cart payingWith: aCreditCard on: self today.
+	
+	self registerReceipt: receipt for: clientId.
+! !
+!Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:39:35' prior: 50351280!
+          listCart: aShoppingCartId 
+	"
+	Aca nos quedo expuesta la clase ShoppingCartEntry
+	Despues de definir PurchasesSummary pensamos en
+	refactorizar el carrito para que use una Bag pero
+	no llegamos con ese refactor.
+	"
+	(self cartExists: aShoppingCartId) ifTrue: [ self error: self class invalidCartIdErrorDescription ]. 
+ 	
+	^self getCartEntries: aShoppingCartId.! !
+
+----QUIT----(24 June 2021 16:46:28) TusLibros.image priorSource: 614082!
