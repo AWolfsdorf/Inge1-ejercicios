@@ -368,8 +368,8 @@ setUp
 
 	stubs := TestStubs new.! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:51'!
-test01
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:32:59'!
+test01InvalidClientShallNotPass
 	
 	| shop |
 	
@@ -385,8 +385,8 @@ test01
 	
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:48'!
-test02
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:37:38'!
+test02NewCartsAreEmpty
 	
 	| shop cartId cartItems |
 	
@@ -402,8 +402,8 @@ test02
 	
 	self assert: cartItems isEmpty.! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:41'!
-test03
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:38:17'!
+test03ListCartWithOneItem
 	
 	| shop cartId cartItems bookIsbn quantity |
 	
@@ -426,8 +426,8 @@ test03
 	self assert: cartItems first quantity equals: quantity.
 	self assert: cartItems first item equals: bookIsbn.! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test04
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:38:40'!
+test04ListInvalidCartShouldRaiseError
 	
 	| shop |
 	
@@ -438,8 +438,8 @@ test04
 		withMessageText: Shop invalidCartIdErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:36'!
-test05
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:39:39'!
+test05AddItemToCartDoesntModifyOtherCarts
 	
 	| shop bookIsbn cartId1 cartId2 quantity |
 	
@@ -456,8 +456,8 @@ test05
 	self assert: (shop listCart: cartId2) isEmpty.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test06
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:40:21'!
+test06CheckoutInvalidCartIdShouldRaiseError
 	
 	| shop |
 	
@@ -468,8 +468,8 @@ test06
 		withMessageText: Shop invalidCartIdErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test07
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:40:45'!
+test07CheckoutUsesTheCashier
 	
 	| shop cartId |
 	
@@ -482,8 +482,8 @@ test07
 		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test08
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:43:21'!
+test08ListPurchasesOnOnlyOneBuyClient
 	
 	| shop cartId clientId password purchases |
 	
@@ -503,8 +503,8 @@ test08
 	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test09
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:21:59'!
+test09ListPurchasesOfManyItemsByOneClient
 	
 	| shop cartId clientId password purchases |
 	
@@ -530,8 +530,8 @@ test09
 	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test10
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:22:34'!
+test10CheckoutWithInvalidCreditCardShouldFail
 	
 	| shop cartId clientId password |
 	
@@ -551,8 +551,8 @@ test10
 		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test11
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:23:14'!
+test11ListMultiplePurchasesOfTheSameClient
 	
 	| shop cartId clientId password purchases cartId2 |
 	
@@ -580,8 +580,8 @@ test11
 	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test12
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:23:52'!
+test12ListPurchasesOfIncorrectPasswordShouldFail
 	
 	| shop clientId password |
 	
@@ -595,8 +595,8 @@ test12
 		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:30:35'!
-test13
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:24:14'!
+test13ListPurchasesOfDifferentClients
 	
 	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
 	
@@ -626,8 +626,8 @@ test13
 	self assert: 2 equals: client2purchases items size.
 	! !
 
-!ShopTest methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:37:14'!
-test14
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:25:02'!
+test14CheckingOutAnExpiredCardShouldFail
 	
 	| shop cartId password clientId timeProvider |
 	
@@ -646,6 +646,56 @@ test14
 	timeProvider toTheFuture: 31 * minute.
 	
 	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:27:57'!
+test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	cartId := shop createCartClientId: clientId password: password.
+		
+	self should: [ shop checkOut: cartId payingWith: stubs validCreditCard ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
+	
+	! !
+
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 6/24/2021 16:28:15'!
+test16AddingItemsToAnExpiredCartShouldFail
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop add: 12 of: stubs book1 to: cartId ]
 		raise: Error - MessageNotUnderstood
 		withMessageText: Shop expiredCartErrorDescription.
 	
@@ -1165,7 +1215,7 @@ withTotal: aTransactionTotal items: aBagOfItems
 
 !classDefinition: #Shop category: 'Tus-Libros'!
 Object subclass: #Shop
-	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider'
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider cartCreationTimes'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
@@ -1182,9 +1232,11 @@ assertCartExists: aShoppingCartId
 		ifTrue: [ self error: self class invalidCartIdErrorDescription ].
 ! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:54:00'!
-assertCartNotExpired: aCartId 
-	((timeProvider now distanceTo: (self getCreationTime: aCartId)) > (30 * minute)) 
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:17:04'!
+assertCartIsNotExpired: aCartId 
+	| cartAge |
+	cartAge := self getCartAgeFor: aCartId. 
+	(cartAge > self maxCartAge) 
 		ifTrue: [ self error: self class expiredCartErrorDescription ].! !
 
 !Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:40:21'!
@@ -1199,11 +1251,9 @@ cartExists: aShoppingCartId
 
 	^ carts size < aShoppingCartId! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:44:47'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:50'!
 checkOut: aShoppingCartId payingWith: aCreditCard 
 	| cart clientId receipt |
-	
-	self assertCartNotExpired: aShoppingCartId.
 	
 	cart := self getCart: aShoppingCartId. 
 	clientId := self getClientIdOf: aShoppingCartId.
@@ -1213,7 +1263,7 @@ checkOut: aShoppingCartId payingWith: aCreditCard
 	self registerReceipt: receipt for: clientId.
 ! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:13:42'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:22:56'!
 createCartAndGetIdFor: aClientId
 	| cartId |
 	carts add: ShoppingCart new.
@@ -1221,6 +1271,7 @@ createCartAndGetIdFor: aClientId
 	cartId := carts size.
 	
 	cartsClients at: cartId put: aClientId. 
+	cartCreationTimes at: cartId put: timeProvider now.
 	
 	^ cartId.! !
 
@@ -1231,12 +1282,22 @@ createCartClientId: aClientId password: aPassword
 
 	^self createCartAndGetIdFor: aClientId.! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:01:40'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:28:40'!
 getCart: aShoppingCartId
 
 	self assertCartExists: aShoppingCartId.
+	self assertCartIsNotExpired: aShoppingCartId.
 	
 	^ carts at: aShoppingCartId! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:15:39'!
+getCartAgeFor: aCartId
+	| cartCreationTime now |
+	
+	cartCreationTime := self getCreationTime: aCartId.
+	now := timeProvider now.
+	
+	^cartCreationTime distanceTo: now.! !
 
 !Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:00:46'!
 getCartEntries: aShoppingCartId
@@ -1248,9 +1309,9 @@ getClientIdOf: aCartId
 	
 	^cartsClients at: aCartId .! !
 
-!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 00:52:04'!
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:21:52'!
 getCreationTime: aCartId 
-	^GregorianDateTime now.! !
+	^cartCreationTimes at: aCartId.! !
 
 !Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/22/2021 22:06:19'!
 listCart: aShoppingCartId 
@@ -1264,6 +1325,11 @@ listPurchasesOf: aClientId with: aClientPassword
 	self authenticateClient: aClientId withPassword: aClientPassword.
 	
 	^ PurchasesSummary for: (self receiptsFor: aClientId).! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/24/2021 01:13:32'!
+maxCartAge
+
+	^ 30 * minute! !
 
 !Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/23/2021 23:41:33'!
 receiptsFor: aClientId
@@ -1282,13 +1348,14 @@ today
 	^FixedGregorianDate today.! !
 
 
-!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 00:50:13'!
+!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 01:22:19'!
 initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
 	
 	userAuthenticator := anUserAuthenticator.
 	carts := OrderedCollection new.
 	clientReceipts  := Dictionary new. 
 	cartsClients := Dictionary new. 
+	cartCreationTimes := Dictionary new. 
 	timeProvider := aTimeProvider.		
 	cashier := Cashier
 		withPrices: aPriceList
