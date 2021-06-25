@@ -208,7 +208,7 @@ test04CheckoutItemWithoutPricesShouldRaiseError
 	self assert: receiptBook isEmpty.! !
 
 
-!CheckOutTest methodsFor: 'setUp/tearDown' stamp: 'AW 6/24/2021 00:23:52'!
+!CheckOutTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/24/2021 21:45:35'!
 setUp
 
 	today _ FixedGregorianDate today.
@@ -250,7 +250,7 @@ setUp
 	book2 := stubs book2.
 	
 	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
-	mockAlwaysOkMerchantProcessor _ stubs mockAlwaysOkMerchantProcessor: stubs timeProvider.
+	mockAlwaysOkMerchantProcessor _ stubs mockAlwaysOkMerchantProcessor.
 	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
 	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
 
