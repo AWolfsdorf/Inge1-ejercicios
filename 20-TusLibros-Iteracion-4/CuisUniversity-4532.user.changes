@@ -1,0 +1,383 @@
+
+
+----STARTUP---- (24 June 2021 21:36:33) as /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+----End fileIn of /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/Tus-Libros.st----!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/24/2021 21:37:27'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/24/2021 21:38:02'!
+PASSED!
+!CheckOutTest methodsFor: 'setUp/tearDown' stamp: 'nz 6/24/2021 21:38:37' prior: 50331895 overrides: 16927572!
+setUp
+
+	today _ FixedGregorianDate today.
+	currentMonth _ today monthOfYear.
+	
+	creditCardNumber _ '4182418241824182'.
+	cardOwner _ 'PEPE SANCHEZ'.
+
+	stubs := TestStubs new.
+
+	validCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth next.
+	
+	expiredCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth previous.
+		
+	expiredThisMonthCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: cardOwner
+		expiration: currentMonth.
+		
+	invalidNumberCreditCard _ stubs invalidNumberCreditCard.
+		
+	emptyOwnerCreditCard _ CreditCard
+		number: creditCardNumber
+		owner: ''
+		expiration: currentMonth next.
+		
+	emptyOwnerCreditCard2 _ CreditCard
+		number: creditCardNumber
+		owner: '            '
+		expiration: currentMonth next.
+		
+	book1 := stubs book1.
+	book2 := stubs book2.
+	
+	mockAlwaysStolenCardMerchantProcessor _ MockAlwaysStolenCardMerchantProcessor new.
+	mockAlwaysOkMerchantProcessor _ stubs mockAlwaysOkMerchantProcessor.
+	mockAlwaysFakeCardMerchantProcessor _ MockAlwaysFakeCardMerchantProcessor new.
+	mockAlwaysWithoutCreditCardMerchantProcessor _ MockAlwaysWithoutCreditCardMerchantProcessor new.! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/24/2021 21:38:50'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/24/2021 21:38:51'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/24/2021 21:38:52'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/24/2021 21:38:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/24/2021 21:38:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/24/2021 21:38:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/24/2021 21:38:53'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/24/2021 21:38:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/24/2021 21:38:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/24/2021 21:38:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/24/2021 21:38:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/24/2021 21:38:54'!
+PASSED!
+
+----End fileIn of /home/nikita/r/f/ingsoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/StringsServicesServer.st----!
+
+ssri := StringsServicesRestInterface listeningOn: 8080.!
+
+Smalltalk allObjectsDo: [
+	:obj |
+	(obj isKindOf: StringsServicesRestInterface)
+	ifTrue: [ obj stopListening. ]
+].!
+
+
+servers : OrderedCollection new.!
+
+
+servers := OrderedCollection new.!
+
+Smalltalk allObjectsDo: [
+	:obj |
+	(obj isKindOf: StringsServicesRestInterface)
+	ifTrue: [ servers add: obj. ]
+].!
+
+servers!
+
+
+servers do: [ :srv | srv stopListening ].!
+
+
+servers do: [ :srv | srv destroy ].!
+
+servers := OrderedCollection new.
+!
+
+
+Smalltalk allObjectsDo: [
+  :obj |
+  (obj isKindOf: StringsServicesRestInterface)
+  ifTrue: [ servers add: obj. ]
+].!
+
+servers!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 6/24/2021 22:13:15'!
+PASSED!
+
+----QUIT----(24 June 2021 22:13:29) CuisUniversity-4532.image priorSource: 18058935!
