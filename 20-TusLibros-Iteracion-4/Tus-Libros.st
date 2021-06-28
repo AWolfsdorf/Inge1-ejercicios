@@ -397,7 +397,7 @@ test02NewCartsAreEmpty
 	
 	self assert: cartItems isEmpty.! !
 
-!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/24/2021 01:38:17'!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/27/2021 23:56:50'!
 test03ListCartWithOneItem
 	
 	| shop cartId cartItems bookIsbn quantity |
@@ -418,8 +418,8 @@ test03ListCartWithOneItem
 	cartItems := shop listCart: cartId.
 	
 	self assert: cartItems size equals: 1.
-	self assert: cartItems first quantity equals: quantity.
-	self assert: cartItems first item equals: bookIsbn.! !
+	self assert: (cartItems first at: 'quantity') equals: quantity.
+	self assert: (cartItems first at: 'item') equals: bookIsbn.! !
 
 !ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/24/2021 01:38:40'!
 test04ListInvalidCartShouldRaiseError
@@ -1302,15 +1302,25 @@ getCart: aShoppingCartId
 	
 	^ carts at: aShoppingCartId! !
 
-!Shop methodsFor: 'cart persistence' stamp: 'AW 6/22/2021 22:00:46'!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:03:09'!
 getCartEntries: aShoppingCartId
 
-	^ (self getCart: aShoppingCartId) entries! !
+	^ self getEntriesAsDictionary: (self getCart: aShoppingCartId) entries.! !
 
 !Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 00:08:15'!
 getClientIdOf: aCartId 
 	
 	^cartsClients at: aCartId .! !
+
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:13:56'!
+getEntriesAsDictionary: aEntryList
+
+	^ (aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+		entryDictionary
+	]) asArray.! !
 
 
 !Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:17:04'!
@@ -1409,6 +1419,42 @@ invalidCartIdErrorDescription
 withUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
 
 	^self new initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
+
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: 'userAuthenticator priceList merchantProcessor timeProvider'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!ShopConfiguration methodsFor: 'initialization' stamp: 'AW 6/27/2021 22:57:37'!
+initializeWithUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+	userAuthenticator := aUserAuthenticator.
+	priceList := aPriceList.
+	merchantProcessor := aMerchantProcessor.
+	timeProvider := aTimeProvider.! !
+
+
+!ShopConfiguration methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:05:19'!
+createShop
+	^Shop 
+		withUserAuthenticator: userAuthenticator 
+		prices: priceList 
+		merchantProcessor: merchantProcessor 
+		timeProvider: timeProvider.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'ShopConfiguration class' category: 'Tus-Libros'!
+ShopConfiguration class
+	instanceVariableNames: ''!
+
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:57:11'!
+withUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+
+
+	^self new initializeWithUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
 
 
 !classDefinition: #ShoppingCart category: 'Tus-Libros'!
@@ -1573,3 +1619,89 @@ timeProvider
 today
 
 	^ FixedGregorianDate today.! !
+
+
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:56:07'!
+mockUserAuthenticatorAlwaysReturning: aBoolean
+	^MockUserAuthenticator alwaysReturning: aBoolean.! !
+
+
+!classDefinition: #TusLibrosRestInterface category: 'Tus-Libros'!
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: 'webServer port shop'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:24'!
+addService: aRouteString action: aBlockClosure
+
+	webServer addService: aRouteString action: aBlockClosure.! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:37:37'!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartId _ (request fields at: 'cartId') asNumber .
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:29'!
+createShopFrom: aShopConfiguration 
+	^aShopConfiguration createShop.! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:56'!
+destroy
+	webServer ifNotNil: [ webServer destroy ].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:01:50'!
+initializeOn: aPort shopConfiguration: aShopConfiguration 
+
+	shop := self createShopFrom: aShopConfiguration.
+	port := aPort.
+	webServer := WebServer new listenOn: self port.
+	
+	self configRoutes.! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:37:13'!
+port
+
+	^port ifNil: [ port _ 8080].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:45:09'!
+startListening
+	webServer startListener.
+	^ 'Listening on port: ' , self port asString.! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:45:14'!
+stopListening
+	webServer stopListener.
+	^ 'Stopped listening from port: ' , self port asString.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TusLibrosRestInterface class' category: 'Tus-Libros'!
+TusLibrosRestInterface class
+	instanceVariableNames: ''!
+
+!TusLibrosRestInterface class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:59:35'!
+on: aPort shopConfiguration: aShopConfiguration 
+
+	^self new initializeOn: aPort shopConfiguration: aShopConfiguration! !

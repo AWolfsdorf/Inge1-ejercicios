@@ -381,3 +381,963 @@ PASSED!
 PASSED!
 
 ----QUIT----(24 June 2021 22:13:29) CuisUniversity-4532.image priorSource: 18058935!
+
+----STARTUP---- (27 June 2021 22:23:03) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #TusLibrosRestInterface category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:31:33'!
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: 'webServer port'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #TusLibrosRestInterface category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:31:51'!
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: 'webServer port'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!TusLibrosRestInterface class methodsFor: 'no messages' stamp: 'AW 6/27/2021 22:32:38'!
+on: aPort! !
+!TusLibrosRestInterface class methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:33:46' prior: 50333994!
+on: aPort
+
+	^self new withPort: aPort! !
+!TusLibrosRestInterface class methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:34:16' prior: 50333998!
+on: aPort
+
+	^self new initializeOn: aPort! !
+!TusLibrosRestInterface methodsFor: 'nil' stamp: 'AW 6/27/2021 22:36:08'!
+initializeOn: aPort
+
+	port := aPort.
+	
+	webServer := WebServer new listenOn: self port.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:37:13'!
+port
+
+	^port ifNil: [ port _ 8080].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:37:37' prior: 50334007!
+initializeOn: aPort
+
+	port := aPort.
+	
+	webServer := WebServer new listenOn: self port.
+	
+	self configRoutes.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:43:07'!
+configRoutes
+
+	self addService: '/sayHello' action: [ :request | request send200Response: 'Que ondas' ].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:24'!
+addService: aRouteString action: aBlockClosure
+
+	webServer addService: aRouteString action: aBlockClosure.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:56'!
+destroy
+	webServer ifNotNil: [ webServer destroy ].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:45:09'!
+startListening
+	webServer startListener.
+	^ 'Listening on port: ' , self port asString.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:45:14'!
+stopListening
+	webServer stopListener.
+	^ 'Stopped listening from port: ' , self port asString.! !
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080.!
+
+tusLibrosWebServer startListening.!
+
+tusLibrosWebServer stopListening !
+
+tusLibrosWebServer destroy !
+
+tusLibrosWebServer destroy.!
+
+stubs _ TestStubs new. !
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:55:12'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+
+shopConfiguration _ ShopConfiguration 
+		withUserAuthenticator: (stubs mockUserAuthenticatorAlwaysReturning: false)
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor
+		timeProvider: stubs timeProvider.!
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:55:35'!
+mockUserAuthenticatorAlwaysReturning: aFalse 
+	self shouldBeImplemented.! !
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:55:51' prior: 50334077!
+mockUserAuthenticatorAlwaysReturning: aFalse 
+	MockUserAuthenticator alwaysReturning: false.! !
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:56:07' prior: 50334083!
+mockUserAuthenticatorAlwaysReturning: aBoolean
+	^MockUserAuthenticator alwaysReturning: aBoolean.! !
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:56:18'!
+withUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aMockTimeProvider 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aMockTimeProvider ! !
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:56:44' prior: 50334095!
+withUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aMockTimeProvider 
+
+
+	^self new initializeWithUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aMockTimeProvider ! !
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:56:52' prior: 50334112!
+withUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aTimeProvider 
+
+
+	^self new initializeWithUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMockAlwaysOkMerchantProcessor timeProvider: aTimeProvider ! !
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:57:04' prior: 50334126!
+withUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+
+
+	^self new initializeWithUserAuthenticator: aMockUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
+!ShopConfiguration class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:57:11' prior: 50334140!
+withUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+
+
+	^self new initializeWithUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:57:26'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: 'userAuthenticator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:57:26'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: 'userAuthenticator priceList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:57:26'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: 'userAuthenticator priceList merchantProcessor'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #ShopConfiguration category: 'Tus-Libros' stamp: 'AW 6/27/2021 22:57:26'!
+Object subclass: #ShopConfiguration
+	instanceVariableNames: 'userAuthenticator priceList merchantProcessor timeProvider'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!ShopConfiguration methodsFor: 'initialization' stamp: 'AW 6/27/2021 22:57:26'!
+initializeWithUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+	self shouldBeImplemented.
+	userAuthenticator := aUserAuthenticator.
+	priceList := aPriceList.
+	merchantProcessor := aMerchantProcessor.
+	timeProvider := aTimeProvider.! !
+!ShopConfiguration methodsFor: 'initialization' stamp: 'AW 6/27/2021 22:57:37' prior: 50334198!
+initializeWithUserAuthenticator: aUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider 
+	userAuthenticator := aUserAuthenticator.
+	priceList := aPriceList.
+	merchantProcessor := aMerchantProcessor.
+	timeProvider := aTimeProvider.! !
+!TusLibrosRestInterface class methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:58:42'!
+on: aPort shopConfiguration: aShopConfiguration 
+
+	^self new initializeOn: aPort! !
+
+!methodRemoval: TusLibrosRestInterface class #on: stamp: 'AW 6/27/2021 22:58:42'!
+on: aPort
+
+	^self new initializeOn: aPort!
+!TusLibrosRestInterface class methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:59:04' prior: 50334223!
+on: aPort shopConfiguration: aShopConfiguration 
+
+	^self new initializeOn: aPort! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:59:35'!
+initializeOn: aPort shopConfiguration: aShopConfiguration 
+
+	port := aPort.
+	
+	webServer := WebServer new listenOn: self port.
+	
+	self configRoutes.! !
+!TusLibrosRestInterface class methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:59:35' prior: 50334234!
+on: aPort shopConfiguration: aShopConfiguration 
+
+	^self new initializeOn: aPort shopConfiguration: aShopConfiguration! !
+
+!methodRemoval: TusLibrosRestInterface #initializeOn: stamp: 'AW 6/27/2021 22:59:35'!
+initializeOn: aPort
+
+	port := aPort.
+	
+	webServer := WebServer new listenOn: self port.
+	
+	self configRoutes.!
+
+!classDefinition: #TusLibrosRestInterface category: 'Tus-Libros' stamp: 'AW 6/27/2021 23:01:52'!
+Object subclass: #TusLibrosRestInterface
+	instanceVariableNames: 'webServer port shop'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:01:50' prior: 50334240!
+initializeOn: aPort shopConfiguration: aShopConfiguration 
+
+	shop := self createShopFrom: aShopConfiguration.
+	port := aPort.
+	webServer := WebServer new listenOn: self port.
+	
+	self configRoutes.! !
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:02:22'!
+createShopFrom: aShopConfiguration 
+	self shouldBeImplemented.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:20' prior: 50334283!
+createShopFrom: aShopConfiguration 
+	^aShopConfiguration create.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:29' prior: 50334289!
+createShopFrom: aShopConfiguration 
+	^aShopConfiguration createShop.! !
+!ShopConfiguration methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:40'!
+createShop
+	self shouldBeImplemented.! !
+!ShopConfiguration methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:05:19' prior: 50334300!
+createShop
+	^Shop 
+		withUserAuthenticator: userAuthenticator 
+		prices: priceList 
+		merchantProcessor: merchantProcessor 
+		timeProvider: timeProvider.! !
+
+tusLibrosWebServer startListening .!
+
+tusLibrosWebServer destroy.!
+
+WebUtils jsonEncode: 'Hola'!
+
+WebUtils jsonEncode: 3 !
+
+WebUtils jsonEncode: Dictionary new!
+
+dict _ Dictionary new.!
+
+dict at: 'id' put: 'tumama'!
+
+WebUtils jsonEncode: dict.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:20:18' prior: 50334025!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		response _ Dictionary new.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		response at: 'cartId' put: cartId.
+		request send200Response: WebUtils jsonEncode: response.
+		
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:20:46' prior: 50334321!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		response _ Dictionary new.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:22:05' prior: 50334335!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		response _ Dictionary new.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:22:20' prior: 50334349!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:25:17' prior: 50334366!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:25:48' prior: 50334383!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartId _ request fields at: 'cartId'.
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. !
+
+tusLibrosWebServer startListening .!
+
+onfiguration 
+		withUserAuthenticator: (stubs mockUserAuthenticatorAlwaysReturning: true)
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor
+		timeProvider: stubs timeProvider. !
+
+
+shopConfiguration _ ShopConfiguration 
+		withUserAuthenticator: (stubs mockUserAuthenticatorAlwaysReturning: true)
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor
+		timeProvider: stubs timeProvider. !
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. !
+
+tusLibrosWebServer startListening.!
+
+tusLibrosWebServer destroy !
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+!
+
+tusLibrosWebServer startListening.
+!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+TusLibrosRestInterface allInstances destroy .!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].!
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. !
+
+tusLibrosWebServer startListening.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:37:15' prior: 50334408!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartId _ request fields at: 'cartId' asNumber .
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+
+tusLibrosWebServer startListening.
+!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:37:37' prior: 50334483!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartId _ (request fields at: 'cartId') asNumber .
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].! !
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+
+tusLibrosWebServer startListening.!
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+
+tusLibrosWebServer startListening.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+
+tusLibrosWebServer stopListening.
+tusLibrosWebServer destroy.!
+
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].!
+
+servers _ OrderedCollection new.!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/27/2021 23:56:19' prior: 50332084!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: (cartItems first at: 'quantity') equals: quantity.
+	self assert: (cartItems first at: 'item') equals: bookIsbn.! !
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/27/2021 23:56:50' prior: 50334562!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 1.
+	self assert: (cartItems first at: 'quantity') equals: quantity.
+	self assert: (cartItems first at: 'item') equals: bookIsbn.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/27/2021 23:57:11'!
+ERROR!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:02:16' prior: 50333132!
+getCartEntries: aShoppingCartId
+
+	^ (self getCart: aShoppingCartId) entries collect: [ :cartEntry | | ccc | 
+		ccc _ Dictionary new.
+		ccc at: 'item'	 put: cartEntry item.
+		ccc at: 'quantity'	 put: cartEntry quantity.
+	].! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:03:09' prior: 50334612!
+getCartEntries: aShoppingCartId
+
+	^ self getEntriesAsDictionary: (self getCart: aShoppingCartId) entries.! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:04:45'!
+getEntriesAsDictionary: aEntryList
+
+	^ aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+	].! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:04:58'!
+ERROR!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 00:04:58'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:04:58'!
+ERROR!
+
+self!
+
+self at: 0!
+
+self at: 1!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:07:30' prior: 50334628!
+getEntriesAsDictionary: aEntryList
+
+	^ aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+		entryDictionary.
+	].! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:07:37' prior: 50334693!
+getEntriesAsDictionary: aEntryList
+
+	^ aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+		entryDictionary
+	].! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:08:04'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 00:08:09'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 00:09:47'!
+PASSED!
+
+
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+
+tusLibrosWebServer startListening.!
+
+WebUtils jsonEncode: OrderedCollection new!
+
+OrderedCollection new asArray !
+
+WebUtils jsonEncode: OrderedCollection new asArray !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:13:42' prior: 50334704!
+getEntriesAsDictionary: aEntryList
+
+	^ aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+		entryDictionary
+	] asArray.! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:13:56' prior: 50334897!
+getEntriesAsDictionary: aEntryList
+
+	^ (aEntryList collect: [ :cartEntry | | entryDictionary | 
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: cartEntry item.
+		entryDictionary at: 'quantity'	 put: cartEntry quantity.
+		entryDictionary
+	]) asArray.! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 00:14:11'!
+PASSED!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.
+!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.
+!
+
+----QUIT----(28 June 2021 00:16:53) CuisUniversity-4532.image priorSource: 73944!
