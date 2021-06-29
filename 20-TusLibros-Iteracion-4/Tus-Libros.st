@@ -397,7 +397,7 @@ test02NewCartsAreEmpty
 	
 	self assert: cartItems isEmpty.! !
 
-!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/27/2021 23:56:50'!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/28/2021 23:59:17'!
 test03ListCartWithOneItem
 	
 	| shop cartId cartItems bookIsbn quantity |
@@ -417,9 +417,8 @@ test03ListCartWithOneItem
 	
 	cartItems := shop listCart: cartId.
 	
-	self assert: cartItems size equals: 1.
-	self assert: (cartItems first at: 'quantity') equals: quantity.
-	self assert: (cartItems first at: 'item') equals: bookIsbn.! !
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems occurrencesOf: bookIsbn) equals: quantity.! !
 
 !ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/24/2021 01:38:40'!
 test04ListInvalidCartShouldRaiseError
@@ -554,7 +553,7 @@ test07CheckoutUsesTheCashier
 		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'AW 6/24/2021 01:43:21'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'AW 6/28/2021 21:43:11'!
 test08ListPurchasesOnOnlyOneBuyClient
 	
 	| shop cartId clientId password purchases |
@@ -570,8 +569,8 @@ test08ListPurchasesOnOnlyOneBuyClient
 	shop checkOut: cartId payingWith: stubs validCreditCard.
 	
 	purchases := shop listPurchasesOf: clientId with: password.
-	self assert: purchases total equals: 100.
-	self assert: purchases items size equals: 2.
+	self assert: (purchases total) equals: 100.
+	self assert: (purchases items) size equals: 2.
 	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
 	! !
 
@@ -746,12 +745,10 @@ test06AddingNonIntegerQuantityRaisesError
 	! !
 
 
-!ShoppingCartTest methodsFor: 'assertions' stamp: 'nz 6/14/2021 19:02:37'!
+!ShoppingCartTest methodsFor: 'assertions' stamp: 'AW 6/28/2021 21:26:52'!
 assert: shoppingCart has: quantity of: item
 
-	self assert: (shoppingCart entries anySatisfy: [ :anShoppingCartItem | 
-		anShoppingCartItem is: quantity of: item.
-	] ).! !
+	self assert: (shoppingCart entries occurrencesOf: item) equals: quantity ! !
 
 
 !ShoppingCartTest methodsFor: 'adding items' stamp: 'nz 6/14/2021 19:02:37'!
@@ -774,7 +771,7 @@ test02AddingAnItemToACart
 	self assert: shoppingCart entries size equals: 1.
 	self assert: shoppingCart has: quantity of: book1.! !
 
-!ShoppingCartTest methodsFor: 'adding items' stamp: 'nz 6/14/2021 19:02:37'!
+!ShoppingCartTest methodsFor: 'adding items' stamp: 'AW 6/28/2021 21:28:10'!
 test03AddingMultipleItemsToACart
 	| shoppingCart |
 
@@ -783,7 +780,7 @@ test03AddingMultipleItemsToACart
 	shoppingCart add: 1 of: book1.
 	shoppingCart add: 2 of: book2.
 	
-	self assert: shoppingCart entries size equals: 2.
+	self assert: shoppingCart entries size equals: 3.
 	self assert: shoppingCart has: 1 of: book1.
 	self assert: shoppingCart has: 2 of: book2.! !
 
@@ -793,6 +790,39 @@ setUp
 	
 	book1 := 'ISBN1'.
 	book2 := 'ISBN2'.! !
+
+
+!classDefinition: #BagSerializer category: 'Tus-Libros'!
+Object subclass: #BagSerializer
+	instanceVariableNames: 'bag'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!BagSerializer methodsFor: 'initialization' stamp: 'AW 6/28/2021 23:49:09'!
+initializeWith: aBag
+	bag := aBag.! !
+
+
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 6/29/2021 00:04:23'!
+asDictionaryArray
+
+	^(bag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'BagSerializer class' category: 'Tus-Libros'!
+BagSerializer class
+	instanceVariableNames: ''!
+
+!BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:57'!
+bag: aBag
+	^self new initializeWith: aBag ! !
 
 
 !classDefinition: #Cashier category: 'Tus-Libros'!
@@ -810,21 +840,21 @@ initializePrices: aPriceList receiptBook: aReceiptBook merchantProcessor: aMerch
 	merchantProcessor := aMerchantProcessor.! !
 
 
-!Cashier methodsFor: 'private' stamp: 'nz 6/15/2021 23:47:15'!
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:32:34'!
 calculateShoppingCartTotal: aShoppingCart
 
-	^ aShoppingCart entries sum: [ :entry |
-		self priceFor: entry.
+	^ aShoppingCart entries sum: [ :item |
+		self priceFor: item.
 	] ifEmpty: [
 		self error: self class cantCheckoutEmptyCartErrorDescription .
 	]! !
 
-!Cashier methodsFor: 'private' stamp: 'nz 6/23/2021 01:34:27'!
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:33:27'!
 createReceiptWithTotal: anAmountOfMoney cart: aShoppingCart 
 
 	| receipt |
 	
-	receipt _ Receipt withTotal: anAmountOfMoney items: (self getEntriesAsBag: aShoppingCart).
+	receipt _ Receipt withTotal: anAmountOfMoney items: aShoppingCart entries.
 	receiptBook add: receipt.
 	
 	^receipt .! !
@@ -839,10 +869,10 @@ getEntriesAsBag: aShoppingCart
 	
 	^aBag.! !
 
-!Cashier methodsFor: 'private' stamp: 'nz 6/14/2021 18:55:26'!
-priceFor: aShoppingCartEntry
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:31:48'!
+priceFor: anItem
 	
-	^(priceList priceFor: aShoppingCartEntry item) * (aShoppingCartEntry quantity).! !
+	^priceList priceFor: anItem.! !
 
 
 !Cashier methodsFor: 'checkout' stamp: 'nz 6/23/2021 01:31:18'!
@@ -860,10 +890,10 @@ checkOut: aShoppingCart payingWith: aCreditCard on: aGregorianDate
 	! !
 
 
-!Cashier methodsFor: 'validation' stamp: 'nz 6/14/2021 19:30:27'!
-areAllItemsInPriceList: aCollectionOfShoppingCartEntries
+!Cashier methodsFor: 'validation' stamp: 'AW 6/28/2021 21:29:46'!
+areAllItemsInPriceList: aBagOfItems
 
-	^ aCollectionOfShoppingCartEntries allSatisfy: [ :entry | priceList hasPriceFor: entry item ]! !
+	^ aBagOfItems asSet allSatisfy: [ :item | priceList hasPriceFor: item ]! !
 
 !Cashier methodsFor: 'validation' stamp: 'nz 6/14/2021 19:30:27'!
 assertAllItemsInPriceList: aCollectionOfShoppingCartEntries
@@ -1262,12 +1292,15 @@ listCart: aShoppingCartId
  	
 	^self getCartEntries: aShoppingCartId.! !
 
-!Shop methodsFor: 'facade' stamp: 'AW 6/23/2021 23:42:03'!
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 21:44:36'!
 listPurchasesOf: aClientId with: aClientPassword
+	| purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
 	
-	self authenticateClient: aClientId withPassword: aClientPassword.
-	
-	^ PurchasesSummary for: (self receiptsFor: aClientId).! !
+	^purchases ! !
 
 
 !Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 00:01:59'!
@@ -1302,25 +1335,15 @@ getCart: aShoppingCartId
 	
 	^ carts at: aShoppingCartId! !
 
-!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:03:09'!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 23:56:15'!
 getCartEntries: aShoppingCartId
 
-	^ self getEntriesAsDictionary: (self getCart: aShoppingCartId) entries.! !
+	^(self getCart: aShoppingCartId) entries.! !
 
 !Shop methodsFor: 'cart persistence' stamp: 'AW 6/24/2021 00:08:15'!
 getClientIdOf: aCartId 
 	
 	^cartsClients at: aCartId .! !
-
-!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 00:13:56'!
-getEntriesAsDictionary: aEntryList
-
-	^ (aEntryList collect: [ :cartEntry | | entryDictionary | 
-		entryDictionary _ Dictionary new.
-		entryDictionary at: 'item'	 put: cartEntry item.
-		entryDictionary at: 'quantity'	 put: cartEntry quantity.
-		entryDictionary
-	]) asArray.! !
 
 
 !Shop methodsFor: 'cart expiration' stamp: 'AW 6/24/2021 01:17:04'!
@@ -1469,12 +1492,12 @@ entries
 	^entries.! !
 
 
-!ShoppingCart methodsFor: 'adding' stamp: 'nz 6/14/2021 19:42:41'!
+!ShoppingCart methodsFor: 'adding' stamp: 'AW 6/28/2021 21:18:29'!
 add: aQuantity of: anItem 
 
 	self assertQuantityIsValid: aQuantity.
 	
-	entries add: (ShoppingCartEntry for: anItem quantity: aQuantity).! !
+	entries add: anItem withOccurrences: aQuantity.! !
 
 
 !ShoppingCart methodsFor: 'validations' stamp: 'AW 6/10/2021 20:09:49'!
@@ -1487,10 +1510,10 @@ assertQuantityIsValid: aQuantity
 		ifFalse: [ self error: self class itemQuantyMustBeAnIntegerErrorDescription ]! !
 
 
-!ShoppingCart methodsFor: 'initialization' stamp: 'nz 6/14/2021 19:42:36'!
+!ShoppingCart methodsFor: 'initialization' stamp: 'AW 6/28/2021 21:18:02'!
 initialize
 
-	entries := OrderedCollection new.! !
+	entries := Bag new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1505,47 +1528,6 @@ itemQuantityMustBeGreaterThanZeroErrorDescription
 !ShoppingCart class methodsFor: 'errors' stamp: 'AW 6/10/2021 20:05:50'!
 itemQuantyMustBeAnIntegerErrorDescription
 	^'Quanty must be an integer!!'! !
-
-
-!classDefinition: #ShoppingCartEntry category: 'Tus-Libros'!
-Object subclass: #ShoppingCartEntry
-	instanceVariableNames: 'item quantity'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Tus-Libros'!
-
-!ShoppingCartEntry methodsFor: 'initialization' stamp: 'AW 6/9/2021 00:31:25'!
-initializeFor: anItem quantity: aQuantity 
-	
-	item := anItem.
-	quantity := aQuantity.! !
-
-
-!ShoppingCartEntry methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:01'!
-item
-	
-	^item! !
-
-!ShoppingCartEntry methodsFor: 'accessing' stamp: 'AW 6/9/2021 00:32:11'!
-quantity
-	
-	^quantity! !
-
-
-!ShoppingCartEntry methodsFor: 'testing' stamp: 'AW 6/9/2021 00:54:31'!
-is: aQuantity of: anItem 
-	^(item = anItem) and: [ quantity = aQuantity ].! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'ShoppingCartEntry class' category: 'Tus-Libros'!
-ShoppingCartEntry class
-	instanceVariableNames: ''!
-
-!ShoppingCartEntry class methodsFor: 'instance creation' stamp: 'AW 6/9/2021 00:31:03'!
-for: anItem quantity: aQuantity 
-
-	^self new initializeFor: anItem quantity: aQuantity ! !
 
 
 !classDefinition: #TestStubs category: 'Tus-Libros'!
@@ -1633,35 +1615,51 @@ Object subclass: #TusLibrosRestInterface
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:24'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:16:45'!
 addService: aRouteString action: aBlockClosure
 
-	webServer addService: aRouteString action: aBlockClosure.! !
+	self addService: aRouteString 
+		action: aBlockClosure 
+		onErrorDo: [ :aRequest :anError |
+		aRequest send400Response: (anError messageText)
+	].
+! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:37:37'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:15:01'!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: [ :aRequest |
+		[ aBlockClosure value: aRequest ] on: Error do: [ :anError |
+			aErrorBlockClosure value: aRequest value: anError.	
+		] 
+	].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22'!
 configRoutes
 	
 	
-	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
-		clientId _ request fields at: 'clientId'.
-		clientPassword _ request fields at: 'password'.
-		cartId _ shop createCartClientId: clientId password: clientPassword.
-		
-		response _ Dictionary new.
-		response at: 'cartId' put: cartId.
-		request send200Response: (WebUtils jsonEncode: response).
-		
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
 	].
 
-	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
-		cartId _ (request fields at: 'cartId') asNumber .
-		cartItems _ shop listCart: cartId.
-		
-		response _ Dictionary new.
-		response at: 'items' put: cartItems.
-		request send200Response: (WebUtils jsonEncode: response).
-		
-	].! !
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCartRequest: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCartRequest: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:29'!
 createShopFrom: aShopConfiguration 
@@ -1670,6 +1668,83 @@ createShopFrom: aShopConfiguration
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:56'!
 destroy
 	webServer ifNotNil: [ webServer destroy ].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:56'!
+handleAddToCartRequest: aRequest
+	| bookIsbn bookQuantity cartId response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	bookIsbn _ aRequest fields at: 'bookIsbn'.
+	bookQuantity _ (aRequest fields at: 'bookQuantity') asNumber.
+	
+	shop add: bookQuantity of: bookIsbn to: cartId.
+	
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22'!
+handleCheckOutCartRequest: aRequest
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	ccn _ aRequest fields at: 'ccn' .
+	ccedSplitted _ (aRequest fields at: 'cced') findTokens: '/'.
+	cco _ aRequest fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:01'!
+handleCreateCartRequest: aRequest
+	| cartId clientId clientPassword response |
+	
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	clientPassword _ aRequest fields at: 'password'.
+	cartId _ shop createCartClientId: clientId password: clientPassword.
+	
+	response _ Dictionary new.
+	response at: 'cartId' put: cartId.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:12'!
+handleListCartRequest: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:17:58'!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	self halt.
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:01:50'!
 initializeOn: aPort shopConfiguration: aShopConfiguration 
@@ -1684,6 +1759,17 @@ initializeOn: aPort shopConfiguration: aShopConfiguration
 port
 
 	^port ifNil: [ port _ 8080].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:07:26'!
+serializePurchases: aPurchasesSummary
+	| dictionary |
+	
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: aPurchasesSummary total.
+	dictionary at: 'items' put: (BagSerializer bag: aPurchasesSummary items) asDictionaryArray.
+	
+	^dictionary .! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:45:09'!
 startListening

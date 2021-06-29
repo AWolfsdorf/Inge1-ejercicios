@@ -1341,3 +1341,3987 @@ tusLibrosWebServer startListening.
 !
 
 ----QUIT----(28 June 2021 00:16:53) CuisUniversity-4532.image priorSource: 73944!
+
+----STARTUP---- (28 June 2021 19:04:22) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:10:29' prior: 50334514!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | 
+		clientId _ request fields at: 'clientId'.
+		clientPassword _ request fields at: 'password'.
+		cartId _ shop createCartClientId: clientId password: clientPassword.
+		
+		response _ Dictionary new.
+		response at: 'cartId' put: cartId.
+		request send200Response: (WebUtils jsonEncode: response).
+		
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | 
+		cartId _ (request fields at: 'cartId') asNumber .
+		bookIsbn _ request fields at: 'boookIsbn'.
+		bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+		
+		shop add: bookQuantity of: bookIsbn to: cartId.
+		
+		response _ Dictionary new.
+		response at: 'response' put: 'OK'.
+		request send200Response: (WebUtils jsonEncode: response).
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | 
+		cartId _ (request fields at: 'cartId') asNumber .
+		cartItems _ shop listCart: cartId.
+		
+		response _ Dictionary new.
+		response at: 'items' put: cartItems.
+		request send200Response: (WebUtils jsonEncode: response).
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:14:08' prior: 50335060!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'boookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:17:56' prior: 50335100!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			self inspect.
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'boookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:18:57' prior: 50335155!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			self halt.
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'boookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+self fields!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:20:36' prior: 50335210!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			self halt.
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:23:15' prior: 50335266!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:42:48' prior: 50335321!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			self halt.
+			cced _ FixedGregorianDate fromDate: (request fields at: 'cced')  .
+			cco _ request fields at: 'cco'.
+			
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+(request fields at: 'cced')!
+
+FixedGregorianDate fromDate: (request fields at: 'cced')!
+
+FixedGregorianDate fromDate: '10/15/2025' !
+
+FixedGregorianDate fromDate: '2025/12/12' !
+
+FixedGregorianDate monthOfYear: '12/2022' dayNumber: 10!
+
+(GregorianMonthOfYear year: 2022 month: 12)!
+
+(GregorianMonthOfYear year: 2022 month: 12)!
+
+(GregorianMonthOfYear year: 2022 month: 12)!
+
+(GregorianMonthOfYear year: 2022 month: 12)!
+
+(GregorianMonthOfYear year: 2022 monthNumber: 12)!
+
+(GregorianMonthOfYear yearNumber: 2022 monthNumber: 12)!
+
+'10/2024' findTokens: '/'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 19:59:59' prior: 50335376!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			self halt.
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) 
+				monthNumber: (ccedSplitted at: 1). 
+			
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+! !
+
+----QUIT----(28 June 2021 20:03:53) CuisUniversity-4532.image priorSource: 108829!
+
+----STARTUP---- (28 June 2021 20:04:17) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:06:24' prior: 50335469!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) 
+				monthNumber: (ccedSplitted at: 1). 
+			
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:07:31' prior: 50335550!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) 
+				monthNumber: (ccedSplitted at: 1). 
+			self halt.
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:08:25' prior: 50335629!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			self halt.
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) 
+				monthNumber: (ccedSplitted at: 1). 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:10:11' prior: 50335708!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			self halt.
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:14:48' prior: 50335793!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:24:02' prior: 50335884!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			self halt.
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+anError messageText!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:27:56' prior: 50335963!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 20:29:51' prior: 50336049!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | clientId password purchases response | [
+			clientId _ (request fields at: 'clientId') asNumber.
+			password _ request fields at: 'password'.
+			
+			purchases _ shop listPurchasesOf: clientId with: password.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 20:40:07' prior: 50333096!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	
+	dictionary _ Dictionary new.
+	
+	
+	! !
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 20:40:48' prior: 50336246!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: purchases total.! !
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 20:41:25' prior: 50336257!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: purchases total.
+	dictionary at: 'items' put: purchases items asArray.! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 21:15:45' prior: 50334909!
+getEntriesAsDictionary: aEntryBag
+
+	^(aEntryBag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (aEntryBag ocurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 21:16:01' prior: 50336283!
+getEntriesAsDictionary: aEntryBag
+
+	^(aEntryBag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (aEntryBag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!ShoppingCart methodsFor: 'adding' stamp: 'AW 6/28/2021 21:17:44' prior: 50333257!
+add: aQuantity of: anItem 
+
+	self assertQuantityIsValid: aQuantity.
+	
+	entries add: anItem withQuantity: aQuantity.! !
+!ShoppingCart methodsFor: 'initialization' stamp: 'AW 6/28/2021 21:18:02' prior: 50333275 overrides: 16896425!
+initialize
+
+	entries := Bag new.! !
+!ShoppingCart methodsFor: 'adding' stamp: 'AW 6/28/2021 21:18:29' prior: 50336307!
+add: aQuantity of: anItem 
+
+	self assertQuantityIsValid: aQuantity.
+	
+	entries add: anItem withOccurrences: aQuantity.! !
+
+!classRemoval: #ShoppingCartEntry stamp: 'AW 6/28/2021 21:18:55'!
+Object subclass: #ShoppingCartEntry
+	instanceVariableNames: 'item quantity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 21:19:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:19:14'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:19:14'!
+FAILURE!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 21:19:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 21:19:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 21:19:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:19:19'!
+ERROR!
+!ShoppingCartTest methodsFor: 'assertions' stamp: 'AW 6/28/2021 21:26:52' prior: 50332479!
+assert: shoppingCart has: quantity of: item
+
+	self assert: (shoppingCart entries occurrencesOf: item) equals: quantity ! !
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:27:02'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:27:04'!
+FAILURE!
+!ShoppingCartTest methodsFor: 'adding items' stamp: 'AW 6/28/2021 21:28:10' prior: 50332505!
+test03AddingMultipleItemsToACart
+	| shoppingCart |
+
+	shoppingCart := ShoppingCart new.
+	
+	shoppingCart add: 1 of: book1.
+	shoppingCart add: 2 of: book2.
+	
+	self assert: shoppingCart entries size equals: 3.
+	self assert: shoppingCart has: 1 of: book1.
+	self assert: shoppingCart has: 2 of: book2.! !
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:28:12'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 21:28:24'!
+ERROR!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 21:28:24'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:28:28'!
+ERROR!
+!Cashier methodsFor: 'validation' stamp: 'AW 6/28/2021 21:29:10' prior: 50332588!
+areAllItemsInPriceList: aBagOfShoppingCartEntries
+
+	^ aBagOfShoppingCartEntries allSatisfy: [ :entry | priceList hasPriceFor: entry item ]! !
+!Cashier methodsFor: 'validation' stamp: 'AW 6/28/2021 21:29:22' prior: 50336506!
+areAllItemsInPriceList: aBagOfItems
+
+	^ aBagOfItems allSatisfy: [ :entry | priceList hasPriceFor: entry item ]! !
+!Cashier methodsFor: 'validation' stamp: 'AW 6/28/2021 21:29:46' prior: 50336513!
+areAllItemsInPriceList: aBagOfItems
+
+	^ aBagOfItems asSet allSatisfy: [ :item | priceList hasPriceFor: item ]! !
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:29:47'!
+ERROR!
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:31:29' prior: 50332569!
+priceFor: anItem
+	
+	^(priceList priceFor: anItem item) * (anItem quantity).! !
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:31:48' prior: 50336529!
+priceFor: anItem
+	
+	^priceList priceFor: anItem.! !
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:32:34' prior: 50332544!
+calculateShoppingCartTotal: aShoppingCart
+
+	^ aShoppingCart entries sum: [ :item |
+		self priceFor: item.
+	] ifEmpty: [
+		self error: self class cantCheckoutEmptyCartErrorDescription .
+	]! !
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:32:38'!
+ERROR!
+!Cashier methodsFor: 'private' stamp: 'AW 6/28/2021 21:33:27' prior: 50332552!
+createReceiptWithTotal: anAmountOfMoney cart: aShoppingCart 
+
+	| receipt |
+	
+	receipt _ Receipt withTotal: anAmountOfMoney items: aShoppingCart entries.
+	receiptBook add: receipt.
+	
+	^receipt .! !
+
+aShoppingCart entries!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:33:35'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 21:33:36'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 21:33:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 21:33:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 21:33:37'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 21:33:38'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 21:33:38'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 21:33:38'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 21:33:38'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:33:39'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:33:39'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:33:40'!
+ERROR!
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 21:34:59' prior: 50336269!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: purchases total.
+	dictionary at: 'items' put: purchases items asArray.
+	^dictionary ! !
+
+purchases items!
+
+self asSet!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 21:38:51'!
+getBagAsDictionaryArray: aEntryBag
+
+	^(aEntryBag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (aEntryBag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:38:51' prior: 50334622!
+getCartEntries: aShoppingCartId
+
+	^ self getBagAsDictionaryArray: (self getCart: aShoppingCartId) entries.! !
+
+!methodRemoval: Shop #getEntriesAsDictionary: stamp: 'AW 6/28/2021 21:38:51'!
+getEntriesAsDictionary: aEntryBag
+
+	^(aEntryBag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (aEntryBag occurrencesOf: item).
+		entryDictionary
+	]) asArray.!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:39:04'!
+ERROR!
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 21:39:45' prior: 50336603!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: purchases total.
+	dictionary at: 'items' put: (self getBagAsDictionaryArray: purchases items).
+	^dictionary ! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:39:48'!
+ERROR!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'AW 6/28/2021 21:40:32' prior: 50332247!
+test08ListPurchasesOnOnlyOneBuyClient
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: (purchases at: 'total') equals: 100.
+	self assert: (purchases at: 'items') size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:40:37'!
+FAILURE!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'AW 6/28/2021 21:43:11' prior: 50336669!
+test08ListPurchasesOnOnlyOneBuyClient
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: (purchases total) equals: 100.
+	self assert: (purchases items) size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 21:44:01' prior: 50336650!
+listPurchasesOf: aClientId with: aClientPassword
+	| dictionary purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: purchases total.
+	dictionary at: 'items' put: (self getBagAsDictionaryArray: purchases items).
+	^purchases ! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:44:03'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 21:44:04'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 21:44:05'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 21:44:05'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 21:44:06'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 21:44:13'!
+PASSED!
+!Shop methodsFor: 'facade' stamp: 'AW 6/28/2021 21:44:36' prior: 50336724!
+listPurchasesOf: aClientId with: aClientPassword
+	| purchases |
+	self
+		authenticateClient: aClientId
+		withPassword: aClientPassword.
+	purchases _ PurchasesSummary for: (self receiptsFor: aClientId).
+	
+	^purchases ! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:46:35'!
+serializePurchases: aPurchasesSummary
+	| dictionary |
+	
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: aPurchasesSummary total.
+	dictionary at: 'items' put: (self getBagAsDictionaryArray: aPurchasesSummary items).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:46:42' prior: 50336884!
+serializePurchases: aPurchasesSummary
+	| dictionary |
+	
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: aPurchasesSummary total.
+	dictionary at: 'items' put: (self getBagAsDictionaryArray: aPurchasesSummary items).
+	
+	^dictionary .! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:47:40' prior: 50336158!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | clientId password purchases response | [
+			clientId _ (request fields at: 'clientId') asNumber.
+			password _ request fields at: 'password'.
+			
+			purchases _ shop listPurchasesOf: clientId with: password.
+			
+			response _ Dictionary new.
+			response at: 'purchases' put: (self serializePurchases: purchases).
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 21:47:48'!
+PASSED!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:48:12' prior: 50336907!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | clientId password purchases response | [
+			self halt.
+			clientId _ (request fields at: 'clientId') asNumber.
+			password _ request fields at: 'password'.
+			
+			purchases _ shop listPurchasesOf: clientId with: password.
+			
+			response _ Dictionary new.
+			response at: 'purchases' put: (self serializePurchases: purchases).
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:50:18' prior: 50337116!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | | clientId password purchases response | [
+			self halt.
+			clientId _ (request fields at: 'clientId') asNumber.
+			password _ request fields at: 'password'.
+			
+			purchases _ shop listPurchasesOf: clientId with: password.
+			
+			response _ Dictionary new.
+			response at: 'purchases' put: (self serializePurchases: purchases).
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:55:38'!
+handleListPurchasesRequest: request
+	| clientId password purchases response |
+	self halt.
+	clientId _ (request fields at: 'clientId') asNumber.
+	password _ request fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	request send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:55:50' prior: 50337302!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	self halt.
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:55:55' prior: 50337319!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	self halt.
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:56:25' prior: 50337212!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | [
+			self handleListPurchasesRequest: request
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 21:57:50' prior: 50337353!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | [
+			self handleListPurchasesRequest: request
+		] onErrorDo: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:00:19' prior: 50337432!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request 
+	] onErrorDo: [ :request :anError |
+		request send400Response: (anError messageText) 
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:00:37'!
+addService: aString action: aBlockClosure onErrorDo: aBlockClosure3 
+	self shouldBeImplemented.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:01:06' prior: 50337608!
+addService: aRootString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	self shouldBeImplemented.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:02:47' prior: 50337615!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: [ :aRequest |
+		(aBlockClosure value: aRequest) on: Error do: aErrorBlockClosure.
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:04:34' prior: 50337622!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: [ :aRequest |
+		(aBlockClosure value: aRequest) on: Error do: [ :anError |
+			aErrorBlockClosure value: anError
+		].
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:09:08' prior: 50337632!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: [ :aRequest |
+		[ aBlockClosure value: aRequest ] on: Error do: [ :anError |
+			aErrorBlockClosure value: anError
+		].
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:12:42' prior: 50337644!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: ([ :aRequest |
+		aBlockClosure value: aRequest 
+	] on: Error do: [ :anError |
+		aErrorBlockClosure value: anError
+	]).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:13:44' prior: 50334032!
+addService: aRouteString action: aBlockClosure
+
+	self addService: aRouteString 
+		action: aBlockClosure 
+		onErrorDo: [ :anError |
+		
+	].
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:15:01' prior: 50337656!
+addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure 
+	
+	webServer addService: aRouteString action: [ :aRequest |
+		[ aBlockClosure value: aRequest ] on: Error do: [ :anError |
+			aErrorBlockClosure value: aRequest value: anError.	
+		] 
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:16:29' prior: 50337667!
+addService: aRouteString action: aBlockClosure
+
+	self addService: aRouteString 
+		action: aBlockClosure 
+		onErrorDo: [ :aRequest :anError |
+		
+	].
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:16:45' prior: 50337687!
+addService: aRouteString action: aBlockClosure
+
+	self addService: aRouteString 
+		action: aBlockClosure 
+		onErrorDo: [ :aRequest :anError |
+		aRequest send400Response: (anError messageText)
+	].
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:16:57' prior: 50337523!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request 
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 22:20:07' prior: 50337706!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ request fields at: 'clientId'.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+clientReceipts at: aClientId!
+
+		self at: '10'!
+
+(self findElementOrNil: arg1)!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:30:07' prior: 50337783!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ (request fields at: 'clientId') asNumber.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: cartItems.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+(self serializePurchases: purchases)!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:38:59' prior: 50337336!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!FormSection methodsFor: 'initialization' stamp: 'AW 6/28/2021 23:42:52' prior: 50814657!
+initializeWithTitle: arg1 withExplanation: arg2 withColor: arg3
+	| temp4 |
+	title _ arg1.
+	explanation _ arg2.
+	self separation: 3.
+	self color: arg3.
+	titleMorph _ LabelMorph 
+		contents: title
+		font: Preferences windowTitleFont
+		emphasis: 1.
+	temp4 _ LayoutSpec
+		fixedWidth: titleMorph morphWidth
+		fixedHeight: titleMorph morphHeight.
+	temp4 offAxisEdgeWeight: 0.03.
+	self
+		addMorph: titleMorph
+		layoutSpec: temp4.
+	explanation isEmpty ifFalse: [
+		explanationMorph _ ImmutableTextModelMorph
+			withText: arg2
+			withColor: arg3
+			withWidth: self fixedWidthForTexts.
+		self addMorph: explanationMorph ].! !
+!LabeledInput methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:43:05' prior: 50814774!
+withLabel: arg1 withWidth: arg2 withModel: arg3 usingAs: arg4
+	| temp5 temp6 |
+	self separation: 5.
+	self layoutSpec:
+		(LayoutSpec
+			proportionalWidth: 0.95
+			fixedHeight: LabeledInput recommendedHeight).
+	labelMorph _ LabelMorph contents: arg1.
+	temp5 _ LayoutSpec
+		fixedWidth: arg2
+		fixedHeight: labelMorph morphHeight
+		offAxisEdgeWeight: #center.
+	self
+		addMorph: labelMorph
+		layoutSpec: temp5.
+	inputMorph _ TabPassingTextModelMorph withModel: arg3.
+	inputMorph textMorph focusMover: arg4.
+	arg4 addFocusReceiver: inputMorph textMorph.
+	inputMorph hideScrollBarsIndefinitely.
+	temp6 _ LayoutSpec
+		fixedWidth: LabeledInput inputWidth * 0.7
+		fixedHeight: labelMorph morphHeight + 2.
+	self
+		addMorph: inputMorph
+		layoutSpec: temp6.! !
+!MessageKeywordsAndParametersTable methodsFor: 'GUI building' stamp: 'AW 6/28/2021 23:43:22' prior: 50815089!
+buildColumnTitlesRowFor: arg1
+	| temp2 temp3 |
+	temp3 _ LayoutMorph newRow.
+	temp3 color: self backgroundColor.
+	temp3 separation: self columnSeparation.
+	temp2 _ OrderedCollection newFrom: arg1.
+	temp2 addFirst: ''.
+	self needsToReorderRows ifTrue: [ temp2 addLast: 'Change order' ].
+	temp2 withIndexDo: [ :arg4 :arg5 | | temp6 temp7 |
+		temp7 _ LayoutMorph newRow.
+		temp7 color: self backgroundColor.
+		temp7 axisEdgeWeight: #center.
+		temp7 addMorph: (LabelMorph contents: arg4).
+		temp6 _ LayoutSpec fixedWidth: (columnWidths at: arg5).
+		temp3
+			addMorph: temp7
+			layoutSpec: temp6 ].
+	^ temp3.! !
+!MessageKeywordsAndParametersTable methodsFor: 'initialization' stamp: 'AW 6/28/2021 23:43:31' prior: 50814979!
+withRows: arg1 withColor: arg2 withPreviewModel: arg3 withRefactoringModel: arg4
+	| temp5 temp6 temp7 temp8 temp9 temp10 temp11 |
+	backgroundColor _ arg2.
+	rowModels _ OrderedCollection new.
+	previewModel _ arg3.
+	refactoringModel _ arg4.
+	variablesToParametrize _ arg1.
+	temp5 _ 4.
+	self separation: temp5.
+	temp7 _ arg1 size + 1.
+	temp6 _ self rowHeight * temp7 + (temp5 * (temp7 + 1)) * 1.1.
+	temp10 _ #('Keyword' 'Parameter name' ).
+	columnWidths _ self
+		columnWidthsRequiredForRowTitles: arg1
+		forInputColumns: temp10 size.
+	temp9 _ columnWidths sum + (self columnSeparation * (columnWidths size + 1)) * 1.1.
+	self layoutSpec:
+		(LayoutSpec
+			fixedWidth: temp9
+			fixedHeight: temp6).
+	temp8 _ self buildColumnTitlesRowFor: temp10.
+	self
+		addMorph: temp8
+		layoutSpec: self rowsLayoutSpec.
+	arg1 withIndexDo: [ :arg13 :arg14 | | temp15 temp16 temp17 temp18 temp19 |
+		temp15 _ LayoutMorph newRow.
+		temp15
+			color: self backgroundColor;
+			separation: self columnSeparation.
+		temp15
+			addMorph: (LabelMorph contents: arg13)
+			layoutSpec: (LayoutSpec fixedWidth: (columnWidths at: 1)).
+		temp18 _ LayoutSpec
+			fixedWidth: (columnWidths at: 2)
+			fixedHeight: self rowHeight.
+		temp17 _ self buildInputMorphWith: (arg4 keywordModelOf: arg13).
+		temp15
+			addMorph: temp17
+			layoutSpec: temp18.
+		temp19 _ self buildInputMorphWith: (arg4 parameterModelOf: arg13).
+		temp15
+			addMorph: temp19
+			layoutSpec: temp18.
+		self needsToReorderRows ifTrue: [
+			temp16 _ ChangeRowOrderButtonModel
+				for: arg1 size - (arg14 - 1)
+				notifying: self.
+			rowModels addFirst: temp16.
+			temp11 _ self buildChangeOrderButtonsWith: temp16.
+			temp15
+				addMorph: temp11
+				layoutSpec: (LayoutSpec fixedWidth: columnWidths last) ].
+		self
+			addMorph: temp15
+			layoutSpec: self rowsLayoutSpec ].! !
+
+!classDefinition: #BagSerializer category: 'Tus-Libros' stamp: 'AW 6/28/2021 23:48:18'!
+Object subclass: #BagSerializer
+	instanceVariableNames: 'bag'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!BagSerializer class methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:48:18'!
+getBagAsDictionaryArray: aBag
+	^self new initializeGetBagAsDictionaryArray: aBag! !
+!BagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:48:18'!
+initializeGetBagAsDictionaryArray: aBag
+	bag := aBag.! !
+!BagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:48:18'!
+getBagAsDictionaryArray
+
+	^(bag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:48:18' prior: 50336618!
+getBagAsDictionaryArray: aEntryBag
+	^(BagSerializer getBagAsDictionaryArray: aEntryBag) getBagAsDictionaryArray! !
+!BagSerializer methodsFor: 'initialization' stamp: 'AW 6/28/2021 23:49:09'!
+initializeWith: aBag
+	bag := aBag.! !
+!BagSerializer class methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:49:09' prior: 50338113!
+getBagAsDictionaryArray: aBag
+	^self new initializeWith: aBag! !
+
+!methodRemoval: BagSerializer #initializeGetBagAsDictionaryArray: stamp: 'AW 6/28/2021 23:49:09'!
+initializeGetBagAsDictionaryArray: aBag
+	bag := aBag.!
+!BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:50:54' prior: 50338146!
+getBagAsDictionaryArray: aBag
+	^(self new initializeWith: aBag) getBagAsDictionaryArray ! !
+!BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:17' prior: 50338156!
+getBagAsDictionaryArray: aBag
+	^self new initializeWith: aBag ! !
+!BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:19' prior: 50338163!
+getBagAsDictionaryArray: aBag
+	^self new initializeWith: aBag ! !
+!BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:57'!
+bag: aBag
+	^self new initializeWith: aBag ! !
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 23:51:57'!
+bag: aEntryBag
+	^(BagSerializer getBagAsDictionaryArray: aEntryBag) getBagAsDictionaryArray! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:51:57' prior: 50336630!
+getCartEntries: aShoppingCartId
+
+	^ self bag: (self getCart: aShoppingCartId) entries.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:51:57' prior: 50338135!
+getBagAsDictionaryArray: aEntryBag
+	^(BagSerializer bag: aEntryBag) getBagAsDictionaryArray! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:51:57' prior: 50336895!
+serializePurchases: aPurchasesSummary
+	| dictionary |
+	
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: aPurchasesSummary total.
+	dictionary at: 'items' put: (self bag: aPurchasesSummary items).
+	
+	^dictionary .! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'AW 6/28/2021 23:51:57' prior: 50338178!
+bag: aEntryBag
+	^(BagSerializer bag: aEntryBag) getBagAsDictionaryArray! !
+
+!methodRemoval: BagSerializer class #getBagAsDictionaryArray: stamp: 'AW 6/28/2021 23:51:57'!
+getBagAsDictionaryArray: aBag
+	^self new initializeWith: aBag !
+
+!methodRemoval: Shop #getBagAsDictionaryArray: stamp: 'AW 6/28/2021 23:51:57'!
+getBagAsDictionaryArray: aEntryBag
+	^(BagSerializer bag: aEntryBag) getBagAsDictionaryArray!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 23:54:13' prior: 50338184!
+getCartEntries: aShoppingCartId
+
+	| entriesBag |
+	entriesBag _ (self getCart: aShoppingCartId) entries.
+	^ (BagSerializer bag: entriesBag) getBagAsDictionaryArray .! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 23:54:25'!
+PASSED!
+
+!methodRemoval: Shop #bag: stamp: 'AW 6/28/2021 23:54:40'!
+bag: aEntryBag
+	^(BagSerializer bag: aEntryBag) getBagAsDictionaryArray!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 23:54:43'!
+PASSED!
+!Shop methodsFor: 'cart persistence' stamp: 'AW 6/28/2021 23:56:15' prior: 50338223!
+getCartEntries: aShoppingCartId
+
+	^(self getCart: aShoppingCartId) entries.! !
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:56:54'!
+FAILURE!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 23:56:54'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:56:54'!
+FAILURE!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/28/2021 23:57:22' prior: 50334586!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems first at: 'quantity') equals: quantity.
+	self assert: (cartItems first at: 'item') equals: bookIsbn.! !
+
+(cartItems occurrencesOf: bookIsbn)!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/28/2021 23:59:17' prior: 50338602!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'book_isbn'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems occurrencesOf: bookIsbn) equals: quantity.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:59:23'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'AW 6/28/2021 23:59:27'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'AW 6/28/2021 23:59:28'!
+PASSED!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:04:08' prior: 50337868!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ (request fields at: 'clientId') asNumber.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: (BagSerializer bag: cartItems) getBagAsDictionaryArray .
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 6/29/2021 00:04:23'!
+asDictionaryArray
+
+	^(bag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:04:23' prior: 50338771!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | | cartId clientId clientPassword response | [
+			clientId _ (request fields at: 'clientId') asNumber.
+			clientPassword _ request fields at: 'password'.
+			cartId _ shop createCartClientId: clientId password: clientPassword.
+			
+			response _ Dictionary new.
+			response at: 'cartId' put: cartId.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+
+!methodRemoval: BagSerializer #getBagAsDictionaryArray stamp: 'AW 6/29/2021 00:04:23'!
+getBagAsDictionaryArray
+
+	^(bag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
+		entryDictionary
+	]) asArray.!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:06:29' prior: 50337958!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	self halt.
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:07:26' prior: 50338197!
+serializePurchases: aPurchasesSummary
+	| dictionary |
+	
+	dictionary _ Dictionary new.
+	
+	dictionary at: 'total' put: aPurchasesSummary total.
+	dictionary at: 'items' put: (BagSerializer bag: aPurchasesSummary items) asDictionaryArray.
+	
+	^dictionary .! !
+
+aPurchasesSummary items!
+
+(BagSerializer bag: aPurchasesSummary items) asDictionaryArray!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:08:39' prior: 50338955!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:10:46'!
+handleCreateCartRequest: request
+	| cartId clientId clientPassword response |
+	clientId _ (request fields at: 'clientId') asNumber.
+	clientPassword _ request fields at: 'password'.
+	cartId _ shop createCartClientId: clientId password: clientPassword.
+	
+	response _ Dictionary new.
+	response at: 'cartId' put: cartId.
+	request send200Response: (WebUtils jsonEncode: response).
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:10:53' prior: 50339003!
+handleCreateCartRequest: request
+	| cartId clientId clientPassword response |
+	
+	clientId _ (request fields at: 'clientId') asNumber.
+	clientPassword _ request fields at: 'password'.
+	cartId _ shop createCartClientId: clientId password: clientPassword.
+	
+	response _ Dictionary new.
+	response at: 'cartId' put: cartId.
+	request send200Response: (WebUtils jsonEncode: response).
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:10:56' prior: 50339019!
+handleCreateCartRequest: Arequest
+	| cartId clientId clientPassword response |
+	
+	clientId _ (Arequest fields at: 'clientId') asNumber.
+	clientPassword _ Arequest fields at: 'password'.
+	cartId _ shop createCartClientId: clientId password: clientPassword.
+	
+	response _ Dictionary new.
+	response at: 'cartId' put: cartId.
+	Arequest send200Response: (WebUtils jsonEncode: response).
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:01' prior: 50339035!
+handleCreateCartRequest: aRequest
+	| cartId clientId clientPassword response |
+	
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	clientPassword _ aRequest fields at: 'password'.
+	cartId _ shop createCartClientId: clientId password: clientPassword.
+	
+	response _ Dictionary new.
+	response at: 'cartId' put: cartId.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:45'!
+handleAddToCartRequest: request
+	
+	| bookIsbn bookQuantity cartId response |
+	cartId _ (request fields at: 'cartId') asNumber .
+	bookIsbn _ request fields at: 'bookIsbn'.
+	bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+	
+	shop add: bookQuantity of: bookIsbn to: cartId.
+	
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	request send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:53' prior: 50339066!
+handleAddToCartRequest: request
+	| bookIsbn bookQuantity cartId response |
+	
+	cartId _ (request fields at: 'cartId') asNumber .
+	bookIsbn _ request fields at: 'bookIsbn'.
+	bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+	
+	shop add: bookQuantity of: bookIsbn to: cartId.
+	
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	request send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:11:56' prior: 50339083!
+handleAddToCartRequest: aRequest
+	| bookIsbn bookQuantity cartId response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	bookIsbn _ aRequest fields at: 'bookIsbn'.
+	bookQuantity _ (aRequest fields at: 'bookQuantity') asNumber.
+	
+	shop add: bookQuantity of: bookIsbn to: cartId.
+	
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:12:24'!
+handleListCart: request
+	| cartId cartItems response |
+	cartId _ (request fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	request send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:12:29' prior: 50339116!
+handleListCart: request
+	| cartId cartItems response |
+	
+	cartId _ (request fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	request send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:12:34' prior: 50339130!
+handleListCart: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:13:19'!
+handleCheckOutCart: request
+			| cartId cced ccedSplitted ccn cco creditCard response |
+	cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:13:40' prior: 50339157!
+handleCheckOutCart: request
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (request fields at: 'cartId') asNumber .
+	ccn _ request fields at: 'ccn' .
+	ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+	cco _ request fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	request send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:13:45' prior: 50339181!
+handleCheckOutCart: aRequest
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	ccn _ aRequest fields at: 'ccn' .
+	ccedSplitted _ (aRequest fields at: 'cced') findTokens: '/'.
+	cco _ aRequest fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:14:52' prior: 50338860!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | | cartId bookIsbn bookQuantity response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			bookIsbn _ request fields at: 'bookIsbn'.
+			bookQuantity _ (request fields at: 'bookQuantity') asNumber.
+			
+			shop add: bookQuantity of: bookIsbn to: cartId.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:15:08' prior: 50339229!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request | | cartId response cartItems | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			cartItems _ shop listCart: cartId.
+			
+			response _ Dictionary new.
+			response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:15:27' prior: 50339295!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCart: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | | cartId ccn cced ccedSplitted cco creditCard response | [
+			cartId _ (request fields at: 'cartId') asNumber .
+			ccn _ request fields at: 'ccn' .
+			ccedSplitted _ (request fields at: 'cced') findTokens: '/'.
+			cco _ request fields at: 'cco'.
+			cced _ GregorianMonthOfYear 
+				yearNumber: (ccedSplitted at: 2) asNumber
+				monthNumber: (ccedSplitted at: 1) asNumber. 
+			creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+			
+			shop checkOut: cartId payingWith: creditCard.
+			
+			response _ Dictionary new.
+			response at: 'response' put: 'OK'.
+			request send200Response: (WebUtils jsonEncode: response).
+		] on: Error do: [ :anError |
+			request send400Response: (anError messageText) 
+		]
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:15:49' prior: 50339347!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCart: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCart: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:12'!
+handleListCartRequest: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:12' prior: 50339388!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCartRequest: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCart: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+
+!methodRemoval: TusLibrosRestInterface #handleListCart: stamp: 'AW 6/29/2021 00:16:12'!
+handleListCart: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22'!
+handleCheckOutCartRequest: aRequest
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	ccn _ aRequest fields at: 'ccn' .
+	ccedSplitted _ (aRequest fields at: 'cced') findTokens: '/'.
+	cco _ aRequest fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22' prior: 50339421!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCartRequest: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCartRequest: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+
+! !
+
+!methodRemoval: TusLibrosRestInterface #handleCheckOutCart: stamp: 'AW 6/29/2021 00:16:22'!
+handleCheckOutCart: aRequest
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	ccn _ aRequest fields at: 'ccn' .
+	ccedSplitted _ (aRequest fields at: 'cced') findTokens: '/'.
+	cco _ aRequest fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'response' put: 'OK'.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+!
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:17:58' prior: 50338987!
+handleListPurchasesRequest: aRequest
+	| clientId password purchases response |
+	
+	self halt.
+	clientId _ (aRequest fields at: 'clientId') asNumber.
+	password _ aRequest fields at: 'password'.
+	
+	purchases _ shop listPurchasesOf: clientId with: password.
+	
+	response _ Dictionary new.
+	response at: 'purchases' put: (self serializePurchases: purchases).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].!
+
+----QUIT----(29 June 2021 00:20:52) CuisUniversity-4532.image priorSource: 124493!
