@@ -5325,3 +5325,405 @@ handleListPurchasesRequest: aRequest
 TusLibrosRestInterface allInstances do: [ :x | x destroy ].!
 
 ----QUIT----(29 June 2021 00:20:52) CuisUniversity-4532.image priorSource: 124493!
+
+----STARTUP---- (1 July 2021 17:16:08) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+----End fileIn of /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/2021-1c/20-TusLibros/Iteracion 4/WordsClientDemo.st----!
+
+CodePackage subclass: #ColorExtrasPackage
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Color-Extras'!
+
+!classDefinition: #ColorExtrasPackage category: 'Color-Extras' stamp: 'Install-Color-Extras 7/1/2021 17:56:58'!
+CodePackage subclass: #ColorExtrasPackage
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Color-Extras'!
+
+ColorExtrasPackage class
+	instanceVariableNames: ''!
+
+!classDefinition: 'ColorExtrasPackage class' category: 'Color-Extras' stamp: 'Install-Color-Extras 7/1/2021 17:56:58'!
+ColorExtrasPackage class
+	instanceVariableNames: ''!
+
+----End fileIn of /opt/Cuis/Packages/Features/Color-Extras.pck.st----!
+
+----End fileIn of /opt/Cuis/Packages/Morphic/Morphic-Widgets-Extras.pck.st----!
+
+CodePackage subclass: #MorphicMisc1Package
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Morphic-Misc1'!
+
+!classDefinition: #MorphicMisc1Package category: 'Morphic-Misc1' stamp: 'Install-Morphic-Misc1 7/1/2021 17:57:52'!
+CodePackage subclass: #MorphicMisc1Package
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Morphic-Misc1'!
+!MorphicMisc1Package commentStamp: '<historical>' prior: 0!
+My purpose in life is to check that any base image methods overridden have not been updated.
+See #MorphMisc1Package class>>prePackageInstall!
+
+MorphicMisc1Package class
+	instanceVariableNames: ''!
+
+!classDefinition: 'MorphicMisc1Package class' category: 'Morphic-Misc1' stamp: 'Install-Morphic-Misc1 7/1/2021 17:57:52'!
+MorphicMisc1Package class
+	instanceVariableNames: ''!
+
+----End fileIn of /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/2021-1c/20-TusLibros/Iteracion 4/WordsClientDemo.st----!
+
+----End fileIn of /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/2021-1c/20-TusLibros/Iteracion 4/WebClient.pck.st----!
+
+Object subclass: #ShopWebClient
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #ShopWebClient category: 'Tus-Libros-Web-Client' stamp: 'AW 7/1/2021 18:07:48'!
+Object subclass: #ShopWebClient
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!ShopWebClient methodsFor: 'no messages' stamp: 'AW 7/1/2021 18:08:43' overrides: 16896425!
+initialize
+
+	! !
+
+self superclass!
+
+self super class!
+
+self class!
+
+self class!
+
+self class superclass !
+
+self class superclass superclass !
+
+self class superclass superclass  superclass !
+
+self class superclass superclass  superclass  superclass !
+
+self class superclass superclass  superclass  superclass  WidgetMorph !
+
+self class superclass superclass  superclass  superclass  superclass  superclass  superclass  superclass  !
+
+self class superclass superclass  superclass  superclass  superclass  superclass  superclass !
+
+self class superclass superclass  superclass  superclass  superclass  superclass !
+
+self class superclass superclass  superclass  superclass  superclass  !
+
+self class superclass superclass  superclass  superclass !
+
+self class superclass superclass  superclass  !
+
+self class superclass superclass  !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:16:34' prior: 50351895 overrides: 16896425!
+initialize
+
+! !
+
+SystemWindow subclass: #ShopWebClient
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #ShopWebClient category: 'Tus-Libros-Web-Client' stamp: 'AW 7/1/2021 18:16:44'!
+SystemWindow subclass: #ShopWebClient
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:18:25' prior: 50351925 overrides: 50559914!
+initialize
+
+	self setLabel: 'Hola don pepito'.
+	self openInWorld.
+	! !
+
+ShopWebClient new.!
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:20:28' prior: 50351942 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Hola don pepito'.
+
+	self openInWorld.
+	! !
+
+ShopWebClient new.!
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:21:36' prior: 50351949 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Compre ya sus libros'.
+
+	self openInWorld.
+	! !
+
+!classDefinition: #ShopWebClientModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/1/2021 18:24:21'!
+Object subclass: #ShopWebClientModel
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:24:17' prior: 50351957 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Compre ya sus libros'.
+	self model: ShopWebClientModel new.
+	self buildShopWindow.
+	
+
+	self openInWorld.
+	! !
+
+ShopWebClient new.  !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:25:04'!
+buildShopWindow
+	self shouldBeImplemented.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:33:27' prior: 50351981!
+buildShopWindow
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: self build1stRow.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:35:44' prior: 50351986!
+buildShopWindow
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: self buildUserAndPasswordTextboxRow;
+		addMorph: self buildCreateCartButtonRow.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:35:57'!
+buildUserAndPasswordTextboxRow
+	self shouldBeImplemented.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:36:53' prior: 50352002!
+buildUserAndPasswordTextboxRow
+	
+	
+	| layout |
+	layout _ LayoutMorph new.
+	
+	^layout.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:36:58' prior: 50352007!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	layout _ LayoutMorph new.
+	
+	^layout.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:37:36' prior: 50352013!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	layout _ LayoutMorph newRow.
+	
+	^layout.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:37:48'!
+buildCreateCartButtonRow
+	self shouldBeImplemented.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:38:14' prior: 50352025!
+buildCreateCartButtonRow
+	| layout |
+	
+	layout _ LayoutMorph newRow.
+	
+	
+	^layout .! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:39:35'!
+buildCreateCartWindow
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: self buildUserAndPasswordTextboxRow;
+		addMorph: self buildCreateCartButtonRow.! !
+!ShopWebClient methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:39:35' prior: 50351972 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Compre ya sus libros'.
+	self model: ShopWebClientModel new.
+	self buildCreateCartWindow.
+	
+
+	self openInWorld.
+	! !
+
+!methodRemoval: ShopWebClient #buildShopWindow stamp: 'AW 7/1/2021 18:39:35'!
+buildShopWindow
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: self buildUserAndPasswordTextboxRow;
+		addMorph: self buildCreateCartButtonRow.!
+
+!classRenamed: #ShopWebClient as: #CreateCartWindow stamp: 'AW 7/1/2021 18:40:03'!
+Smalltalk renameClassNamed: #ShopWebClient as: #CreateCartWindow!
+
+!classRenamed: #ShopWebClientModel as: #CreateCartWindowModel stamp: 'AW 7/1/2021 18:40:13'!
+Smalltalk renameClassNamed: #ShopWebClientModel as: #CreateCartWindowModel!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:40:13' prior: 50352046 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Compre ya sus libros'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+
+	self openInWorld.
+	! !
+
+!classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client' stamp: 'AW 7/1/2021 18:45:00'!
+SystemWindow subclass: #CreateCartWindow
+	instanceVariableNames: 'userNameTextBox'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:45:12' prior: 50352019!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox
+		"addMorph: passwordTextBox;"
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:46:44' prior: 50352090!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: nil.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox
+		"addMorph: passwordTextBox;"
+		.
+	
+	
+	^layout.! !
+
+CreateCartWindow new. !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:47:36' prior: 50352100!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox
+		"addMorph: passwordTextBox;"
+		.
+	
+	
+	^layout.! !
+
+CreateCartWindow new. !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:51:39' prior: 50352113!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox
+		"addMorph: passwordTextBox;"
+		.
+	
+	
+	^layout.! !
+
+CreateCartWindow new.  !
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:51:55'!
+userName
+	self shouldBeImplemented.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:52:07' prior: 50352141!
+userName
+	^'Hola mama'! !
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:54:50' prior: 50352126!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ].
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox
+		"addMorph: passwordTextBox;"
+		.
+	
+	
+	^layout.! !
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:55:04'!
+userName: aText 
+	self shouldBeImplemented.! !
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/1/2021 18:55:51'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/1/2021 18:55:49' prior: 50352169!
+userName: aUsername 
+	userName _ aUsername.! !
+
+----QUIT----(1 July 2021 22:01:05) CuisUniversity-4532.image priorSource: 252576!
