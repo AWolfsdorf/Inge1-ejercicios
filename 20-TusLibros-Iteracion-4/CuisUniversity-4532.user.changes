@@ -5727,3 +5727,1013 @@ userName: aUsername
 	userName _ aUsername.! !
 
 ----QUIT----(1 July 2021 22:01:05) CuisUniversity-4532.image priorSource: 252576!
+
+----STARTUP---- (1 July 2021 22:04:01) as /home/nikita/r/f/isw1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:07:45' prior: 50352146!
+userName
+	^userName! !
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:08:41' overrides: 16896425!
+initialize
+	userName _ ''.! !
+
+
+CreateCartWindow new.  !
+
+
+CreateCartWindow new.  !
+
+
+CreateCartWindow new.  !
+
+
+PluggableMorph new.!
+
+
+PluggableMorph new.!
+
+
+PluggableMorph new.!
+
+self openInWorld.!
+
+
+CreateCartWindow new.  !
+
+!classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/1/2021 22:12:39'!
+SystemWindow subclass: #CreateCartWindow
+	instanceVariableNames: 'userNameTextBox passwordTextBox'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:12:27' prior: 50352151!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ].
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:12:54' prior: 50352219!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ].
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:13:21' prior: 50352236!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ].
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:13:42'!
+buildTextBoxMorph
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:13:42' prior: 50352253!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	self buildTextBoxMorph.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:14:04' prior: 50352270!
+buildTextBoxMorph
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:14:29'!
+buildTextBoxMorph: aGetter
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:14:29' prior: 50352282!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	self buildTextBoxMorph: #userName.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+!methodRemoval: CreateCartWindow #buildTextBoxMorph stamp: 'nz 7/1/2021 22:14:29'!
+buildTextBoxMorph
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:14:59'!
+buildTextBoxMorph: aGetter setter: aSetter 
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:14:59' prior: 50352316!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	self buildTextBoxMorph: #userName setter: #userName:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+!methodRemoval: CreateCartWindow #buildTextBoxMorph: stamp: 'nz 7/1/2021 22:14:59'!
+buildTextBoxMorph: aGetter
+
+	userNameTextBox _ TextModelMorph
+		textProvider: self model
+		textGetter: #userName
+		textSetter: #userName:.
+		
+	userNameTextBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			userNameTextBox textMorph acceptContents ]!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:15:19' prior: 50352337!
+buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	^textBox.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:15:49' prior: 50352349!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self buildTextBoxMorph: #userName setter: #userName:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:16:04' prior: 50352384!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self buildTextBoxMorph: #userName setter: #userName:.
+	passwordTextBox _ self buildTextBoxMorph: #password setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+
+CreateCartWindow new.  !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:16:19'!
+password
+	self shouldBeImplemented.! !
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/1/2021 22:16:26'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:16:24' prior: 50352412!
+password
+	password! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:16:49' prior: 50352199 overrides: 16896425!
+initialize
+	userName _ ''.
+	password _ ''.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:17:32' prior: 50352425!
+password
+	^ password.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:18:39' prior: 50352372!
+buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300.
+		
+	^textBox.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:19:04' prior: 50352441!
+buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	^textBox.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:20:06'!
+withLabel: aLabel buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	^textBox.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:20:06' prior: 50352396!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self withLabel: 'asdf' buildTextBoxMorph: #userName setter: #userName:.
+	passwordTextBox _ self withLabel: 'asdf' buildTextBoxMorph: #password setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+!methodRemoval: CreateCartWindow #buildTextBoxMorph:setter: stamp: 'nz 7/1/2021 22:20:06'!
+buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	^textBox.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:20:28'!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	^textBox.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:20:28' prior: 50352489!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self buildTextBoxMorphwithLabel: 'asdf' getter: #userName setter: #userName:.
+	passwordTextBox _ self buildTextBoxMorphwithLabel: 'asdf' getter: #password setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+!methodRemoval: CreateCartWindow #withLabel:buildTextBoxMorph:setter: stamp: 'nz 7/1/2021 22:20:28'!
+withLabel: aLabel buildTextBoxMorph: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	^textBox.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:20:46' prior: 50352535!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self buildTextBoxMorphwithLabel: 'User Name' getter: #userName setter: #userName:.
+	passwordTextBox _ self buildTextBoxMorphwithLabel: 'Password' getter: #password setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:21:06' prior: 50352567!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self
+		buildTextBoxMorphwithLabel: 'User Name'
+		getter: #userName
+		setter: #userName:.
+	passwordTextBox _ self
+		buildTextBoxMorphwithLabel: 'Password'
+		getter: #password
+		setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:21:09' prior: 50352583!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self
+		buildTextBoxMorphwithLabel: 'User Name'
+		getter: #userName
+		setter: #userName:.
+		
+	passwordTextBox _ self
+		buildTextBoxMorphwithLabel: 'Password'
+		getter: #password
+		setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:23:03' prior: 50352600!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self
+		buildTextBoxMorphwithLabel: 'User Name'
+		getter: #userName
+		setter: #userName:.
+		
+	passwordTextBox _ self
+		buildTextBoxMorphwithLabel: 'Password'
+		getter: #password
+		setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:23:48' prior: 50352519!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+	textBox label: aLabel.
+		
+	^textBox.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:24:04' prior: 50352634!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+	textBox	
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+		
+	^textBox.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:24:59' prior: 50352652!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+		
+	^textBox.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:27:44' prior: 50352668!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox firstRowLayoutMorph |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	firstRowLayoutMorph _ LayoutMorph newRow.
+	firstRowLayoutMorph
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (LabelMorph contents: aLabel);
+		addMorph: textBox.
+	^ firstRowLayoutMorph.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:27:51' prior: 50352684!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+
+	| textBox layout |
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (LabelMorph contents: aLabel);
+		addMorph: textBox.
+	^ layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:27:57' prior: 50352706!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+	| textBox layout |
+	
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (LabelMorph contents: aLabel);
+		addMorph: textBox.
+	^ layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:28:23'!
+buildTextBoxMorphWithLabel: aLabel getter: aGetter setter: aSetter 
+	| textBox layout |
+	
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (LabelMorph contents: aLabel);
+		addMorph: textBox.
+	^ layout.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:28:23' prior: 50352617!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self
+		buildTextBoxMorphWithLabel: 'User Name'
+		getter: #userName
+		setter: #userName:.
+		
+	passwordTextBox _ self
+		buildTextBoxMorphWithLabel: 'Password'
+		getter: #password
+		setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		.
+	
+	
+	^layout.! !
+
+!methodRemoval: CreateCartWindow #buildTextBoxMorphwithLabel:getter:setter: stamp: 'nz 7/1/2021 22:28:23'!
+buildTextBoxMorphwithLabel: aLabel getter: aGetter setter: aSetter 
+	| textBox layout |
+	
+	textBox _ TextModelMorph
+		textProvider: self model
+		textGetter: aGetter
+		textSetter: aSetter.
+		
+	textBox textMorph
+		setProperty: #keyStroke:
+		toValue: [ :key |
+			textBox textMorph acceptContents ].
+		
+	textBox
+		borderWidth: 1;
+		borderColor: Color skyBlue;
+		morphWidth: 300;
+		morphHeight: 20.
+		
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (LabelMorph contents: aLabel);
+		addMorph: textBox.
+	^ layout.!
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:29:31' prior: 50352768!
+buildUserAndPasswordTextboxRow
+	| layout |
+	
+	userNameTextBox _ self
+		buildTextBoxMorphWithLabel: 'User Name'
+		getter: #userName
+		setter: #userName:.
+		
+	passwordTextBox _ self
+		buildTextBoxMorphWithLabel: 'Password'
+		getter: #password
+		setter: #password:.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: userNameTextBox;
+		addMorph: passwordTextBox.
+		
+	
+	
+	^layout.! !
+
+
+CreateCartWindow new.  !
+
+!classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/1/2021 22:31:16'!
+SystemWindow subclass: #CreateCartWindow
+	instanceVariableNames: 'userNameTextBox passwordTextBox createCartButton'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:31:13' prior: 50352030!
+buildCreateCartButtonRow
+	| layout |
+	
+	createCartButton _ PluggableButtonMorph
+		model: self model
+		stateGetter: nil
+		action: #createCartRequest
+		label: 'Create Cart'.
+	
+	layout _ LayoutMorph newRow.
+	layout
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: createCartButton.
+	^layout .! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:31:46'!
+createCartRequest
+	self shouldBeImplemented.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:31:49' prior: 50352846!
+createCartRequest
+	! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:32:27' prior: 50352851!
+createCartRequest
+	
+	self inspect! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:32:46'!
+password: aText 
+	self shouldBeImplemented.
+	password _ aText! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:32:51' prior: 50352861!
+password: aText 
+	password _ aText! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:45:47' prior: 50352073 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Compre ya sus libros'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	self openInWorld.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:46:05' prior: 50352872 overrides: 50559914!
+initialize
+
+	super initialize.
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	self openInWorld.! !
+
+
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.!
+
+!classDefinition: #TusLibrosClient category: 'Tus-Libros-Web-Client' stamp: 'nz 7/1/2021 22:51:55'!
+Object subclass: #TusLibrosClient
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:51:44' prior: 50352856!
+createCartRequest
+	
+	| tusLibrosClient |
+	tusLibrosClient := TusLibrosClient new.
+	tusLibrosClient createCart: userName password: password.
+	! !
+
+
+CreateCartWindow new.  !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 22:54:56'!
+createCart: aText password: aText2 
+	self shouldBeImplemented.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:00:12' prior: 50352911!
+createCart: aClientId password: aPassword 
+
+	| fieldDict resp |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	resp _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	resp isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: resp content readStream) asOrderedCollection ]
+		ifFalse: [ ^ self error: resp content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:00:18' prior: 50352917!
+createCart: aClientId password: aPassword 
+
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	response _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) asOrderedCollection ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:00:41'!
+url
+	self shouldBeImplemented.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:01:06' prior: 50352949!
+url
+	^'http://localhost:8080'! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:01:08' prior: 50352954!
+url
+	^'http://localhost:8080'.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:02:23' prior: 50352903!
+createCartRequest
+	
+	| tusLibrosClient response |
+	tusLibrosClient := TusLibrosClient new.
+	response := tusLibrosClient createCart: userName password: password.
+	response inspect.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:03:19' prior: 50352933!
+createCart: aClientId password: aPassword 
+
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	response _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^WebUtils jsonDecode: response content readStream ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:03:20' prior: 50352973!
+createCart: aClientId password: aPassword 
+
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	response _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ WebUtils jsonDecode: response content readStream ]
+		ifFalse: [ ^ self error: response content ].! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:04:09' prior: 50352964!
+createCartRequest
+	
+	| tusLibrosClient response |
+	tusLibrosClient := TusLibrosClient new.
+	response := tusLibrosClient createCart: userName password: password.
+	self halt.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/1/2021 23:07:07' prior: 50353006!
+createCartRequest
+	
+	| tusLibrosClient response |
+	tusLibrosClient := TusLibrosClient new.
+	response := tusLibrosClient createCart: userName password: password.
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+
+----QUIT----(1 July 2021 23:09:12) CuisUniversity-4532.image priorSource: 657134!
