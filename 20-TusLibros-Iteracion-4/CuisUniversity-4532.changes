@@ -18433,3 +18433,535 @@ CreateCartWindow new.  !
 	"! !
 
 ----QUIT----(1 July 2021 23:09:12) CuisUniversity-4532.image priorSource: 657134!
+
+----STARTUP---- (6 July 2021 19:06:29) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:13:15'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClien'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:13:14' prior: 50353015!
+ createCartRequest
+	
+	| response |
+	response := tusLibrosClien createCart: userName password: password.
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:13:23'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClient'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:13:23' prior: 50353049!
+       createCartRequest
+	
+	| response |
+	response := tusLibrosClient createCart: userName password: password.
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:13:31' prior: 50352430 overrides: 16896425!
+                   initialize
+	userName _ ''.
+	password _ ''.
+	tusLibrosClient := TusLibrosClient new.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:15:32' prior: 50353074!
+ createCartRequest
+	
+	| response |
+	response := tusLibrosClient createCart: userName password: password.
+	
+	self cart: response.
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:15:39' prior: 50353097!
+               createCartRequest
+	
+	| cartId |
+	cartId := tusLibrosClient createCart: userName password: password.
+	
+	self cart: cartId.
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:17:23' prior: 50352989!
+                           createCart: aClientId password: aPassword 
+
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	response _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	self halt.
+	response isSuccess
+		ifTrue: [ ^ WebUtils jsonDecode: response content readStream ]
+		ifFalse: [ ^ self error: response content ].! !
+
+
+CreateCartWindow new.  !
+
+	response content!
+
+	response content readStream !
+
+(WebUtils jsonDecode: response content readStream) at: 'cartId'!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:20:01' prior: 50353131!
+                    createCart: aClientId password: aPassword 
+
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	fieldDict at: 'clientId' put: aClientId.
+	fieldDict at: 'password' put: aPassword.
+	response _ WebClient
+		htmlSubmit: self url, '/createCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'cartId' ]
+		ifFalse: [ ^ self error: response content ].
+		
+! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:20:17'!
+        cart: aSmallInteger 
+	self shouldBeImplemented.! !
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:21:19'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClient cartID'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:21:17' prior: 50353168!
+                             cart: aCartId 
+	cartID := aCartId.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:22:00' prior: 50353114!
+                  createCartRequest
+	
+	self cart: (tusLibrosClient createCart: userName password: password).
+	
+	self halt.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:22:09'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClient cartId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:22:09' prior: 50353183!
+            cart: aCartId 
+	cartId := aCartId.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:31:22' prior: 50352881 overrides: 50559914!
+   initialize
+
+	super initialize.
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	self model when: #cartCreated send: #navigateToCatalogWindow to: self.
+	
+	self openInWorld.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:31:54' prior: 50353188!
+               createCartRequest
+	
+	self cart: (tusLibrosClient createCart: userName password: password).
+	
+	self cartCreated.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:32:39' prior: 50353229!
+             createCartRequest
+	
+	self cart: (tusLibrosClient createCart: userName password: password).
+	
+	self triggerEvent: #cartCreated with: self.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:34:31' prior: 50353245!
+                   createCartRequest
+	
+	self cart: (tusLibrosClient createCart: userName password: password).
+	
+	self triggerEvent: self class cartCreatedEvent with: self.
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:35:10' prior: 50353218 overrides: 50559914!
+                     initialize
+
+	super initialize.
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	self model when: self model class createdCartEvent send: #navigateToCatalogWindow to: self.
+	
+	self openInWorld.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:35:18' prior: 50353280 overrides: 50559914!
+           initialize
+
+	super initialize.
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel class methodsFor: 'events' stamp: 'AW 7/6/2021 19:36:13'!
+                      cartCreatedEvent
+	self shouldBeImplemented.! !
+!CreateCartWindowModel class methodsFor: 'events' stamp: 'AW 7/6/2021 19:36:18' prior: 50353304!
+                cartCreatedEvent
+	^#cartCreated! !
+!CreateCartWindow methodsFor: 'navigation' stamp: 'AW 7/6/2021 19:36:42'!
+                   navigateToCatalogWindow
+	self shouldBeImplemented.! !
+!CreateCartWindow methodsFor: 'navigation' stamp: 'AW 7/6/2021 19:36:59' prior: 50353313!
+                navigateToCatalogWindow
+	
+	"
+	Hacer algo para movernos a la pantalla de catalogo
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:40:49' prior: 50353262!
+ createCartRequest
+	[ self cart: (tusLibrosClient createCart: userName password: password).
+	  self triggerEvent: self class cartCreatedEvent with: self. ] on: Error
+		do: [ self triggerEvent: self class cartCreationErrorEvent ].
+		
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:41:05' prior: 50353324!
+                     createCartRequest
+	[ self cart: (tusLibrosClient createCart: userName password: password).
+	  self triggerEvent: self class cartCreatedEvent with: self. ] on: Error
+		do: [ self triggerEvent: self class cartCreationErrorEvent with: self ].
+		
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:43:16' prior: 50353292 overrides: 50559914!
+                           initialize
+
+	super initialize.
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.  !
+!CreateCartWindowModel class methodsFor: 'events' stamp: 'AW 7/6/2021 19:43:41'!
+                 cartCreationErrorEvent
+	self shouldBeImplemented.! !
+
+CreateCartWindow new.  !
+!CreateCartWindowModel class methodsFor: 'events' stamp: 'AW 7/6/2021 19:44:33' prior: 50353380!
+                cartCreationErrorEvent
+	^#cartCreationErrorEvent! !
+
+
+shopConfiguration _ ShopConfiguration 
+		withUserAuthenticator: (stubs mockUserAuthenticatorAlwaysReturning: false)
+		prices: stubs priceList
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor
+		timeProvider: stubs timeProvider. 
+		
+TusLibrosRestInterface allInstances do: [ :x | x destroy ].
+tusLibrosWebServer _ TusLibrosRestInterface on: 8080 shopConfiguration: shopConfiguration. 
+tusLibrosWebServer startListening.
+!
+
+
+CreateCartWindow new.  !
+!CreateCartWindow methodsFor: 'dialogs' stamp: 'AW 7/6/2021 19:45:47'!
+                            showBadLoginErrorDialog
+	self shouldBeImplemented.! !
+
+self contents: 'Hola'!
+
+MinimalStringMorph contents: 'Hola'!
+
+MinimalStringMorph contents: 'Hola'!
+
+MinimalStringMorph contents: 'Hola'!
+
+MinimalStringMorph contents: 'Hola'!
+
+MinimalStringMorph contents: 'Hola'.!
+
+MinimalStringMorph contents: 'Hola'.!
+
+MinimalStringMorph contents: 'Hola'.!
+
+(MinimalStringMorph contents: 'Hola') openInWorld .!
+
+(MinimalStringMorph contents: 'Hola') openInWorld .!
+
+(MinimalStringMorph contents: 'Hola') openInWorld .!
+
+(MinimalStringMorph contents: 'Hola') openInWorld .!
+
+(MinimalStringMorph contents: 'Hola') openInWorld .!
+
+TextModelMorph withText: 'holis'!
+
+(TextModelMorph withText: 'holis') openInWorld !
+
+SystemWindow subclass: #MessageDialogWindow
+	instanceVariableNames: 'message'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:55:11'!
+SystemWindow subclass: #MessageDialogWindow
+	instanceVariableNames: 'message'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!MessageDialogWindow class methodsFor: 'no messages' stamp: 'AW 7/6/2021 19:56:11'!
+    message: aMessageText 
+
+	^self new initializeMessage: aMessageText.! !
+
+MessageDialogWindow message: 'holis'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:56:56'!
+SystemWindow subclass: #MessageDialogWindow
+	instanceVariableNames: 'message messageText'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 19:56:56'!
+            initializeMessage: aMessageText 
+	self shouldBeImplemented.
+	messageText := aMessageText.! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 19:57:01' prior: 50353458!
+  initializeMessage: aMessageText 
+	
+	messageText := aMessageText.! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 19:57:54' prior: 50353464!
+                           initializeMessage: aMessageText 
+	
+	messageText := aMessageText.
+	
+	self label: aMessageText.
+	
+	self openInWorld.! !
+
+	MessageDialogWindow message: 'holis' !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 19:58:30' prior: 50353470!
+initializeMessage: aMessageText 
+	
+	self label: aMessageText.
+	
+	self openInWorld.! !
+
+SystemWindow subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'AW 7/6/2021 19:58:38'!
+SystemWindow subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 19:58:49' prior: 50353478!
+             initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	
+	self openInWorld.! !
+
+	MessageDialogWindow message: 'holis' !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:01:49' prior: 50353497!
+                             initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	self morphExtent: self defaultExtent
+	self openInWorld.! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:02:05'!
+                  defaultExtent
+	^200@200! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:02:14' prior: 50353505!
+    initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	self morphExtent: self defaultExtent.
+	self openInWorld.
+	! !
+
+(MessageDialogWindow message: 'HOlis') openInWorld !
+
+(MessageDialogWindow message: 'HOlis') !
+
+(MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:03:11' prior: 50353512!
+                     defaultExtent
+	^20@20! !
+
+	(MessageDialogWindow message: 'HOlis') !
+
+	self initialExtent !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:05:33' overrides: 16926571!
+initialExtent 
+	self defaultExtent.
+	! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:05:38' prior: 50353534 overrides: 16926571!
+  initialExtent 
+	^self defaultExtent.
+	! !
+
+	(MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:06:05' prior: 50353539 overrides: 16926571!
+                      initialExtent 
+	^200@200.
+	
+! !
+
+	(MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:07:10' prior: 50353546 overrides: 16926571!
+initialExtent 
+	^100@200.
+	 
+! !
+
+	 (MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:07:22' prior: 50353552 overrides: 16926571!
+                              initialExtent 
+	^200@100.
+
+! !
+
+	 (MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:07:56' prior: 50353559 overrides: 16926571!
+initialExtent 
+	^300@0.
+
+
+! !
+
+	 (MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:08:17' prior: 50353565 overrides: 16926571!
+ initialExtent 
+	^500@0.
+
+
+! !
+
+	 (MessageDialogWindow message: 'HOlis') !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:08:29' prior: 50353571 overrides: 16926571!
+ initialExtent 
+	^500@0.
+! !
+!CreateCartWindow methodsFor: 'dialogs' stamp: 'AW 7/6/2021 20:09:23' prior: 50353405!
+             showBadLoginErrorDialog
+	MessageDialogWindow message: 'Login Inválido!!'.! !
+
+CreateCartWindow new.  !
+
+----QUIT----(6 July 2021 20:14:25) CuisUniversity-4532.image priorSource: 684201!
