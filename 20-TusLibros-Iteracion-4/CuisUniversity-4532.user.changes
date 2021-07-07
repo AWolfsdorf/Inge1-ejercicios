@@ -2041,3 +2041,1974 @@ initializeForCartId: aCartId
 	self openInWorld.! !
 
 ----QUIT----(7 July 2021 01:45:02) CuisUniversity-4532.image priorSource: 18460338!
+
+----STARTUP---- (7 July 2021 14:30:42) as /home/nikita/r/f/isw1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:45:06' prior: 50909643!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self halt.
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+
+	self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:45:32'!
+buildWindowBody
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		)! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:45:32' prior: 50909714!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self halt.
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+
+	self buildWindowBody.
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:45:36' prior: 50909807!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self halt.
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+	self buildWindowBody.
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:49:02' prior: 50909777!
+buildWindowBody
+
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		)! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:49:58' prior: 50909883!
+buildWindowBody
+
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartPart.
+		
+		"
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		);
+		"! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:55:09'!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			PluggableListMorph
+				model: self model
+				listGetter: #catalogEntries 
+				indexGetter: #selectedCatalogEntry
+				indexSetter: #selectedCatalogEntry:
+		);
+		addMorph: (
+			 LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				);
+				yourself
+		);
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:55:53'!
+buildCartHalf
+	
+	^ LabelMorph
+		contents: 'HERE BE CART'.! !
+
+
+CreateCartWindow new.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 14:56:27' prior: 50909845!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+	self buildWindowBody.
+	
+	self openInWorld.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 14:56:41'!
+catalogEntries
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 14:57:06' prior: 50910012!
+catalogEntries
+	^OrderedCollection with: 'Libro A' with: 'Libro B'.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 14:57:17'!
+selectedCatalogEntry
+	self shouldBeImplemented.! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 14:57:28'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntry'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 14:57:27' prior: 50910022!
+selectedCatalogEntry
+	^selectedCatalogEntry.! !
+
+
+CreateCartWindow new.!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:00:07' prior: 50908822!
+initializeForCartId: aCartId 
+
+	cartId := aCartId.
+	selectedCatalogEntry := 0.! !
+
+
+CreateCartWindow new!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:00:25' prior: 50909913!
+buildWindowBody
+
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartHalf.
+		
+		"
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		);
+		"! !
+
+
+CreateCartWindow new.
+!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:01'!
+selectedCatalogEntry: aSmallInteger 
+	self shouldBeImplemented.
+	selectedCatalogEntry _ aSmallInteger! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:05' prior: 50910082!
+selectedCatalogEntry: aSmallInteger 
+
+	selectedCatalogEntry _ aSmallInteger! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:28' prior: 50910036!
+selectedCatalogEntry
+	^selectedCatalogEntry.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:38'!
+selectedCatalogEntryIndex
+	^selectedCatalogEntry.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:38' prior: 50909945!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			PluggableListMorph
+				model: self model
+				listGetter: #catalogEntries 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntry:
+		);
+		addMorph: (
+			 LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				);
+				yourself
+		);
+		yourself.
+		! !
+
+!methodRemoval: CatalogWindowModel #selectedCatalogEntry stamp: 'nz 7/7/2021 15:01:38'!
+selectedCatalogEntry
+	^selectedCatalogEntry.!
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:01:42'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:42' prior: 50910100!
+selectedCatalogEntryIndex
+	^selectedCatalogEntryIndex.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:42' prior: 50910042!
+initializeForCartId: aCartId 
+
+	cartId := aCartId.
+	selectedCatalogEntryIndex := 0.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:42' prior: 50910089!
+selectedCatalogEntry: aSmallInteger 
+
+	selectedCatalogEntryIndex _ aSmallInteger! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:52'!
+selectedCatalogEntryIndex: aSmallInteger 
+
+	selectedCatalogEntryIndex _ aSmallInteger! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:01:52' prior: 50910105!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			PluggableListMorph
+				model: self model
+				listGetter: #catalogEntries 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntryIndex:
+		);
+		addMorph: (
+			 LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				);
+				yourself
+		);
+		yourself.
+		! !
+
+!methodRemoval: CatalogWindowModel #selectedCatalogEntry: stamp: 'nz 7/7/2021 15:01:52'!
+selectedCatalogEntry: aSmallInteger 
+
+	selectedCatalogEntryIndex _ aSmallInteger!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:03:15' prior: 50910165!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Libros disponibles:'
+				);
+				addMorph: (
+					PluggableListMorph
+						model: self model
+						listGetter: #catalogEntries 
+						indexGetter: #selectedCatalogEntryIndex
+						indexSetter: #selectedCatalogEntryIndex:
+				);
+				yourself
+			
+		);
+		addMorph: (
+			 LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				);
+				yourself
+		);
+		yourself.
+		! !
+
+
+CatalogWindow forCartId: 3.!
+
+Object subclass: #CatalogWindowBookEntry
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogWindowBookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:04:34'!
+Object subclass: #CatalogWindowBookEntry
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowBookEntry methodsFor: 'no messages' stamp: 'nz 7/7/2021 15:05:20'!
+title
+	^'Refactoring'.! !
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:05:38'!
+price
+	^129.90! !
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:05:42' prior: 50910242!
+price
+	^29.90! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:09:41'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:09:39' prior: 50910147!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogWindowBookEntry price: 29.90 name: 'Refactoring' isbn: '0001')
+		with: (CatalogWindowBookEntry price: 24.90 name: 'TDD by example' isbn: '0002').! !
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:10:29' prior: 50910259!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogWindowBookEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogWindowBookEntry price: 24.90 title: 'TDD by example' isbn: '0002').! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:12:28'!
+catalogEntriesTitles
+	^OrderedCollection with: 'Libro A' with: 'Libro B'.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:12:28' prior: 50910195!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Libros disponibles:'
+				);
+				addMorph: (
+					PluggableListMorph
+						model: self model
+						listGetter: #catalogEntriesTitles 
+						indexGetter: #selectedCatalogEntryIndex
+						indexSetter: #selectedCatalogEntryIndex:
+				);
+				yourself
+			
+		);
+		addMorph: (
+			 LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				);
+				yourself
+		);
+		yourself.
+		! !
+
+!methodRemoval: CatalogWindowModel #catalogEntries stamp: 'nz 7/7/2021 15:12:28'!
+catalogEntries
+	^OrderedCollection with: 'Libro A' with: 'Libro B'.!
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:12:50'!
+isbn
+	^'0001'.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:13:44' prior: 50910283!
+catalogEntriesTitles
+	^catalogEntries collect: [ :entry | entry title ].! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:05'!
+price: aSmallFloat64 title: aString isbn: aString3 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializePrice: aSmallFloat64 title: aString isbn: aString3 ! !
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:17' prior: 50910335!
+price: aSmallFloat64 title: aString isbn: aString3 
+	
+	^self new initializePrice: aSmallFloat64 title: aString isbn: aString3 ! !
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:20' prior: 50910346!
+price: aPrice title: aString isbn: aString3 
+	
+	^self new initializePrice: aPrice title: aString isbn: aString3 ! !
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:29' prior: 50910354!
+price: aPrice title: aTitle isbn: aString3 
+	
+	^self new initializePrice: aPrice title: aTitle isbn: aString3 ! !
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:36' prior: 50910362!
+price: aPrice title: aTitle isbn: anISBN 
+	
+	^self new initializePrice: aPrice title: aTitle isbn: anISBN ! !
+!CatalogWindowBookEntry class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 15:14:51' prior: 50910369!
+price: aPrice title: aTitle isbn: anIsbn
+	
+	^self new initializePrice: aPrice title: aTitle isbn: anIsbn ! !
+
+!classDefinition: #CatalogWindowBookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:14:58'!
+Object subclass: #CatalogWindowBookEntry
+	instanceVariableNames: 'price'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogWindowBookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:14:58'!
+Object subclass: #CatalogWindowBookEntry
+	instanceVariableNames: 'price title'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogWindowBookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:14:58'!
+Object subclass: #CatalogWindowBookEntry
+	instanceVariableNames: 'price title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowBookEntry methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:14:58'!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	self shouldBeImplemented.
+	price := aPrice.
+	title := aTitle.
+	isbn := anIsbn.! !
+!CatalogWindowBookEntry methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:15:03' prior: 50910408!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	price := aPrice.
+	title := aTitle.
+	isbn := anIsbn.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:16:54' prior: 50910324!
+isbn
+	^isbn! !
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:16:58' prior: 50910246!
+price
+	^price! !
+!CatalogWindowBookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:17:03' prior: 50910238!
+title
+	^title! !
+
+
+CatalogWindow forCartId: 3.
+!
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:18:47' prior: 50910159!
+selectedCatalogEntryIndex: aSmallInteger 
+
+	selectedCatalogEntryIndex _ aSmallInteger.
+	
+	self
+		triggerEvent: #selectedCatalogEntryChanged
+		with: self.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:19:05' prior: 50909974!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	selectedCatalogEntryChanged
+	"
+	self buildWindowBody.
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:20:08' prior: 50910446!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntry to: self.
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:20:18'!
+rebuildSelectedCatalogEntry
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:20:28' prior: 50910527!
+rebuildSelectedCatalogEntry
+
+	self halt.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:23:20'!
+buildCatalogTitleList
+
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Libros disponibles:'
+		);
+		addMorph: (
+			PluggableListMorph
+				model: self model
+				listGetter: #catalogEntriesTitles 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntryIndex:
+		);
+		yourself.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:24:08' prior: 50910289!
+buildCatalogHalf
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCatalogTitleList;
+		addMorph: self buildSelectedCatalogEntryInfo;
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 15:24:24'!
+buildSelectedCatalogEntryInfo
+	
+	 ^LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Test-Driven Development by Example'
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+		);
+		yourself! !
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:41:39'!
+rebuildSelectedCatalogEntryInfo
+
+	self halt.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:41:39' prior: 50910485!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	
+	self openInWorld.! !
+
+!methodRemoval: CatalogWindow #rebuildSelectedCatalogEntry stamp: 'nz 7/7/2021 15:41:39'!
+rebuildSelectedCatalogEntry
+
+	self halt.!
+
+
+CatalogWindow forCartId: 3.!
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 15:45:28'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:45:27' prior: 50910560!
+buildSelectedCatalogEntryInfo
+	
+	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Test-Driven Development by Example'
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+		);
+		yourself.
+		
+	^selectedCatalogEntryInfoLayout.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:00' prior: 50910636!
+buildSelectedCatalogEntryInfo
+	
+	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		yourself.
+		
+	^selectedCatalogEntryInfoLayout.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:04' prior: 50910653!
+buildSelectedCatalogEntryInfo
+	
+	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		yourself.
+		
+	self rebuildSelectedCatalogEntryInfo.
+		
+	^selectedCatalogEntryInfoLayout.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:18' prior: 50910576!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: 'Test-Driven Development by Example'
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+		).! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:56' prior: 50910672!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs .
+
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: 'Test-Driven Development by Example'
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+		).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:47:44' prior: 50910686!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	self model selectedEntry title
+
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:48:25' prior: 50910701!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	self model selectedEntry title
+
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:48:37' prior: 50910716!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:48:54' prior: 50910734!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:49:35' prior: 50910751!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	
+	self model selectedEntry ifNil: [^nil].
+	
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:51:07'!
+selectedEntry
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:52:37' prior: 50910787!
+selectedEntry
+	selectedCatalogEntryIndex isZero ifTrue: [ ^nil ] ifFalse: [ ^catalogEntries at: selectedCatalogEntryIndex ].! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:53:56' prior: 50910768!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	
+	self model selectedEntry ifNil: [
+		selectedCatalogEntryInfoLayout addMorph: (LabelMorph contents: 'Seleccione un libro de la izquierda' ).
+		^nil.
+	].
+	
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #test
+				label: 'Add to Cart'
+		).! !
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:02:19' prior: 50910799!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	
+	self model selectedEntry ifNil: [
+		selectedCatalogEntryInfoLayout addMorph: (LabelMorph contents: 'Seleccione un libro de la izquierda' ).
+		^nil.
+	].
+	
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #addSelectedCatalogEntryToCart
+				label: 'Add to Cart'
+		).! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:02:30'!
+addSelectedCatalogEntryToCart
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:02:41' prior: 50910845!
+addSelectedCatalogEntryToCart
+	self halt.! !
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:13:26' prior: 50909968!
+buildCartHalf
+	
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCatalogTitleList;
+		addMorph: self buildSelectedCatalogEntryInfo;
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:13:58' prior: 50910858!
+buildCartHalf
+	
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCartList;
+		addMorph: self buildCartSummary;
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:14:17'!
+buildCartSummary! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:14:27' prior: 50910049!
+buildWindowBody
+
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartHalf.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:14:29' prior: 50910879!
+buildWindowBody
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartHalf.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:14:58' prior: 50910875!
+buildCartSummary
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCatalogTitleList;
+		addMorph: self buildSelectedCatalogEntryInfo;
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:15:31' prior: 50910897!
+buildCartSummary
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCartTotal;
+		addMorph: self buildCheckoutButton;
+		yourself.
+		! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:15:39'!
+buildCartTotal! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:16:19' prior: 50910914!
+buildCartTotal
+
+	LabelMorph
+		contents: ('Total: $ ', self model cartTotal).! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:04'!
+buildCheckoutButton! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:33' prior: 50910923!
+buildCheckoutButton
+
+	^PluggableButtonMorph
+		model: self model
+		stateGetter: nil
+		action: #checkoutCart
+		label: 'Checkout'! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:37' prior: 50910927!
+buildCheckoutButton
+
+	^PluggableButtonMorph
+		model: self model
+		stateGetter: nil
+		action: #checkoutCart
+		label: 'Checkout'.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:48'!
+buildCartList
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:51' prior: 50910943!
+buildCartList
+	! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:19:49' prior: 50910948!
+buildCartList
+	
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'En el carrito:'
+		);
+		addMorph: (
+			PluggableListMorph
+				model: self model
+				listGetter: #cartEntriesTitles
+				indexGetter: #selectedCartEntryIndex
+				indexSetter: #selectedCartEntryIndex:
+		);
+		yourself.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:20:00'!
+cartEntriesTitles
+	self shouldBeImplemented.! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:21:28'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:21:26' prior: 50910967!
+cartEntriesTitles
+	^cartEntries collect: [ :entry | entry title, ' x', entry quantity asString ].! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05'!
+selectedCatalogEntry
+	selectedCatalogEntryIndex isZero ifTrue: [ ^nil ] ifFalse: [ ^catalogEntries at: selectedCatalogEntryIndex ].! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05' prior: 50910822!
+rebuildSelectedCatalogEntryInfo
+
+	selectedCatalogEntryInfoLayout removeAllMorphs.
+	
+	self model selectedCatalogEntry ifNil: [
+		selectedCatalogEntryInfoLayout addMorph: (LabelMorph contents: 'Seleccione un libro de la izquierda' ).
+		^nil.
+	].
+	
+	selectedCatalogEntryInfoLayout 
+		addMorph: (
+			LabelMorph
+				contents: self model selectedCatalogEntry title
+		);
+		addMorph: (
+			LabelMorph
+				contents: ('$ ', self model selectedCatalogEntry price asString)
+		);
+		addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #addSelectedCatalogEntryToCart
+				label: 'Add to Cart'
+		).! !
+
+!methodRemoval: CatalogWindowModel #selectedEntry stamp: 'nz 7/7/2021 16:23:05'!
+selectedEntry
+	selectedCatalogEntryIndex isZero ifTrue: [ ^nil ] ifFalse: [ ^catalogEntries at: selectedCatalogEntryIndex ].!
+
+Object subclass: #CartWindowEntry
+	instanceVariableNames: 'quantity title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CartWindowEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:23:35'!
+Object subclass: #CartWindowEntry
+	instanceVariableNames: 'quantity title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classRenamed: #CatalogWindowBookEntry as: #CatalogEntry stamp: 'nz 7/7/2021 16:24:08'!
+Smalltalk renameClassNamed: #CatalogWindowBookEntry as: #CatalogEntry!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:24:08' prior: 50910271!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').! !
+
+!classRenamed: #CartWindowEntry as: #CartEntry stamp: 'nz 7/7/2021 16:24:36'!
+Smalltalk renameClassNamed: #CartWindowEntry as: #CartEntry!
+
+!classDefinition: #BookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:08'!
+Object subclass: #BookEntry
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CartEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:08'!
+BookEntry subclass: #CartEntry
+	instanceVariableNames: 'quantity title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CartEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:20'!
+BookEntry subclass: #CartEntry
+	instanceVariableNames: 'quantity isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #BookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:20'!
+Object subclass: #BookEntry
+	instanceVariableNames: 'title'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CartEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:27'!
+BookEntry subclass: #CartEntry
+	instanceVariableNames: 'isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #BookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:25:27'!
+Object subclass: #BookEntry
+	instanceVariableNames: 'title quantity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:00'!
+Object subclass: #CatalogEntry
+	instanceVariableNames: 'xprice title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:00' prior: 50910416!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	xprice := aPrice.
+	title := aTitle.
+	isbn := anIsbn.! !
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:00' prior: 50910428!
+price
+	^xprice! !
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:07'!
+Object subclass: #CatalogEntry
+	instanceVariableNames: 'price title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:07' prior: 50911119!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	price := aPrice.
+	title := aTitle.
+	isbn := anIsbn.! !
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:07' prior: 50911126!
+price
+	^price! !
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:10'!
+Object subclass: #CatalogEntry
+	instanceVariableNames: 'price titlex isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:10' prior: 50911138!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	price := aPrice.
+	titlex := aTitle.
+	isbn := anIsbn.! !
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:10' prior: 50910432!
+title
+	^titlex! !
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:13'!
+Object subclass: #CatalogEntry
+	instanceVariableNames: 'price titlex isbnx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:13' prior: 50910424!
+isbn
+	^isbnx! !
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:13' prior: 50911157!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	price := aPrice.
+	titlex := aTitle.
+	isbnx := anIsbn.! !
+
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price titlex isbnx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:18'!
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price titlex isbnx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price isbnx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:24'!
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price isbnx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:26:26'!
+BookEntry subclass: #CatalogEntry
+	instanceVariableNames: 'price'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:34' prior: 50911164!
+title
+	^title! !
+!BookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:26:39'!
+title
+	^title! !
+
+!methodRemoval: CatalogEntry #title stamp: 'nz 7/7/2021 16:26:39'!
+title
+	^title!
+
+!classDefinition: #CartEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:27:05'!
+BookEntry subclass: #CartEntry
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #BookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:27:05'!
+Object subclass: #BookEntry
+	instanceVariableNames: 'title quantity isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+Object subclass: #BookEntry
+	instanceVariableNames: 'title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #BookEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:27:11'!
+Object subclass: #BookEntry
+	instanceVariableNames: 'title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+BookEntry subclass: #CartEntry
+	instanceVariableNames: 'quantity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CartEntry category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:27:18'!
+BookEntry subclass: #CartEntry
+	instanceVariableNames: 'quantity'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:27:30' prior: 50911176!
+isbn
+	^isbn! !
+!BookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:27:36'!
+isbn
+	^isbn! !
+
+!methodRemoval: CatalogEntry #isbn stamp: 'nz 7/7/2021 16:27:36'!
+isbn
+	^isbn!
+!BookEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:28:19'!
+initializeIsbn: anIsbn title: aTitle
+	isbn _ anIsbn.
+	title _ aTitle.! !
+!CatalogEntry methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:28:48' prior: 50911180!
+initializePrice: aPrice title: aTitle isbn: anIsbn 
+	
+	self initializeIsbn: anIsbn title: aTitle.
+	price := aPrice.! !
+!CartEntry methodsFor: 'no messages' stamp: 'nz 7/7/2021 16:29:19'!
+initializeQuantity: aQuantity title: aTitle isbn: anIsbn 
+	
+	self initializeIsbn: anIsbn title: aTitle.
+	quantity := aQuantity.! !
+!CartEntry class methodsFor: 'no messages' stamp: 'nz 7/7/2021 16:30:03'!
+quantity: aQuantity title: aTitle isbn: anIsbn
+	
+	^self new initializeQuantity: aQuantity title: aTitle isbn: anIsbn ! !
+!CartEntry methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:30:34'!
+quantity
+	^quantity! !
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:32:49' prior: 50911044!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+		
+		
+	cartEntries _ OrderedCollection
+		with: (CartEntry quantity: 1 title: 'Refactoring' isbn: '0001')
+		with: (CartEntry quantity: 2 title: 'TDD by example' isbn: '0002').! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:12'!
+selectedCartEntryIndex
+	self shouldBeImplemented.! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 16:33:23'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:22' prior: 50911331!
+selectedCartEntryIndex
+	
+	^selectedCartEntryIndex! !
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:33:35' prior: 50911313!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	selectedCartEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+		
+		
+	cartEntries _ OrderedCollection
+		with: (CartEntry quantity: 1 title: 'Refactoring' isbn: '0001')
+		with: (CartEntry quantity: 2 title: 'TDD by example' isbn: '0002').! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:44'!
+cartTotal
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:48' prior: 50911371!
+cartTotal
+	^99! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:51' prior: 50911376!
+cartTotal
+	^99.90! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:34:02' prior: 50910918!
+buildCartTotal
+
+	LabelMorph
+		contents: ('Total: $ ', self model cartTotal asString).! !
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:35:42' prior: 50910888!
+buildWindowBody
+
+	self halt.
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartHalf.
+		! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:16' prior: 50911384!
+buildCartTotal
+
+	^LabelMorph
+		contents: ('Total: $ ', self model cartTotal asString).! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:32'!
+selectedCartEntryIndex: aSmallInteger 
+	self shouldBeImplemented.
+	selectedCartEntryIndex _ aSmallInteger! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:36' prior: 50911410!
+selectedCartEntryIndex: aSmallInteger 
+	
+	selectedCartEntryIndex _ aSmallInteger! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:47' prior: 50911393!
+buildWindowBody
+
+	^ self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: self buildCatalogHalf;
+		addMorph: self buildCartHalf.
+		! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:38:26' prior: 50908828 overrides: 50865461!
+defaultExtent
+	^1060@500! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:42:33' prior: 50910581!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #catalogUpdated send: #rebuildCatalogTitleList to: self.
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	
+	self model refreshCatalog.
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:42:51'!
+refreshCatalog
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:43:15' prior: 50911352!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	selectedCartEntryIndex _ 0.
+	
+	catalogEntries _ OrderedCollection new.
+		
+		
+	cartEntries _ OrderedCollection
+		with: (CartEntry quantity: 1 title: 'Refactoring' isbn: '0001')
+		with: (CartEntry quantity: 2 title: 'TDD by example' isbn: '0002').! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:43:20' prior: 50911484!
+refreshCatalog
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:43:46' prior: 50911503!
+refreshCatalog
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	self 
+		triggerEvent: #catalogUpdated
+		with: self.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:43:54' prior: 50911513!
+refreshCatalog
+	
+	catalogEntries _ OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	
+	self 
+		triggerEvent: #catalogUpdated
+		with: self.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:44:22'!
+rebuildCatalogTitleList
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:44:27' prior: 50911536!
+rebuildCatalogTitleList
+	
+	self halt.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:45:57' prior: 50911541!
+rebuildCatalogTitleList
+	
+	"No hay nada que rebuildear en realidad, el PluggableListMorph ya se actualiza solo"! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:46:01' prior: 50911546!
+rebuildCatalogTitleList
+	
+	"No hay nada que rebuildear en realidad, el PluggableListMorph ya se actualiza solo"! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:46:42' prior: 50911553!
+rebuildCatalogTitleList
+	
+	"No hay nada que rebuildear en realidad, el PluggableListMorph ya se actualiza solo"
+	self redrawNeeded ! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:46:44' prior: 50911561!
+rebuildCatalogTitleList
+	
+	self redrawNeeded ! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:46:57' prior: 50911569!
+rebuildCatalogTitleList
+	
+	self halt
+	self redrawNeeded ! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:46:58' prior: 50911575!
+rebuildCatalogTitleList
+	
+	self halt.
+	self redrawNeeded ! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:48:37' prior: 50911580!
+rebuildCatalogTitleList
+	
+	self halt.
+	self submorphsDo: [ :morph | morph halt ].  
+	self redrawNeeded ! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:48:38' prior: 50911586!
+rebuildCatalogTitleList
+	
+	self submorphsDo: [ :morph | morph halt ].  
+	self redrawNeeded ! !
+
+
+CatalogWindow forCartId: 3.!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:49:45' prior: 50911593!
+rebuildCatalogTitleList
+	
+	self redrawNeeded ! !
+
+
+w _ CatalogWindow forCartId: 3.!
+
+w world explore.!
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 17:11:19'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogListMorph'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:18' prior: 50910536!
+buildCatalogTitleList
+
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Libros disponibles:'
+		);
+		addMorph: [
+			catalogListMorph _ PluggableListMorph
+				model: self model
+				listGetter: #catalogEntriesTitles 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntryIndex:.
+			catalogListMorph
+		] value;
+		yourself.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:35' prior: 50911601!
+rebuildCatalogTitleList
+	
+	self catalogListMorph updateList! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:54' prior: 50911633!
+rebuildCatalogTitleList
+	
+	catalogListMorph updateList! !
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 17:11:58'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:58' prior: 50911638!
+rebuildCatalogTitleList
+	
+	catalogTitleListMorph updateList! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:58' prior: 50911617!
+buildCatalogTitleList
+
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Libros disponibles:'
+		);
+		addMorph: [
+			catalogTitleListMorph _ PluggableListMorph
+				model: self model
+				listGetter: #catalogEntriesTitles 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntryIndex:.
+			catalogTitleListMorph
+		] value;
+		yourself.! !
+
+w world explore.!
+
+
+w _ CatalogWindow forCartId: 3.
+!
+
+
+w _ CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:12:24' prior: 50911652!
+rebuildCatalogTitleList
+	
+	"Hay que avisarle a mano a la lista que cambió"
+	catalogTitleListMorph updateList! !
+
+
+w _ CatalogWindow forCartId: 3.
+!
+
+----SNAPSHOT----(7 July 2021 17:12:56) CuisUniversity-4532.image priorSource: 18497769!
