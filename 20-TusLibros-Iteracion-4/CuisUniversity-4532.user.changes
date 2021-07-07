@@ -644,3 +644,1400 @@ showBadLoginErrorDialog
 shop!
 
 ----SNAPSHOT----(7 July 2021 00:47:55) CuisUniversity-4532.image priorSource: 18450685!
+
+
+CreateCartWindow new.!
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 00:51:37'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindow methodsFor: 'navigation' stamp: 'nz 7/7/2021 00:53:56' prior: 50907853!
+navigateToCatalogWindow
+	
+	"
+	Hacer algo para movernos a la pantalla de catalogo
+	"
+	CatalogWindow forCart: self model cart.! !
+!CreateCartWindow methodsFor: 'navigation' stamp: 'nz 7/7/2021 00:54:11' prior: 50908548!
+navigateToCatalogWindow
+	
+	"
+	Hacer algo para movernos a la pantalla de catalogo
+	"
+	CatalogWindow forCart: self model cart.
+	self delete.! !
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].
+server _ TusLibrosRestInterface on: 8080 shop: shop.
+!
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 00:57:10'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClient cartId lastError'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:57:06' prior: 50907943!
+createCartRequest
+
+	[
+		self cart:
+			(tusLibrosClient
+				createCart: userName
+				password: password).
+		self
+			triggerEvent: self class cartCreatedEvent
+			with: self 
+	]
+		on: Error
+		do: [ :error |
+			lastError := error.
+			self
+				triggerEvent: self class cartCreationErrorEvent
+				with: self.
+		].
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:02' prior: 50908577!
+createCartRequest
+
+	[
+		self cart:
+			(tusLibrosClient
+				createCart: userName
+				password: password).
+		self
+			triggerEvent: self class cartCreatedEvent
+			with: self 
+	]
+		on: Error - MessageNotUnderstood
+		do: [ :error |
+			lastError := error.
+			self
+				triggerEvent: self class cartCreationErrorEvent
+				with: self.
+		].
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:15'!
+cart
+	self shouldBeImplemented.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:22' prior: 50908621!
+cart
+	^cartId.! !
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:44'!
+cartId
+	^cartId.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:44' prior: 50908555!
+navigateToCatalogWindow
+	
+	"
+	Hacer algo para movernos a la pantalla de catalogo
+	"
+	CatalogWindow forCart: self model cartId.
+	self delete.! !
+
+!methodRemoval: CreateCartWindowModel #cart stamp: 'nz 7/7/2021 00:58:44'!
+cart
+	^cartId.!
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:59:25' prior: 50908599!
+createCartRequest
+
+	[
+		cartId := tusLibrosClient
+			createCart: userName
+			password: password.
+		self
+			triggerEvent: self class cartCreatedEvent
+			with: self 
+	]
+		on: Error - MessageNotUnderstood
+		do: [ :error |
+			lastError := error.
+			self
+				triggerEvent: self class cartCreationErrorEvent
+				with: self.
+		].
+	"
+	en el caso de que este ok: 
+	- actualizar el modelo (guardarnos el id de carrito)
+	- tirar un evento avisando que tenemos un carrito 
+	en el caso de que falle:
+	- tirar un evento con informacion del error
+	
+	despues:
+	- capturar eventos en la vista y actuar en consecencia
+	"! !
+
+!methodRemoval: CreateCartWindowModel #cart: stamp: 'nz 7/7/2021 00:59:33'!
+cart: aCartId 
+	cartId := aCartId.!
+!CatalogWindow class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:00:02'!
+forCart: aSmallInteger 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeForCart: aSmallInteger ! !
+!CatalogWindow class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:00:18' prior: 50908671!
+forCart: aCartId 
+	^self new initializeForCartId: aCartId ! !
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 01:00:35'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: 'cartId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:00:35'!
+initializeForCartId: aCartId 
+	self shouldBeImplemented.
+	cartId := aCartId.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:00:39' prior: 50908692!
+initializeForCartId: aCartId 
+	
+	cartId := aCartId.! !
+!CatalogWindow class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:00:56'!
+forCartId: aCartId 
+	^self new initializeForCartId: aCartId ! !
+
+!methodRemoval: CatalogWindow class #forCart: stamp: 'nz 7/7/2021 01:00:56'!
+forCart: aCartId 
+	^self new initializeForCartId: aCartId !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 01:02:09' prior: 50908510 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self morphExtent: (self defaultExtent).
+	
+	self buildCreateCartWindow.
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:02:57' prior: 50908698!
+initializeForCartId: aCartId 
+	
+	cartId := aCartId.
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: CreateCartWindowModel new.
+	self morphExtent: (self defaultExtent).
+	
+	self buildCreateCartWindow.
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: self buildUserAndPasswordTextboxRow;
+		addMorph: self buildCreateCartButtonRow.
+	
+	self openInWorld.! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 01:04:15'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:04:08' prior: 50908731!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: 'Libro A');
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+Panel subclass: #CatalogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 01:04:21'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CreateCartWindow methodsFor: 'navigation' stamp: 'nz 7/7/2021 01:04:59' prior: 50908634!
+navigateToCatalogWindow
+	
+	"
+	Hacer algo para movernos a la pantalla de catalogo
+	"
+	CatalogWindow forCartId: self model cartId.
+	self delete.! !
+!CatalogWindowModel class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:05:08'!
+forCartId: aSmallInteger 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeForCartId: aSmallInteger ! !
+!CatalogWindowModel class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:05:16' prior: 50908794!
+forCartId: aCartId 
+	^self new initializeForCartId: aCartId ! !
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 01:05:22'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:05:22'!
+initializeForCartId: aCartId 
+	self shouldBeImplemented.
+	cartId := aCartId.! !
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:05:26' prior: 50908816!
+initializeForCartId: aCartId 
+
+	cartId := aCartId.! !
+
+
+CreateCartWindow new.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:07:05' overrides: 50865461!
+defaultExtent
+	^1058@292! !
+
+
+CreateCartWindow new.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:09:21' prior: 50908757!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:10:43' prior: 50908833!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	self halt.
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:11:24' prior: 50908854!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:11:39' prior: 50908875!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self addMorph: self layoutMorph.
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:11:47' prior: 50908895!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:11:58' prior: 50908917!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0.
+	self
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:12:01' prior: 50908938!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0.
+		
+	self
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A')
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:13:09' prior: 50908958!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0.
+		
+	self
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:13:29' prior: 50908979!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:16:02' prior: 50909004!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:16:14' prior: 50909029!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:16:29' prior: 50909055!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+	self 
+		color: Color red.
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:16:38' prior: 50909081!
+initializeForCartId: aCartId 
+	
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:17:06' prior: 50909108!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'TEST BUTTON'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:17:30' prior: 50909133!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newRow
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:17:52' prior: 50909159!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beColumn;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:17:57' prior: 50909185!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO'
+				)
+		);
+		addMorph: (LabelMorph contents: 'Libro B').
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:19:03' prior: 50909210!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Refactoring - Improving the Design of Existing Code');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Libro A');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO'
+				)
+		).
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:19:39' prior: 50909235!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Refactoring - Improving the Design of Existing Code');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Test-Driven Development by Example');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO'
+				)
+		).
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:19:49' prior: 50909270!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph 
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Refactoring - Improving the Design of Existing Code');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (LabelMorph contents: 'Test-Driven Development by Example');
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+
+self layoutMorph !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:24:09' prior: 50909306!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph addMorph: (
+		PluggableScrollPane new addMorph: (
+			LayoutMorph newRow
+				separation: 15;
+				color: Color red;
+				axisEdgeWeight: 0;
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph 
+								contents: 'Refactoring - Improving the Design of Existing Code'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO YA'
+						)
+				);
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph
+								contents: 'Test-Driven Development by Example'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+						)
+				)
+		)
+	).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:25:01' prior: 50909345!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph addMorph: (
+		PluggableScrollPane new
+			morphExtent: (self defaultExtent);
+			addMorph: (
+			LayoutMorph newRow
+				separation: 15;
+				color: Color red;
+				axisEdgeWeight: 0;
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph 
+								contents: 'Refactoring - Improving the Design of Existing Code'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO YA'
+						)
+				);
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph
+								contents: 'Test-Driven Development by Example'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+						)
+				)
+		)
+	).
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:25:11' prior: 50909388!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph addMorph: (
+		PluggableScrollPane new morphExtent: (self defaultExtent); addMorph: (
+			LayoutMorph newRow
+				separation: 15;
+				color: Color red;
+				axisEdgeWeight: 0;
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph 
+								contents: 'Refactoring - Improving the Design of Existing Code'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO YA'
+						)
+				);
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph
+								contents: 'Test-Driven Development by Example'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+						)
+				)
+		)
+	).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:27:40' prior: 50909431!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph addMorph: (
+		PluggableScrollPane new morphExtent: (self defaultExtent - (8@20)); addMorph: (
+			LayoutMorph newRow
+				separation: 15;
+				color: Color red;
+				axisEdgeWeight: 0;
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph 
+								contents: 'Refactoring - Improving the Design of Existing Code'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO YA'
+						)
+				);
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph
+								contents: 'Test-Driven Development by Example'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+						)
+				)
+		)
+	).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:29:51' prior: 50909476!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph addMorph: (
+		PluggableScrollPane new morphExtent: (self defaultExtent - (8@20)); addMorph: (
+			LayoutMorph newRow
+				separation: 15;
+				color: Color red;
+				axisEdgeWeight: 0;
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph 
+								contents: 'Refactoring - Improving the Design of Existing Code'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO YA'
+						);
+						yourself
+				);
+				addMorph: (
+					LayoutMorph newColumn
+						separation: 25;
+						axisEdgeWeight: 0.5;
+						color: Color blue;
+						addMorph: (
+							LabelMorph
+								contents: 'Test-Driven Development by Example'
+						);
+						addMorph: (
+							PluggableButtonMorph
+								model: self model
+								stateGetter: nil
+								action: #test
+								label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+						);
+						yourself
+				);
+				yourself
+		);
+		yourself
+	).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:32:23' prior: 50909520!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+
+	self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+
+
+CatalogWindow forCartId: 3.
+!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:35:35' prior: 50909566!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:44:25' prior: 50909605!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self halt.
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+
+	self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+
+----QUIT----(7 July 2021 01:45:02) CuisUniversity-4532.image priorSource: 18460338!

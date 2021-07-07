@@ -1,3 +1,92 @@
+!classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client'!
+Panel subclass: #CatalogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:07:05'!
+defaultExtent
+	^1058@292! !
+
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:44:25'!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	self halt.
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	"
+
+	self layoutMorph
+		beRow;
+		separation: 15;
+		color: Color red;
+		axisEdgeWeight: 0;
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph 
+						contents: 'Refactoring - Improving the Design of Existing Code'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO YA'
+				)
+		);
+		addMorph: (
+			LayoutMorph newColumn
+				separation: 25;
+				axisEdgeWeight: 0.5;
+				color: Color blue;
+				addMorph: (
+					LabelMorph
+						contents: 'Test-Driven Development by Example'
+				);
+				addMorph: (
+					PluggableButtonMorph
+						model: self model
+						stateGetter: nil
+						action: #test
+						label: 'AGREGAR AL CARRITO PERO RECONTRA YA'
+				)
+		).
+	
+	self openInWorld.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'CatalogWindow class' category: 'Tus-Libros-Web-Client'!
+CatalogWindow class
+	instanceVariableNames: ''!
+
+!CatalogWindow class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:00:56'!
+forCartId: aCartId 
+	^self new initializeForCartId: aCartId ! !
+
+
 !classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client'!
 Panel subclass: #CreateCartWindow
 	instanceVariableNames: 'userNameTextBox passwordTextBox createCartButton'
@@ -89,7 +178,7 @@ buildUserAndPasswordTextboxRow
 defaultExtent
 	^1058@292! !
 
-!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:45:01'!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 01:02:09'!
 initialize
 
 	super initialize.
@@ -100,19 +189,20 @@ initialize
 	
 	self buildCreateCartWindow.
 	
-	
 	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
 	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
 	
 	self openInWorld.! !
 
 
-!CreateCartWindow methodsFor: 'navigation' stamp: 'AW 7/6/2021 19:36:59'!
+!CreateCartWindow methodsFor: 'navigation' stamp: 'nz 7/7/2021 01:04:59'!
 navigateToCatalogWindow
 	
 	"
 	Hacer algo para movernos a la pantalla de catalogo
-	"! !
+	"
+	CatalogWindow forCartId: self model cartId.
+	self delete.! !
 
 
 !CreateCartWindow methodsFor: 'dialogs' stamp: 'nz 7/7/2021 00:45:52'!
@@ -186,23 +276,58 @@ alerta: aMessageText
 	^self new initializeAlerta: aMessageText.! !
 
 
-!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client'!
-Object subclass: #CreateCartWindowModel
-	instanceVariableNames: 'userName password tusLibrosClient cartId'
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:22:09'!
-cart: aCartId 
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 01:05:26'!
+initializeForCartId: aCartId 
+
 	cartId := aCartId.! !
 
-!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:41:05'!
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'CatalogWindowModel class' category: 'Tus-Libros-Web-Client'!
+CatalogWindowModel class
+	instanceVariableNames: ''!
+
+!CatalogWindowModel class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:05:16'!
+forCartId: aCartId 
+	^self new initializeForCartId: aCartId ! !
+
+
+!classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client'!
+Object subclass: #CreateCartWindowModel
+	instanceVariableNames: 'userName password tusLibrosClient cartId lastError'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:58:44'!
+cartId
+	^cartId.! !
+
+!CreateCartWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:59:25'!
 createCartRequest
-	[ self cart: (tusLibrosClient createCart: userName password: password).
-	  self triggerEvent: self class cartCreatedEvent with: self. ] on: Error
-		do: [ self triggerEvent: self class cartCreationErrorEvent with: self ].
-		
+
+	[
+		cartId := tusLibrosClient
+			createCart: userName
+			password: password.
+		self
+			triggerEvent: self class cartCreatedEvent
+			with: self 
+	]
+		on: Error - MessageNotUnderstood
+		do: [ :error |
+			lastError := error.
+			self
+				triggerEvent: self class cartCreationErrorEvent
+				with: self.
+		].
 	"
 	en el caso de que este ok: 
 	- actualizar el modelo (guardarnos el id de carrito)
