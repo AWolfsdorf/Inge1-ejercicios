@@ -1,128 +1,11 @@
 !classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client'!
 Panel subclass: #CatalogWindow
-	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph cartEntrySlot cartTotalLabel'
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph cartSummarySlot cartTotalLabel checkoutButtonSlot'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:27:15'!
-buildCartHalf
-	
-	^ LayoutMorph newColumn
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		addMorph: self buildCartList;
-		addMorph: self buildRemoveCartEntryButton;
-		addMorph: self buildCartSummary;
-		yourself.
-		! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:23:56'!
-buildCartList
-	
-	^ LayoutMorph newColumn
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		addMorph: (
-			LabelMorph
-				contents: 'En el carrito:'
-		);
-		addMorph: [
-			cartListMorph _ PluggableListMorph
-				model: self model
-				listGetter: #cartEntriesTitles
-				indexGetter: #selectedCartEntryIndex
-				indexSetter: #selectedCartEntryIndex:.
-			cartListMorph
-		] value;
-		yourself.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:15:31'!
-buildCartSummary
-	
-	^ LayoutMorph newRow
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		addMorph: self buildCartTotal;
-		addMorph: self buildCheckoutButton;
-		yourself.
-		! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:55:57'!
-buildCartTotal
-
-	cartTotalLabel _ LabelMorph contents: ''.
-	self updateCartTotal.
-		
-	^cartTotalLabel.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:24:08'!
-buildCatalogHalf
-	
-	^ LayoutMorph newRow
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		addMorph: self buildCatalogTitleList;
-		addMorph: self buildSelectedCatalogEntryInfo;
-		yourself.
-		! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:11:58'!
-buildCatalogTitleList
-
-	^ LayoutMorph newColumn
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		addMorph: (
-			LabelMorph
-				contents: 'Libros disponibles:'
-		);
-		addMorph: [
-			catalogTitleListMorph _ PluggableListMorph
-				model: self model
-				listGetter: #catalogEntriesTitles 
-				indexGetter: #selectedCatalogEntryIndex
-				indexSetter: #selectedCatalogEntryIndex:.
-			catalogTitleListMorph
-		] value;
-		yourself.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:17:37'!
-buildCheckoutButton
-
-	^PluggableButtonMorph
-		model: self model
-		stateGetter: nil
-		action: #checkoutCart
-		label: 'Checkout'.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:42:46'!
-buildRemoveCartEntryButton
-
-	cartEntrySlot _ LayoutMorph newRow
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		yourself.
-		
-	self rebuildRemoveCartEntryButton .
-	
-	^cartEntrySlot 
-	! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:04'!
-buildSelectedCatalogEntryInfo
-	
-	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
-		separation: 25;
-		axisEdgeWeight: 0.5;
-		yourself.
-		
-	self rebuildSelectedCatalogEntryInfo.
-		
-	^selectedCatalogEntryInfoLayout.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:47'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:37:47'!
 buildWindowBody
 
 	^ self layoutMorph
@@ -134,11 +17,11 @@ buildWindowBody
 		addMorph: self buildCartHalf.
 		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:34:12'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 19:29:12'!
 defaultExtent
-	^1300@600! !
+	^1350@600! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:47:04'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 19:15:31'!
 initializeForCartId: aCartId 
 	
 	self titleMorph showButtonsNamed: #( close collapse ).
@@ -170,32 +53,57 @@ initializeForCartId: aCartId
 	self model when: #cartEntryRemoved send: #refreshCart to: self model.
 	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
 	self model when: #selectedCartEntryChanged send: #rebuildRemoveCartEntryButton to: self.
+	self model when: #checkoutSuccessful send: #navigateToTicketWindow: to: self.
 	
 	self model refreshCatalog.
 	
 	self openInWorld.! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:44:42'!
-rebuildRemoveCartEntryButton
 
-	cartEntrySlot removeAllMorphs .
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 15:24:08'!
+buildCatalogHalf
 	
-	self model selectedCartEntry ifNil: [
-		cartEntrySlot addMorph: (
-			LabelMorph contents: 'Seleccione un item del carrito para removerlo.'
-		).
-	] ifNotNil: [
-		cartEntrySlot addMorph: (
-			PluggableButtonMorph
-				model: self model
-				stateGetter: nil
-				action: #removeSelectedCartEntry
-				label: 'Remover ', self model selectedCartEntry title
-		).
-	].
-! !
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCatalogTitleList;
+		addMorph: self buildSelectedCatalogEntryInfo;
+		yourself.
+		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05'!
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 17:11:58'!
+buildCatalogTitleList
+
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'Libros disponibles:'
+		);
+		addMorph: [
+			catalogTitleListMorph _ PluggableListMorph
+				model: self model
+				listGetter: #catalogEntriesTitles 
+				indexGetter: #selectedCatalogEntryIndex
+				indexSetter: #selectedCatalogEntryIndex:.
+			catalogTitleListMorph
+		] value;
+		yourself.! !
+
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 15:46:04'!
+buildSelectedCatalogEntryInfo
+	
+	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		yourself.
+		
+	self rebuildSelectedCatalogEntryInfo.
+		
+	^selectedCatalogEntryInfoLayout.! !
+
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 16:23:05'!
 rebuildSelectedCatalogEntryInfo
 
 	selectedCatalogEntryInfoLayout removeAllMorphs.
@@ -222,23 +130,141 @@ rebuildSelectedCatalogEntryInfo
 				label: 'Add to Cart'
 		).! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:53:30'!
-updateCartList
-	
-	"Hay que avisarle a mano a la lista que cambió"
-	cartListMorph updateList.
-	self updateCartTotal.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:56:02'!
-updateCartTotal
-
-	cartTotalLabel contents: 'Total $ ', self model cartTotal asString.! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:44'!
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 18:21:44'!
 updateCatalogTitleList
 	
 	"Hay que avisarle a mano a la lista que cambió"
 	catalogTitleListMorph updateList! !
+
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:27:15'!
+buildCartHalf
+	
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCartList;
+		addMorph: self buildRemoveCartEntryButton;
+		addMorph: self buildCartSummary;
+		yourself.
+		! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:23:56'!
+buildCartList
+	
+	^ LayoutMorph newColumn
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'En el carrito:'
+		);
+		addMorph: [
+			cartListMorph _ PluggableListMorph
+				model: self model
+				listGetter: #cartEntriesTitles
+				indexGetter: #selectedCartEntryIndex
+				indexSetter: #selectedCartEntryIndex:.
+			cartListMorph
+		] value;
+		yourself.! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 16:15:31'!
+buildCartSummary
+	
+	^ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		addMorph: self buildCartTotal;
+		addMorph: self buildCheckoutButton;
+		yourself.
+		! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:55:57'!
+buildCartTotal
+
+	cartTotalLabel _ LabelMorph contents: ''.
+	self updateCartTotal.
+		
+	^cartTotalLabel.! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:23:48'!
+buildCheckoutButton
+
+	checkoutButtonSlot _ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5.
+		
+	self rebuildCheckoutButton.
+		
+	^checkoutButtonSlot.! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:15:31'!
+buildRemoveCartEntryButton
+
+	cartSummarySlot _ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		yourself.
+		
+	self rebuildRemoveCartEntryButton .
+	
+	^cartSummarySlot 
+	! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:28:47'!
+rebuildCheckoutButton
+
+	checkoutButtonSlot removeAllMorphs .
+	
+	(self model cartTotal > 0) ifTrue: [
+		checkoutButtonSlot addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #checkoutCart
+				label: 'Checkout'
+		).
+	] ifFalse: [
+		checkoutButtonSlot addMorph: (
+			LabelMorph contents: 'Agregá algo al carrito!!'
+		).
+	].
+		! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:15:31'!
+rebuildRemoveCartEntryButton
+
+	cartSummarySlot removeAllMorphs .
+	
+	self model selectedCartEntry ifNil: [
+		cartSummarySlot addMorph: (
+			LabelMorph contents: 'Seleccione un item del carrito para removerlo.'
+		).
+	] ifNotNil: [
+		cartSummarySlot addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #removeSelectedCartEntry
+				label: 'Remover ', self model selectedCartEntry title
+		).
+	].
+
+! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:27:09'!
+updateCartList
+	
+	"Hay que avisarle a mano a la lista que cambió"
+	cartListMorph updateList.
+	self updateCartTotal.
+	self rebuildCheckoutButton.! !
+
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:56:02'!
+updateCartTotal
+
+	cartTotalLabel contents: 'Total $ ', self model cartTotal asString.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -565,6 +591,14 @@ cartTotal
 catalogEntriesTitles
 	^catalogEntries collect: [ :entry | entry title ].! !
 
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:11:02'!
+checkoutCart
+	
+	"Pegarle a la API"
+	| ticket |
+	ticket _ TicketModel new.
+	self triggerEvent: #checkoutSuccessful with: ticket.! !
+
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:05:25'!
 priceForIsbn: anIsbn
 
@@ -573,10 +607,10 @@ priceForIsbn: anIsbn
 		ifFound: [ :entry | ^entry price ] 
 		ifNone: [ self error: self class noPriceForIsbnErrorDescription ].! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:00:16'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:27:59'!
 refreshCart
 	
-	cartEntries _ OrderedCollection
+	cartEntries _ OrderedCollection 
 		with: (CartEntry quantity: 4 title: 'Refactoring' isbn: '0001')
 		with: (CartEntry quantity: 9 title: 'TDD by example' isbn: '0002').
 		
@@ -729,6 +763,14 @@ cartCreatedEvent
 !CreateCartWindowModel class methodsFor: 'events' stamp: 'AW 7/6/2021 19:44:33'!
 cartCreationErrorEvent
 	^#cartCreationErrorEvent! !
+
+
+!classDefinition: #TicketModel category: 'Tus-Libros-Web-Client'!
+Object subclass: #TicketModel
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
 
 
 !classDefinition: #TusLibrosClient category: 'Tus-Libros-Web-Client'!
