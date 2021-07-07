@@ -1,6 +1,6 @@
 !classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client'!
 Panel subclass: #CatalogWindow
-	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph cartEntrySlot'
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph cartEntrySlot cartTotalLabel'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
@@ -49,11 +49,13 @@ buildCartSummary
 		yourself.
 		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:16'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:55:57'!
 buildCartTotal
 
-	^LabelMorph
-		contents: ('Total: $ ', self model cartTotal asString).! !
+	cartTotalLabel _ LabelMorph contents: ''.
+	self updateCartTotal.
+		
+	^cartTotalLabel.! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:24:08'!
 buildCatalogHalf
@@ -220,11 +222,17 @@ rebuildSelectedCatalogEntryInfo
 				label: 'Add to Cart'
 		).! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:35'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:53:30'!
 updateCartList
 	
 	"Hay que avisarle a mano a la lista que cambió"
-	cartListMorph updateList! !
+	cartListMorph updateList.
+	self updateCartTotal.! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:56:02'!
+updateCartTotal
+
+	cartTotalLabel contents: 'Total $ ', self model cartTotal asString.! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:44'!
 updateCatalogTitleList
@@ -514,17 +522,18 @@ price: aPrice title: aTitle isbn: anIsbn
 
 !classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client'!
 Object subclass: #CatalogWindowModel
-	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex'
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex cartTotal'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 18:20:24'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 18:58:10'!
 initializeForCartId: aCartId 
 
 	cartId _ aCartId.
 	selectedCatalogEntryIndex _ 0.
 	selectedCartEntryIndex _ 0.
+	cartTotal _ 0.
 	
 	catalogEntries _ OrderedCollection new.
 		
@@ -539,24 +548,39 @@ addSelectedCatalogEntryToCart
 		triggerEvent: #cartEntryAdded
 		with: self.! !
 
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:01:50'!
+calculateCartTotal
+	
+	^cartEntries sum: [ :entry | self priceForIsbn: entry isbn ] ifEmpty: [ 0 ].! !
+
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:21:26'!
 cartEntriesTitles
 	^cartEntries collect: [ :entry | entry title, ' x', entry quantity asString ].! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:51'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:57:58'!
 cartTotal
-	^99.90! !
+	^cartTotal! !
 
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:13:44'!
 catalogEntriesTitles
 	^catalogEntries collect: [ :entry | entry title ].! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:12:13'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:05:25'!
+priceForIsbn: anIsbn
+
+	catalogEntries
+		detect: [ :entry | entry isbn = anIsbn ] 
+		ifFound: [ :entry | ^entry price ] 
+		ifNone: [ self error: self class noPriceForIsbnErrorDescription ].! !
+
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:00:16'!
 refreshCart
 	
 	cartEntries _ OrderedCollection
 		with: (CartEntry quantity: 4 title: 'Refactoring' isbn: '0001')
 		with: (CartEntry quantity: 9 title: 'TDD by example' isbn: '0002').
+		
+	cartTotal _ self calculateCartTotal.
 	
 	self 
 		triggerEvent: #cartUpdated
@@ -624,6 +648,10 @@ CatalogWindowModel class
 !CatalogWindowModel class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 01:05:16'!
 forCartId: aCartId 
 	^self new initializeForCartId: aCartId ! !
+
+!CatalogWindowModel class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 19:06:02'!
+noPriceForIsbnErrorDescription
+	^'No hay precio para el isbn en cuestion. Parece ser de un libro que no esta en el catalogo.'! !
 
 
 !classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client'!
