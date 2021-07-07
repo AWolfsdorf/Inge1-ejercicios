@@ -1,46 +1,9 @@
 !classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client'!
 Panel subclass: #CatalogWindow
-	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph'
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
-
-!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:38:26'!
-defaultExtent
-	^1060@500! !
-
-!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:42:33'!
-initializeForCartId: aCartId 
-	
-	self titleMorph showButtonsNamed: #( close collapse ).
-	self setLabel: 'Alto catalogo de libros de Kent Beck'.
-	self model: (CatalogWindowModel forCartId: aCartId).
-	self morphExtent: (self defaultExtent).
-
-	"
-	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
-	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
-	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
-	actualizar en base a eso esta vista.
-	
-	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
-	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
-	
-	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
-	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
-	o simil para actualizarla. 
-	
-	Con el boton de remover hay que hacerle algo similar y ya. 
-	
-	"
-	self buildWindowBody.
-	
-	self model when: #catalogUpdated send: #rebuildCatalogTitleList to: self.
-	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
-	
-	self model refreshCatalog.
-	
-	self openInWorld.! !
 
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:13:58'!
@@ -54,7 +17,7 @@ buildCartHalf
 		yourself.
 		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:19:49'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:23:56'!
 buildCartList
 	
 	^ LayoutMorph newColumn
@@ -64,13 +27,14 @@ buildCartList
 			LabelMorph
 				contents: 'En el carrito:'
 		);
-		addMorph: (
-			PluggableListMorph
+		addMorph: [
+			cartListMorph _ PluggableListMorph
 				model: self model
 				listGetter: #cartEntriesTitles
 				indexGetter: #selectedCartEntryIndex
-				indexSetter: #selectedCartEntryIndex:
-		);
+				indexSetter: #selectedCartEntryIndex:.
+			cartListMorph
+		] value;
 		yourself.! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:15:31'!
@@ -154,11 +118,44 @@ buildWindowBody
 		addMorph: self buildCartHalf.
 		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 17:12:24'!
-rebuildCatalogTitleList
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:38:26'!
+defaultExtent
+	^1060@500! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:44'!
+initializeForCartId: aCartId 
 	
-	"Hay que avisarle a mano a la lista que cambió"
-	catalogTitleListMorph updateList! !
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #catalogUpdated send: #updateCatalogTitleList to: self.
+	self model when: #cartUpdated send: #updateCartList to: self.
+	self model when: #cartEntryAdded send: #triggerRefreshCart to: self.
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	
+	self model refreshCatalog.
+	
+	self openInWorld.! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05'!
 rebuildSelectedCatalogEntryInfo
@@ -186,6 +183,23 @@ rebuildSelectedCatalogEntryInfo
 				action: #addSelectedCatalogEntryToCart
 				label: 'Add to Cart'
 		).! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:10:41'!
+triggerRefreshCart
+
+	self model refreshCart.! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:35'!
+updateCartList
+	
+	"Hay que avisarle a mano a la lista que cambió"
+	cartListMorph updateList! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:44'!
+updateCatalogTitleList
+	
+	"Hay que avisarle a mano a la lista que cambió"
+	catalogTitleListMorph updateList! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -474,7 +488,7 @@ Object subclass: #CatalogWindowModel
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:43:15'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 18:20:24'!
 initializeForCartId: aCartId 
 
 	cartId _ aCartId.
@@ -484,14 +498,15 @@ initializeForCartId: aCartId
 	catalogEntries _ OrderedCollection new.
 		
 		
-	cartEntries _ OrderedCollection
-		with: (CartEntry quantity: 1 title: 'Refactoring' isbn: '0001')
-		with: (CartEntry quantity: 2 title: 'TDD by example' isbn: '0002').! !
+	cartEntries _ OrderedCollection new.! !
 
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:02:41'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:06:20'!
 addSelectedCatalogEntryToCart
-	self halt.! !
+	
+	self
+		triggerEvent: #cartEntryAdded
+		with: self.! !
 
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:21:26'!
 cartEntriesTitles
@@ -504,6 +519,17 @@ cartTotal
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:13:44'!
 catalogEntriesTitles
 	^catalogEntries collect: [ :entry | entry title ].! !
+
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:12:13'!
+refreshCart
+	
+	cartEntries _ OrderedCollection
+		with: (CartEntry quantity: 4 title: 'Refactoring' isbn: '0001')
+		with: (CartEntry quantity: 9 title: 'TDD by example' isbn: '0002').
+	
+	self 
+		triggerEvent: #cartUpdated
+		with: self.! !
 
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:43:54'!
 refreshCatalog
