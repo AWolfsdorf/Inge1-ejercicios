@@ -18965,3 +18965,568 @@ initialExtent
 CreateCartWindow new.  !
 
 ----QUIT----(6 July 2021 20:14:25) CuisUniversity-4532.image priorSource: 684201!
+
+----STARTUP---- (6 July 2021 20:42:53) as /home/nikita/r/f/isw1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+p := PluggableMorph new.!
+
+p openInWorld!
+
+PluggableMorph subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/6/2021 20:46:05'!
+PluggableMorph subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 20:51:50' prior: 50353516!
+                   initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	self morphExtent: self defaultExtent.
+	
+	self layoutMorph
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText).
+	
+	self openInWorld.
+	! !
+
+PluggableMorph subclass: #MessageDialogWindow
+	instanceVariableNames: 'contentLayout'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/6/2021 20:58:00'!
+PluggableMorph subclass: #MessageDialogWindow
+	instanceVariableNames: 'contentLayout'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 20:59:15' prior: 50353609!
+           initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	self morphExtent: self defaultExtent.
+	
+	contentLayout _ LayoutMorph newColumn.
+	contentLayout
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText).
+	
+	self openInWorld.
+	! !
+
+p openInWorld!
+
+m _ MessageDialogWindow new.!
+
+m openInWorld.!
+
+
+CreateCartWindow new.  !
+
+
+CreateCartWindow new.  !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:28:24' prior: 50353634!
+          initializeMessage: aMessageText 
+	
+	self setLabel: aMessageText.
+	self morphExtent: self defaultExtent.
+	
+	contentLayout _ LayoutMorph newColumn.
+	self addMorph: contentLayout.
+	contentLayout
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText).
+	
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow new.
+m openInWorld.!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:29:08' prior: 50353650!
+                      initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	contentLayout _ LayoutMorph newColumn.
+	self addMorph: contentLayout.
+	contentLayout
+		beColumn;
+		separation: 15;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText).
+	
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:29:41' prior: 50353577!
+   initialExtent 
+	^500@100.
+! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:29:44' prior: 50353681!
+ initialExtent 
+	^300@100.
+! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:30:50'!
+                     initialExtent_ 
+	^300@100.
+! !
+
+!methodRemoval: MessageDialogWindow #initialExtent stamp: 'nz 7/6/2021 23:30:50'!
+initialExtent 
+	^300@100.
+!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:31:09' prior: 50353528!
+                     defaultExtent
+	^300@100! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+self color: (Color fromHexString: '#006200')!
+
+self position!
+
+self position!
+
+self extent!
+
+self location!
+
+self location!
+
+self location: (MorphicTranslation withTranslation: 7.0@6.0)  !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:39:28' prior: 50353667!
+          initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	contentLayout _ LayoutMorph newColumn.
+	self addMorph: contentLayout.
+	contentLayout
+		beColumn;
+		separation: 15;
+		morphExtent: self defaultExtent;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText).
+	
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:40:31' prior: 50353713!
+  initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	contentLayout _ LayoutMorph newColumn.
+	self addMorph: contentLayout.
+	contentLayout
+		beColumn;
+		separation: 15;
+		morphExtent: self defaultExtent;
+		axisEdgeWeight: 0;
+		addMorph: (LabelMorph contents: aMessageText);
+		addMorph: (self buildOkButton).
+	
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:41:05'!
+         buildOkButton
+	self shouldBeImplemented.! !
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:41:31' prior: 50353744!
+              buildOkButton
+
+	^PluggableButtonMorph
+		model: self model
+		stateGetter: nil
+		action: #close
+		label: 'Ok'.
+	! !
+
+
+CreateCartWindow new.  !
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:44:45' prior: 50353749!
+             buildOkButton
+
+	^PluggableButtonMorph
+		model: self model
+		stateGetter: nil
+		action: #closeBoxHit
+		label: 'Ok'.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:45:42' prior: 50353757!
+          buildOkButton
+
+	^PluggableButtonMorph
+		model: self
+		stateGetter: nil
+		action: #closeDialog
+		label: 'Ok'.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:46:01'!
+                            closeDialog
+	self shouldBeImplemented.! !
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:47:03' prior: 50353777!
+                closeDialog
+	! !
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:48:00' prior: 50353782!
+         closeDialog
+	self delete.! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+!methodRemoval: MessageDialogWindow #initialExtent_ stamp: 'nz 7/6/2021 23:48:29'!
+initialExtent_ 
+	^300@100.
+!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:49:13' prior: 50353728!
+                         initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (LabelMorph contents: aMessageText);
+			addMorph: (self buildOkButton);
+			yourself
+	)
+		
+	self openInWorld.
+	! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:49:17' prior: 50353798!
+                initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (LabelMorph contents: aMessageText);
+			addMorph: (self buildOkButton);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:49:38' prior: 50353812!
+               initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:50:31' prior: 50353826!
+initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: (Color fromString: 'white');
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:51:42' prior: 50353842!
+                         initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: (Color fromString: 'palePeach');
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:52:00' prior: 50353860!
+                     initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: (Color fromString: 'lightBlue');
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:53:21' overrides: 16889446!
+                 defaultBorderWidth
+	^1! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:56:20' prior: 50353878!
+         initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+
+!methodRemoval: MessageDialogWindow #defaultBorderWidth stamp: 'nz 7/6/2021 23:56:59'!
+defaultBorderWidth
+	^1!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:57:29' prior: 50353902!
+             initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent - 2@2;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:57:50' prior: 50353930!
+             initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent - (2@2);
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:58:05' prior: 50353949!
+               initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+m _ MessageDialogWindow message: 'Holas'.
+m openInWorld.
+!
+
+----QUIT----(6 July 2021 23:59:24) CuisUniversity-4532.image priorSource: 701958!

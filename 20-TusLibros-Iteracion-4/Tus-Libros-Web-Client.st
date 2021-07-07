@@ -114,28 +114,56 @@ showBadLoginErrorDialog
 
 
 !classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client'!
-SystemWindow subclass: #MessageDialogWindow
-	instanceVariableNames: ''
+PluggableMorph subclass: #MessageDialogWindow
+	instanceVariableNames: 'contentLayout'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:03:11'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:31:09'!
 defaultExtent
-	^20@20! !
+	^300@100! !
 
-!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:08:29'!
-initialExtent 
-	^500@0.
-! !
-
-!MessageDialogWindow methodsFor: 'initialization' stamp: 'AW 7/6/2021 20:02:14'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:58:05'!
 initializeMessage: aMessageText 
 	
-	self setLabel: aMessageText.
 	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
 	self openInWorld.
 	! !
+
+
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:45:42'!
+buildOkButton
+
+	^PluggableButtonMorph
+		model: self
+		stateGetter: nil
+		action: #closeDialog
+		label: 'Ok'.
+	! !
+
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/6/2021 23:48:00'!
+closeDialog
+	self delete.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
