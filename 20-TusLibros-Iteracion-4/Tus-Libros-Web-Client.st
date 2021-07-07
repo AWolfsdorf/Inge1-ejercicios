@@ -5,12 +5,13 @@ Panel subclass: #CatalogWindow
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 16:37:47'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 19:34:05'!
 buildWindowBody
 
 	^ self layoutMorph
 		beRow;
 		separation: 15;
+		borderWidth: 1;
 		color: Color red;
 		axisEdgeWeight: 0;
 		addMorph: self buildCatalogHalf;
@@ -60,22 +61,24 @@ initializeForCartId: aCartId
 	self openInWorld.! !
 
 
-!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 15:24:08'!
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 19:34:14'!
 buildCatalogHalf
 	
 	^ LayoutMorph newRow
 		separation: 25;
+		borderWidth: 1;
 		axisEdgeWeight: 0.5;
 		addMorph: self buildCatalogTitleList;
 		addMorph: self buildSelectedCatalogEntryInfo;
 		yourself.
 		! !
 
-!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 17:11:58'!
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 19:34:40'!
 buildCatalogTitleList
 
 	^ LayoutMorph newColumn
 		separation: 25;
+		borderWidth: 1;
 		axisEdgeWeight: 0.5;
 		addMorph: (
 			LabelMorph
@@ -91,11 +94,12 @@ buildCatalogTitleList
 		] value;
 		yourself.! !
 
-!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 15:46:04'!
+!CatalogWindow methodsFor: 'catalog half' stamp: 'nz 7/7/2021 19:34:46'!
 buildSelectedCatalogEntryInfo
 	
 	selectedCatalogEntryInfoLayout _ LayoutMorph newColumn
 		separation: 25;
+		borderWidth: 1;
 		axisEdgeWeight: 0.5;
 		yourself.
 		
@@ -137,23 +141,25 @@ updateCatalogTitleList
 	catalogTitleListMorph updateList! !
 
 
-!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:27:15'!
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:34:18'!
 buildCartHalf
 	
 	^ LayoutMorph newColumn
 		separation: 25;
 		axisEdgeWeight: 0.5;
+		borderWidth: 1;
 		addMorph: self buildCartList;
 		addMorph: self buildRemoveCartEntryButton;
 		addMorph: self buildCartSummary;
 		yourself.
 		! !
 
-!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 18:23:56'!
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:34:29'!
 buildCartList
 	
 	^ LayoutMorph newColumn
 		separation: 25;
+		borderWidth: 1;
 		axisEdgeWeight: 0.5;
 		addMorph: (
 			LabelMorph
@@ -169,11 +175,12 @@ buildCartList
 		] value;
 		yourself.! !
 
-!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 16:15:31'!
+!CatalogWindow methodsFor: 'cart half' stamp: 'nz 7/7/2021 19:34:36'!
 buildCartSummary
 	
 	^ LayoutMorph newRow
 		separation: 25;
+		borderWidth: 1;
 		axisEdgeWeight: 0.5;
 		addMorph: self buildCartTotal;
 		addMorph: self buildCheckoutButton;
@@ -265,6 +272,11 @@ updateCartList
 updateCartTotal
 
 	cartTotalLabel contents: 'Total $ ', self model cartTotal asString.! !
+
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:30:30'!
+navigateToTicketWindow: aTicketModel 
+	self shouldBeImplemented.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
