@@ -1,18 +1,19 @@
 !classDefinition: #CatalogWindow category: 'Tus-Libros-Web-Client'!
 Panel subclass: #CatalogWindow
-	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph'
+	instanceVariableNames: 'selectedCatalogEntryInfoLayout catalogTitleListMorph cartListMorph cartEntrySlot'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:13:58'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:27:15'!
 buildCartHalf
 	
 	^ LayoutMorph newColumn
 		separation: 25;
 		axisEdgeWeight: 0.5;
 		addMorph: self buildCartList;
+		addMorph: self buildRemoveCartEntryButton;
 		addMorph: self buildCartSummary;
 		yourself.
 		! !
@@ -94,6 +95,19 @@ buildCheckoutButton
 		action: #checkoutCart
 		label: 'Checkout'.! !
 
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:42:46'!
+buildRemoveCartEntryButton
+
+	cartEntrySlot _ LayoutMorph newRow
+		separation: 25;
+		axisEdgeWeight: 0.5;
+		yourself.
+		
+	self rebuildRemoveCartEntryButton .
+	
+	^cartEntrySlot 
+	! !
+
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 15:46:04'!
 buildSelectedCatalogEntryInfo
 	
@@ -118,11 +132,11 @@ buildWindowBody
 		addMorph: self buildCartHalf.
 		! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:38:26'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:34:12'!
 defaultExtent
-	^1060@500! !
+	^1300@600! !
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:44'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:47:04'!
 initializeForCartId: aCartId 
 	
 	self titleMorph showButtonsNamed: #( close collapse ).
@@ -150,12 +164,34 @@ initializeForCartId: aCartId
 	
 	self model when: #catalogUpdated send: #updateCatalogTitleList to: self.
 	self model when: #cartUpdated send: #updateCartList to: self.
-	self model when: #cartEntryAdded send: #triggerRefreshCart to: self.
+	self model when: #cartEntryAdded send: #refreshCart to: self model.
+	self model when: #cartEntryRemoved send: #refreshCart to: self model.
 	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	self model when: #selectedCartEntryChanged send: #rebuildRemoveCartEntryButton to: self.
 	
 	self model refreshCatalog.
 	
 	self openInWorld.! !
+
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:44:42'!
+rebuildRemoveCartEntryButton
+
+	cartEntrySlot removeAllMorphs .
+	
+	self model selectedCartEntry ifNil: [
+		cartEntrySlot addMorph: (
+			LabelMorph contents: 'Seleccione un item del carrito para removerlo.'
+		).
+	] ifNotNil: [
+		cartEntrySlot addMorph: (
+			PluggableButtonMorph
+				model: self model
+				stateGetter: nil
+				action: #removeSelectedCartEntry
+				label: 'Remover ', self model selectedCartEntry title
+		).
+	].
+! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05'!
 rebuildSelectedCatalogEntryInfo
@@ -183,11 +219,6 @@ rebuildSelectedCatalogEntryInfo
 				action: #addSelectedCatalogEntryToCart
 				label: 'Add to Cart'
 		).! !
-
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:10:41'!
-triggerRefreshCart
-
-	self model refreshCart.! !
 
 !CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:21:35'!
 updateCartList
@@ -501,7 +532,7 @@ initializeForCartId: aCartId
 	cartEntries _ OrderedCollection new.! !
 
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:06:20'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:45:48'!
 addSelectedCatalogEntryToCart
 	
 	self
@@ -542,15 +573,30 @@ refreshCatalog
 		triggerEvent: #catalogUpdated
 		with: self.! !
 
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:48:52'!
+removeSelectedCartEntry
+	
+	self
+		triggerEvent: #cartEntryRemoved
+		with: self.! !
+
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:30:29'!
+selectedCartEntry
+	selectedCartEntryIndex isZero ifTrue: [ ^nil ] ifFalse: [ ^cartEntries at: selectedCartEntryIndex ].! !
+
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:33:22'!
 selectedCartEntryIndex
 	
 	^selectedCartEntryIndex! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:37:36'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:43:35'!
 selectedCartEntryIndex: aSmallInteger 
 	
-	selectedCartEntryIndex _ aSmallInteger! !
+	selectedCartEntryIndex _ aSmallInteger.
+	
+	self
+		triggerEvent: #selectedCartEntryChanged
+		with: self.! !
 
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:23:05'!
 selectedCatalogEntry
