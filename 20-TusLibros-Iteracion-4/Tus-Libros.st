@@ -1603,6 +1603,14 @@ today
 	^ FixedGregorianDate today.! !
 
 
+!TestStubs methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:26:25'!
+demoShop
+	^ Shop
+		withUserAuthenticator: (self mockUserAuthenticatorAlwaysReturning: true)
+		prices: self priceList
+		merchantProcessor: self mockAlwaysOkMerchantProcessor 
+		timeProvider: self timeProvider.! !
+
 !TestStubs methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:56:07'!
 mockUserAuthenticatorAlwaysReturning: aBoolean
 	^MockUserAuthenticator alwaysReturning: aBoolean.! !
@@ -1660,10 +1668,6 @@ configRoutes
 
 
 ! !
-
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:04:29'!
-createShopFrom: aShopConfiguration 
-	^aShopConfiguration createShop.! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 22:44:56'!
 destroy
@@ -1746,10 +1750,10 @@ handleListPurchasesRequest: aRequest
 
 ! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/27/2021 23:01:50'!
-initializeOn: aPort shopConfiguration: aShopConfiguration 
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:28:19'!
+initializeOn: aPort shop: aShop
 
-	shop := self createShopFrom: aShopConfiguration.
+	shop := aShop.
 	port := aPort.
 	webServer := WebServer new listenOn: self port.
 	
@@ -1787,7 +1791,7 @@ stopListening
 TusLibrosRestInterface class
 	instanceVariableNames: ''!
 
-!TusLibrosRestInterface class methodsFor: 'instance creation' stamp: 'AW 6/27/2021 22:59:35'!
-on: aPort shopConfiguration: aShopConfiguration 
+!TusLibrosRestInterface class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 00:27:58'!
+on: aPort shop: aShop
 
-	^self new initializeOn: aPort shopConfiguration: aShopConfiguration! !
+	^self new initializeOn: aPort shop: aShop! !
