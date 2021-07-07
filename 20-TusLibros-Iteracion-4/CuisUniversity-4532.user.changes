@@ -290,3 +290,357 @@ server _ TusLibrosRestInterface on: 8080 shop: shop.!
 CreateCartWindow new.!
 
 ----SNAPSHOT----(7 July 2021 00:30:57) CuisUniversity-4532.image priorSource: 18448188!
+
+Panel subclass: #CreateCartWindow
+	instanceVariableNames: 'userNameTextBox passwordTextBox createCartButton'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 00:31:59'!
+Panel subclass: #CreateCartWindow
+	instanceVariableNames: 'userNameTextBox passwordTextBox createCartButton'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+Panel subclass: #MessageDialogWindow
+	instanceVariableNames: 'contentLayout'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 00:32:07'!
+Panel subclass: #MessageDialogWindow
+	instanceVariableNames: 'contentLayout'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+Panel subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+!classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 00:32:10'!
+Panel subclass: #MessageDialogWindow
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+
+
+CreateCartWindow new.
+!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:33:57' prior: 50907839 overrides: 50865470!
+initialize
+
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+
+
+CreateCartWindow new.!
+
+self open!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:37:48' prior: 50908281 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:39:00' prior: 50908299 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self morphExtent: (self defaultExtent).
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:39:55' overrides: 50865461!
+defaultExtent
+	^800@300! !
+
+
+CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:40:45' prior: 50908336 overrides: 50865461!
+defaultExtent
+	^1058@292! !
+
+
+CreateCartWindow new.!
+
+
+CreateCartWindow new.!
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:41:55' prior: 50907877 overrides: 50865461!
+defaultExtent
+	^430@136! !
+!MessageDialogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:42:12'!
+defaultExtend
+	^430@136! !
+
+!methodRemoval: MessageDialogWindow #defaultExtend stamp: 'nz 7/7/2021 00:42:36'!
+defaultExtend
+	^430@136!
+
+
+CreateCartWindow new.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 00:43:14'!
+alerta: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+!MessageDialogWindow class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:43:14' prior: 50907918!
+message: aMessageText 
+
+	^self new alerta: aMessageText.! !
+
+!methodRemoval: MessageDialogWindow #initializeMessage: stamp: 'nz 7/7/2021 00:43:14'!
+initializeMessage: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	!
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 00:43:41'!
+initializeAlerta: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+!MessageDialogWindow class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:43:41' prior: 50908378!
+message: aMessageText 
+
+	^self new initializeAlerta: aMessageText.! !
+
+!methodRemoval: MessageDialogWindow #alerta: stamp: 'nz 7/7/2021 00:43:41'!
+alerta: aMessageText 
+	
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	!
+!MessageDialogWindow class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:43:50'!
+alerta: aMessageText 
+
+	^self new initializeAlerta: aMessageText.! !
+
+!methodRemoval: MessageDialogWindow class #message: stamp: 'nz 7/7/2021 00:43:50'!
+message: aMessageText 
+
+	^self new initializeAlerta: aMessageText.!
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 00:44:18' prior: 50908401!
+initializeAlerta: aMessageText 
+	
+	
+	self setLabel: 'Atención!!'.
+	self morphExtent: self defaultExtent.
+	
+	self addMorph: (
+		LayoutMorph newColumn
+			beColumn;
+			separation: 15;
+			color: Color lightBlue;
+			borderColor: Color darkGray;
+			borderWidth: 2;
+			morphExtent: self defaultExtent;
+			axisEdgeWeight: 0;
+			addMorph: (
+				LabelMorph contents: aMessageText
+			);
+			addMorph: (
+				self buildOkButton
+			);
+			yourself
+	).
+		
+	self openInWorld.
+	! !
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:44:50' prior: 50908317 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	"self morphExtent: (self defaultExtent).
+	"self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:44:54' prior: 50908473 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	"self morphExtent: (self defaultExtent).
+	"
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:45:01' prior: 50908491 overrides: 50865470!
+initialize
+
+	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Cree su carrito'.
+	self model: CreateCartWindowModel new.
+	self morphExtent: (self defaultExtent).
+	
+	self buildCreateCartWindow.
+	
+	
+	self model when: self model class cartCreatedEvent send: #navigateToCatalogWindow to: self.
+	self model when: self model class cartCreationErrorEvent send: #showBadLoginErrorDialog to: self.
+	
+	self openInWorld.! !
+
+
+CreateCartWindow new.!
+
+
+CreateCartWindow new.!
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+
+
+CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'dialogs' stamp: 'nz 7/7/2021 00:45:52' prior: 50907858!
+showBadLoginErrorDialog
+	MessageDialogWindow alerta: 'Login Inválido!!'.! !
+
+shop!
+
+----SNAPSHOT----(7 July 2021 00:47:55) CuisUniversity-4532.image priorSource: 18450685!

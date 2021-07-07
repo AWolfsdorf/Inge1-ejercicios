@@ -1,5 +1,5 @@
 !classDefinition: #CreateCartWindow category: 'Tus-Libros-Web-Client'!
-SystemWindow subclass: #CreateCartWindow
+Panel subclass: #CreateCartWindow
 	instanceVariableNames: 'userNameTextBox passwordTextBox createCartButton'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -85,12 +85,19 @@ buildUserAndPasswordTextboxRow
 	
 	^layout.! !
 
-!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:43:16'!
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:40:45'!
+defaultExtent
+	^1058@292! !
+
+!CreateCartWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:45:01'!
 initialize
 
 	super initialize.
+	self titleMorph showButtonsNamed: #( close collapse ).
 	self setLabel: 'Cree su carrito'.
 	self model: CreateCartWindowModel new.
+	self morphExtent: (self defaultExtent).
+	
 	self buildCreateCartWindow.
 	
 	
@@ -108,25 +115,27 @@ navigateToCatalogWindow
 	"! !
 
 
-!CreateCartWindow methodsFor: 'dialogs' stamp: 'AW 7/6/2021 20:09:23'!
+!CreateCartWindow methodsFor: 'dialogs' stamp: 'nz 7/7/2021 00:45:52'!
 showBadLoginErrorDialog
-	MessageDialogWindow message: 'Login Inválido!!'.! !
+	MessageDialogWindow alerta: 'Login Inválido!!'.! !
 
 
 !classDefinition: #MessageDialogWindow category: 'Tus-Libros-Web-Client'!
-PluggableMorph subclass: #MessageDialogWindow
-	instanceVariableNames: 'contentLayout'
+Panel subclass: #MessageDialogWindow
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:31:09'!
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 00:41:55'!
 defaultExtent
-	^300@100! !
+	^430@136! !
 
-!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/6/2021 23:58:05'!
-initializeMessage: aMessageText 
+!MessageDialogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 00:44:18'!
+initializeAlerta: aMessageText 
 	
+	
+	self setLabel: 'Atención!!'.
 	self morphExtent: self defaultExtent.
 	
 	self addMorph: (
@@ -171,10 +180,10 @@ closeDialog
 MessageDialogWindow class
 	instanceVariableNames: ''!
 
-!MessageDialogWindow class methodsFor: 'as yet unclassified' stamp: 'AW 7/6/2021 19:56:11'!
-message: aMessageText 
+!MessageDialogWindow class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 00:43:50'!
+alerta: aMessageText 
 
-	^self new initializeMessage: aMessageText.! !
+	^self new initializeAlerta: aMessageText.! !
 
 
 !classDefinition: #CreateCartWindowModel category: 'Tus-Libros-Web-Client'!
