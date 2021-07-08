@@ -821,15 +821,20 @@ initializeWith: aBag
 	bag := aBag.! !
 
 
-!BagSerializer methodsFor: 'evaluating' stamp: 'AW 6/29/2021 00:04:23'!
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:00:53'!
 asDictionaryArray
 
 	^(bag asSet collect: [ :item | | entryDictionary |
 		entryDictionary _ Dictionary new.
-		entryDictionary at: 'item'	 put: item.
+		entryDictionary at: 'item'	 put: (self serializeItem: item).
 		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
 		entryDictionary
 	]) asArray.! !
+
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:02:06'!
+serializeItem: anItem
+
+	^anItem.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -840,6 +845,24 @@ BagSerializer class
 !BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:57'!
 bag: aBag
 	^self new initializeWith: aBag ! !
+
+
+!classDefinition: #BookBagSerializer category: 'Tus-Libros'!
+BagSerializer subclass: #BookBagSerializer
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:04:10'!
+serializeItem: aBook
+	
+	| bookDictionary |
+	bookDictionary _ Dictionary new.
+	bookDictionary at: 'isbn' put: aBook isbn.	
+	bookDictionary at: 'title' put: aBook title.	
+
+	^bookDictionary.! !
 
 
 !classDefinition: #Book category: 'Tus-Libros'!
@@ -1791,7 +1814,7 @@ handleAddToCartRequest: aRequest
 	response at: 'response' put: 'OK'.
 	aRequest send200Response: (WebUtils jsonEncode: response).! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:55:27'!
 handleCheckOutCartRequest: aRequest
 	| cartId cced ccedSplitted ccn cco creditCard response |
 	
@@ -1807,7 +1830,7 @@ handleCheckOutCartRequest: aRequest
 	shop checkOut: cartId payingWith: creditCard.
 
 	response _ Dictionary new.
-	response at: 'response' put: 'OK'.
+	response at: 'ticket' put: cartId.
 	aRequest send200Response: (WebUtils jsonEncode: response).
 
 
@@ -1826,15 +1849,15 @@ handleCreateCartRequest: aRequest
 	aRequest send200Response: (WebUtils jsonEncode: response).
 ! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:12'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:59:25'!
 handleListCartRequest: aRequest
 	| cartId cartItems response |
 	
 	cartId _ (aRequest fields at: 'cartId') asNumber .
 	cartItems _ shop listCart: cartId.
-	
+
 	response _ Dictionary new.
-	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	response at: 'items' put: (BookBagSerializer bag: cartItems) asDictionaryArray .
 	aRequest send200Response: (WebUtils jsonEncode: response).! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:15'!

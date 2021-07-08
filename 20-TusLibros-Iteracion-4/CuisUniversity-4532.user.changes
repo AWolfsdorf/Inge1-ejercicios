@@ -7571,3 +7571,648 @@ title
 w _ CatalogWindow forCartId: 3.!
 
 ----QUIT----(7 July 2021 23:29:51) CuisUniversity-4532.image priorSource: 18618996!
+
+----STARTUP---- (7 July 2021 23:31:59) as /home/awolfsdorf/Dropbox/CSCOM/IngeSoft1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+MessageDialogWindow alerta: 'Probando alerta!!'.!
+
+w _ CreateCartWindow new.!
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].!
+
+server _ TusLibrosRestInterface on: 8080 shop: shop.!
+
+w _ CreateCartWindow new.!
+!CreateCartWindow methodsFor: 'navigation' stamp: 'AW 7/7/2021 23:35:32' prior: 50908786!
+navigateToCatalogWindow
+	
+	CatalogWindow forCartId: self model cartId.
+	self delete.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:37:26' prior: 50915168!
+getCatalogEntriesFrom: aPriceListDictionary
+
+	
+	self asdas
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+
+w _ CreateCartWindow new.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:38:04' prior: 50915442!
+getCatalogEntriesFrom: aPriceListDictionary
+
+	
+	self halt
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+
+w _ CreateCartWindow new.!
+
+	self halt!
+
+w _ CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:41:19' prior: 50915454!
+getCatalogEntriesFrom: aPriceListDictionaryList
+
+	^aPriceListDictionaryList collect: [ :aPriceListDictionary | 
+		CatalogEntry 
+			price: (aPriceListDictionary at: 'price') 
+			title: (aPriceListDictionary at: 'title') 
+			isbn: 	(aPriceListDictionary at: 'isbn')
+	]
+	self halt
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:41:23' prior: 50915467!
+getCatalogEntriesFrom: aPriceListDictionaryList
+
+	^aPriceListDictionaryList collect: [ :aPriceListDictionary | 
+		CatalogEntry 
+			price: (aPriceListDictionary at: 'price') 
+			title: (aPriceListDictionary at: 'title') 
+			isbn: 	(aPriceListDictionary at: 'isbn')
+	] ! !
+
+aPriceListDictionaryList collect: [ :aPriceListDictionary | 
+		CatalogEntry 
+			price: (aPriceListDictionary at: 'price') 
+			title: (aPriceListDictionary at: 'title') 
+			isbn: 	(aPriceListDictionary at: 'isbn')
+	] !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:46:57' prior: 50913652!
+refreshCart
+	
+	cartEntries _ self getCartEntriesFrom: tusLibrosClient listCartEntries.
+	
+	cartTotal _ self calculateCartTotal.
+	
+	self 
+		triggerEvent: #cartUpdated
+		with: self.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:47:19' prior: 50915504!
+refreshCart
+	
+	cartEntries _ self getCartEntries.
+	
+	cartTotal _ self calculateCartTotal.
+	
+	self 
+		triggerEvent: #cartUpdated
+		with: self.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:48:41'!
+getCartEntries
+	
+	cartEntries _ tusLibrosClient listCartEntriesOf: cartId.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:49:46' prior: 50915521!
+getCartEntries
+	
+	cartEntries _ tusLibrosClient listCartEntriesOf: cartId.
+	
+	^cartEntries collect: [ 
+			
+	]! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:51:34' prior: 50915527!
+getCartEntries
+	
+	cartEntries _ tusLibrosClient listCartEntriesOf: cartId.
+	
+	^cartEntries collect: [ :aCartEntryDictionary | 
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (aCartEntryDictionary at: 'title')  
+			isbn: 	(aCartEntryDictionary at: 'isbn')
+	]! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:52:04' prior: 50915534!
+getCartEntries
+	
+	cartEntries _ tusLibrosClient listCartEntriesOf: cartId.
+	
+	^self deserializeCartEntries: cartEntries! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:53:08'!
+deserializeCartEntries: aSerializedCartEntries
+
+	^aSerializedCartEntries collect: [ :aCartEntryDictionary | 
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (aCartEntryDictionary at: 'title')  
+			isbn: 	(aCartEntryDictionary at: 'isbn')
+	]	! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:53:39' prior: 50915547!
+getCartEntries
+	
+	| serializedCartEntries |
+	serializedCartEntries _ tusLibrosClient listCartEntriesOf: cartId.
+	
+	^self deserializeCartEntries: serializedCartEntries! !
+
+w _ CatalogWindow forCartId: 3.!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:54:23'!
+listCartEntriesOf: aSmallInteger 
+	self shouldBeImplemented.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:54:45' prior: 50915575!
+listCartEntriesOf: aCartId
+	
+	self halt! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:55:28' prior: 50915581!
+listCartEntriesOf: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'prices' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:55:35' prior: 50915586!
+listCartEntriesOf: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/listCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'prices' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:55:44' prior: 50915601!
+listCartEntriesOf: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/listCart'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:55:57' prior: 50915615!
+listCartEntriesOf: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/listCart'
+		fields: fieldDict.
+	self halt.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+
+w _ CatalogWindow forCartId: 3.!
+
+WebUtils jsonDecode: response content readStream!
+
+WebUtils jsonDecode: response!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:57:31' prior: 50907679!
+handleListCartRequest: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+	self halt.
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:57:39' prior: 50915648!
+handleListCartRequest: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+
+	response _ Dictionary new.
+	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+
+!classDefinition: #BookBagSerializer category: 'Tus-Libros' stamp: 'AW 7/7/2021 23:59:37'!
+BagSerializer subclass: #BookBagSerializer
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/7/2021 23:59:25' prior: 50915662!
+handleListCartRequest: aRequest
+	| cartId cartItems response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	cartItems _ shop listCart: cartId.
+
+	response _ Dictionary new.
+	response at: 'items' put: (BookBagSerializer bag: cartItems) asDictionaryArray .
+	aRequest send200Response: (WebUtils jsonEncode: response).! !
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:00:53' prior: 50906637!
+asDictionaryArray
+
+	^(bag asSet collect: [ :item | | entryDictionary |
+		entryDictionary _ Dictionary new.
+		entryDictionary at: 'item'	 put: (self serializeItem: item).
+		entryDictionary at: 'quantity'	 put: (bag occurrencesOf: item).
+		entryDictionary
+	]) asArray.! !
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:01:08'!
+serializeItem: item
+
+	self shouldBeImplemented.! !
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:01:20' prior: 50915707!
+serializeItem: item
+
+	^item.! !
+!BookBagSerializer methodsFor: 'no messages' stamp: 'AW 7/8/2021 00:01:52' overrides: 50915712!
+serializeItem: item
+
+	^item.! !
+!BagSerializer methodsFor: 'evaluating' stamp: 'AW 7/8/2021 00:02:06' prior: 50915712!
+serializeItem: anItem
+
+	^anItem.! !
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:02:17' prior: 50915716 overrides: 50915720!
+serializeItem: aBookItem
+
+	^aBookItem.! !
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:02:45' prior: 50915725 overrides: 50915720!
+serializeItem: aBook
+
+	^aBook.! !
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:03:16' prior: 50915731 overrides: 50915720!
+serializeItem: aBook
+	
+	| bookDictionary |
+	bookDictionary _ Dictionary new.
+	
+	^aBook.! !
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:03:26' prior: 50915736 overrides: 50915720!
+serializeItem: aBook
+	
+	| bookDictionary |
+	bookDictionary _ Dictionary new.
+	
+	^bookDictionary.! !
+!BookBagSerializer methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:04:10' prior: 50915743 overrides: 50915720!
+serializeItem: aBook
+	
+	| bookDictionary |
+	bookDictionary _ Dictionary new.
+	bookDictionary at: 'isbn' put: aBook isbn.	
+	bookDictionary at: 'title' put: aBook title.	
+
+	^bookDictionary.! !
+
+w _ CatalogWindow forCartId: 3.!
+
+(WebUtils jsonDecode: response content readStream)!
+
+shop _ TestStubs new demoShop.!
+
+shop _ TestStubs new demoShop.
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].
+server _ TusLibrosRestInterface on: 8080 shop: shop.
+!
+
+w _ CatalogWindow forCartId: 3.
+!
+
+w _ CreateCartWindow new.!
+
+WebUtils jsonDecode: response content readStream!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:07:02' prior: 50915629!
+listCartEntriesOf: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/listCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:09:01' prior: 50913645!
+addSelectedCatalogEntryToCart
+	
+	tusLibrosClient addToCart: self selectedCartEntry isbn. 
+	
+	self
+		triggerEvent: #cartEntryAdded
+		with: self.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:09:53'!
+addToCart: aBookIsbn
+
+	! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:10:59'!
+add: aBookIsbn to: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'bookIsbn' put: aBookIsbn .
+	fieldDict at: 'cartId' put: aCartId .
+	response _ WebClient
+		htmlSubmit: self url, '/listCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:11:12' prior: 50915799!
+add: aBookIsbn to: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'bookIsbn' put: aBookIsbn .
+	fieldDict at: 'cartId' put: aCartId .
+	response _ WebClient
+		htmlSubmit: self url, '/addToCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:11:42' prior: 50915815!
+add: aBookIsbn to: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'bookIsbn' put: aBookIsbn .
+	fieldDict at: 'bookQuantity' put: 1 .
+	fieldDict at: 'cartId' put: aCartId .
+	response _ WebClient
+		htmlSubmit: self url, '/addToCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:12:45' prior: 50915831!
+add: aBookIsbn to: aCartId
+	| fieldDict response |
+	
+	fieldDict _ Dictionary new.
+	fieldDict at: 'bookIsbn' put: aBookIsbn .
+	fieldDict at: 'bookQuantity' put: 1 .
+	fieldDict at: 'cartId' put: aCartId .
+	response _ WebClient
+		htmlSubmit: self url, '/addToCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ WebUtils jsonDecode: response content readStream ]
+		ifFalse: [ ^ self error: response content ].! !
+
+!methodRemoval: TusLibrosClient #addToCart: stamp: 'AW 7/8/2021 00:13:08'!
+addToCart: aBookIsbn
+
+	!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:13:26' prior: 50915787!
+addSelectedCatalogEntryToCart
+	
+	tusLibrosClient add: self selectedCartEntry isbn to: cartId . 
+	
+	self
+		triggerEvent: #cartEntryAdded
+		with: self.! !
+
+w _ CreateCartWindow new.!
+
+w _ CatalogWindow forCartId: 3.!
+
+w _ CatalogWindow forCartId: 3.!
+!CatalogWindow methodsFor: 'cart half' stamp: 'AW 7/8/2021 00:18:40' prior: 50913441!
+buildCartList
+	cartListMorph _ PluggableListMorph
+		model: self model
+		listGetter: #cartEntriesTitles
+		indexGetter: #selectedCartEntryIndex
+		indexSetter: #selectedCartEntryIndex:.
+		
+	^ LayoutMorph newColumn
+		separation: 25;
+		borderWidth: 1;
+		axisEdgeWeight: 0.5;
+		addMorph: (
+			LabelMorph
+				contents: 'En el carrito:'
+		);
+		addMorph: cartListMorph;
+		yourself.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:20:29' prior: 50915554!
+deserializeCartEntries: aSerializedCartEntries
+	self halt.
+	^aSerializedCartEntries collect: [ :aCartEntryDictionary | 
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (aCartEntryDictionary at: 'title')  
+			isbn: 	(aCartEntryDictionary at: 'isbn')
+	]	! !
+
+w _ CatalogWindow forCartId: 3.!
+
+w _ CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:23:34' prior: 50915868!
+addSelectedCatalogEntryToCart
+	
+	tusLibrosClient add: self selectedCatalogEntry isbn to: cartId . 
+	
+	self
+		triggerEvent: #cartEntryAdded
+		with: self.! !
+
+w _ CatalogWindow forCartId: 3.!
+
+w _ CatalogWindow forCartId: 3.!
+
+w _ CreateCartWindow new.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:25:10' prior: 50915894!
+deserializeCartEntries: aSerializedCartEntries
+
+	^aSerializedCartEntries collect: [ :aCartEntryDictionary | 
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (aCartEntryDictionary at: 'title')  
+			isbn: 	(aCartEntryDictionary at: 'isbn')
+	]	! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:26:45' prior: 50915921!
+deserializeCartEntries: aSerializedCartEntries
+
+	^aSerializedCartEntries collect: [ :aCartEntryDictionary | | item | 
+		item _ aCartEntryDictionary at: 'item'.
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: ((aCartEntryDictionary at: 'title')  )
+			isbn: 	(aCartEntryDictionary at: 'isbn')
+	]	! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:27:02' prior: 50915933!
+deserializeCartEntries: aSerializedCartEntries
+
+	^aSerializedCartEntries collect: [ :aCartEntryDictionary | | item | 
+		item _ aCartEntryDictionary at: 'item'.
+		CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (item at: 'title')
+			isbn: 	(item at: 'isbn')
+	]	! !
+
+CartEntry 
+			quantity: (aCartEntryDictionary at: 'quantity')  
+			title: (item at: 'title')
+			isbn: 	(item at: 'isbn')!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:29:20' prior: 50912795!
+calculateCartTotal
+	
+	^cartEntries sum: [ :entry | (self priceForIsbn: entry isbn) * (entry quantity) ] ifEmpty: [ 0 ].! !
+
+w _ CreateCartWindow new.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:43:20' prior: 50912831!
+checkoutCart
+	
+	"Pegarle a la API"
+	| ticket |
+	ticket _ tusLibrosClient checkoutCart: cartId payingWith: self fakeCreditCard.
+	self triggerEvent: #checkoutSuccessful with: ticket.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:43:42' prior: 50915972!
+checkoutCart
+	
+	"Pegarle a la API"
+	| ticket |
+	ticket _ (tusLibrosClient checkoutCart: cartId payingWith: self fakeCreditCard) at: 'ticket'.
+	self triggerEvent: #checkoutSuccessful with: ticket.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:43:56' prior: 50915981!
+checkoutCart
+	
+	"Pegarle a la API"
+	| ticket |
+	ticket _ tusLibrosClient checkoutCart: cartId payingWith: self fakeCreditCard.
+	self triggerEvent: #checkoutSuccessful with: ticket.! !
+
+w _ CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'accessing' stamp: 'AW 7/8/2021 00:44:21'!
+fakeCreditCard
+	self shouldBeImplemented.! !
+!CatalogWindowModel methodsFor: 'accessing' stamp: 'AW 7/8/2021 00:45:38' prior: 50916001!
+fakeCreditCard
+	^CreditCard number: 'number' owner: 'Alexis Zdanovitch' expiration: '02/2042'.! !
+
+CreditCard number: 'number' owner: 'Alexis Zdanovitch' expiration: '02/2042'!
+
+Dictionary newFromPairs: 
+		{ 'cco'.'Alexis Zdanovitch'.'cced'.'02/2042'.'ccn'.'1234567890123456'   }.
+	!
+!CatalogWindowModel methodsFor: 'accessing' stamp: 'AW 7/8/2021 00:50:52' prior: 50916006!
+fakeCreditCard
+	^Dictionary newFromPairs: { 
+		'cco'.'Alexis Zdanovitch'.
+		'cced'.'02/2042'.
+		'ccn'.'1234567890123456'   
+	}.
+		! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:51:11'!
+checkoutCart: aSmallInteger payingWith: aDictionary 
+	self shouldBeImplemented.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:52:07' prior: 50916025!
+checkoutCart: aCartId payingWith: aCreditCardDictionary 
+	
+	! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:53:03' prior: 50916031!
+checkoutCart: aCartId payingWith: aCreditCardDictionary 
+	| fieldDict response |
+	
+	fieldDict _ aCreditCardDictionary copy.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/checkoutCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'items' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:53:26' prior: 50916037!
+checkoutCart: aCartId payingWith: aCreditCardDictionary 
+	| fieldDict response |
+	
+	fieldDict _ aCreditCardDictionary copy.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/checkOutCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'ticket' ]
+		ifFalse: [ ^ self error: response content ].! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:53:45' prior: 50916053!
+checkoutCart: aCartId payingWith: aCreditCardDictionary 
+	| fieldDict response |
+	
+	fieldDict _ aCreditCardDictionary copy.
+	fieldDict at: 'cartId' put: aCartId.
+	response _ WebClient
+		htmlSubmit: self url, '/checkOutCart'
+		fields: fieldDict.
+
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'ticket' ]
+		ifFalse: [ ^ self error: response content ].! !
+
+WebUtils jsonDecode: response content readStream!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:55:27' prior: 50907641!
+handleCheckOutCartRequest: aRequest
+	| cartId cced ccedSplitted ccn cco creditCard response |
+	
+	cartId _ (aRequest fields at: 'cartId') asNumber .
+	ccn _ aRequest fields at: 'ccn' .
+	ccedSplitted _ (aRequest fields at: 'cced') findTokens: '/'.
+	cco _ aRequest fields at: 'cco'.
+	cced _ GregorianMonthOfYear 
+		yearNumber: (ccedSplitted at: 2) asNumber
+		monthNumber: (ccedSplitted at: 1) asNumber. 
+	creditCard _ CreditCard number: ccn owner: cco expiration: cced.
+
+	shop checkOut: cartId payingWith: creditCard.
+
+	response _ Dictionary new.
+	response at: 'ticket' put: cartId.
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+
+w _ CreateCartWindow new.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:56:11' prior: 50913576!
+navigateToTicketWindow: aTicket 
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:57:08' prior: 50916112!
+navigateToTicketWindow: aTicket 
+
+	
+	MessageDialogWindow alerta: 'Felicidades!! has comprado el carrito ' . aTicket.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:57:34' prior: 50916117!
+navigateToTicketWindow: aTicket 
+
+	
+	MessageDialogWindow alerta: 'Felicidades!! has comprado el carrito ' . aTicket.
+	
+	self delete.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'AW 7/8/2021 00:58:23' prior: 50916124!
+navigateToTicketWindow: aTicket 
+
+	
+	MessageDialogWindow alerta: 'Felicidades!! has comprado el carrito ' , aTicket asString.
+	
+	self delete.! !
+
+w _ CreateCartWindow new.!
+
+----QUIT----(8 July 2021 00:59:27) CuisUniversity-4532.image priorSource: 18680629!
