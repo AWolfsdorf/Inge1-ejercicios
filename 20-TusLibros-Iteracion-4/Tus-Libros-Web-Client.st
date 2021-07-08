@@ -22,7 +22,7 @@ buildWindowBody
 defaultExtent
 	^1350@600! !
 
-!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 19:15:31'!
+!CatalogWindow methodsFor: 'initialization' stamp: 'nz 7/7/2021 20:54:40'!
 initializeForCartId: aCartId 
 	
 	self titleMorph showButtonsNamed: #( close collapse ).
@@ -274,7 +274,7 @@ updateCartTotal
 	cartTotalLabel contents: 'Total $ ', self model cartTotal asString.! !
 
 
-!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:30:30'!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 20:54:40'!
 navigateToTicketWindow: aTicketModel 
 	self shouldBeImplemented.! !
 
@@ -560,18 +560,19 @@ price: aPrice title: aTitle isbn: anIsbn
 
 !classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client'!
 Object subclass: #CatalogWindowModel
-	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex cartTotal'
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex cartTotal tusLibrosClient'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros-Web-Client'!
 
-!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 18:58:10'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 22:19:05'!
 initializeForCartId: aCartId 
 
 	cartId _ aCartId.
 	selectedCatalogEntryIndex _ 0.
 	selectedCartEntryIndex _ 0.
 	cartTotal _ 0.
+	tusLibrosClient := TusLibrosClient new.
 	
 	catalogEntries _ OrderedCollection new.
 		
@@ -579,9 +580,9 @@ initializeForCartId: aCartId
 	cartEntries _ OrderedCollection new.! !
 
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 18:45:48'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:03:03'!
 addSelectedCatalogEntryToCart
-	
+	"Le deberia pegar a la api"
 	self
 		triggerEvent: #cartEntryAdded
 		with: self.! !
@@ -611,6 +612,15 @@ checkoutCart
 	ticket _ TicketModel new.
 	self triggerEvent: #checkoutSuccessful with: ticket.! !
 
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:22:38'!
+getCatalogEntriesFrom: aPriceListDictionary
+
+	self shouldBeImplemented
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+
 !CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:05:25'!
 priceForIsbn: anIsbn
 
@@ -619,9 +629,10 @@ priceForIsbn: anIsbn
 		ifFound: [ :entry | ^entry price ] 
 		ifNone: [ self error: self class noPriceForIsbnErrorDescription ].! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 19:27:59'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:03:44'!
 refreshCart
 	
+	"deberia pegarle a la api"
 	cartEntries _ OrderedCollection 
 		with: (CartEntry quantity: 4 title: 'Refactoring' isbn: '0001')
 		with: (CartEntry quantity: 9 title: 'TDD by example' isbn: '0002').
@@ -632,12 +643,10 @@ refreshCart
 		triggerEvent: #cartUpdated
 		with: self.! !
 
-!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 16:43:54'!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:37'!
 refreshCatalog
 	
-	catalogEntries _ OrderedCollection
-		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
-		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	catalogEntries _ self getCatalogEntriesFrom: tusLibrosClient listPrices.
 	
 	self 
 		triggerEvent: #catalogUpdated
@@ -804,6 +813,20 @@ createCart: aClientId password: aPassword
 		fields: fieldDict.
 	response isSuccess
 		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'cartId' ]
+		ifFalse: [ ^ self error: response content ].
+		
+! !
+
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:49'!
+listPrices
+	
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'prices' ]
 		ifFalse: [ ^ self error: response content ].
 		
 ! !

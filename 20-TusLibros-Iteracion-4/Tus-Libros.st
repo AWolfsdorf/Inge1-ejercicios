@@ -397,10 +397,10 @@ test02NewCartsAreEmpty
 	
 	self assert: cartItems isEmpty.! !
 
-!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/28/2021 23:59:17'!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:09:57'!
 test03ListCartWithOneItem
 	
-	| shop cartId cartItems bookIsbn quantity |
+	| shop cartId cartItems quantity |
 	
 	shop := Shop 
 		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
@@ -411,14 +411,13 @@ test03ListCartWithOneItem
 	cartId := shop createCartClientId: 3 password: '1234'.
 	
 	quantity := 2.
-	bookIsbn := 'book_isbn'.
 		
-	shop add: quantity of: bookIsbn to: cartId.
+	shop add: quantity of: stubs book1 isbn to: cartId.
 	
 	cartItems := shop listCart: cartId.
 	
 	self assert: cartItems size equals: 2.
-	self assert: (cartItems occurrencesOf: bookIsbn) equals: quantity.! !
+	self assert: (cartItems occurrencesOf: stubs book1) equals: quantity.! !
 
 !ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/24/2021 01:38:40'!
 test04ListInvalidCartShouldRaiseError
@@ -432,10 +431,10 @@ test04ListInvalidCartShouldRaiseError
 		withMessageText: Shop invalidCartIdErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'cart creation and listing' stamp: 'AW 6/24/2021 01:39:39'!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:10:51'!
 test05AddItemToCartDoesntModifyOtherCarts
 	
-	| shop bookIsbn cartId1 cartId2 quantity |
+	| shop cartId1 cartId2 quantity |
 	
 	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
 	
@@ -443,11 +442,29 @@ test05AddItemToCartDoesntModifyOtherCarts
 	cartId2 := shop createCartClientId: 4 password: '12345'.
 	
 	quantity := 2.
-	bookIsbn := 'book_isbn'.
 		
-	shop add: quantity of: bookIsbn to: cartId1.
+	shop add: quantity of: stubs book1 isbn to: cartId1.
 	
 	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:30:15'!
+test17
+	
+	| shop catalog  |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	catalog := shop listPrices.
+	
+	self assert: catalog size equals: 3.
+	self assert: (catalog at: stubs book1) equals: 50.
+	self assert: (catalog at: stubs book2) equals: 20.
+	self assert: (catalog at: stubs book3) equals: 30.
 	! !
 
 
@@ -501,7 +518,7 @@ test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended
 	
 	! !
 
-!ShopTest methodsFor: 'cart expiration' stamp: 'nz 6/24/2021 16:28:15'!
+!ShopTest methodsFor: 'cart expiration' stamp: 'nz 7/7/2021 22:12:07'!
 test16AddingItemsToAnExpiredCartShouldFail
 	
 	| shop cartId password clientId timeProvider |
@@ -520,7 +537,7 @@ test16AddingItemsToAnExpiredCartShouldFail
 	
 	timeProvider toTheFuture: 31 * minute.
 	
-	self should: [ shop add: 12 of: stubs book1 to: cartId ]
+	self should: [ shop add: 12 of: stubs book1 isbn to: cartId ]
 		raise: Error - MessageNotUnderstood
 		withMessageText: Shop expiredCartErrorDescription.
 	
@@ -553,7 +570,7 @@ test07CheckoutUsesTheCashier
 		withMessageText: Cashier cantCheckoutEmptyCartErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'AW 6/28/2021 21:43:11'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:13'!
 test08ListPurchasesOnOnlyOneBuyClient
 	
 	| shop cartId clientId password purchases |
@@ -564,7 +581,7 @@ test08ListPurchasesOnOnlyOneBuyClient
 	password := '123456'.
 	cartId := shop createCartClientId: clientId password: password.
 	
-	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 2 of: stubs book1 isbn to: cartId.
 	
 	shop checkOut: cartId payingWith: stubs validCreditCard.
 	
@@ -574,7 +591,7 @@ test08ListPurchasesOnOnlyOneBuyClient
 	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 6/24/2021 16:21:59'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:39'!
 test09ListPurchasesOfManyItemsByOneClient
 	
 	| shop cartId clientId password purchases |
@@ -585,11 +602,11 @@ test09ListPurchasesOfManyItemsByOneClient
 	password := '123456'.
 	cartId := shop createCartClientId: clientId password: password.
 	
-	shop add: 2 of: stubs book1 to: cartId.
+	shop add: 2 of: stubs book1 isbn to: cartId.
 	
-	shop add: 1 of: stubs book2 to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
 	
-	shop add: 1 of: stubs book3 to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
 	
 	shop checkOut: cartId payingWith: stubs validCreditCard.
 	
@@ -601,7 +618,7 @@ test09ListPurchasesOfManyItemsByOneClient
 	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 6/24/2021 16:22:34'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:43'!
 test10CheckoutWithInvalidCreditCardShouldFail
 	
 	| shop cartId clientId password |
@@ -612,7 +629,7 @@ test10CheckoutWithInvalidCreditCardShouldFail
 	password := '123456'.
 	cartId := shop createCartClientId: clientId password: password.
 	
-	shop add: 1 of: stubs book1 to: cartId.
+	shop add: 1 of: stubs book1 isbn to: cartId.
 	
 	self
 		should: [ shop
@@ -622,7 +639,7 @@ test10CheckoutWithInvalidCreditCardShouldFail
 		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 6/24/2021 16:23:14'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:54'!
 test11ListMultiplePurchasesOfTheSameClient
 	
 	| shop cartId clientId password purchases cartId2 |
@@ -633,14 +650,14 @@ test11ListMultiplePurchasesOfTheSameClient
 	password := '123456'.
 	
 	cartId := shop createCartClientId: clientId password: password.
-	shop add: 2 of: stubs book1 to: cartId.
-	shop add: 1 of: stubs book2 to: cartId.
-	shop add: 1 of: stubs book3 to: cartId.
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
 	shop checkOut: cartId payingWith: stubs validCreditCard.
 	
 	cartId2 := shop createCartClientId: clientId password: password.
-	shop add: 1 of: stubs book1 to: cartId2.
-	shop add: 1 of: stubs book3 to: cartId2.
+	shop add: 1 of: stubs book1 isbn to: cartId2.
+	shop add: 1 of: stubs book3 isbn to: cartId2.
 	shop checkOut: cartId2 payingWith: stubs validCreditCard.
 	
 	purchases := shop listPurchasesOf: clientId with: password.
@@ -666,7 +683,7 @@ test12ListPurchasesOfIncorrectPasswordShouldFail
 		withMessageText: Shop incorrectPasswordOrClientIdErrorDescription.
 	! !
 
-!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 6/24/2021 16:24:14'!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:12:00'!
 test13ListPurchasesOfDifferentClients
 	
 	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
@@ -678,14 +695,14 @@ test13ListPurchasesOfDifferentClients
 	password := '123456'.
 	
 	cartId := shop createCartClientId: clientId1 password: password.
-	shop add: 2 of: stubs book1 to: cartId.
-	shop add: 1 of: stubs book2 to: cartId.
-	shop add: 1 of: stubs book3 to: cartId.
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
 	shop checkOut: cartId payingWith: stubs validCreditCard.
 	
 	cartId2 := shop createCartClientId: clientId2 password: password.
-	shop add: 1 of: stubs book1 to: cartId2.
-	shop add: 1 of: stubs book3 to: cartId2.
+	shop add: 1 of: stubs book1 isbn to: cartId2.
+	shop add: 1 of: stubs book3 isbn to: cartId2.
 	shop checkOut: cartId2 payingWith: stubs validCreditCard.
 	
 	client1purchases := shop listPurchasesOf: clientId1 with: password.
@@ -823,6 +840,62 @@ BagSerializer class
 !BagSerializer class methodsFor: 'instance creation' stamp: 'AW 6/28/2021 23:51:57'!
 bag: aBag
 	^self new initializeWith: aBag ! !
+
+
+!classDefinition: #Book category: 'Tus-Libros'!
+Object subclass: #Book
+	instanceVariableNames: 'title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:49:58'!
+= anotherBook
+	^ (anotherBook isKindOf: self class) and: [
+		(anotherBook titleEquals: title) and: [ anotherBook isbnEquals: isbn ]
+	]! !
+
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:34:34'!
+hash
+	^(title, '::', isbn) hash! !
+
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:33:14'!
+initializeTitle: aTitle isbn: anIsbn 
+
+	title := aTitle.
+	isbn := anIsbn.! !
+
+
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:10:11'!
+isbn
+	
+	^isbn! !
+
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:54'!
+isbnEquals: anIsbn 
+
+	^anIsbn = isbn! !
+
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:41:21'!
+title
+	
+	^title! !
+
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:31'!
+titleEquals: aTitle 
+
+	^aTitle = title! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Book class' category: 'Tus-Libros'!
+Book class
+	instanceVariableNames: ''!
+
+!Book class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 21:33:02'!
+title: aTitle isbn: anIsbn 
+	
+	^self new initializeTitle: aTitle isbn: anIsbn ! !
 
 
 !classDefinition: #Cashier category: 'Tus-Libros'!
@@ -1139,6 +1212,11 @@ initialize
 	prices _ Dictionary new.! !
 
 
+!PriceList methodsFor: 'accessing' stamp: 'nz 7/7/2021 21:27:26'!
+allPrices
+	
+	^prices copy.! !
+
 !PriceList methodsFor: 'accessing' stamp: 'nz 6/14/2021 19:29:04'!
 hasPriceFor: aBook 
 	
@@ -1247,15 +1325,17 @@ withTotal: aTransactionTotal items: aBagOfItems
 
 !classDefinition: #Shop category: 'Tus-Libros'!
 Object subclass: #Shop
-	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider cartCreationTimes'
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider cartCreationTimes priceList'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!Shop methodsFor: 'facade' stamp: 'AW 6/23/2021 23:34:42'!
-add: aQuantity of: anItem to: aShoppingCartId
+!Shop methodsFor: 'facade' stamp: 'nz 7/7/2021 21:58:44'!
+add: aQuantity of: anIdentifier to: aShoppingCartId
+	| item |
+	item := self getItemFor: anIdentifier. 
 	
-	(self getCart: aShoppingCartId) add: aQuantity of: anItem! !
+	(self getCart: aShoppingCartId) add: aQuantity of: item.! !
 
 !Shop methodsFor: 'facade' stamp: 'nz 6/24/2021 16:38:48'!
 checkOut: aShoppingCartId payingWith: aCreditCard 
@@ -1390,7 +1470,7 @@ today
 	^FixedGregorianDate today.! !
 
 
-!Shop methodsFor: 'initialization' stamp: 'AW 6/24/2021 01:22:19'!
+!Shop methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:23:22'!
 initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
 	
 	userAuthenticator := anUserAuthenticator.
@@ -1399,6 +1479,7 @@ initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchant
 	cartsClients := Dictionary new. 
 	cartCreationTimes := Dictionary new. 
 	timeProvider := aTimeProvider.		
+	priceList := aPriceList.
 	cashier := Cashier
 		withPrices: aPriceList
 		receiptBook: OrderedCollection new
@@ -1418,6 +1499,19 @@ authenticateClient: aClientId withPassword: aPassword
 	(userAuthenticator authenticate: aClientId password: aPassword) ifFalse: [
 		self error: self class incorrectPasswordOrClientIdErrorDescription .
 	]! !
+
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:17'!
+getItemFor: anIdentifier 
+	
+	priceList allPrices keys 
+		detect: [:item | item isbnEquals: anIdentifier ] 
+		ifFound: [ :item | ^item ] 
+		ifNone: [ self error: self class isbnNotFoundErrorDescription ]. ! !
+
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:36:14'!
+listPrices
+	^priceList allPrices.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1442,6 +1536,11 @@ invalidCartIdErrorDescription
 withUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
 
 	^self new initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider ! !
+
+
+!Shop class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:41'!
+isbnNotFoundErrorDescription
+	^'ISBN not found!!'! !
 
 
 !classDefinition: #ShopConfiguration category: 'Tus-Libros'!
@@ -1537,17 +1636,17 @@ Object subclass: #TestStubs
 	poolDictionaries: ''
 	category: 'Tus-Libros'!
 
-!TestStubs methodsFor: 'books' stamp: 'nz 6/23/2021 01:01:49'!
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:30:57'!
 book1
-	^'ISBN1'.! !
+	^Book title: 'Refactoring' isbn: 'ISBN1'.! !
 
-!TestStubs methodsFor: 'books' stamp: 'nz 6/23/2021 01:01:53'!
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:31:25'!
 book2
-	^'ISBN2'.! !
+	^Book title: 'TDD by example' isbn: 'ISBN2'.! !
 
-!TestStubs methodsFor: 'books' stamp: 'nz 6/23/2021 01:12:43'!
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:31:59'!
 book3
-	^'ISBN3'.! !
+	^Book title: 'Design Patterns' isbn: 'ISBN3'.! !
 
 !TestStubs methodsFor: 'books' stamp: 'nz 6/23/2021 01:43:29'!
 priceList
@@ -1642,7 +1741,7 @@ addService: aRouteString action: aBlockClosure onErrorDo: aErrorBlockClosure
 		] 
 	].! !
 
-!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:16:22'!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:32:13'!
 configRoutes
 	
 	
@@ -1665,6 +1764,11 @@ configRoutes
 	self addService: '/listPurchases' action: [ :request | 
 		self handleListPurchasesRequest: request.
 	].
+
+	self addService: '/listPrices' action: [ :request | 
+		self handleListPricesRequest: request.
+	].
+
 
 
 ! !
@@ -1733,6 +1837,19 @@ handleListCartRequest: aRequest
 	response at: 'items' put: (BagSerializer bag: cartItems) asDictionaryArray .
 	aRequest send200Response: (WebUtils jsonEncode: response).! !
 
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:15'!
+handleListPricesRequest: aRequest
+	| pricesList response |
+	
+	pricesList _ shop listPrices.
+	
+	response _ Dictionary new.
+	response at: 'prices' put: (self serializePrices: pricesList).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:17:58'!
 handleListPurchasesRequest: aRequest
 	| clientId password purchases response |
@@ -1763,6 +1880,18 @@ initializeOn: aPort shop: aShop
 port
 
 	^port ifNil: [ port _ 8080].! !
+
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:40:29'!
+serializePrices: aPricesListDictionary
+
+	^aPricesListDictionary keys collect: [ :item | 
+		| dictEntry |
+		dictEntry _ Dictionary new.
+		dictEntry at: 'isbn' put: item isbn.
+		dictEntry at: 'title' put: item title.
+		dictEntry at: 'price' put: (aPricesListDictionary at: item).
+		dictEntry
+	].! !
 
 !TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'AW 6/29/2021 00:07:26'!
 serializePurchases: aPurchasesSummary

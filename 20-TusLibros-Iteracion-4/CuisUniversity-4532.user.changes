@@ -5760,3 +5760,1814 @@ w _ CatalogWindow forCartId: 3.
 !
 
 ----QUIT----(7 July 2021 19:35:32) CuisUniversity-4532.image priorSource: 18561043!
+
+----STARTUP---- (7 July 2021 20:37:56) as /home/nikita/r/f/isw1/Inge1-ejercicios/20-TusLibros-Iteracion-4/CuisUniversity-4532.image!
+
+
+
+CreateCartWindow new.
+!
+
+
+CreateCartWindow new.
+!
+
+self model !
+
+self = self model!
+
+self == self model!
+
+self model class!
+
+
+w _ CreateCartWindow new.!
+
+w delete.!
+
+w openInWorld!
+
+
+w world explore.!
+
+
+w openInWorld!
+
+
+w world explore.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 20:54:28'!
+navigateToTicketWindowwww: aTicketModel 
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 20:54:28' prior: 50913147!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #catalogUpdated send: #updateCatalogTitleList to: self.
+	self model when: #cartUpdated send: #updateCartList to: self.
+	self model when: #cartEntryAdded send: #refreshCart to: self model.
+	self model when: #cartEntryRemoved send: #refreshCart to: self model.
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	self model when: #selectedCartEntryChanged send: #rebuildRemoveCartEntryButton to: self.
+	self model when: #checkoutSuccessful send: #navigateToTicketWindowwww: to: self.
+	
+	self model refreshCatalog.
+	
+	self openInWorld.! !
+
+!methodRemoval: CatalogWindow #navigateToTicketWindow: stamp: 'nz 7/7/2021 20:54:28'!
+navigateToTicketWindow: aTicketModel 
+	self shouldBeImplemented.!
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 20:54:40'!
+navigateToTicketWindow: aTicketModel 
+	self shouldBeImplemented.! !
+!CatalogWindow methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 20:54:40' prior: 50913515!
+initializeForCartId: aCartId 
+	
+	self titleMorph showButtonsNamed: #( close collapse ).
+	self setLabel: 'Alto catalogo de libros de Kent Beck'.
+	self model: (CatalogWindowModel forCartId: aCartId).
+	self morphExtent: (self defaultExtent).
+
+	"
+	Aca usar dos PluggableListMorph para listar los libros del catalogo y los items del carrito
+	Podemos asumir que arrancan vacios en el modelo y mandarle un #requestCatalog al modelo
+	para que este eventualmente mande el request y tire un evento diciendo #catalogUpdated y
+	actualizar en base a eso esta vista.
+	
+	Luego con cada click sobre un elemento de la lista del catalogo hay que actualizar algun
+	label donde este el detalle con el precio al lado del boton de añadir al carrito y el textbox con la cantidad.
+	
+	Una facil para añadir al carrito es que le pege a la api para añadir el libro y luego por vagancia le pega
+	tambien al listCart/. Luego en la respuesta del lisCart llega un evento a la vista #cartListUpdated
+	o simil para actualizarla. 
+	
+	Con el boton de remover hay que hacerle algo similar y ya. 
+	
+	"
+	self buildWindowBody.
+	
+	self model when: #catalogUpdated send: #updateCatalogTitleList to: self.
+	self model when: #cartUpdated send: #updateCartList to: self.
+	self model when: #cartEntryAdded send: #refreshCart to: self model.
+	self model when: #cartEntryRemoved send: #refreshCart to: self model.
+	self model when: #selectedCatalogEntryChanged send: #rebuildSelectedCatalogEntryInfo to: self.
+	self model when: #selectedCartEntryChanged send: #rebuildRemoveCartEntryButton to: self.
+	self model when: #checkoutSuccessful send: #navigateToTicketWindow: to: self.
+	
+	self model refreshCatalog.
+	
+	self openInWorld.! !
+
+!methodRemoval: CatalogWindow #navigateToTicketWindowwww: stamp: 'nz 7/7/2021 20:54:40'!
+navigateToTicketWindowwww: aTicketModel 
+	self shouldBeImplemented.!
+
+
+w _ CreateCartWindow new.
+!
+
+
+w _ CatalogWindow forCartId: 3.!
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:03:03' prior: 50912526!
+addSelectedCatalogEntryToCart
+	"Le deberia pegar a la api"
+	self
+		triggerEvent: #cartEntryAdded
+		with: self.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:03:44' prior: 50913363!
+refreshCart
+	
+	"deberia pegarle a la api"
+	cartEntries _ OrderedCollection 
+		with: (CartEntry quantity: 4 title: 'Refactoring' isbn: '0001')
+		with: (CartEntry quantity: 9 title: 'TDD by example' isbn: '0002').
+		
+	cartTotal _ self calculateCartTotal.
+	
+	self 
+		triggerEvent: #cartUpdated
+		with: self.! !
+
+
+w _ CatalogWindow forCartId: 3.!
+
+
+w _ CatalogWindow forCartId: 3.!
+
+
+w _ CatalogWindow forCartId: 3.
+!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 21:18:26'!
+test17
+	
+	| shop catalog  |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	catalog := shop listCatalog.
+	
+	self assert: catalog size equals: 3.
+	self assert: (catalog at: stubs book1) equals: 50.
+	self assert: (catalog at: stubs book2) equals: 20.
+	self assert: (catalog at: stubs book3) equals: 30.
+	! !
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:22:12'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:22:17'!
+listCatalog
+	self shouldBeImplemented.! !
+
+!classDefinition: #Shop category: 'Tus-Libros' stamp: 'nz 7/7/2021 21:23:23'!
+Object subclass: #Shop
+	instanceVariableNames: 'userAuthenticator carts clientReceipts cashier cartsClients timeProvider cartCreationTimes priceList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Shop methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:23:22' prior: 50907318!
+initializeWithUserAuthenticator: anUserAuthenticator prices: aPriceList merchantProcessor: aMerchantProcessor timeProvider: aTimeProvider    
+	
+	userAuthenticator := anUserAuthenticator.
+	carts := OrderedCollection new.
+	clientReceipts  := Dictionary new. 
+	cartsClients := Dictionary new. 
+	cartCreationTimes := Dictionary new. 
+	timeProvider := aTimeProvider.		
+	priceList := aPriceList.
+	cashier := Cashier
+		withPrices: aPriceList
+		receiptBook: OrderedCollection new
+		merchantProcessor: aMerchantProcessor.
+		
+
+		
+	
+		
+
+		! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:24:04'!
+listPriceList
+	self shouldBeImplemented.! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:24:04' prior: 50913668!
+test17
+	
+	| shop catalog  |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	catalog := shop listPriceList.
+	
+	self assert: catalog size equals: 3.
+	self assert: (catalog at: stubs book1) equals: 50.
+	self assert: (catalog at: stubs book2) equals: 20.
+	self assert: (catalog at: stubs book3) equals: 30.
+	! !
+
+!methodRemoval: Shop #listCatalog stamp: 'nz 7/7/2021 21:24:04'!
+listCatalog
+	self shouldBeImplemented.!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:24:15' prior: 50913721!
+listPriceList
+	priceList ! !
+!PriceList methodsFor: 'accessing' stamp: 'nz 7/7/2021 21:27:26'!
+allPrices
+	
+	^prices copy.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:27:38' prior: 50913747!
+listPriceList
+	^priceList allPrices .! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:27:44'!
+PASSED!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:27:51' prior: 50913754!
+listPriceList
+	^priceList allPrices.! !
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'nz 7/7/2021 21:31:03'!
+Object subclass: #Book
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:30:57' prior: 50907499!
+book1
+	^Book title: 'Refactoring' isbn: 'ISBN1'.! !
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:31:25' prior: 50907502!
+book2
+	^Book title: 'TDD by example' isbn: 'ISBN2'.! !
+!TestStubs methodsFor: 'books' stamp: 'nz 7/7/2021 21:31:59' prior: 50907505!
+book3
+	^Book title: 'Design Patterns' isbn: 'ISBN3'.! !
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:32:03'!
+ERROR!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:32:03'!
+ERROR!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:32:03'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:32:03'!
+ERROR!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 7/7/2021 21:32:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 7/7/2021 21:32:16'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 7/7/2021 21:32:24'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 7/7/2021 21:32:24'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 7/7/2021 21:32:24'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:32:43'!
+ERROR!
+!Book class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 21:32:50'!
+title: aString isbn: aString2 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeTitle: aString isbn: aString2 ! !
+!Book class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 21:32:55' prior: 50913887!
+title: aString isbn: aString2 
+	
+	^self new initializeTitle: aString isbn: aString2 ! !
+!Book class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 21:32:58' prior: 50913896!
+title: aTitle isbn: aString2 
+	
+	^self new initializeTitle: aTitle isbn: aString2 ! !
+!Book class methodsFor: 'instance creation' stamp: 'nz 7/7/2021 21:33:02' prior: 50913902!
+title: aTitle isbn: anIsbn 
+	
+	^self new initializeTitle: aTitle isbn: anIsbn ! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:33:04'!
+ERROR!
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'nz 7/7/2021 21:33:09'!
+Object subclass: #Book
+	instanceVariableNames: 'title'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+
+!classDefinition: #Book category: 'Tus-Libros' stamp: 'nz 7/7/2021 21:33:09'!
+Object subclass: #Book
+	instanceVariableNames: 'title isbn'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros'!
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:33:09'!
+initializeTitle: aTitle isbn: anIsbn 
+	self shouldBeImplemented.
+	title := aTitle.
+	isbn := anIsbn.! !
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:33:14' prior: 50913929!
+initializeTitle: aTitle isbn: anIsbn 
+
+	title := aTitle.
+	isbn := anIsbn.! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:33:18'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:33:18'!
+ERROR!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:33:18'!
+FAILURE!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:33:18'!
+ERROR!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:33:18'!
+ERROR!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:33:18'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:33:18'!
+ERROR!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:33:32'!
+ERROR!
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:34:09' overrides: 16881052!
+hash
+	(title, '::', isbn) hash! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:34:22'!
+ERROR!
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:34:34' prior: 50913999 overrides: 16881052!
+hash
+	^(title, '::', isbn) hash! !
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:34:37'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:34:37'!
+ERROR!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:34:37'!
+FAILURE!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:34:37'!
+ERROR!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:34:37'!
+ERROR!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:34:37'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:34:37'!
+ERROR!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:34:40'!
+ERROR!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:35:40'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:36:11'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:36:23'!
+ERROR!
+
+arg1 hash!
+
+arg1 hash \\ array size + 1!
+
+array size + 1!
+
+self hash !
+
+self hash!
+!Book methodsFor: 'initialization' stamp: 'nz 7/7/2021 21:49:58' overrides: 16881029!
+= anotherBook
+	^ (anotherBook isKindOf: self class) and: [
+		(anotherBook titleEquals: title) and: [ anotherBook isbnEquals: isbn ]
+	]! !
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:50:07'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:50:07'!
+ERROR!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:50:08'!
+ERROR!
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:15'!
+titleEquals: aString 
+	self shouldBeImplemented.! !
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:31' prior: 50914231!
+titleEquals: aTitle 
+
+	^aTitle = title! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:50:33'!
+ERROR!
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:39'!
+isbnEquals: aString 
+	self shouldBeImplemented.! !
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:47' prior: 50914243!
+isbnEquals: aTitle 
+
+	^aTitle = title! !
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:50' prior: 50914248!
+isbnEquals: anIsbn 
+
+	^anIsbn = title! !
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:50:54' prior: 50914252!
+isbnEquals: anIsbn 
+
+	^anIsbn = isbn! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:50:55'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:50:57'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:50:58'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:50:58'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:50:58'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:50:59'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 7/7/2021 21:51:25'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:52:32'!
+PASSED!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 21:53:53' prior: 50906187!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'zarlanga'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems occurrencesOf: bookIsbn) equals: quantity.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:53:54'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 21:54:12'!
+PASSED!
+!Shop methodsFor: 'facade' stamp: 'nz 7/7/2021 21:56:52' prior: 50907190!
+add: aQuantity of: anIsbn to: aShoppingCartId
+	
+	(self getCart: aShoppingCartId) add: aQuantity of: anIsbn! !
+!Shop methodsFor: 'facade' stamp: 'nz 7/7/2021 21:58:44' prior: 50914533!
+add: aQuantity of: anIdentifier to: aShoppingCartId
+	| item |
+	item := self getItemFor: anIdentifier. 
+	
+	(self getCart: aShoppingCartId) add: aQuantity of: item.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 21:59:45'!
+ERROR!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 21:59:50'!
+getItemFor: aString 
+	self shouldBeImplemented.! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:11' prior: 50914550!
+getItemFor: aString 
+	
+	priceList allPrices keys 
+		detect: [:item | item isbnEquals: aString ] 
+		ifFound: [ :item | ^item ] 
+		ifNone: [ self error: self class isbnNotFoundErrorDescription ]. ! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:17' prior: 50914555!
+getItemFor: anIdentifier 
+	
+	priceList allPrices keys 
+		detect: [:item | item isbnEquals: anIdentifier ] 
+		ifFound: [ :item | ^item ] 
+		ifNone: [ self error: self class isbnNotFoundErrorDescription ]. ! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:02:22'!
+ERROR!
+!Shop class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:29'!
+isbnNotFoundErrorDescription
+	self shouldBeImplemented.! !
+!Shop class methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:02:41' prior: 50914576!
+isbnNotFoundErrorDescription
+	^'ISBN not found!!'! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:02:43'!
+ERROR!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:02:53' prior: 50914402!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems bookIsbn quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+	bookIsbn := 'ISBN1'.
+		
+	shop add: quantity of: bookIsbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems occurrencesOf: bookIsbn) equals: quantity.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:02:58'!
+FAILURE!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:02:58'!
+FAILURE!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:09:36'!
+FAILURE!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:09:36'!
+FAILURE!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:09:57' prior: 50914589!
+test03ListCartWithOneItem
+	
+	| shop cartId cartItems quantity |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	cartId := shop createCartClientId: 3 password: '1234'.
+	
+	quantity := 2.
+		
+	shop add: quantity of: stubs book1 isbn to: cartId.
+	
+	cartItems := shop listCart: cartId.
+	
+	self assert: cartItems size equals: 2.
+	self assert: (cartItems occurrencesOf: stubs book1) equals: quantity.! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:10:04'!
+ERROR!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:10:04'!
+ERROR!
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:10:10'!
+isbn
+	self shouldBeImplemented.
+	^isbn! !
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:10:11' prior: 50914648!
+isbn
+	
+	^isbn! !
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:10:13'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 22:10:21'!
+ERROR!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 22:10:21'!
+FAILURE!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 22:10:21'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 22:10:26'!
+ERROR!
+!ShopTest methodsFor: 'cart creation and listing' stamp: 'nz 7/7/2021 22:10:51' prior: 50906223!
+test05AddItemToCartDoesntModifyOtherCarts
+	
+	| shop cartId1 cartId2 quantity |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+	
+	cartId1 := shop createCartClientId: 3 password: '1234'.
+	cartId2 := shop createCartClientId: 4 password: '12345'.
+	
+	quantity := 2.
+		
+	shop add: quantity of: stubs book1 isbn to: cartId1.
+	
+	self assert: (shop listCart: cartId2) isEmpty.
+	! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 22:10:58'!
+ERROR!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 22:11:01'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 22:11:03'!
+ERROR!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:13' prior: 50906348!
+test08ListPurchasesOnOnlyOneBuyClient
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: (purchases total) equals: 100.
+	self assert: (purchases items) size equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	! !
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 22:11:16'!
+PASSED!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:39' prior: 50906374!
+test09ListPurchasesOfManyItemsByOneClient
+	
+	| shop cartId clientId password purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	
+	shop add: 1 of: stubs book3 isbn to: cartId.
+	
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: purchases total equals: 150.
+	self assert: purchases items size equals: 4.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 2.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 1.
+	! !
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 22:11:40'!
+PASSED!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:43' prior: 50906407!
+test10CheckoutWithInvalidCreditCardShouldFail
+	
+	| shop cartId clientId password |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	cartId := shop createCartClientId: clientId password: password.
+	
+	shop add: 1 of: stubs book1 isbn to: cartId.
+	
+	self
+		should: [ shop
+				checkOut: cartId
+				payingWith: stubs invalidNumberCreditCard. ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Cashier invalidCreditCardNumberErrorDescription.
+	! !
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 22:11:44'!
+PASSED!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:46' prior: 50906430!
+test11ListMultiplePurchasesOfTheSameClient
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 to: cartId2.
+	shop add: 1 of: stubs book3 to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 22:11:47'!
+ERROR!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:11:54' prior: 50914841!
+test11ListMultiplePurchasesOfTheSameClient
+	
+	| shop cartId clientId password purchases cartId2 |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId password: password.
+	shop add: 1 of: stubs book1 isbn to: cartId2.
+	shop add: 1 of: stubs book3 isbn to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	purchases := shop listPurchasesOf: clientId with: password.
+	self assert: 230 equals: purchases total.
+	self assert: 6 equals: purchases items size.
+	self assert: (purchases items occurrencesOf: stubs book1) equals: 3.
+	self assert: (purchases items occurrencesOf: stubs book2) equals: 1.
+	self assert: (purchases items occurrencesOf: stubs book3) equals: 2.
+	! !
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 22:11:55'!
+PASSED!
+!ShopTest methodsFor: 'check out and purchase listing' stamp: 'nz 7/7/2021 22:12:00' prior: 50906489!
+test13ListPurchasesOfDifferentClients
+	
+	| shop cartId clientId1 clientId2 password client1purchases cartId2 client2purchases |
+	
+	shop := Shop withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) prices: stubs priceList merchantProcessor: stubs mockAlwaysOkMerchantProcessor timeProvider: stubs timeProvider.
+		
+	clientId1 := 15.
+	clientId2 := 42.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId1 password: password.
+	shop add: 2 of: stubs book1 isbn to: cartId.
+	shop add: 1 of: stubs book2 isbn to: cartId.
+	shop add: 1 of: stubs book3 isbn to: cartId.
+	shop checkOut: cartId payingWith: stubs validCreditCard.
+	
+	cartId2 := shop createCartClientId: clientId2 password: password.
+	shop add: 1 of: stubs book1 isbn to: cartId2.
+	shop add: 1 of: stubs book3 isbn to: cartId2.
+	shop checkOut: cartId2 payingWith: stubs validCreditCard.
+	
+	client1purchases := shop listPurchasesOf: clientId1 with: password.
+	self assert: 150 equals: client1purchases total.
+	self assert: 4 equals: client1purchases items size.
+	
+	client2purchases := shop listPurchasesOf: clientId2 with: password.
+	self assert: 80 equals: client2purchases total.
+	self assert: 2 equals: client2purchases items size.
+	! !
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 22:12:01'!
+PASSED!
+!ShopTest methodsFor: 'cart expiration' stamp: 'nz 7/7/2021 22:12:07' prior: 50906290!
+test16AddingItemsToAnExpiredCartShouldFail
+	
+	| shop cartId password clientId timeProvider |
+	
+	timeProvider := stubs timeProvider.
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: timeProvider.
+		
+	clientId := 15.
+	password := '123456'.
+	
+	cartId := shop createCartClientId: clientId password: password.
+	
+	timeProvider toTheFuture: 31 * minute.
+	
+	self should: [ shop add: 12 of: stubs book1 isbn to: cartId ]
+		raise: Error - MessageNotUnderstood
+		withMessageText: Shop expiredCartErrorDescription.
+	
+	! !
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 22:12:08'!
+PASSED!
+
+!testRun: #CheckOutTest #test01CheckoutEmptyCartShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test02CheckoutACartWithOneItem stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test03CheckoutACartWithMultipleItems stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test04CheckoutItemWithoutPricesShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test05CheckoutWithExpiredCardShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test06CheckoutWithCardExpiredThisMonthShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test07CheckoutWithStolenCardShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test08CheckoutWithFakeCardShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test09CheckoutWithInsufficientFundsShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test10CheckoutWithInvalidCardNumberShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test11CheckoutWithEmptyCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #CheckOutTest #test12CheckoutWithBlankCardOwnerNameShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #PriceListTest #test01AddItemWithNegativePriceShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #PriceListTest #test02AddItemWithZeroPriceShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test01InvalidClientShallNotPass stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test02NewCartsAreEmpty stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test03ListCartWithOneItem stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test04ListInvalidCartShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test05AddItemToCartDoesntModifyOtherCarts stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test06CheckoutInvalidCartIdShouldRaiseError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test07CheckoutUsesTheCashier stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test08ListPurchasesOnOnlyOneBuyClient stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test09ListPurchasesOfManyItemsByOneClient stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test10CheckoutWithInvalidCreditCardShouldFail stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test11ListMultiplePurchasesOfTheSameClient stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test12ListPurchasesOfIncorrectPasswordShouldFail stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test13ListPurchasesOfDifferentClients stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test14CheckingOutAnExpiredCardShouldFail stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test15CheckingOutInADifferentPointInTimeShouldWorkAsIntended stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test16AddingItemsToAnExpiredCartShouldFail stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShopTest #test17 stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test01EmptyCartHasNoItems stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test02AddingAnItemToACart stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test03AddingMultipleItemsToACart stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test04AddingANegativeQuantityRaisesError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test05AddingZeroQuantityRaisesError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+!testRun: #ShoppingCartTest #test06AddingNonIntegerQuantityRaisesError stamp: 'nz 7/7/2021 22:12:14'!
+PASSED!
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].
+server _ TusLibrosRestInterface on: 8080 shop: shop.!
+
+
+w _ CreateCartWindow new.!
+
+
+w _ CreateCartWindow new.
+!
+
+!classDefinition: #CatalogWindowModel category: 'Tus-Libros-Web-Client' stamp: 'nz 7/7/2021 22:19:06'!
+Object subclass: #CatalogWindowModel
+	instanceVariableNames: 'cartId selectedCatalogEntryIndex catalogEntries cartEntries selectedCartEntryIndex cartTotal tusLibrosClient'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Tus-Libros-Web-Client'!
+!CatalogWindowModel methodsFor: 'initialization' stamp: 'nz 7/7/2021 22:19:05' prior: 50912755!
+initializeForCartId: aCartId 
+
+	cartId _ aCartId.
+	selectedCatalogEntryIndex _ 0.
+	selectedCartEntryIndex _ 0.
+	cartTotal _ 0.
+	tusLibrosClient := TusLibrosClient new.
+	
+	catalogEntries _ OrderedCollection new.
+		
+		
+	cartEntries _ OrderedCollection new.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:22:03' prior: 50911525!
+refreshCatalog
+	
+	catalogEntries _ self getCatalogEntriesFrom: tusLibrosClient listPriceList.
+	
+	self 
+		triggerEvent: #catalogUpdated
+		with: self.! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:22:20'!
+getCatalogEntriesFrom: aPriceListDictionary
+
+	
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:22:38' prior: 50915158!
+getCatalogEntriesFrom: aPriceListDictionary
+
+	self shouldBeImplemented
+	"OrderedCollection
+		with: (CatalogEntry price: 29.90 title: 'Refactoring' isbn: '0001')
+		with: (CatalogEntry price: 24.90 title: 'TDD by example' isbn: '0002').
+	" ! !
+
+
+w _ CatalogWindow forCartId: 3.
+!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:23:41'!
+listPriceList
+	self shouldBeImplemented.! !
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:25:43' prior: 50915180!
+listPriceList
+	
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) ]
+		ifFalse: [ ^ self error: response content ].
+		
+! !
+
+
+w _ CatalogWindow forCartId: 3.!
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:28:03' prior: 50907594!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCartRequest: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCartRequest: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+	self addService: '/listPrices' action: [ :request | 
+		self handleListPricesRequest: request.
+	].
+
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:29:35'!
+handleListPricesRequest: aRequest
+	| pricesList response |
+	
+	pricesList _ shop listPrices.
+	
+	response _ Dictionary new.
+	response at: 'prices' put: (self serializePrices: pricesList).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:00' prior: 50915224!
+handleListPricesRequest: aRequest
+	| pricesList response |
+	
+	pricesList _ shop listPriceList.
+	
+	response _ Dictionary new.
+	response at: 'prices' put: (self serializePrices: pricesList).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:15'!
+listPrices
+	^priceList allPrices.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:15' prior: 50915236!
+handleListPricesRequest: aRequest
+	| pricesList response |
+	
+	pricesList _ shop listPrices.
+	
+	response _ Dictionary new.
+	response at: 'prices' put: (self serializePrices: pricesList).
+	aRequest send200Response: (WebUtils jsonEncode: response).
+
+
+! !
+!ShopTest methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:15' prior: 50913726!
+test17
+	
+	| shop catalog  |
+	
+	shop := Shop 
+		withUserAuthenticator: (MockUserAuthenticator alwaysReturning: true) 
+		prices: stubs priceList 
+		merchantProcessor: stubs mockAlwaysOkMerchantProcessor 
+		timeProvider: stubs timeProvider.
+	
+	catalog := shop listPrices.
+	
+	self assert: catalog size equals: 3.
+	self assert: (catalog at: stubs book1) equals: 50.
+	self assert: (catalog at: stubs book2) equals: 20.
+	self assert: (catalog at: stubs book3) equals: 30.
+	! !
+
+!methodRemoval: Shop #listPriceList stamp: 'nz 7/7/2021 22:30:15'!
+listPriceList
+	^priceList allPrices.!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:37'!
+listPrices
+	
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) ]
+		ifFalse: [ ^ self error: response content ].
+		
+! !
+!CatalogWindowModel methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:37' prior: 50915150!
+refreshCatalog
+	
+	catalogEntries _ self getCatalogEntriesFrom: tusLibrosClient listPrices.
+	
+	self 
+		triggerEvent: #catalogUpdated
+		with: self.! !
+
+!methodRemoval: TusLibrosClient #listPriceList stamp: 'nz 7/7/2021 22:30:37'!
+listPriceList
+	
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) ]
+		ifFalse: [ ^ self error: response content ].
+		
+!
+!TusLibrosClient methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:30:49' prior: 50915284!
+listPrices
+	
+	| fieldDict response |
+	fieldDict _ Dictionary new.
+	response _ WebClient
+		htmlSubmit: self url, '/listPrices'
+		fields: fieldDict.
+	response isSuccess
+		ifTrue: [ ^ (WebUtils jsonDecode: response content readStream) at: 'prices' ]
+		ifFalse: [ ^ self error: response content ].
+		
+! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:31:09'!
+serializePrices: aPricesListDictionary
+
+	! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:31:19' prior: 50915330!
+serializePrices: aPricesListDictionary
+
+	self halt.! !
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].
+server _ TusLibrosRestInterface on: 8080 shop: shop.
+!
+
+
+w _ CatalogWindow forCartId: 3.!
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:32:13' prior: 50915201!
+configRoutes
+	
+	
+	self addService: '/createCart' action: [ :request | 
+		self handleCreateCartRequest: request.
+	].
+
+	self addService: '/addToCart' action: [ :request | 
+		self handleAddToCartRequest: request.
+	].
+
+	self addService: '/listCart' action: [ :request |
+		self handleListCartRequest: request.
+	].
+
+	self addService: '/checkOutCart' action: [ :request | 
+		self handleCheckOutCartRequest: request.
+	].
+
+	self addService: '/listPurchases' action: [ :request | 
+		self handleListPurchasesRequest: request.
+	].
+
+	self addService: '/listPrices' action: [ :request | 
+		self handleListPricesRequest: request.
+	].
+
+
+
+! !
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].!
+
+server _ TusLibrosRestInterface on: 8080 shop: shop.!
+
+
+w _ CatalogWindow forCartId: 3.!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:33:39' prior: 50915247!
+listPrices
+	self halt.
+	^priceList allPrices.! !
+
+
+w _ CatalogWindow forCartId: 3.!
+
+shop _ TestStubs new demoShop.
+!
+
+
+TusLibrosRestInterface allInstancesDo: [ 
+	:server | server destroy ].
+server _ TusLibrosRestInterface on: 8080 shop: shop.
+!
+
+
+w _ CatalogWindow forCartId: 3.!
+!Shop methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:36:14' prior: 50915374!
+listPrices
+	^priceList allPrices.! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:39:54' prior: 50915335!
+serializePrices: aPricesListDictionary
+
+	^aPricesListDictionary keys collect: [ :item | 
+		| d |
+		d _ Dictionary new.
+		d at: 'isbn' put: item isbn.
+		d at: 'title' put: item title.
+		d at: 'price' put: (aPricesListDictionary at: item).
+		d
+	].! !
+!TusLibrosRestInterface methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:40:29' prior: 50915391!
+serializePrices: aPricesListDictionary
+
+	^aPricesListDictionary keys collect: [ :item | 
+		| dictEntry |
+		dictEntry _ Dictionary new.
+		dictEntry at: 'isbn' put: item isbn.
+		dictEntry at: 'title' put: item title.
+		dictEntry at: 'price' put: (aPricesListDictionary at: item).
+		dictEntry
+	].! !
+
+
+w _ CatalogWindow forCartId: 3.!
+!Book methodsFor: 'as yet unclassified' stamp: 'nz 7/7/2021 22:41:21'!
+title
+	
+	^title! !
+
+
+w _ CatalogWindow forCartId: 3.!
+
+----QUIT----(7 July 2021 23:29:51) CuisUniversity-4532.image priorSource: 18618996!
